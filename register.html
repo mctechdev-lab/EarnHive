@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Create Account — EarnHive</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23111'/%3E%3Cpolygon points='50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5' fill='%23F5B800' opacity='0.9'/%3E%3Ctext y='68' x='18' font-size='55' font-weight='900' fill='%23111' font-family='Arial'%3EEH%3C/text%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#F5B800;--gold2:#E5A800;--gold-l:rgba(245,184,0,0.1);--gold-b:rgba(245,184,0,0.2);
+  --g:#16A34A;--g2:#15803D;--g-l:rgba(22,163,74,0.1);--g-b:rgba(22,163,74,0.2);
+  --dark:#080808;--dark2:#0F0F0F;--dark3:#161616;--dark4:#1C1C1C;
+  --text:#F5F5F5;--t2:#A8A8A8;--t3:#555;
+  --border:rgba(255,255,255,0.07);--border2:rgba(245,184,0,0.18);
+  --red:#EF4444;--red-l:rgba(239,68,68,0.1);
+  --font-h:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;
+}
+*{scrollbar-width:thin;scrollbar-color:var(--gold) var(--dark);}
+html,body{height:100%;font-family:var(--font-b);background:var(--dark);color:var(--text);overflow-x:hidden;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(245,184,0,0.2)}50%{box-shadow:0 0 40px rgba(245,184,0,0.4)}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+
+/* LAYOUT */
+.layout{display:flex;min-height:100vh;}
+
+/* LEFT PANEL */
+.left{width:45%;background:linear-gradient(160deg,#0A1F0D 0%,#080808 50%,#0A0A0A 100%);border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;padding:48px;position:relative;overflow:hidden;}
+.left-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 30% 30%,rgba(245,184,0,0.05) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 70% 80%,rgba(22,163,74,0.05) 0%,transparent 50%);}
+.left-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);}
+.left-inner{position:relative;z-index:1;}
+.left-bottom{position:relative;z-index:1;}
+
+/* Logo */
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:56px;text-decoration:none;}
+.logo-mark{width:38px;height:38px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;animation:glow 3s ease-in-out infinite;}
+.logo-text{font-family:var(--font-h);font-size:20px;font-weight:800;color:var(--text);}
+.logo-text em{color:var(--gold);font-style:normal;}
+
+/* Left content */
+.left-tag{display:inline-flex;align-items:center;gap:7px;background:var(--gold-l);border:1px solid var(--gold-b);color:var(--gold);padding:6px 14px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:0.5px;margin-bottom:20px;}
+.left-h{font-family:var(--font-h);font-size:clamp(28px,3vw,42px);font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:14px;}
+.left-h .gold{color:var(--gold);}
+.left-h .green{color:var(--g);}
+.left-p{font-size:14px;color:var(--t2);line-height:1.7;max-width:340px;margin-bottom:32px;}
+
+/* Perks */
+.perks{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;}
+.perk{display:flex;align-items:flex-start;gap:12px;}
+.perk-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.perk-ico.gold{background:var(--gold-l);border:1px solid var(--gold-b);}
+.perk-ico.gold i{color:var(--gold);font-size:15px;}
+.perk-ico.green{background:var(--g-l);border:1px solid var(--g-b);}
+.perk-ico.green i{color:var(--g);font-size:15px;}
+.perk-title{font-size:14px;font-weight:700;margin-bottom:2px;}
+.perk-sub{font-size:12px;color:var(--t2);}
+
+/* Social proof bottom */
+.proof-bar{background:rgba(245,184,0,0.06);border:1px solid var(--gold-b);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;}
+.proof-avatars{display:flex;}
+.proof-av{width:32px;height:32px;border-radius:50%;border:2px solid var(--dark);display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:12px;font-weight:700;margin-left:-8px;flex-shrink:0;}
+.proof-av:first-child{margin-left:0;}
+.proof-text{font-size:13px;color:var(--t2);}
+.proof-text strong{color:var(--gold);}
+
+/* RIGHT PANEL */
+.right{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 48px;background:var(--dark2);overflow-y:auto;}
+.form-wrap{width:100%;max-width:440px;}
+
+/* Progress */
+.progress{display:flex;align-items:center;margin-bottom:32px;}
+.prog-step{display:flex;align-items:center;gap:8px;}
+.prog-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;transition:all .3s;border:2px solid;flex-shrink:0;}
+.prog-step.active .prog-circle{background:var(--gold);border-color:var(--gold);color:var(--dark);}
+.prog-step.done .prog-circle{background:var(--g);border-color:var(--g);color:#fff;}
+.prog-step.idle .prog-circle{background:transparent;border-color:var(--t3);color:var(--t3);}
+.prog-label{font-size:11px;font-weight:600;}
+.prog-step.active .prog-label{color:var(--gold);}
+.prog-step.done .prog-label{color:var(--g);}
+.prog-step.idle .prog-label{color:var(--t3);}
+.prog-line{flex:1;height:2px;background:var(--border);border-radius:2px;margin:0 8px;transition:background .3s;}
+.prog-line.done{background:var(--g);}
+
+/* Form header */
+.form-head{margin-bottom:28px;}
+.form-head h2{font-family:var(--font-h);font-size:28px;font-weight:800;letter-spacing:-0.8px;margin-bottom:6px;}
+.form-head h2 .gold{color:var(--gold);}
+.form-head p{font-size:14px;color:var(--t2);}
+
+/* Steps */
+.step{display:none;animation:slideIn .35s ease forwards;}
+.step.active{display:block;}
+
+/* Form groups */
+.fg{margin-bottom:16px;}
+.fg label{display:block;font-size:11px;font-weight:700;color:var(--t3);letter-spacing:0.6px;text-transform:uppercase;margin-bottom:8px;}
+.fgr{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.iw{position:relative;}
+.iw input{width:100%;padding:13px 16px 13px 44px;background:var(--dark3);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-size:14px;font-family:var(--font-b);outline:none;transition:all .25s;}
+.iw input:focus{background:var(--dark4);border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,184,0,0.08);}
+.iw input::placeholder{color:var(--t3);}
+.iw input.err{border-color:var(--red);}
+.ii{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:14px;pointer-events:none;transition:color .25s;}
+.iw input:focus~.ii{color:var(--gold);}
+.iev{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:14px;cursor:pointer;background:none;border:none;padding:4px;transition:color .2s;}
+.iev:hover{color:var(--gold);}
+.hint{font-size:12px;color:var(--red);margin-top:5px;display:none;}
+.hint.show{display:block;}
+
+/* Password strength */
+.pwd-strength{margin-top:8px;}
+.str-bars{display:flex;gap:4px;margin-bottom:4px;}
+.str-bar{height:3px;flex:1;border-radius:2px;background:var(--dark4);transition:background .3s;}
+.str-bar.weak{background:var(--red);}
+.str-bar.fair{background:var(--gold);}
+.str-bar.good{background:#22C55E;}
+.str-bar.strong{background:var(--g);}
+.str-label{font-size:11px;color:var(--t3);}
+
+/* Checkbox */
+.check-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px;}
+.checkmark{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--border);background:var(--dark3);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0;margin-top:1px;}
+.checkmark.on{background:var(--gold);border-color:var(--gold);}
+.check-text{font-size:13px;color:var(--t2);line-height:1.5;}
+.check-text a{color:var(--gold);text-decoration:none;font-weight:600;}
+
+/* Buttons */
+.btn-row{display:flex;gap:10px;margin-top:20px;}
+.btn-back{padding:13px 18px;background:transparent;border:1.5px solid var(--border);border-radius:10px;color:var(--t2);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;gap:7px;transition:all .2s;}
+.btn-back:hover{border-color:var(--gold);color:var(--gold);}
+.btn-next{flex:1;padding:13px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--dark);border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;justify-content:center;gap:8px;transition:all .25s;box-shadow:0 6px 24px rgba(245,184,0,0.25);}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 10px 30px rgba(245,184,0,0.35);}
+.btn-next:disabled{opacity:0.6;pointer-events:none;}
+
+/* Social login */
+.divider{display:flex;align-items:center;gap:12px;margin:20px 0;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.divider span{font-size:12px;color:var(--t3);font-weight:500;}
+.soc-btns{display:flex;gap:10px;margin-bottom:20px;}
+.soc-btn{flex:1;padding:11px;border:1.5px solid var(--border);border-radius:10px;background:var(--dark3);color:var(--t2);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s;}
+.soc-btn:hover{border-color:var(--gold-b);background:var(--dark4);color:var(--gold);}
+.soc-btn.google i{color:#EA4335;}
+
+/* Footer link */
+.form-footer{text-align:center;font-size:14px;color:var(--t2);}
+.form-footer a{color:var(--gold);font-weight:700;text-decoration:none;}
+
+/* Error banner */
+.err-banner{background:var(--red-l);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:12px 16px;font-size:13px;color:var(--red);margin-bottom:16px;display:none;align-items:center;gap:8px;}
+.err-banner.show{display:flex;}
+
+/* SUCCESS */
+.success-screen{display:none;text-align:center;animation:fadeUp .5s ease forwards;}
+.success-screen.show{display:block;}
+.succ-icon{width:90px;height:90px;border-radius:50%;background:var(--gold-l);border:2px solid var(--gold-b);margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:40px;animation:glow 2s ease-in-out infinite;}
+.succ-h{font-family:var(--font-h);font-size:26px;font-weight:800;margin-bottom:10px;}
+.succ-p{font-size:14px;color:var(--t2);line-height:1.65;margin-bottom:24px;}
+.succ-perks{background:var(--dark3);border:1px solid var(--gold-b);border-radius:14px;padding:18px;text-align:left;margin-bottom:24px;}
+.succ-perk{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--t2);padding:5px 0;}
+.succ-perk i{color:var(--gold);font-size:12px;}
+.btn-go{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--dark);border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 8px 28px rgba(245,184,0,0.3);transition:all .25s;}
+.btn-go:hover{transform:translateY(-1px);box-shadow:0 12px 36px rgba(245,184,0,0.4);}
+
+/* Loading spinner */
+.spinner{width:16px;height:16px;border:2px solid rgba(0,0,0,0.3);border-top-color:var(--dark);border-radius:50%;animation:spin .7s linear infinite;display:none;}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;z-index:999;background:var(--dark3);border:1px solid var(--border);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);max-width:300px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast-ico{width:34px;height:34px;border-radius:9px;background:var(--gold-l);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.toast-ico i{color:var(--gold);font-size:14px;}
+.toast-msg{font-size:13px;font-weight:600;color:var(--text);}
+
+@media(max-width:900px){.left{display:none;}.right{padding:32px 20px;}}
+@media(max-width:480px){.right{padding:24px 16px;}.fgr{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- LEFT -->
+<div class="left">
+  <div class="left-bg"></div>
+  <div class="left-grid"></div>
+  <div class="left-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-mark">🐝</div>
+      <div class="logo-text">Earn<em>Hive</em></div>
+    </a>
+    <div class="left-tag"><i class="fa-solid fa-globe" style="font-size:10px;"></i> Available in 100+ Countries</div>
+    <h1 class="left-h">Join the Hive.<br>Start earning<br><span class="gold">real money.</span></h1>
+    <p class="left-p">Create your free EarnHive account and get instant access to tasks, mini jobs, Ludo & Whot games — earn TON crypto or local currency from anywhere in the world.</p>
+    <div class="perks">
+      <div class="perk">
+        <div class="perk-ico gold"><i class="fa-solid fa-list-check"></i></div>
+        <div><div class="perk-title">Complete Tasks</div><div class="perk-sub">Earn from $0.10 per task. Hundreds available daily.</div></div>
+      </div>
+      <div class="perk">
+        <div class="perk-ico green"><i class="fa-solid fa-briefcase"></i></div>
+        <div><div class="perk-title">Mini Jobs</div><div class="perk-sub">Freelance work. Writing, design, translation & more.</div></div>
+      </div>
+      <div class="perk">
+        <div class="perk-ico gold"><i class="fa-solid fa-dice"></i></div>
+        <div><div class="perk-title">Ludo & Whot Games</div><div class="perk-sub">Stake TON or local currency. Winners take the pot.</div></div>
+      </div>
+      <div class="perk">
+        <div class="perk-ico green"><i class="fa-solid fa-gift"></i></div>
+        <div><div class="perk-title">Referral Bonus</div><div class="perk-sub">Earn 10% of every friend's task earnings for 7 days.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="left-bottom">
+    <div class="proof-bar">
+      <div class="proof-avatars">
+        <div class="proof-av" style="background:#F5B800;color:#111;">R</div>
+        <div class="proof-av" style="background:#16A34A;color:#fff;">E</div>
+        <div class="proof-av" style="background:#4F6EF7;color:#fff;">M</div>
+        <div class="proof-av" style="background:#EC4899;color:#fff;">A</div>
+        <div class="proof-av" style="background:#8B5CF6;color:#fff;">K</div>
+      </div>
+      <div class="proof-text"><strong>50,000+</strong> people already earning on EarnHive worldwide</div>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+  <div class="form-wrap">
+
+    <!-- PROGRESS BAR -->
+    <div class="progress" id="progress-bar">
+      <div class="prog-step active" id="ps1">
+        <div class="prog-circle" id="pc1">1</div>
+        <div class="prog-label">Your Info</div>
+      </div>
+      <div class="prog-line" id="pl1"></div>
+      <div class="prog-step idle" id="ps2">
+        <div class="prog-circle" id="pc2">2</div>
+        <div class="prog-label">Security</div>
+      </div>
+    </div>
+
+    <!-- FORM HEADER -->
+    <div class="form-head" id="form-head">
+      <h2 id="form-title">Create Your <span class="gold">Account</span></h2>
+      <p id="form-sub">Step 1 of 2 — Enter your personal details</p>
+    </div>
+
+    <!-- ERROR BANNER -->
+    <div class="err-banner" id="err-banner">
+      <i class="fa-solid fa-circle-xmark"></i>
+      <span id="err-text"></span>
+    </div>
+
+    <!-- STEP 1 — Personal Info -->
+    <div class="step active" id="step1">
+      <div class="fgr">
+        <div class="fg">
+          <label>First Name</label>
+          <div class="iw">
+            <input type="text" id="fname" placeholder="John"/>
+            <i class="ii fa-solid fa-user"></i>
+          </div>
+          <div class="hint" id="h-fname">First name is required</div>
+        </div>
+        <div class="fg">
+          <label>Last Name</label>
+          <div class="iw">
+            <input type="text" id="lname" placeholder="Doe"/>
+            <i class="ii fa-solid fa-user"></i>
+          </div>
+          <div class="hint" id="h-lname">Last name is required</div>
+        </div>
+      </div>
+      <div class="fg">
+        <label>Email Address</label>
+        <div class="iw">
+          <input type="email" id="email" placeholder="you@example.com"/>
+          <i class="ii fa-solid fa-envelope"></i>
+        </div>
+        <div class="hint" id="h-email">Enter a valid email address</div>
+      </div>
+      <div class="fg">
+        <label>Phone Number <span style="color:var(--t3);font-size:10px;font-weight:400;text-transform:none;letter-spacing:0;">(Optional)</span></label>
+        <div class="iw">
+          <input type="tel" id="phone" placeholder="+234 800 000 0000"/>
+          <i class="ii fa-solid fa-phone"></i>
+        </div>
+      </div>
+      <div class="fg">
+        <label>Referral Code <span style="color:var(--t3);font-size:10px;font-weight:400;text-transform:none;letter-spacing:0;">(Optional)</span></label>
+        <div class="iw">
+          <input type="text" id="refcode" placeholder="Enter referral code if you have one"/>
+          <i class="ii fa-solid fa-tag"></i>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-next" onclick="goStep2()" style="width:100%;">
+          Next Step <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+      <div class="divider"><span>or sign up with</span></div>
+      <div class="soc-btns">
+        <button class="soc-btn google" onclick="googleSignup()">
+          <i class="fa-brands fa-google"></i> Google
+        </button>
+        <button class="soc-btn" onclick="toast('Telegram signup coming soon!')">
+          <i class="fa-brands fa-telegram" style="color:#2AABEE;"></i> Telegram
+        </button>
+      </div>
+      <div class="form-footer">Already have an account? <a href="login.html">Log in →</a></div>
+    </div>
+
+    <!-- STEP 2 — Security -->
+    <div class="step" id="step2">
+      <div class="fg">
+        <label>Create Password</label>
+        <div class="iw">
+          <input type="password" id="pwd" placeholder="Create a strong password" oninput="checkPwdStrength(this.value)"/>
+          <i class="ii fa-solid fa-lock"></i>
+          <button class="iev" onclick="togglePwd('pwd','eye1')" type="button"><i class="fa-regular fa-eye" id="eye1"></i></button>
+        </div>
+        <div class="pwd-strength">
+          <div class="str-bars">
+            <div class="str-bar" id="sb1"></div>
+            <div class="str-bar" id="sb2"></div>
+            <div class="str-bar" id="sb3"></div>
+            <div class="str-bar" id="sb4"></div>
+          </div>
+          <div class="str-label" id="str-label">Enter a password to check strength</div>
+        </div>
+        <div class="hint" id="h-pwd">Password must be at least 8 characters</div>
+      </div>
+      <div class="fg">
+        <label>Confirm Password</label>
+        <div class="iw">
+          <input type="password" id="cpwd" placeholder="Repeat your password"/>
+          <i class="ii fa-solid fa-lock"></i>
+          <button class="iev" onclick="togglePwd('cpwd','eye2')" type="button"><i class="fa-regular fa-eye" id="eye2"></i></button>
+        </div>
+        <div class="hint" id="h-cpwd">Passwords do not match</div>
+      </div>
+      <div class="check-row" style="margin-top:6px;">
+        <div class="checkmark" id="tc-check" onclick="toggleCheck()"></div>
+        <div class="check-text">I agree to EarnHive's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I confirm I am at least 18 years old.</div>
+      </div>
+      <div class="hint" id="h-terms">You must accept the terms</div>
+      <div class="btn-row">
+        <button class="btn-back" onclick="goStep1()"><i class="fa-solid fa-arrow-left"></i></button>
+        <button class="btn-next" id="create-btn" onclick="handleRegister()">
+          <div class="spinner" id="spinner"></div>
+          <span id="create-text"><i class="fa-solid fa-rocket"></i> Create Account</span>
+        </button>
+      </div>
+      <div class="form-footer" style="margin-top:16px;">Already have an account? <a href="login.html">Log in →</a></div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="success-screen">
+      <div class="succ-icon">🐝</div>
+      <div class="succ-h">Welcome to the Hive! 🎉</div>
+      <p class="succ-p">Your EarnHive account is ready. Complete a quick setup to personalise your experience and start earning.</p>
+      <div class="succ-perks">
+        <div class="succ-perk"><i class="fa-solid fa-circle-check"></i> Complete tasks and earn crypto instantly</div>
+        <div class="succ-perk"><i class="fa-solid fa-circle-check"></i> Play Ludo & Whot with real money stakes</div>
+        <div class="succ-perk"><i class="fa-solid fa-circle-check"></i> Apply for mini freelance jobs</div>
+        <div class="succ-perk"><i class="fa-solid fa-circle-check"></i> Withdraw to bank or crypto wallet worldwide</div>
+      </div>
+      <button class="btn-go" onclick="goOnboarding()">
+        <i class="fa-solid fa-arrow-right"></i> Set Up My Account
+      </button>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="toast" id="toast">
+  <div class="toast-ico"><i class="fa-solid fa-circle-check" id="t-icon"></i></div>
+  <div class="toast-msg" id="t-msg"></div>
+</div>
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, GoogleAuthProvider, signInWithPopup, setPersistence, browserLocalPersistence } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+
+const app = initializeApp({
+  apiKey: "AIzaSyAPAJCqvt40OpIuQDNShW4mdZQgpcS8lW8",
+  authDomain: "earnhive-8faa0.firebaseapp.com",
+  projectId: "earnhive-8faa0",
+  storageBucket: "earnhive-8faa0.firebasestorage.app",
+  messagingSenderId: "807669517293",
+  appId: "1:807669517293:web:37b20ab46d5c323e6a75e4"
+});
+
+const auth = getAuth(app);
+await setPersistence(auth, browserLocalPersistence);
+const googleProvider = new GoogleAuthProvider();
+
+window._auth = auth;
+window._createUser = createUserWithEmailAndPassword;
+window._sendVerification = sendEmailVerification;
+window._googleProvider = googleProvider;
+window._signInWithPopup = signInWithPopup;
+
+// Check ref code in URL
+const params = new URLSearchParams(window.location.search);
+const refFromUrl = params.get('ref');
+if(refFromUrl) document.getElementById('refcode').value = refFromUrl;
+</script>
+
+<script>
+let tcAccepted = false;
+let currentStep = 1;
+
+// ── STEP NAVIGATION ──
+function goStep2(){
+  let valid = true;
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  if(!fname){ showHint('h-fname'); err('fname'); valid=false; } else { hideHint('h-fname'); noErr('fname'); }
+  if(!lname){ showHint('h-lname'); err('lname'); valid=false; } else { hideHint('h-lname'); noErr('lname'); }
+  if(!email||!email.includes('@')||!email.includes('.')){ showHint('h-email'); err('email'); valid=false; } else { hideHint('h-email'); noErr('email'); }
+  if(!valid) return;
+  // Update progress
+  document.getElementById('ps1').className='prog-step done';
+  document.getElementById('pc1').innerHTML='<i class="fa-solid fa-check" style="font-size:11px;"></i>';
+  document.getElementById('pl1').classList.add('done');
+  document.getElementById('ps2').className='prog-step active';
+  document.getElementById('step1').classList.remove('active');
+  document.getElementById('step2').classList.add('active');
+  document.getElementById('form-title').innerHTML='Secure Your <span class="gold">Account</span>';
+  document.getElementById('form-sub').textContent='Step 2 of 2 — Set your password';
+  currentStep=2;
+  hideError();
+}
+
+function goStep1(){
+  document.getElementById('ps1').className='prog-step active';
+  document.getElementById('pc1').textContent='1';
+  document.getElementById('pl1').classList.remove('done');
+  document.getElementById('ps2').className='prog-step idle';
+  document.getElementById('step2').classList.remove('active');
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('form-title').innerHTML='Create Your <span class="gold">Account</span>';
+  document.getElementById('form-sub').textContent='Step 1 of 2 — Enter your personal details';
+  currentStep=1;
+  hideError();
+}
+
+// ── REGISTER ──
+async function handleRegister(){
+  let valid = true;
+  const pwd = document.getElementById('pwd').value;
+  const cpwd = document.getElementById('cpwd').value;
+  if(pwd.length<8){ showHint('h-pwd'); err('pwd'); valid=false; } else { hideHint('h-pwd'); noErr('pwd'); }
+  if(pwd!==cpwd||!cpwd){ showHint('h-cpwd'); err('cpwd'); valid=false; } else { hideHint('h-cpwd'); noErr('cpwd'); }
+  if(!tcAccepted){ showHint('h-terms'); valid=false; } else { hideHint('h-terms'); }
+  if(!valid) return;
+
+  setLoading(true);
+  hideError();
+
+  try{
+    const fname = document.getElementById('fname').value.trim();
+    const lname = document.getElementById('lname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const refcode = document.getElementById('refcode').value.trim();
+
+    // 1. Create Firebase user
+    const cred = await window._createUser(window._auth, email, pwd);
+    const fbUser = cred.user;
+
+    // 2. Send email verification
+    await window._sendVerification(fbUser);
+
+    // 3. Register in Supabase
+    const res = await fetch('/api/register', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        firebase_uid: fbUser.uid,
+        first_name: fname,
+        last_name: lname,
+        email,
+        phone: phone||null,
+        referral_code: refcode||null,
+      })
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error||'Registration failed');
+
+    // 4. Save to localStorage
+    localStorage.setItem('eh_user', JSON.stringify({
+      id: data.user.id,
+      first_name: fname,
+      last_name: lname,
+      email,
+      referral_code: data.user.referral_code,
+      firebase_uid: fbUser.uid,
+    }));
+    localStorage.setItem('eh_last_active', Date.now().toString());
+    localStorage.setItem('eh_onboarding_done', 'false');
+
+    setLoading(false);
+
+    // 5. Show success
+    document.getElementById('step2').classList.remove('active');
+    document.getElementById('progress-bar').style.display='none';
+    document.getElementById('form-head').style.display='none';
+    document.getElementById('err-banner').style.display='none';
+    document.getElementById('success-screen').classList.add('show');
+
+  } catch(e){
+    setLoading(false);
+    let msg = e.message;
+    if(msg.includes('email-already-in-use')) msg='This email is already registered. Please log in instead.';
+    else if(msg.includes('weak-password')) msg='Password is too weak. Use at least 8 characters with numbers.';
+    else if(msg.includes('invalid-email')) msg='Please enter a valid email address.';
+    showError(msg);
+  }
+}
+
+// ── GOOGLE SIGNUP ──
+async function googleSignup(){
+  try{
+    setLoading(true);
+    const result = await window._signInWithPopup(window._auth, window._googleProvider);
+    const user = result.user;
+    const parts = (user.displayName||'').split(' ');
+    const res = await fetch('/api/register',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        firebase_uid: user.uid,
+        first_name: parts[0]||'User',
+        last_name: parts.slice(1).join(' ')||'',
+        email: user.email,
+        phone: null,
+        referral_code: document.getElementById('refcode').value.trim()||null,
+      })
+    });
+    const data = await res.json();
+    localStorage.setItem('eh_user', JSON.stringify({...data.user, firebase_uid: user.uid}));
+    localStorage.setItem('eh_last_active', Date.now().toString());
+    localStorage.setItem('eh_onboarding_done', 'false');
+    window.location.href = 'onboarding.html';
+  } catch(e){
+    setLoading(false);
+    showError(e.message);
+  }
+}
+
+function goOnboarding(){
+  window.location.href = 'onboarding.html';
+}
+
+// ── HELPERS ──
+function setLoading(on){
+  const btn=document.getElementById('create-btn');
+  btn.disabled=on;
+  document.getElementById('spinner').style.display=on?'block':'none';
+  document.getElementById('create-text').style.display=on?'none':'flex';
+}
+
+function showError(msg){ document.getElementById('err-text').textContent=msg; document.getElementById('err-banner').classList.add('show'); }
+function hideError(){ document.getElementById('err-banner').classList.remove('show'); }
+function showHint(id){ document.getElementById(id).classList.add('show'); }
+function hideHint(id){ document.getElementById(id).classList.remove('show'); }
+function err(id){ document.getElementById(id).classList.add('err'); }
+function noErr(id){ document.getElementById(id).classList.remove('err'); }
+
+function togglePwd(inputId, iconId){
+  const inp=document.getElementById(inputId);
+  const icon=document.getElementById(iconId);
+  if(inp.type==='password'){ inp.type='text'; icon.className='fa-regular fa-eye-slash'; }
+  else { inp.type='password'; icon.className='fa-regular fa-eye'; }
+}
+
+function toggleCheck(){
+  tcAccepted=!tcAccepted;
+  const el=document.getElementById('tc-check');
+  el.classList.toggle('on',tcAccepted);
+  el.innerHTML=tcAccepted?'<i class="fa-solid fa-check" style="color:var(--dark);font-size:11px;"></i>':'';
+  if(tcAccepted) hideHint('h-terms');
+}
+
+function checkPwdStrength(val){
+  let score=0;
+  if(val.length>=8) score++;
+  if(/[A-Z]/.test(val)) score++;
+  if(/[0-9]/.test(val)) score++;
+  if(/[^A-Za-z0-9]/.test(val)) score++;
+  const classes=['weak','fair','good','strong'];
+  const labels=['Too weak — add numbers & symbols','Fair — add uppercase','Good password!','Strong password 💪'];
+  ['sb1','sb2','sb3','sb4'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.className='str-bar';
+    if(i<score) el.classList.add(classes[score-1]);
+  });
+  document.getElementById('str-label').textContent=val.length>0?(labels[score-1]||'Too weak'):'Enter a password to check strength';
+}
+
+function toast(msg,type='info'){
+  const colors={success:'#F5B800',error:'#EF4444',info:'#F5B800'};
+  const icons={success:'fa-circle-check',error:'fa-circle-xmark',info:'fa-circle-info'};
+  document.getElementById('t-icon').className=`fa-solid ${icons[type]||icons.info}`;
+  document.getElementById('t-icon').style.color=colors[type]||colors.info;
+  document.getElementById('t-msg').textContent=msg;
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// Input focus effect
+document.querySelectorAll('.iw input').forEach(inp=>{
+  inp.addEventListener('focus',()=>{
+    const ic=inp.parentElement.querySelector('.ii');
+    if(ic) ic.style.color='var(--gold)';
+  });
+  inp.addEventListener('blur',()=>{
+    const ic=inp.parentElement.querySelector('.ii');
+    if(ic) ic.style.color='var(--t3)';
+  });
+});
+</script>
+</body>
+</html>
