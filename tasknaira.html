@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Task Naira — Work It. Play It. Earn It.</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --green: #00C566;
+    --green-dark: #009E52;
+    --gold: #FFB800;
+    --dark: #0A0F0D;
+    --dark2: #111A14;
+    --card: #141F18;
+    --card2: #1A2820;
+    --border: rgba(0,197,102,0.15);
+    --text: #E8F5EE;
+    --muted: #7A9A84;
+    --red: #FF4D4D;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--dark); color:var(--text); font-family:'DM Sans',sans-serif; min-height:100vh; overflow-x:hidden; }
+
+  /* NAVBAR */
+  nav {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px; background:rgba(10,15,13,0.9);
+    border-bottom:1px solid var(--border);
+    position:sticky; top:0; z-index:100; backdrop-filter:blur(12px);
+  }
+  .logo { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--green); letter-spacing:-0.5px; }
+  .logo span { color:var(--gold); }
+  .nav-links { display:flex; gap:28px; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:14px; font-weight:500; transition:color .2s; cursor:pointer; }
+  .nav-links a:hover, .nav-links a.active { color:var(--green); }
+  .nav-btns { display:flex; gap:10px; }
+  .btn-outline { padding:9px 20px; border:1px solid var(--green); color:var(--green); background:transparent; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; transition:all .2s; font-family:'DM Sans',sans-serif; }
+  .btn-outline:hover { background:var(--green); color:#000; }
+  .btn-solid { padding:9px 20px; background:var(--green); color:#000; border:none; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; transition:all .2s; font-family:'DM Sans',sans-serif; }
+  .btn-solid:hover { background:var(--green-dark); }
+
+  /* PAGES */
+  .page { display:none; animation:fadeIn .3s ease; }
+  .page.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ===== HOME PAGE ===== */
+  .hero {
+    padding:80px 32px 60px;
+    text-align:center;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,197,102,0.12) 0%, transparent 70%);
+    position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; top:-100px; left:50%; transform:translateX(-50%);
+    width:600px; height:600px;
+    background: radial-gradient(circle, rgba(0,197,102,0.06) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero-badge {
+    display:inline-block; background:rgba(0,197,102,0.1); border:1px solid var(--border);
+    color:var(--green); padding:6px 16px; border-radius:100px; font-size:12px; font-weight:600;
+    margin-bottom:20px; letter-spacing:0.5px;
+  }
+  .hero h1 { font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,68px); font-weight:800; line-height:1.05; margin-bottom:20px; }
+  .hero h1 em { color:var(--green); font-style:normal; }
+  .hero h1 .gold { color:var(--gold); }
+  .hero p { color:var(--muted); font-size:17px; max-width:480px; margin:0 auto 36px; line-height:1.6; }
+  .hero-cta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .btn-big { padding:14px 32px; border-radius:10px; font-size:15px; font-weight:700; cursor:pointer; transition:all .2s; font-family:'DM Sans',sans-serif; }
+  .btn-big-green { background:var(--green); color:#000; border:none; }
+  .btn-big-green:hover { background:var(--green-dark); transform:translateY(-1px); }
+  .btn-big-outline { background:transparent; border:1px solid var(--border); color:var(--text); }
+  .btn-big-outline:hover { border-color:var(--green); color:var(--green); }
+
+  .stats-bar {
+    display:flex; justify-content:center; gap:48px; flex-wrap:wrap;
+    padding:32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    background:var(--dark2);
+  }
+  .stat { text-align:center; }
+  .stat-num { font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--green); }
+  .stat-label { font-size:12px; color:var(--muted); margin-top:4px; }
+
+  .features { padding:60px 32px; max-width:1100px; margin:0 auto; }
+  .section-title { font-family:'Syne',sans-serif; font-size:30px; font-weight:800; margin-bottom:8px; }
+  .section-sub { color:var(--muted); font-size:15px; margin-bottom:40px; }
+  .features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+  .feature-card {
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:28px; transition:all .2s; cursor:default;
+  }
+  .feature-card:hover { border-color:var(--green); transform:translateY(-3px); }
+  .feat-icon { font-size:32px; margin-bottom:16px; }
+  .feat-title { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; margin-bottom:8px; }
+  .feat-desc { color:var(--muted); font-size:14px; line-height:1.6; }
+
+  /* ===== TASKS PAGE ===== */
+  .page-header { padding:40px 32px 0; }
+  .page-header h2 { font-family:'Syne',sans-serif; font-size:28px; font-weight:800; }
+  .page-header p { color:var(--muted); font-size:14px; margin-top:6px; }
+
+  .tasks-toolbar { display:flex; gap:12px; padding:20px 32px; flex-wrap:wrap; align-items:center; }
+  .filter-btn { padding:8px 18px; border-radius:100px; font-size:13px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:transparent; color:var(--muted); transition:all .2s; font-family:'DM Sans',sans-serif; }
+  .filter-btn.active, .filter-btn:hover { background:var(--green); color:#000; border-color:var(--green); }
+  .search-box { margin-left:auto; display:flex; align-items:center; gap:8px; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:8px 14px; }
+  .search-box input { background:none; border:none; outline:none; color:var(--text); font-size:13px; font-family:'DM Sans',sans-serif; width:160px; }
+  .search-box input::placeholder { color:var(--muted); }
+
+  .tasks-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; padding:16px 32px 40px; }
+  .task-card {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:20px; transition:all .2s;
+  }
+  .task-card:hover { border-color:var(--green); transform:translateY(-2px); }
+  .task-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
+  .task-cat { font-size:11px; font-weight:600; padding:4px 10px; border-radius:100px; }
+  .cat-survey { background:rgba(0,197,102,0.15); color:var(--green); }
+  .cat-review { background:rgba(255,184,0,0.15); color:var(--gold); }
+  .cat-social { background:rgba(100,149,237,0.15); color:#6495ED; }
+  .cat-data { background:rgba(255,100,100,0.15); color:#FF6464; }
+  .task-pay { font-family:'Syne',sans-serif; font-size:18px; font-weight:800; color:var(--green); }
+  .task-pay span { font-size:11px; font-weight:400; color:var(--muted); }
+  .task-title { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; margin-bottom:6px; }
+  .task-desc { color:var(--muted); font-size:13px; line-height:1.5; margin-bottom:16px; }
+  .task-meta { display:flex; gap:16px; font-size:12px; color:var(--muted); margin-bottom:16px; }
+  .task-meta span { display:flex; align-items:center; gap:4px; }
+  .task-btn { width:100%; padding:10px; background:var(--green); color:#000; border:none; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all .2s; }
+  .task-btn:hover { background:var(--green-dark); }
+
+  /* ===== GAMES PAGE ===== */
+  .games-hero { padding:40px 32px 20px; text-align:center; }
+  .games-hero h2 { font-family:'Syne',sans-serif; font-size:32px; font-weight:800; }
+  .games-hero p { color:var(--muted); font-size:15px; margin-top:8px; }
+  .games-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; padding:24px 32px 40px; max-width:900px; margin:0 auto; }
+  .game-card {
+    border-radius:20px; padding:32px; text-align:center; position:relative; overflow:hidden;
+    border:1px solid var(--border); transition:all .3s; cursor:pointer;
+  }
+  .game-card:hover { transform:translateY(-4px); }
+  .game-card.ludo { background:linear-gradient(135deg, #0d2b1a 0%, #1a3d2a 100%); }
+  .game-card.whot { background:linear-gradient(135deg, #1a1a0d 0%, #2d2a0f 100%); }
+  .game-card::before {
+    content:''; position:absolute; top:-40px; right:-40px; width:120px; height:120px;
+    border-radius:50%; opacity:0.1;
+  }
+  .game-card.ludo::before { background:var(--green); }
+  .game-card.whot::before { background:var(--gold); }
+  .game-emoji { font-size:64px; margin-bottom:16px; display:block; }
+  .game-name { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; margin-bottom:8px; }
+  .game-card.ludo .game-name { color:var(--green); }
+  .game-card.whot .game-name { color:var(--gold); }
+  .game-desc { color:var(--muted); font-size:14px; margin-bottom:20px; line-height:1.5; }
+  .game-stake { display:flex; justify-content:center; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .stake-opt {
+    padding:6px 14px; border-radius:100px; font-size:12px; font-weight:700;
+    border:1px solid; cursor:pointer; transition:all .2s; font-family:'DM Sans',sans-serif;
+  }
+  .ludo .stake-opt { border-color:var(--green); color:var(--green); background:transparent; }
+  .ludo .stake-opt:hover, .ludo .stake-opt.sel { background:var(--green); color:#000; }
+  .whot .stake-opt { border-color:var(--gold); color:var(--gold); background:transparent; }
+  .whot .stake-opt:hover, .whot .stake-opt.sel { background:var(--gold); color:#000; }
+  .game-play-btn { width:100%; padding:12px; border:none; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; font-family:'Syne',sans-serif; letter-spacing:0.5px; transition:all .2s; }
+  .ludo .game-play-btn { background:var(--green); color:#000; }
+  .whot .game-play-btn { background:var(--gold); color:#000; }
+  .game-play-btn:hover { opacity:0.9; transform:scale(1.02); }
+  .live-badge { display:inline-flex; align-items:center; gap:5px; font-size:11px; color:var(--green); background:rgba(0,197,102,0.1); border:1px solid var(--border); border-radius:100px; padding:3px 10px; margin-bottom:12px; }
+  .dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* ===== WALLET PAGE ===== */
+  .wallet-wrap { padding:32px; max-width:700px; margin:0 auto; }
+  .wallet-card {
+    background:linear-gradient(135deg, #0d2b1a 0%, #1a3d2a 50%, #0d3020 100%);
+    border:1px solid rgba(0,197,102,0.3); border-radius:20px; padding:32px; margin-bottom:24px;
+    position:relative; overflow:hidden;
+  }
+  .wallet-card::after {
+    content:'₦'; position:absolute; right:-10px; top:-20px; font-size:160px;
+    font-family:'Syne',sans-serif; font-weight:800; color:rgba(0,197,102,0.05);
+    line-height:1; pointer-events:none;
+  }
+  .wallet-label { font-size:12px; color:var(--muted); font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; }
+  .wallet-balance { font-family:'Syne',sans-serif; font-size:48px; font-weight:800; color:var(--green); line-height:1; margin-bottom:4px; }
+  .wallet-sub { color:var(--muted); font-size:13px; margin-bottom:28px; }
+  .wallet-actions { display:flex; gap:12px; }
+  .w-btn { flex:1; padding:12px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all .2s; }
+  .w-btn-green { background:var(--green); color:#000; border:none; }
+  .w-btn-outline { background:transparent; border:1px solid rgba(0,197,102,0.4); color:var(--green); }
+  .w-btn:hover { opacity:0.85; }
+
+  .wallet-breakdown { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; }
+  .wbreak-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; }
+  .wbreak-label { font-size:11px; color:var(--muted); font-weight:600; margin-bottom:6px; }
+  .wbreak-val { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; }
+  .wbreak-val.green { color:var(--green); }
+  .wbreak-val.gold { color:var(--gold); }
+
+  .tx-section h3 { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; margin-bottom:16px; }
+  .tx-item { display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid var(--border); }
+  .tx-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+  .tx-icon.earn { background:rgba(0,197,102,0.12); }
+  .tx-icon.withdraw { background:rgba(255,77,77,0.12); }
+  .tx-icon.game { background:rgba(255,184,0,0.12); }
+  .tx-info { flex:1; }
+  .tx-title { font-size:14px; font-weight:600; }
+  .tx-date { font-size:12px; color:var(--muted); margin-top:2px; }
+  .tx-amount { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; }
+  .tx-amount.plus { color:var(--green); }
+  .tx-amount.minus { color:var(--red); }
+
+  /* ===== MODAL ===== */
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:200; align-items:center; justify-content:center; backdrop-filter:blur(4px); }
+  .modal-overlay.open { display:flex; }
+  .modal { background:var(--card2); border:1px solid var(--border); border-radius:20px; padding:32px; width:90%; max-width:440px; animation:fadeIn .3s ease; }
+  .modal h3 { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; margin-bottom:6px; }
+  .modal p { color:var(--muted); font-size:14px; margin-bottom:24px; }
+  .form-group { margin-bottom:16px; }
+  .form-group label { display:block; font-size:12px; font-weight:600; color:var(--muted); margin-bottom:6px; letter-spacing:0.5px; text-transform:uppercase; }
+  .form-group input, .form-group select {
+    width:100%; padding:11px 14px; background:var(--dark); border:1px solid var(--border);
+    border-radius:8px; color:var(--text); font-size:14px; outline:none; font-family:'DM Sans',sans-serif;
+    transition:border-color .2s;
+  }
+  .form-group input:focus, .form-group select:focus { border-color:var(--green); }
+  .form-group select option { background:var(--dark); }
+  .modal-btns { display:flex; gap:10px; margin-top:24px; }
+  .modal-cancel { flex:1; padding:11px; background:transparent; border:1px solid var(--border); border-radius:8px; color:var(--muted); font-size:13px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; }
+  .modal-submit { flex:2; padding:11px; background:var(--green); border:none; border-radius:8px; color:#000; font-size:13px; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; }
+
+  /* Toast */
+  .toast { position:fixed; bottom:24px; right:24px; background:var(--card2); border:1px solid var(--green); border-radius:12px; padding:14px 20px; font-size:14px; font-weight:600; color:var(--green); z-index:999; transform:translateY(80px); opacity:0; transition:all .3s; max-width:300px; }
+  .toast.show { transform:translateY(0); opacity:1; }
+
+  /* Mobile nav */
+  .mobile-nav { display:none; position:fixed; bottom:0; left:0; right:0; background:var(--dark2); border-top:1px solid var(--border); padding:10px 0; z-index:100; }
+  .mobile-nav-items { display:flex; justify-content:space-around; }
+  .mnav-item { display:flex; flex-direction:column; align-items:center; gap:4px; padding:4px 16px; cursor:pointer; color:var(--muted); transition:color .2s; }
+  .mnav-item.active, .mnav-item:hover { color:var(--green); }
+  .mnav-icon { font-size:22px; }
+  .mnav-label { font-size:10px; font-weight:600; }
+
+  @media(max-width:640px) {
+    nav { padding:14px 16px; }
+    .nav-links { display:none; }
+    .hero { padding:50px 16px 40px; }
+    .tasks-grid, .features-grid { padding:16px; grid-template-columns:1fr; }
+    .tasks-toolbar { padding:12px 16px; }
+    .wallet-wrap { padding:16px; }
+    .wallet-breakdown { grid-template-columns:1fr 1fr; }
+    .page-header { padding:24px 16px 0; }
+    .games-grid { padding:16px; }
+    .mobile-nav { display:block; }
+    body { padding-bottom:70px; }
+    .stats-bar { gap:24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">Task<span>Naira</span> 🐝</div>
+  <div class="nav-links">
+    <a class="active" onclick="showPage('home',this)">Home</a>
+    <a onclick="showPage('tasks',this)">Tasks</a>
+    <a onclick="showPage('games',this)">Games</a>
+    <a onclick="showPage('wallet',this)">Wallet</a>
+  </div>
+  <div class="nav-btns">
+    <button class="btn-outline" onclick="openModal('login')">Log In</button>
+    <button class="btn-solid" onclick="openModal('signup')">Sign Up Free</button>
+  </div>
+</nav>
+
+<!-- ===== HOME PAGE ===== -->
+<div class="page active" id="home">
+  <div class="hero">
+    <div class="hero-badge">🇳🇬 #1 Nigerian Earn Platform</div>
+    <h1>Complete Tasks.<br><em>Play Games.</em><br>Earn <span class="gold">Naira.</span></h1>
+    <p>Join thousands of Nigerians earning real money daily — complete simple tasks or play Ludo & Whot and withdraw to your bank account.</p>
+    <div class="hero-cta">
+      <button class="btn-big btn-big-green" onclick="openModal('signup')">Start Earning Free →</button>
+      <button class="btn-big btn-big-outline" onclick="showPage('games', null)">🎮 Play Games</button>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num">12,400+</div><div class="stat-label">Active Users</div></div>
+    <div class="stat"><div class="stat-num">₦48M+</div><div class="stat-label">Total Paid Out</div></div>
+    <div class="stat"><div class="stat-num">3,200+</div><div class="stat-label">Tasks Completed Daily</div></div>
+    <div class="stat"><div class="stat-num">4.9★</div><div class="stat-label">User Rating</div></div>
+  </div>
+
+  <div class="features">
+    <div class="section-title">Everything you need to earn 💰</div>
+    <div class="section-sub">Two powerful ways to make money — tasks and games, all in one app.</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feat-icon">📋</div>
+        <div class="feat-title">Task Marketplace</div>
+        <div class="feat-desc">Browse hundreds of micro-tasks — surveys, app reviews, social media tasks, data entry — and get paid instantly on completion.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">🎲</div>
+        <div class="feat-title">Ludo Naira</div>
+        <div class="feat-desc">Play the classic Ludo game you already love. Stake your amount, beat your opponents, and win real Naira — withdraw anytime.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">🃏</div>
+        <div class="feat-title">Whot Naira</div>
+        <div class="feat-desc">The classic Whot card game now pays real money. Challenge friends or strangers, win the pot and cash out straight to your bank.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">💳</div>
+        <div class="feat-title">Instant Withdrawal</div>
+        <div class="feat-desc">Withdraw your earnings to any Nigerian bank — GTB, Access, Opay, Palmpay, Kuda and more. Powered by Paystack.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">🔒</div>
+        <div class="feat-title">Safe & Secure</div>
+        <div class="feat-desc">Your account and funds are protected with Firebase authentication, Supabase secure database, and Paystack-grade payment security.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">🤝</div>
+        <div class="feat-title">Refer & Earn</div>
+        <div class="feat-desc">Invite your friends and earn ₦500 for every person who signs up and completes their first task. No limit on referrals!</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TASKS PAGE ===== -->
+<div class="page" id="tasks">
+  <div class="page-header">
+    <h2>Task Marketplace 📋</h2>
+    <p>Complete tasks and earn Naira directly to your wallet</p>
+  </div>
+  <div class="tasks-toolbar">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Surveys</button>
+    <button class="filter-btn">Social Media</button>
+    <button class="filter-btn">Reviews</button>
+    <button class="filter-btn">Data Entry</button>
+    <div class="search-box">
+      <span>🔍</span>
+      <input type="text" placeholder="Search tasks..."/>
+    </div>
+  </div>
+  <div class="tasks-grid">
+    <div class="task-card">
+      <div class="task-top">
+        <span class="task-cat cat-survey">Survey</span>
+        <div class="task-pay">₦350 <span>/task</span></div>
+      </div>
+      <div class="task-title">Complete a 5-minute product survey</div>
+      <div class="task-desc">Share your opinion on a new Nigerian food brand. Answer 10 simple questions about your eating habits.</div>
+      <div class="task-meta">
+        <span>⏱ 5 mins</span>
+        <span>👥 248 done</span>
+        <span>🎯 50 slots left</span>
+      </div>
+      <button class="task-btn" onclick="showToast('Task started! Complete it to earn ₦350 🎉')">Start Task →</button>
+    </div>
+    <div class="task-card">
+      <div class="task-top">
+        <span class="task-cat cat-social">Social Media</span>
+        <div class="task-pay">₦150 <span>/task</span></div>
+      </div>
+      <div class="task-title">Follow & Like on Instagram</div>
+      <div class="task-desc">Follow a business account, like 3 posts and leave a genuine comment. Screenshot as proof of completion.</div>
+      <div class="task-meta">
+        <span>⏱ 2 mins</span>
+        <span>👥 512 done</span>
+        <span>🎯 120 slots left</span>
+      </div>
+      <button class="task-btn" onclick="showToast('Task started! Complete it to earn ₦150 🎉')">Start Task →</button>
+    </div>
+    <div class="task-card">
+      <div class="task-top">
+        <span class="task-cat cat-review">Review</span>
+        <div class="task-pay">₦600 <span>/task</span></div>
+      </div>
+      <div class="task-title">Write an app review on Google Play</div>
+      <div class="task-desc">Download, test for 10 minutes, and write a genuine 4-star review for a fintech app on Google Play Store.</div>
+      <div class="task-meta">
+        <span>⏱ 15 mins</span>
+        <span>👥 89 done</span>
+        <span>🎯 30 slots left</span>
+      </div>
+      <button class="task-btn" onclick="showToast('Task started! Complete it to earn ₦600 🎉')">Start Task →</button>
+    </div>
+    <div class="task-card">
+      <div class="task-top">
+        <span class="task-cat cat-data">Data Entry</span>
+        <div class="task-pay">₦800 <span>/task</span></div>
+      </div>
+      <div class="task-title">Transcribe 10 voice notes to text</div>
+      <div class="task-desc">Listen to 10 short voice notes (each under 1 minute) and type out the exact words spoken in each clip.</div>
+      <div class="task-meta">
+        <span>⏱ 20 mins</span>
+        <span>👥 34 done</span>
+        <span>🎯 15 slots left</span>
+      </div>
+      <button class="task-btn" onclick="showToast('Task started! Complete it to earn ₦800 🎉')">Start Task →</button>
+    </div>
+    <div class="task-card">
+      <div class="task-top">
+        <span class="task-cat cat-survey">Survey</span>
+        <div class="task-pay">₦250 <span>/task</span></div>
+      </div>
+      <div class="task-title">Rate your internet service provider</div>
+      <div class="task-desc">Quick 8-question survey about your current internet provider experience. Helps telecom companies improve service.</div>
+      <div class="task-meta">
+        <span>⏱ 4 mins</span>
+        <span>👥 670 done</span>
+        <span>🎯 80 slots left</span>
+      </div>
+      <button class="task-btn" onclick="showToast('Task started! Complete it to earn ₦250 🎉')">Start Task →</button>
+    </div>
+    <div class="task-card">
+      <div class="task-top">
+        <span class="task-cat cat-social">Social Media</span>
+        <div class="task-pay">₦200 <span>/task</span></div>
+      </div>
+      <div class="task-title">Retweet and comment on Twitter/X</div>
+      <div class="task-desc">Retweet a post from a business account and leave a thoughtful comment. Must have at least 50 followers to qualify.</div>
+      <div class="task-meta">
+        <span>⏱ 3 mins</span>
+        <span>👥 310 done</span>
+        <span>🎯 200 slots left</span>
+      </div>
+      <button class="task-btn" onclick="showToast('Task started! Complete it to earn ₦200 🎉')">Start Task →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GAMES PAGE ===== -->
+<div class="page" id="games">
+  <div class="games-hero">
+    <h2>🎮 Game & Earn</h2>
+    <p>Stake Naira. Play your favourite games. Win big.</p>
+  </div>
+  <div class="games-grid">
+    <!-- LUDO -->
+    <div class="game-card ludo">
+      <div class="live-badge"><span class="dot"></span> 342 playing now</div>
+      <span class="game-emoji">🎲</span>
+      <div class="game-name">Ludo Naira</div>
+      <div class="game-desc">The Ludo you grew up playing — now with real Naira on the line. Beat 3 opponents and take the entire pot home.</div>
+      <div class="game-stake">
+        <button class="stake-opt sel" onclick="selectStake(this)">₦100</button>
+        <button class="stake-opt" onclick="selectStake(this)">₦200</button>
+        <button class="stake-opt" onclick="selectStake(this)">₦500</button>
+        <button class="stake-opt" onclick="selectStake(this)">₦1,000</button>
+      </div>
+      <button class="game-play-btn" onclick="showToast('Finding Ludo opponents... 🎲 Game lobby loading!')">🎲 Find a Game</button>
+    </div>
+    <!-- WHOT -->
+    <div class="game-card whot">
+      <div class="live-badge" style="color:var(--gold);background:rgba(255,184,0,0.1);border-color:rgba(255,184,0,0.2)"><span class="dot" style="background:var(--gold)"></span> 198 playing now</div>
+      <span class="game-emoji">🃏</span>
+      <div class="game-name">Whot Naira</div>
+      <div class="game-desc">The classic Nigerian card game with a twist — every match has real Naira at stake. Outsmart your opponent and cash out.</div>
+      <div class="game-stake">
+        <button class="stake-opt sel" onclick="selectStake(this)">₦100</button>
+        <button class="stake-opt" onclick="selectStake(this)">₦200</button>
+        <button class="stake-opt" onclick="selectStake(this)">₦500</button>
+        <button class="stake-opt" onclick="selectStake(this)">₦1,000</button>
+      </div>
+      <button class="game-play-btn" onclick="showToast('Finding Whot opponents... 🃏 Game lobby loading!')">🃏 Find a Game</button>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div style="padding:0 32px 40px; max-width:900px; margin:0 auto;">
+    <div class="section-title" style="margin-bottom:8px;">How Game Naira Works</div>
+    <div class="section-sub">Simple, fair, and transparent</div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-top:20px;">
+      <div class="feature-card" style="text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">1️⃣</div>
+        <div class="feat-title">Pick Your Stake</div>
+        <div class="feat-desc">Choose how much Naira you want to play for — from ₦100 to ₦1,000</div>
+      </div>
+      <div class="feature-card" style="text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">2️⃣</div>
+        <div class="feat-title">Get Matched</div>
+        <div class="feat-desc">We instantly match you with another player at the same stake level</div>
+      </div>
+      <div class="feature-card" style="text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">3️⃣</div>
+        <div class="feat-title">Play & Win</div>
+        <div class="feat-desc">Play the game you love. Winner gets the full pot minus a small platform fee</div>
+      </div>
+      <div class="feature-card" style="text-align:center;">
+        <div style="font-size:32px;margin-bottom:10px;">4️⃣</div>
+        <div class="feat-title">Cash Out</div>
+        <div class="feat-desc">Your winnings land in your wallet instantly. Withdraw to your bank anytime</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WALLET PAGE ===== -->
+<div class="page" id="wallet">
+  <div class="wallet-wrap">
+    <div class="wallet-card">
+      <div class="wallet-label">Total Balance</div>
+      <div class="wallet-balance">₦4,750</div>
+      <div class="wallet-sub">Available for withdrawal</div>
+      <div class="wallet-actions">
+        <button class="w-btn w-btn-green" onclick="openModal('withdraw')">💳 Withdraw</button>
+        <button class="w-btn w-btn-outline" onclick="showToast('Fund wallet via Paystack coming soon!')">➕ Add Funds</button>
+      </div>
+    </div>
+
+    <div class="wallet-breakdown">
+      <div class="wbreak-card">
+        <div class="wbreak-label">From Tasks</div>
+        <div class="wbreak-val green">₦2,950</div>
+      </div>
+      <div class="wbreak-card">
+        <div class="wbreak-label">From Games</div>
+        <div class="wbreak-val gold">₦1,800</div>
+      </div>
+      <div class="wbreak-card">
+        <div class="wbreak-label">Referral Bonus</div>
+        <div class="wbreak-val green">₦1,000</div>
+      </div>
+      <div class="wbreak-card">
+        <div class="wbreak-label">Total Withdrawn</div>
+        <div class="wbreak-val" style="color:var(--muted)">₦6,200</div>
+      </div>
+    </div>
+
+    <div class="tx-section">
+      <h3>Recent Transactions</h3>
+      <div class="tx-item">
+        <div class="tx-icon earn">📋</div>
+        <div class="tx-info">
+          <div class="tx-title">Survey Task Completed</div>
+          <div class="tx-date">Today, 2:14 PM</div>
+        </div>
+        <div class="tx-amount plus">+₦350</div>
+      </div>
+      <div class="tx-item">
+        <div class="tx-icon game">🎲</div>
+        <div class="tx-info">
+          <div class="tx-title">Ludo Naira — Won</div>
+          <div class="tx-date">Today, 11:30 AM</div>
+        </div>
+        <div class="tx-amount plus">+₦900</div>
+      </div>
+      <div class="tx-item">
+        <div class="tx-icon withdraw">💳</div>
+        <div class="tx-info">
+          <div class="tx-title">Withdrawal to GTBank</div>
+          <div class="tx-date">Yesterday, 6:00 PM</div>
+        </div>
+        <div class="tx-amount minus">-₦2,000</div>
+      </div>
+      <div class="tx-item">
+        <div class="tx-icon earn">📱</div>
+        <div class="tx-info">
+          <div class="tx-title">App Review Task</div>
+          <div class="tx-date">Yesterday, 3:45 PM</div>
+        </div>
+        <div class="tx-amount plus">+₦600</div>
+      </div>
+      <div class="tx-item">
+        <div class="tx-icon game">🃏</div>
+        <div class="tx-info">
+          <div class="tx-title">Whot Naira — Lost</div>
+          <div class="tx-date">Yesterday, 1:20 PM</div>
+        </div>
+        <div class="tx-amount minus">-₦200</div>
+      </div>
+      <div class="tx-item">
+        <div class="tx-icon earn">🤝</div>
+        <div class="tx-info">
+          <div class="tx-title">Referral Bonus — Chukwuemeka</div>
+          <div class="tx-date">2 days ago</div>
+        </div>
+        <div class="tx-amount plus">+₦500</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <div class="mobile-nav-items">
+    <div class="mnav-item active" onclick="showPage('home',null); setMobileActive(this)">
+      <span class="mnav-icon">🏠</span>
+      <span class="mnav-label">Home</span>
+    </div>
+    <div class="mnav-item" onclick="showPage('tasks',null); setMobileActive(this)">
+      <span class="mnav-icon">📋</span>
+      <span class="mnav-label">Tasks</span>
+    </div>
+    <div class="mnav-item" onclick="showPage('games',null); setMobileActive(this)">
+      <span class="mnav-icon">🎮</span>
+      <span class="mnav-label">Games</span>
+    </div>
+    <div class="mnav-item" onclick="showPage('wallet',null); setMobileActive(this)">
+      <span class="mnav-icon">💰</span>
+      <span class="mnav-label">Wallet</span>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-signup">
+  <div class="modal">
+    <h3>Create Your Account 🐝</h3>
+    <p>Join free and start earning Naira today!</p>
+    <div class="form-group"><label>Full Name</label><input type="text" placeholder="Emeka Okafor"/></div>
+    <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="08012345678"/></div>
+    <div class="form-group"><label>Email Address</label><input type="email" placeholder="emeka@email.com"/></div>
+    <div class="form-group"><label>Password</label><input type="password" placeholder="Create a strong password"/></div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal('signup')">Cancel</button>
+      <button class="modal-submit" onclick="closeModal('signup'); showToast('Account created! Welcome to Task Naira 🎉')">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-login">
+  <div class="modal">
+    <h3>Welcome Back 👋</h3>
+    <p>Log in to continue earning Naira</p>
+    <div class="form-group"><label>Phone / Email</label><input type="text" placeholder="08012345678 or email"/></div>
+    <div class="form-group"><label>Password</label><input type="password" placeholder="Your password"/></div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal('login')">Cancel</button>
+      <button class="modal-submit" onclick="closeModal('login'); showToast('Logged in successfully! Welcome back 🎉')">Log In</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-withdraw">
+  <div class="modal">
+    <h3>Withdraw Funds 💳</h3>
+    <p>Powered by Paystack — instant transfer to your bank</p>
+    <div class="form-group">
+      <label>Select Bank</label>
+      <select>
+        <option>GTBank</option>
+        <option>Access Bank</option>
+        <option>Opay</option>
+        <option>Palmpay</option>
+        <option>Kuda Bank</option>
+        <option>First Bank</option>
+        <option>UBA</option>
+        <option>Zenith Bank</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Account Number</label><input type="text" placeholder="0123456789"/></div>
+    <div class="form-group"><label>Amount (₦)</label><input type="number" placeholder="Minimum ₦500"/></div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal('withdraw')">Cancel</button>
+      <button class="modal-submit" onclick="closeModal('withdraw'); showToast('Withdrawal initiated! Arrives in 1–3 mins via Paystack 💳')">Withdraw Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  function showPage(id, linkEl) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    if (linkEl) linkEl.classList.add('active');
+    window.scrollTo(0,0);
+  }
+
+  function setMobileActive(el) {
+    document.querySelectorAll('.mnav-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function openModal(type) {
+    document.getElementById('modal-' + type).classList.add('open');
+  }
+  function closeModal(type) {
+    document.getElementById('modal-' + type).classList.remove('open');
+  }
+  document.querySelectorAll('.modal-overlay').forEach(o => {
+    o.addEventListener('click', function(e) {
+      if (e.target === this) this.classList.remove('open');
+    });
+  });
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  function selectStake(el) {
+    const parent = el.closest('.game-card');
+    parent.querySelectorAll('.stake-opt').forEach(s => s.classList.remove('sel'));
+    el.classList.add('sel');
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

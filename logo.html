@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Task Naira Logo</title>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f0f0;font-family:'Familjen Grotesk',sans-serif;padding:40px;min-height:100vh;}
+.page{max-width:900px;margin:0 auto;}
+h2{font-size:14px;font-weight:700;color:#666;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;margin-top:40px;}
+h2:first-child{margin-top:0;}
+
+/* Preview boxes */
+.preview-box{border-radius:16px;padding:48px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;gap:48px;flex-wrap:wrap;}
+.pb-white{background:#fff;border:1px solid #e0e0e0;}
+.pb-green{background:#009A44;}
+.pb-dark{background:#0D1F14;}
+.pb-gold{background:linear-gradient(135deg,#C89B00,#F5D060);}
+
+/* ── LOGO MARK ── */
+.logo-wrap{display:flex;align-items:center;gap:12px;}
+.logo-icon{
+  width:48px;height:48px;border-radius:13px;
+  background:linear-gradient(145deg,#009A44,#007A36);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(0,154,68,0.35);
+  position:relative;overflow:hidden;flex-shrink:0;
+}
+.logo-icon::before{
+  content:'';position:absolute;top:-10px;right:-10px;
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,0.1);
+}
+.logo-icon svg{position:relative;z-index:1;}
+
+/* ── LOGO TEXT ── */
+.logo-text{display:flex;flex-direction:column;line-height:1;}
+.logo-task{font-family:'Familjen Grotesk',sans-serif;font-size:22px;font-weight:800;color:#0D1F14;letter-spacing:-0.5px;}
+.logo-naira{font-family:'Familjen Grotesk',sans-serif;font-size:22px;font-weight:800;color:#009A44;letter-spacing:-0.5px;}
+.logo-task-w{color:#fff;}
+.logo-naira-w{color:#F5D060;}
+.logo-task-g{color:#fff;}
+.logo-naira-g{color:#F5D060;}
+
+/* SIZES */
+.logo-wrap.sm .logo-icon{width:32px;height:32px;border-radius:9px;}
+.logo-wrap.sm .logo-task,.logo-wrap.sm .logo-naira{font-size:16px;}
+.logo-wrap.lg .logo-icon{width:64px;height:64px;border-radius:17px;}
+.logo-wrap.lg .logo-task,.logo-wrap.lg .logo-naira{font-size:30px;}
+.logo-wrap.xl .logo-icon{width:80px;height:80px;border-radius:22px;}
+.logo-wrap.xl .logo-task,.logo-wrap.xl .logo-naira{font-size:38px;}
+
+/* Icon only */
+.icon-only{width:60px;height:60px;border-radius:16px;background:linear-gradient(145deg,#009A44,#007A36);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,154,68,0.35);}
+.icon-only.sm{width:40px;height:40px;border-radius:11px;}
+.icon-only.lg{width:80px;height:80px;border-radius:22px;}
+.icon-only.rounded{border-radius:50%;}
+.icon-only.gold{background:linear-gradient(145deg,#C89B00,#F5D060);}
+.icon-only.white{background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.1);}
+
+/* Favicon preview */
+.favicon-wrap{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.fav{border-radius:8px;background:linear-gradient(145deg,#009A44,#007A36);display:flex;align-items:center;justify-content:center;}
+.fav-16{width:16px;height:16px;border-radius:4px;}
+.fav-32{width:32px;height:32px;border-radius:6px;}
+.fav-64{width:64px;height:64px;border-radius:10px;}
+.fav-128{width:128px;height:128px;border-radius:16px;}
+.fav-label{font-size:11px;color:#999;text-align:center;margin-top:6px;}
+
+/* Download section */
+.dl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:40px;}
+.dl-card{background:#fff;border:1px solid #e0e0e0;border-radius:14px;padding:20px;text-align:center;}
+.dl-preview{margin-bottom:14px;display:flex;justify-content:center;}
+.dl-name{font-size:13px;font-weight:700;color:#333;margin-bottom:4px;}
+.dl-desc{font-size:11px;color:#999;}
+.dl-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 16px;background:#009A44;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Familjen Grotesk',sans-serif;transition:all .2s;}
+.dl-btn:hover{background:#007A36;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h2>Primary Logo — Light Background</h2>
+  <div class="preview-box pb-white">
+    <!-- XL -->
+    <div class="logo-wrap xl">
+      <div class="logo-icon">
+        <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+          <!-- Lightning bolt -->
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+          <!-- Naira lines -->
+          <line x1="10" y1="21" x2="28" y2="21" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+          <line x1="10" y1="24" x2="28" y2="24" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-task">Task</span>
+        <span class="logo-naira">Naira</span>
+      </div>
+    </div>
+    <!-- LG -->
+    <div class="logo-wrap lg">
+      <div class="logo-icon">
+        <svg width="30" height="30" viewBox="0 0 38 38" fill="none">
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/>
+          <line x1="10" y1="21" x2="28" y2="21" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+          <line x1="10" y1="24" x2="28" y2="24" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-task">Task</span>
+        <span class="logo-naira">Naira</span>
+      </div>
+    </div>
+    <!-- MD -->
+    <div class="logo-wrap">
+      <div class="logo-icon">
+        <svg width="24" height="24" viewBox="0 0 38 38" fill="none">
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-task">Task</span>
+        <span class="logo-naira">Naira</span>
+      </div>
+    </div>
+    <!-- SM -->
+    <div class="logo-wrap sm">
+      <div class="logo-icon">
+        <svg width="16" height="16" viewBox="0 0 38 38" fill="none">
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-task">Task</span>
+        <span class="logo-naira">Naira</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>Primary Logo — Dark/Green Background</h2>
+  <div class="preview-box pb-green">
+    <div class="logo-wrap xl">
+      <div class="logo-icon" style="background:rgba(255,255,255,0.2);box-shadow:0 4px 16px rgba(0,0,0,0.2);">
+        <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-task logo-task-w">Task</span>
+        <span class="logo-naira logo-naira-w">Naira</span>
+      </div>
+    </div>
+    <div class="logo-wrap lg">
+      <div class="logo-icon" style="background:rgba(255,255,255,0.2);box-shadow:none;">
+        <svg width="28" height="28" viewBox="0 0 38 38" fill="none">
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-task logo-task-w">Task</span>
+        <span class="logo-naira logo-naira-w">Naira</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="preview-box pb-dark">
+    <div class="logo-wrap xl">
+      <div class="logo-icon">
+        <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-task logo-task-g">Task</span>
+        <span class="logo-naira logo-naira-g">Naira</span>
+      </div>
+    </div>
+    <div class="logo-wrap lg">
+      <div class="logo-icon">
+        <svg width="28" height="28" viewBox="0 0 38 38" fill="none">
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-task logo-task-g">Task</span>
+        <span class="logo-naira logo-naira-g">Naira</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>Icon Only Variations</h2>
+  <div class="preview-box pb-white">
+    <div style="text-align:center;">
+      <div class="icon-only lg">
+        <svg width="40" height="40" viewBox="0 0 38 38" fill="none">
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/>
+        </svg>
+      </div>
+      <div style="font-size:11px;color:#999;margin-top:8px;">Square</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="icon-only lg rounded">
+        <svg width="40" height="40" viewBox="0 0 38 38" fill="none">
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/>
+        </svg>
+      </div>
+      <div style="font-size:11px;color:#999;margin-top:8px;">Circle</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="icon-only lg gold">
+        <svg width="40" height="40" viewBox="0 0 38 38" fill="none">
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/>
+        </svg>
+      </div>
+      <div style="font-size:11px;color:#999;margin-top:8px;">Gold</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="icon-only lg white" style="border:2px solid #009A44;">
+        <svg width="40" height="40" viewBox="0 0 38 38" fill="none">
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="#009A44"/>
+        </svg>
+      </div>
+      <div style="font-size:11px;color:#999;margin-top:8px;">White</div>
+    </div>
+  </div>
+
+  <h2>Favicon Sizes</h2>
+  <div class="preview-box pb-white" style="justify-content:flex-start;gap:32px;">
+    <div style="text-align:center;">
+      <div class="fav fav-16" style="margin:0 auto;">
+        <svg width="10" height="10" viewBox="0 0 38 38" fill="none"><path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/></svg>
+      </div>
+      <div class="fav-label">16×16</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="fav fav-32" style="margin:0 auto;">
+        <svg width="18" height="18" viewBox="0 0 38 38" fill="none"><path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/></svg>
+      </div>
+      <div class="fav-label">32×32</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="fav fav-64" style="margin:0 auto;">
+        <svg width="36" height="36" viewBox="0 0 38 38" fill="none"><path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/></svg>
+      </div>
+      <div class="fav-label">64×64</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="fav fav-128" style="margin:0 auto;">
+        <svg width="72" height="72" viewBox="0 0 38 38" fill="none"><path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/></svg>
+      </div>
+      <div class="fav-label">128×128</div>
+    </div>
+  </div>
+
+  <h2>App Splash / Loading Screen Preview</h2>
+  <div class="preview-box pb-white" style="min-height:200px;flex-direction:column;gap:20px;">
+    <div style="text-align:center;">
+      <div style="width:80px;height:80px;border-radius:22px;background:linear-gradient(145deg,#009A44,#007A36);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 8px 32px rgba(0,154,68,0.3);">
+        <svg width="44" height="44" viewBox="0 0 38 38" fill="none">
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/>
+        </svg>
+      </div>
+      <div style="font-family:'Familjen Grotesk';font-size:32px;font-weight:800;color:#0D1F14;letter-spacing:-1px;">Task<span style="color:#009A44;">Naira</span></div>
+      <div style="font-size:13px;color:#7A9A84;margin-top:6px;">Work It. Play It. Earn It.</div>
+    </div>
+  </div>
+
+  <div class="preview-box pb-green" style="min-height:200px;flex-direction:column;gap:20px;">
+    <div style="text-align:center;">
+      <div style="width:80px;height:80px;border-radius:22px;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:2px solid rgba(255,255,255,0.3);">
+        <svg width="44" height="44" viewBox="0 0 38 38" fill="none">
+          <path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/>
+        </svg>
+      </div>
+      <div style="font-family:'Familjen Grotesk';font-size:32px;font-weight:800;color:#fff;letter-spacing:-1px;">Task<span style="color:#F5D060;">Naira</span></div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.75);margin-top:6px;">Work It. Play It. Earn It.</div>
+    </div>
+  </div>
+
+  <h2>Logo on App Mockup</h2>
+  <div class="preview-box pb-white" style="gap:24px;flex-wrap:wrap;">
+    <!-- Navbar preview -->
+    <div style="background:#fff;border:1px solid #D5EAE0;border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:10px;min-width:280px;">
+      <div style="width:32px;height:32px;background:linear-gradient(145deg,#009A44,#007A36);border-radius:9px;display:flex;align-items:center;justify-content:center;">
+        <svg width="18" height="18" viewBox="0 0 38 38" fill="none"><path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/></svg>
+      </div>
+      <div style="font-family:'Familjen Grotesk';font-size:18px;font-weight:800;color:#0D1F14;">Task<span style="color:#009A44;">Naira</span></div>
+      <div style="margin-left:auto;font-size:12px;color:#7A9A84;">Navbar</div>
+    </div>
+    <!-- Sidebar preview -->
+    <div style="background:#0D1F14;border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:10px;min-width:280px;">
+      <div style="width:32px;height:32px;background:linear-gradient(145deg,#009A44,#007A36);border-radius:9px;display:flex;align-items:center;justify-content:center;">
+        <svg width="18" height="18" viewBox="0 0 38 38" fill="none"><path d="M22 6L12 20H19L16 32L28 16H21L22 6Z" fill="white"/></svg>
+      </div>
+      <div style="font-family:'Familjen Grotesk';font-size:18px;font-weight:800;color:#fff;">Task<span style="color:#F5D060;">Naira</span></div>
+      <div style="margin-left:auto;font-size:12px;color:#7A9A84;">Dark Nav</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
