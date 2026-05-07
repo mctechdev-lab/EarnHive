@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Settings — Task Naira</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23009A44'/%3E%3Cpath d='M37 8L20 34H31L27 56L46 28H35L37 8Z' fill='white'/%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--g:#009A44;--g2:#007A36;--gl:#E8F7EE;--gl2:#C8EDD8;--gold:#C89B00;--gold-l:#FFF8E0;--text:#0D1F14;--t2:#3A5444;--t3:#7A9A84;--border:#D5EAE0;--red:#FF4757;--off:#F5FAF7;--gray:#EEF3F0;--font-h:'Familjen Grotesk',sans-serif;--font-b:'Plus Jakarta Sans',sans-serif;}
+body{font-family:var(--font-b);background:var(--off);color:var(--text);padding:24px;min-height:100vh;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.skel{background:linear-gradient(90deg,var(--gray) 25%,var(--border) 50%,var(--gray) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;}
+/* Profile card */
+.profile-card{background:linear-gradient(135deg,var(--g),var(--g2));border-radius:20px;padding:28px;margin-bottom:24px;display:flex;align-items:center;gap:20px;position:relative;overflow:hidden;}
+.pc-bg{position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.06);}
+.pc-bg2{position:absolute;bottom:-60px;left:-40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,0.04);}
+.pc-av{width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,0.2);border:3px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:26px;font-weight:700;color:#fff;flex-shrink:0;position:relative;z-index:1;}
+.pc-info{position:relative;z-index:1;flex:1;}
+.pc-name{font-family:var(--font-h);font-size:22px;font-weight:700;color:#fff;margin-bottom:4px;}
+.pc-email{font-size:13px;color:rgba(255,255,255,0.8);margin-bottom:8px;}
+.pc-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);color:#fff;padding:4px 12px;border-radius:100px;font-size:11px;font-weight:600;}
+.pc-stats{display:flex;gap:24px;position:relative;z-index:1;}
+.pcs-val{font-family:var(--font-h);font-size:20px;font-weight:700;color:#fff;}
+.pcs-lbl{font-size:11px;color:rgba(255,255,255,0.7);}
+/* Wallet */
+.wallet-card{background:linear-gradient(135deg,var(--g),var(--g2));border-radius:16px;padding:20px;margin-bottom:16px;position:relative;overflow:hidden;}
+.wc-bg{position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.06);}
+.wc-lbl{font-size:11px;color:rgba(255,255,255,0.7);margin-bottom:4px;position:relative;}
+.wc-amt{font-family:var(--font-h);font-size:32px;font-weight:700;color:#fff;margin-bottom:4px;position:relative;letter-spacing:-1px;}
+.wc-sub{font-size:12px;color:rgba(255,255,255,0.7);margin-bottom:18px;position:relative;}
+.wc-btns{display:flex;gap:10px;position:relative;}
+.wc-btn{flex:1;padding:10px;border-radius:9px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;}
+.wc-btn-w{background:#fff;color:var(--g);}
+.wc-btn-w:hover{background:rgba(255,255,255,0.9);}
+.wc-btn-gh{background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);}
+.wc-btn-gh:hover{background:rgba(255,255,255,0.25);}
+.wallet-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+.wb-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;}
+.wb-val{font-family:var(--font-h);font-size:18px;font-weight:700;margin-bottom:3px;}
+.wb-lbl{font-size:11px;color:var(--t3);}
+/* Settings items */
+.sec{margin-bottom:24px;}
+.sec-title{font-family:var(--font-h);font-size:15px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.sec-title i{color:var(--g);font-size:14px;}
+.si{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:8px;transition:all .2s;cursor:pointer;}
+.si:hover{border-color:var(--gl2);background:var(--off);}
+.si-l{display:flex;align-items:center;gap:14px;}
+.si-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ic-g{background:var(--gl);} .ic-g i{color:var(--g);font-size:16px;}
+.ic-b{background:#EEF2FF;} .ic-b i{color:#4F6EF7;font-size:16px;}
+.ic-gold{background:var(--gold-l);} .ic-gold i{color:var(--gold);font-size:16px;}
+.ic-r{background:#FFF0F1;} .ic-r i{color:var(--red);font-size:16px;}
+.ic-p{background:#F5EEFF;} .ic-p i{color:#8B5CF6;font-size:16px;}
+.ic-wa{background:#E8FFF0;} .ic-wa i{color:#25D366;font-size:16px;}
+.si-title{font-size:14px;font-weight:600;color:var(--text);}
+.si-sub{font-size:12px;color:var(--t3);margin-top:2px;}
+.si-r{display:flex;align-items:center;gap:8px;color:var(--t3);font-size:13px;}
+.toggle{width:42px;height:24px;border-radius:100px;background:var(--border);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;}
+.toggle.on{background:var(--g);}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,0.15);}
+.toggle.on::after{transform:translateX(18px);}
+.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+.tag-gold{background:var(--gold-l);color:var(--gold);}
+.tag-green{background:var(--gl);color:var(--g);}
+/* WhatsApp big button */
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;background:#25D366;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font-b);margin-bottom:8px;transition:all .2s;text-decoration:none;}
+.wa-btn:hover{background:#1DB954;transform:translateY(-1px);}
+.wa-btn i{font-size:20px;}
+/* Modals */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);}
+.overlay.open{display:flex;}
+.modal{background:#fff;border-radius:20px;width:100%;max-width:420px;box-shadow:0 24px 80px rgba(0,0,0,0.2);animation:pop .3s cubic-bezier(.34,1.56,.64,1);overflow:hidden;}
+@keyframes pop{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+.mt{padding:22px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.mt h3{font-family:var(--font-h);font-size:19px;font-weight:700;}
+.mc{width:30px;height:30px;border-radius:8px;background:var(--off);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--t2);}
+.mb{padding:22px 24px;}
+.fg{margin-bottom:15px;}
+.fg label{display:block;font-size:11px;font-weight:700;color:var(--t3);letter-spacing:0.6px;text-transform:uppercase;margin-bottom:7px;}
+.fg input,.fg select{width:100%;padding:11px 14px;background:var(--gray);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-size:14px;font-family:var(--font-b);outline:none;transition:all .2s;}
+.fg input:focus,.fg select:focus{background:#fff;border-color:var(--g);box-shadow:0 0 0 3px rgba(0,154,68,0.08);}
+.fg input::placeholder{color:var(--t3);}
+.fgr{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.info-box{border-radius:10px;padding:12px;font-size:13px;color:var(--t2);display:flex;gap:8px;margin-top:10px;}
+.info-g{background:var(--gl);border:1px solid var(--gl2);}
+.info-gold{background:var(--gold-l);border:1px solid #F5E4A0;}
+.mf{padding:0 24px 22px;display:flex;gap:10px;}
+.mcancel{flex:1;padding:11px;background:var(--off);border:1px solid var(--border);border-radius:9px;color:var(--t2);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-b);}
+.msub{flex:2;padding:11px;border:none;border-radius:9px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;justify-content:center;gap:7px;}
+.ms-g{background:var(--g);}
+.ms-g:hover{background:var(--g2);}
+.ms-gold{background:var(--gold);}
+.msub:disabled{opacity:0.7;pointer-events:none;}
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;z-index:999;background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.1);transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);max-width:280px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.ti{width:34px;height:34px;border-radius:9px;background:var(--gl);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ti i{color:var(--g);font-size:14px;}
+.tm{font-size:13px;font-weight:600;color:var(--text);}
+@media(max-width:600px){.pc-stats{display:none;}.wallet-breakdown{grid-template-columns:1fr 1fr;}.profile-card{flex-direction:column;text-align:center;}.fgr{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- Profile Card -->
+<div class="profile-card" id="profile-card">
+  <div class="pc-bg"></div><div class="pc-bg2"></div>
+  <div class="pc-av" id="pc-av">--</div>
+  <div class="pc-info">
+    <div class="pc-name" id="pc-name">Loading...</div>
+    <div class="pc-email" id="pc-email">...</div>
+    <div class="pc-badge"><i class="fa-solid fa-circle-check" style="font-size:10px;"></i> <span id="pc-verified">Verified Account</span></div>
+  </div>
+  <div class="pc-stats">
+    <div><div class="pcs-val" id="pc-earned">₦0</div><div class="pcs-lbl">Total Earned</div></div>
+    <div><div class="pcs-val" id="pc-refs">0</div><div class="pcs-lbl">Referrals</div></div>
+    <div><div class="pcs-val" id="pc-withdrawn">₦0</div><div class="pcs-lbl">Withdrawn</div></div>
+  </div>
+</div>
+
+<!-- Wallet -->
+<div class="sec">
+  <div class="sec-title"><i class="fa-solid fa-wallet"></i> Wallet & Payments</div>
+  <div class="wallet-card">
+    <div class="wc-bg"></div>
+    <div class="wc-lbl">TOTAL BALANCE</div>
+    <div class="wc-amt" id="wc-amt">₦0.00</div>
+    <div class="wc-sub">Available for withdrawal</div>
+    <div class="wc-btns">
+      <button class="wc-btn wc-btn-w" onclick="openModal('deposit')"><i class="fa-solid fa-arrow-down"></i> Deposit</button>
+      <button class="wc-btn wc-btn-gh" onclick="openModal('withdraw')"><i class="fa-solid fa-arrow-up"></i> Withdraw</button>
+    </div>
+  </div>
+  <div class="wallet-breakdown">
+    <div class="wb-card"><div class="wb-val" style="color:var(--g);" id="wb-tasks">₦0</div><div class="wb-lbl">From Tasks</div></div>
+    <div class="wb-card"><div class="wb-val" style="color:var(--gold);" id="wb-deposited">₦0</div><div class="wb-lbl">Total Deposited</div></div>
+    <div class="wb-card"><div class="wb-val" style="color:var(--t3);" id="wb-withdrawn">₦0</div><div class="wb-lbl">Withdrawn</div></div>
+  </div>
+  <div class="si" onclick="loadTransactions()">
+    <div class="si-l"><div class="si-ico ic-b"><i class="fa-solid fa-clock-rotate-left"></i></div><div><div class="si-title">Transaction History</div><div class="si-sub">View all your past transactions</div></div></div>
+    <div class="si-r"><i class="fa-solid fa-chevron-right"></i></div>
+  </div>
+</div>
+
+<!-- Account -->
+<div class="sec">
+  <div class="sec-title"><i class="fa-solid fa-user"></i> Account</div>
+  <div class="si" onclick="openModal('editprofile')">
+    <div class="si-l"><div class="si-ico ic-g"><i class="fa-solid fa-user-pen"></i></div><div><div class="si-title">Edit Profile</div><div class="si-sub">Update your name, phone and email</div></div></div>
+    <div class="si-r"><i class="fa-solid fa-chevron-right"></i></div>
+  </div>
+  <div class="si" onclick="openModal('changepwd')">
+    <div class="si-l"><div class="si-ico ic-b"><i class="fa-solid fa-lock"></i></div><div><div class="si-title">Change Password</div><div class="si-sub">Update your account password</div></div></div>
+    <div class="si-r"><i class="fa-solid fa-chevron-right"></i></div>
+  </div>
+  <div class="si" onclick="toast('KYC verification coming soon')">
+    <div class="si-l"><div class="si-ico ic-gold"><i class="fa-solid fa-id-card"></i></div><div><div class="si-title">KYC Verification</div><div class="si-sub">Verify identity to increase withdrawal limits</div></div></div>
+    <div class="si-r"><span class="tag tag-gold">Coming Soon</span><i class="fa-solid fa-chevron-right"></i></div>
+  </div>
+</div>
+
+<!-- Notifications -->
+<div class="sec">
+  <div class="sec-title"><i class="fa-solid fa-bell"></i> Notifications</div>
+  <div class="si">
+    <div class="si-l"><div class="si-ico ic-g"><i class="fa-solid fa-envelope"></i></div><div><div class="si-title">Email Notifications</div><div class="si-sub">Task updates and earnings alerts</div></div></div>
+    <div class="si-r"><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+  </div>
+  <div class="si">
+    <div class="si-l"><div class="si-ico ic-b"><i class="fa-solid fa-mobile-screen"></i></div><div><div class="si-title">Push Notifications</div><div class="si-sub">Coming when APK is ready</div></div></div>
+    <div class="si-r"><span class="tag tag-gold">APK Soon</span></div>
+  </div>
+</div>
+
+<!-- Referrals -->
+<div class="sec">
+  <div class="sec-title"><i class="fa-solid fa-share-nodes"></i> Referrals</div>
+  <div class="si" onclick="copyRef()">
+    <div class="si-l"><div class="si-ico ic-g"><i class="fa-solid fa-gift"></i></div><div><div class="si-title">Refer & Earn 10%</div><div class="si-sub" id="ref-link-display">Loading...</div></div></div>
+    <div class="si-r"><span class="tag tag-green" id="ref-count-badge">0 referrals</span><i class="fa-solid fa-copy"></i></div>
+  </div>
+</div>
+
+<!-- Support & Community -->
+<div class="sec">
+  <div class="sec-title"><i class="fa-solid fa-circle-info"></i> Support & Community</div>
+  <!-- WhatsApp Community Big Button -->
+  <a class="wa-btn" href="https://chat.whatsapp.com/FwdLTWpZzAi2dpZkDiplAT?mode=gi_t" target="_blank">
+    <i class="fa-brands fa-whatsapp"></i> Join Task Naira WhatsApp Community
+  </a>
+  <div class="si" onclick="window.open('https://wa.me/2348056230366','_blank')">
+    <div class="si-l"><div class="si-ico ic-wa"><i class="fa-brands fa-whatsapp"></i></div><div><div class="si-title">Contact Support</div><div class="si-sub">Chat with us on WhatsApp — +234 805 623 0366</div></div></div>
+    <div class="si-r"><i class="fa-solid fa-chevron-right"></i></div>
+  </div>
+  <div class="si" onclick="toast('Help Center coming soon')">
+    <div class="si-l"><div class="si-ico ic-b"><i class="fa-solid fa-circle-question"></i></div><div><div class="si-title">Help Center</div><div class="si-sub">FAQs and how-to guides</div></div></div>
+    <div class="si-r"><i class="fa-solid fa-chevron-right"></i></div>
+  </div>
+  <div class="si" onclick="toast('Terms opening...')">
+    <div class="si-l"><div class="si-ico ic-p"><i class="fa-solid fa-file-lines"></i></div><div><div class="si-title">Terms & Privacy Policy</div><div class="si-sub">Read our terms and privacy policy</div></div></div>
+    <div class="si-r"><i class="fa-solid fa-chevron-right"></i></div>
+  </div>
+  <div class="si" onclick="handleLogout()">
+    <div class="si-l"><div class="si-ico ic-r"><i class="fa-solid fa-right-from-bracket"></i></div><div><div class="si-title">Log Out</div><div class="si-sub">Sign out of your Task Naira account</div></div></div>
+    <div class="si-r"><i class="fa-solid fa-chevron-right"></i></div>
+  </div>
+</div>
+
+<!-- Deposit Modal -->
+<div class="overlay" id="modal-deposit">
+  <div class="modal">
+    <div class="mt"><h3><i class="fa-solid fa-arrow-down" style="color:var(--g);margin-right:8px;"></i>Deposit Funds</h3><button class="mc" onclick="closeModal('deposit')"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="mb">
+      <div class="fg"><label>Amount (₦)</label><input type="number" id="dep-amount" placeholder="Minimum ₦100" min="100"/></div>
+      <div class="info-box info-g"><i class="fa-solid fa-lock" style="color:var(--g);flex-shrink:0;margin-top:1px;"></i>Secured by <strong>Paystack</strong> — funds reflect instantly after payment.</div>
+    </div>
+    <div class="mf">
+      <button class="mcancel" onclick="closeModal('deposit')">Cancel</button>
+      <button class="msub ms-g" id="dep-btn" onclick="handleDeposit()"><i class="fa-solid fa-lock"></i> Pay with Paystack</button>
+    </div>
+  </div>
+</div>
+
+<!-- Withdraw Modal -->
+<div class="overlay" id="modal-withdraw">
+  <div class="modal">
+    <div class="mt"><h3><i class="fa-solid fa-arrow-up" style="color:var(--gold);margin-right:8px;"></i>Withdraw Earnings</h3><button class="mc" onclick="closeModal('withdraw')"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="mb">
+      <div class="fg"><label>Select Bank</label><select id="wd-bank"><option value="">-- Select Bank --</option><option>GTBank</option><option>Access Bank</option><option>First Bank</option><option>UBA</option><option>Zenith Bank</option><option>Opay</option><option>Palmpay</option><option>Kuda Bank</option><option>Sterling Bank</option><option>Wema Bank</option><option>Fidelity Bank</option><option>Polaris Bank</option></select></div>
+      <div class="fg"><label>Account Number</label><input type="text" id="wd-acct" placeholder="0123456789" maxlength="10"/></div>
+      <div class="fg"><label>Account Name</label><input type="text" id="wd-name" placeholder="Your account name"/></div>
+      <div class="fg"><label>Amount (₦)</label><input type="number" id="wd-amount" placeholder="Minimum ₦500" min="500"/></div>
+      <div class="info-box info-gold"><i class="fa-solid fa-clock" style="color:var(--gold);flex-shrink:0;margin-top:1px;"></i>₦15 fee applies. Manually processed within 1–24 hours.</div>
+    </div>
+    <div class="mf">
+      <button class="mcancel" onclick="closeModal('withdraw')">Cancel</button>
+      <button class="msub ms-gold" id="wd-btn" onclick="handleWithdraw()"><i class="fa-solid fa-arrow-up"></i> Request Withdrawal</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="overlay" id="modal-editprofile">
+  <div class="modal">
+    <div class="mt"><h3><i class="fa-solid fa-user-pen" style="color:var(--g);margin-right:8px;"></i>Edit Profile</h3><button class="mc" onclick="closeModal('editprofile')"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="mb">
+      <div class="fgr">
+        <div class="fg"><label>First Name</label><input type="text" id="ep-fname"/></div>
+        <div class="fg"><label>Last Name</label><input type="text" id="ep-lname"/></div>
+      </div>
+      <div class="fg"><label>Phone Number</label><input type="tel" id="ep-phone"/></div>
+      <div class="fg"><label>Email Address</label><input type="email" id="ep-email" disabled style="opacity:0.6;cursor:not-allowed;"/></div>
+    </div>
+    <div class="mf">
+      <button class="mcancel" onclick="closeModal('editprofile')">Cancel</button>
+      <button class="msub ms-g" onclick="closeModal('editprofile');toast('Profile updated successfully ✅')"><i class="fa-solid fa-check"></i> Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Change Password Modal -->
+<div class="overlay" id="modal-changepwd">
+  <div class="modal">
+    <div class="mt"><h3><i class="fa-solid fa-lock" style="color:var(--g);margin-right:8px;"></i>Change Password</h3><button class="mc" onclick="closeModal('changepwd')"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="mb">
+      <div class="fg"><label>Current Password</label><input type="password" id="cp-current" placeholder="Enter current password"/></div>
+      <div class="fg"><label>New Password</label><input type="password" id="cp-new" placeholder="Enter new password"/></div>
+      <div class="fg"><label>Confirm New Password</label><input type="password" id="cp-confirm" placeholder="Repeat new password"/></div>
+    </div>
+    <div class="mf">
+      <button class="mcancel" onclick="closeModal('changepwd')">Cancel</button>
+      <button class="msub ms-g" onclick="handleChangePassword()"><i class="fa-solid fa-lock"></i> Update Password</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="t"><div class="ti"><i class="fa-solid fa-circle-check" id="ticon"></i></div><div class="tm" id="tm"></div></div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+import { getAuth, onAuthStateChanged, signOut, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+
+const app = initializeApp({
+  apiKey:"AIzaSyAkZn9q8jJ5YJEpRPqy-0xjh59q2OS2oh8",
+  authDomain:"task-naira.firebaseapp.com",
+  projectId:"task-naira",
+  storageBucket:"task-naira.firebasestorage.app",
+  messagingSenderId:"295178303446",
+  appId:"1:295178303446:web:6d8c5f0895b81f6d299677"
+});
+
+const auth = getAuth(app);
+let currentUser = null;
+let userData = null;
+
+onAuthStateChanged(auth, async (user) => {
+  if(!user){ window.top.location.href='login.html'; return; }
+  currentUser = user;
+  window._auth = auth;
+  window._signOut = signOut;
+  window._updatePassword = updatePassword;
+  window._EmailAuthProvider = EmailAuthProvider;
+  window._reauthenticate = reauthenticateWithCredential;
+
+  try{
+    const res = await fetch('/api/me', { headers:{'x-firebase-uid': user.uid} });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error);
+    userData = data.user;
+    const w = data.user.wallet||{};
+    renderProfile(data.user, w);
+  } catch(e){ toast('Failed to load profile','error'); }
+});
+
+function renderProfile(u, w){
+  const initials = `${(u.first_name||'')[0]||''}${(u.last_name||'')[0]||''}`.toUpperCase();
+  document.getElementById('pc-av').textContent = initials;
+  document.getElementById('pc-name').textContent = `${u.first_name} ${u.last_name}`;
+  document.getElementById('pc-email').textContent = `${u.email}${u.phone?' · '+u.phone:''}`;
+  document.getElementById('pc-earned').textContent = naira(w.total_earned||0);
+  document.getElementById('pc-refs').textContent = u.active_referrals||0;
+  document.getElementById('pc-withdrawn').textContent = naira(w.total_withdrawn||0);
+  document.getElementById('wc-amt').textContent = naira(w.balance||0);
+  document.getElementById('wb-tasks').textContent = naira(w.total_earned||0);
+  document.getElementById('wb-deposited').textContent = naira(w.total_deposited||0);
+  document.getElementById('wb-withdrawn').textContent = naira(w.total_withdrawn||0);
+  document.getElementById('ref-link-display').textContent = `tasknaira.com/ref/${u.referral_code}`;
+  document.getElementById('ref-count-badge').textContent = `${u.active_referrals||0} referrals`;
+  // Prefill edit form
+  document.getElementById('ep-fname').value = u.first_name||'';
+  document.getElementById('ep-lname').value = u.last_name||'';
+  document.getElementById('ep-phone').value = u.phone||'';
+  document.getElementById('ep-email').value = u.email||'';
+  window._refCode = u.referral_code;
+  window._uid = currentUser.uid;
+}
+
+window.handleDeposit = async function(){
+  const amount = parseInt(document.getElementById('dep-amount').value);
+  if(!amount||amount<100){ toast('Minimum deposit is ₦100','error'); return; }
+  const btn = document.getElementById('dep-btn');
+  btn.disabled=true; btn.innerHTML='<span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;display:inline-block;"></span> Loading...';
+  try{
+    const res = await fetch('/api/deposit',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ firebase_uid:currentUser.uid, amount, email:currentUser.email })
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error);
+    closeModal('deposit');
+    window.open(data.authorization_url,'_blank');
+    toast('Redirecting to Paystack... Complete payment to fund your wallet 💳');
+  } catch(e){ toast(e.message,'error'); }
+  btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-lock"></i> Pay with Paystack';
+};
+
+window.handleWithdraw = async function(){
+  const bank = document.getElementById('wd-bank').value;
+  const acct = document.getElementById('wd-acct').value.trim();
+  const name = document.getElementById('wd-name').value.trim();
+  const amount = parseInt(document.getElementById('wd-amount').value);
+  if(!bank||!acct||!name||!amount){ toast('Please fill all fields','error'); return; }
+  if(amount<500){ toast('Minimum withdrawal is ₦500','error'); return; }
+  const btn = document.getElementById('wd-btn');
+  btn.disabled=true; btn.innerHTML='<span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;display:inline-block;"></span> Submitting...';
+  try{
+    const res = await fetch('/api/withdraw',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ firebase_uid:currentUser.uid, amount, bank_name:bank, account_number:acct, account_name:name })
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error);
+    closeModal('withdraw');
+    document.getElementById('wc-amt').textContent = naira(data.new_balance);
+    if(window.parent&&window.parent.updateWallet) window.parent.updateWallet(data.new_balance);
+    toast('Withdrawal request submitted! Processing within 1-24 hours 💛');
+  } catch(e){ toast(e.message,'error'); }
+  btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-arrow-up"></i> Request Withdrawal';
+};
+
+window.handleChangePassword = async function(){
+  const current = document.getElementById('cp-current').value;
+  const newPwd = document.getElementById('cp-new').value;
+  const confirm = document.getElementById('cp-confirm').value;
+  if(!current||!newPwd||!confirm){ toast('Please fill all fields','error'); return; }
+  if(newPwd!==confirm){ toast('New passwords do not match','error'); return; }
+  if(newPwd.length<8){ toast('Password must be at least 8 characters','error'); return; }
+  try{
+    const credential = window._EmailAuthProvider.credential(currentUser.email, current);
+    await window._reauthenticate(currentUser, credential);
+    await window._updatePassword(currentUser, newPwd);
+    closeModal('changepwd');
+    toast('Password changed successfully 🔒');
+  } catch(e){
+    let msg = e.message;
+    if(msg.includes('wrong-password')||msg.includes('invalid-credential')) msg='Current password is incorrect.';
+    toast(msg,'error');
+  }
+};
+
+window.handleLogout = async function(){
+  localStorage.clear();
+  await window._signOut(window._auth);
+  window.top.location.href='login.html';
+};
+
+window.loadTransactions = function(){
+  toast('Full transaction history coming soon');
+};
+
+window.copyRef = function(){
+  const code = window._refCode;
+  if(!code) return;
+  navigator.clipboard.writeText(`https://task-naira-seven.vercel.app/register?ref=${code}`).catch(()=>{});
+  toast('Referral link copied! Share and earn 10% 🔥');
+};
+
+function naira(a){ return `₦${parseFloat(a||0).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2})}`; }
+</script>
+
+<script>
+function openModal(id){ document.getElementById('modal-'+id).classList.add('open'); }
+function closeModal(id){ document.getElementById('modal-'+id).classList.remove('open'); }
+document.querySelectorAll('.overlay').forEach(o=>{ o.addEventListener('click',function(e){ if(e.target===this)this.classList.remove('open'); }); });
+function toast(msg,type='success'){
+  const c={success:{icon:'#009A44',ic:'fa-circle-check'},error:{icon:'#FF4757',ic:'fa-circle-xmark'}};
+  const col=c[type]||c.success;
+  document.getElementById('ticon').className=`fa-solid ${col.ic}`;
+  document.getElementById('ticon').style.color=col.icon;
+  document.getElementById('tm').textContent=msg;
+  const t=document.getElementById('t'); t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+</script>
+</body>
+</html>

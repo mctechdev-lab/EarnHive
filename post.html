@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Post — Task Naira</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23009A44'/%3E%3Cpath d='M37 8L20 34H31L27 56L46 28H35L37 8Z' fill='white'/%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--g:#009A44;--g2:#007A36;--gl:#E8F7EE;--gl2:#C8EDD8;--gold:#C89B00;--gold-l:#FFF8E0;--text:#0D1F14;--t2:#3A5444;--t3:#7A9A84;--border:#D5EAE0;--red:#FF4757;--off:#F5FAF7;--gray:#EEF3F0;--font-h:'Familjen Grotesk',sans-serif;--font-b:'Plus Jakarta Sans',sans-serif;}
+body{font-family:var(--font-b);background:var(--off);color:var(--text);padding:24px;min-height:100vh;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.skel{background:linear-gradient(90deg,var(--gray) 25%,var(--border) 50%,var(--gray) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;}
+.tab-bar{display:flex;gap:4px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:5px;margin-bottom:24px;}
+.tab{flex:1;padding:10px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-b);border:none;background:transparent;color:var(--t2);display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s;}
+.tab:hover{color:var(--g);}
+.tab.active{background:var(--g);color:#fff;box-shadow:0 3px 10px rgba(0,154,68,0.25);}
+.tab-content{display:none;animation:fadeUp .35s ease forwards;}
+.tab-content.active{display:block;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px;}
+.card-title{font-family:var(--font-h);font-size:16px;font-weight:700;color:var(--text);margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+.card-title i{color:var(--g);}
+.fg{margin-bottom:15px;}
+.fg label{display:block;font-size:11px;font-weight:700;color:var(--t3);letter-spacing:0.6px;text-transform:uppercase;margin-bottom:7px;}
+.fg input,.fg textarea,.fg select{width:100%;padding:11px 14px;background:var(--gray);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-size:14px;font-family:var(--font-b);outline:none;transition:all .2s;resize:none;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{background:#fff;border-color:var(--g);box-shadow:0 0 0 3px rgba(0,154,68,0.08);}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--t3);}
+.fg select option{background:#fff;}
+.fgr{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.wbal{display:flex;align-items:center;justify-content:space-between;background:var(--gl);border:1px solid var(--gl2);border-radius:12px;padding:14px 18px;margin-bottom:20px;}
+.wb-l{display:flex;align-items:center;gap:10px;}
+.wb-ico{width:36px;height:36px;border-radius:9px;background:var(--g);display:flex;align-items:center;justify-content:center;}
+.wb-ico i{color:#fff;font-size:14px;}
+.wb-lbl{font-size:12px;color:var(--t2);}
+.wb-amt{font-family:var(--font-h);font-size:18px;font-weight:700;color:var(--g);}
+.cost-box{background:var(--off);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px;}
+.cr{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:13px;color:var(--t2);}
+.cr.total{font-weight:700;color:var(--text);border-top:1px solid var(--border);margin-top:6px;padding-top:10px;font-size:14px;}
+.cv.green{color:var(--g);}
+.btn-post{width:100%;padding:14px;background:var(--g);color:#fff;border:none;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 24px rgba(0,154,68,0.3);transition:all .2s;}
+.btn-post:hover{background:var(--g2);}
+.btn-post:disabled{opacity:0.7;pointer-events:none;}
+/* Review */
+.sub-item{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px;display:flex;align-items:flex-start;gap:16px;transition:all .2s;}
+.sub-item:hover{box-shadow:0 4px 16px rgba(0,0,0,0.06);}
+.sub-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--g),#00C259);display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:16px;font-weight:700;color:#fff;flex-shrink:0;}
+.sub-info{flex:1;}
+.sub-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.sub-task{font-size:12px;color:var(--t3);margin-bottom:6px;}
+.sub-proof{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);background:var(--gray);border-radius:6px;padding:5px 10px;margin-bottom:10px;cursor:pointer;text-decoration:none;}
+.sub-proof:hover{background:var(--gl);color:var(--g);}
+.sub-proof i{color:var(--g);font-size:11px;}
+.sub-actions{display:flex;gap:8px;}
+.btn-approve{padding:8px 16px;background:var(--g);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;gap:5px;transition:all .2s;}
+.btn-approve:hover{background:var(--g2);}
+.btn-approve:disabled{opacity:0.6;pointer-events:none;}
+.btn-reject{padding:8px 16px;background:#FFF0F1;color:var(--red);border:1px solid #FFD0D3;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;gap:5px;transition:all .2s;}
+.btn-reject:hover{background:var(--red);color:#fff;}
+.sub-amt{font-family:var(--font-h);font-size:18px;font-weight:700;color:var(--g);white-space:nowrap;}
+.tag{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;}
+.tag-pending{background:#FFF8E0;color:var(--gold);}
+.tag-done{background:var(--gl);color:var(--g);}
+.tag-rejected{background:#FFF0F1;color:var(--red);}
+/* Referral */
+.ref-hero{background:linear-gradient(135deg,var(--g),var(--g2));border-radius:20px;padding:28px;margin-bottom:20px;position:relative;overflow:hidden;}
+.rh-bg{position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.06);}
+.rh-title{font-family:var(--font-h);font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;position:relative;}
+.rh-sub{font-size:14px;color:rgba(255,255,255,0.8);margin-bottom:20px;line-height:1.5;position:relative;}
+.ref-link-box{display:flex;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:10px;overflow:hidden;position:relative;}
+.ref-link-inp{flex:1;background:transparent;border:none;padding:11px 16px;color:#fff;font-size:13px;font-family:var(--font-b);outline:none;}
+.ref-copy-btn{padding:11px 18px;background:rgba(255,255,255,0.2);color:#fff;border:none;border-left:1px solid rgba(255,255,255,0.2);font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;gap:6px;transition:all .2s;}
+.ref-copy-btn:hover{background:rgba(255,255,255,0.3);}
+.ref-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px;}
+.ref-stat{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;}
+.rs-val{font-family:var(--font-h);font-size:22px;font-weight:700;color:var(--g);margin-bottom:4px;}
+.rs-lbl{font-size:12px;color:var(--t3);}
+.ref-item{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;}
+.ri-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--g),#00C259);display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:15px;font-weight:700;color:#fff;flex-shrink:0;}
+.ri-info{flex:1;}
+.ri-name{font-size:14px;font-weight:700;color:var(--text);}
+.ri-sub{font-size:12px;color:var(--t3);margin-top:2px;}
+.ri-days{font-size:11px;font-weight:700;color:var(--gold);background:var(--gold-l);padding:3px 10px;border-radius:100px;display:inline-block;margin-top:4px;}
+.ri-earn-val{font-family:var(--font-h);font-size:16px;font-weight:700;color:var(--g);text-align:right;}
+.ri-earn-lbl{font-size:11px;color:var(--t3);text-align:right;}
+.how-ref{background:var(--gl);border:1px solid var(--gl2);border-radius:14px;padding:20px;}
+.hr-title{font-family:var(--font-h);font-size:16px;font-weight:700;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.hr-title i{color:var(--g);}
+.hr-steps{display:flex;flex-direction:column;gap:10px;}
+.hr-step{display:flex;align-items:flex-start;gap:12px;font-size:13px;color:var(--t2);}
+.hr-num{width:24px;height:24px;border-radius:50%;background:var(--g);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.empty{text-align:center;padding:40px 20px;}
+.empty i{font-size:40px;color:var(--border);margin-bottom:12px;display:block;}
+.empty p{font-size:14px;color:var(--t3);}
+/* WhatsApp button */
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;background:#25D366;color:#fff;border:none;border-radius:11px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font-b);margin-bottom:16px;transition:all .2s;text-decoration:none;}
+.wa-btn:hover{background:#1DB954;transform:translateY(-1px);}
+.wa-btn i{font-size:20px;}
+/* Reject modal */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);}
+.overlay.open{display:flex;}
+.modal{background:#fff;border-radius:20px;width:100%;max-width:420px;box-shadow:0 24px 80px rgba(0,0,0,0.2);animation:pop .3s cubic-bezier(.34,1.56,.64,1);overflow:hidden;}
+@keyframes pop{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+.mt{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.mt h3{font-family:var(--font-h);font-size:18px;font-weight:700;}
+.mc{width:30px;height:30px;border-radius:8px;background:var(--off);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--t2);}
+.mb{padding:20px 24px;}
+.mf{padding:0 24px 20px;display:flex;gap:10px;}
+.mcancel{flex:1;padding:11px;background:var(--off);border:1px solid var(--border);border-radius:9px;color:var(--t2);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-b);}
+.mreject{flex:2;padding:11px;background:var(--red);border:none;border-radius:9px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-b);}
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;z-index:999;background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.1);transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);max-width:280px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.ti{width:34px;height:34px;border-radius:9px;background:var(--gl);display:flex;align-items:center;justify-content:justify;flex-shrink:0;}
+.ti i{color:var(--g);font-size:14px;margin:auto;}
+.tm{font-size:13px;font-weight:600;color:var(--text);}
+@media(max-width:700px){.grid-2{grid-template-columns:1fr;}.fgr{grid-template-columns:1fr;}.ref-stats{grid-template-columns:1fr 1fr;}.tab span{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="tab-bar">
+  <button class="tab active" id="tab-post" onclick="switchTab('post')"><i class="fa-solid fa-plus-circle"></i> <span>Post Task</span></button>
+  <button class="tab" id="tab-review" onclick="switchTab('review')"><i class="fa-solid fa-clipboard-check"></i> <span>Review Work</span> <span id="pending-badge" style="background:var(--red);color:#fff;font-size:10px;padding:1px 6px;border-radius:100px;display:none;"></span></button>
+  <button class="tab" id="tab-referral" onclick="switchTab('referral')"><i class="fa-solid fa-share-nodes"></i> <span>Referrals</span></button>
+</div>
+
+<!-- POST TASK -->
+<div class="tab-content active" id="content-post">
+  <div class="wbal" id="wallet-bal">
+    <div class="wb-l"><div class="wb-ico"><i class="fa-solid fa-wallet"></i></div><div><div class="wb-lbl">Your Wallet Balance</div><div class="wb-amt" id="bal-display">Loading...</div></div></div>
+    <button style="padding:9px 18px;background:var(--g);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;gap:6px;" onclick="parent.openDepositModal()"><i class="fa-solid fa-arrow-down"></i> Add Funds</button>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-info-circle"></i> Task Details</div>
+        <div class="fg"><label>Task Title</label><input type="text" id="task-title" placeholder="e.g. Follow my Instagram page"/></div>
+        <div class="fg"><label>Description</label><textarea rows="3" id="task-desc" placeholder="Describe exactly what workers need to do and how to submit proof..."></textarea></div>
+        <div class="fg"><label>Category</label><select id="task-cat"><option value="social_media">Social Media</option><option value="survey">Survey</option><option value="app_review">App Review</option><option value="data_entry">Data Entry</option><option value="other">Other</option></select></div>
+        <div class="fgr">
+          <div class="fg"><label>Proof Type</label><select id="task-proof"><option value="screenshot">Screenshot</option><option value="link">Link</option><option value="username">Username</option><option value="video">Video</option></select></div>
+          <div class="fg"><label>Est. Time</label><select id="task-time"><option>1-2 minutes</option><option>3-5 minutes</option><option>10-15 minutes</option><option>20-30 minutes</option></select></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-link"></i> Task Link (Optional)</div>
+        <div class="fg"><label>URL</label><input type="url" id="task-url" placeholder="https://instagram.com/youraccount"/></div>
+        <div class="fg"><label>Extra Instructions</label><textarea rows="2" id="task-extra" placeholder="Any extra details workers should know..."></textarea></div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-coins"></i> Pricing & Slots</div>
+        <div class="fgr">
+          <div class="fg"><label>Pay Per Task (₦)</label><input type="number" id="task-pay" placeholder="e.g. 200" min="50" oninput="calcCost()"/></div>
+          <div class="fg"><label>Number of Slots</label><input type="number" id="task-slots" placeholder="e.g. 100" min="1" oninput="calcCost()"/></div>
+        </div>
+        <div class="cost-box">
+          <div class="cr"><span>Pay per task</span><span id="cp">₦0</span></div>
+          <div class="cr"><span>Slots</span><span id="cs">0</span></div>
+          <div class="cr"><span>Platform fee (10%)</span><span id="cf">₦0</span></div>
+          <div class="cr total"><span>Total Cost</span><span class="cv green" id="ct">₦0</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-shield-halved"></i> How It Works</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+          <div style="display:flex;gap:10px;font-size:13px;color:var(--t2);"><i class="fa-solid fa-circle-check" style="color:var(--g);margin-top:2px;flex-shrink:0;"></i> Funds locked in escrow until you verify</div>
+          <div style="display:flex;gap:10px;font-size:13px;color:var(--t2);"><i class="fa-solid fa-circle-check" style="color:var(--g);margin-top:2px;flex-shrink:0;"></i> You review every submission before paying</div>
+          <div style="display:flex;gap:10px;font-size:13px;color:var(--t2);"><i class="fa-solid fa-circle-check" style="color:var(--g);margin-top:2px;flex-shrink:0;"></i> Unused slots refunded to your wallet</div>
+          <div style="display:flex;gap:10px;font-size:13px;color:var(--t2);"><i class="fa-solid fa-circle-check" style="color:var(--g);margin-top:2px;flex-shrink:0;"></i> Task goes live immediately after posting</div>
+        </div>
+        <button class="btn-post" id="post-btn" onclick="postTask()"><i class="fa-solid fa-rocket"></i> Post Task Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEW WORK -->
+<div class="tab-content" id="content-review">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+    <div><h3 style="font-family:var(--font-h);font-size:18px;font-weight:700;">Review Submissions</h3><p style="font-size:13px;color:var(--t3);margin-top:3px;">Approve or reject work submitted by task workers</p></div>
+  </div>
+  <div id="submissions-list"><div class="skel" style="height:100px;margin-bottom:12px;"></div><div class="skel" style="height:100px;margin-bottom:12px;"></div></div>
+</div>
+
+<!-- REFERRALS -->
+<div class="tab-content" id="content-referral">
+  <div class="ref-hero">
+    <div class="rh-bg"></div>
+    <div class="rh-title">Earn 10% of Your Friends' Task Earnings!</div>
+    <div class="rh-sub">For 7 days after someone joins with your link, you automatically earn 10% of everything they earn from tasks.</div>
+    <div class="ref-link-box">
+      <input class="ref-link-inp" id="ref-link" readonly/>
+      <button class="ref-copy-btn" onclick="copyRef()"><i class="fa-solid fa-copy"></i> Copy</button>
+    </div>
+  </div>
+
+  <!-- WhatsApp Community Join Button -->
+  <a class="wa-btn" href="https://chat.whatsapp.com/FwdLTWpZzAi2dpZkDiplAT?mode=gi_t" target="_blank">
+    <i class="fa-brands fa-whatsapp"></i> Join Task Naira WhatsApp Community
+  </a>
+
+  <div class="ref-stats" id="ref-stats">
+    <div class="ref-stat"><div class="rs-val" id="ref-count">0</div><div class="rs-lbl">Friends Invited</div></div>
+    <div class="ref-stat"><div class="rs-val" id="ref-earned">₦0</div><div class="rs-lbl">Total Earned</div></div>
+    <div class="ref-stat"><div class="rs-val" id="ref-active">0</div><div class="rs-lbl">Active This Week</div></div>
+  </div>
+
+  <div id="referrals-list"><div class="skel" style="height:80px;margin-bottom:10px;"></div></div>
+
+  <div class="how-ref" style="margin-top:20px;">
+    <div class="hr-title"><i class="fa-solid fa-circle-question"></i> How Referral Works</div>
+    <div class="hr-steps">
+      <div class="hr-step"><div class="hr-num">1</div><div>Share your unique referral link with friends and family</div></div>
+      <div class="hr-step"><div class="hr-num">2</div><div>They sign up using your link and complete their first task</div></div>
+      <div class="hr-step"><div class="hr-num">3</div><div>For 7 days after they join, you earn <strong>10% of all their task earnings</strong></div></div>
+      <div class="hr-step"><div class="hr-num">4</div><div>Your bonus comes from platform commission — completely free for you and your friend</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Reject Modal -->
+<div class="overlay" id="reject-modal">
+  <div class="modal">
+    <div class="mt"><h3>Reject Submission</h3><button class="mc" onclick="closeRejectModal()"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="mb">
+      <div class="fg"><label>Reason for Rejection</label><textarea id="reject-reason" rows="3" placeholder="Tell the worker why their submission was rejected..."></textarea></div>
+    </div>
+    <div class="mf">
+      <button class="mcancel" onclick="closeRejectModal()">Cancel</button>
+      <button class="mreject" onclick="confirmReject()"><i class="fa-solid fa-xmark"></i> Reject Submission</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="t"><div class="ti"><i class="fa-solid fa-circle-check" id="ticon"></i></div><div class="tm" id="tm"></div></div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+
+const app = initializeApp({
+  apiKey:"AIzaSyAkZn9q8jJ5YJEpRPqy-0xjh59q2OS2oh8",
+  authDomain:"task-naira.firebaseapp.com",
+  projectId:"task-naira",
+  storageBucket:"task-naira.firebasestorage.app",
+  messagingSenderId:"295178303446",
+  appId:"1:295178303446:web:6d8c5f0895b81f6d299677"
+});
+
+const auth = getAuth(app);
+let currentUID = null;
+let walletBalance = 0;
+let pendingRejectId = null;
+
+onAuthStateChanged(auth, async (user) => {
+  if(!user){ window.top.location.href='login.html'; return; }
+  currentUID = user.uid;
+  const res = await fetch('/api/me', { headers:{'x-firebase-uid': user.uid} });
+  const data = await res.json();
+  if(!res.ok) return;
+  const u = data.user;
+  walletBalance = parseFloat(u.wallet?.balance||0);
+  document.getElementById('bal-display').textContent = `₦${walletBalance.toLocaleString('en-NG',{minimumFractionDigits:2})}`;
+  document.getElementById('ref-link').value = `https://task-naira-seven.vercel.app/register?ref=${u.referral_code}`;
+  window._refCode = u.referral_code;
+  loadSubmissions();
+  loadReferrals();
+});
+
+// ── POST TASK ──
+window.calcCost = function(){
+  const p = parseFloat(document.getElementById('task-pay').value)||0;
+  const s = parseInt(document.getElementById('task-slots').value)||0;
+  const sub = p*s; const fee = sub*0.1; const total = sub+fee;
+  document.getElementById('cp').textContent = `₦${p.toLocaleString()}`;
+  document.getElementById('cs').textContent = s.toLocaleString();
+  document.getElementById('cf').textContent = `₦${fee.toLocaleString()}`;
+  document.getElementById('ct').textContent = `₦${total.toLocaleString()}`;
+};
+
+window.postTask = async function(){
+  const title = document.getElementById('task-title').value.trim();
+  const desc = document.getElementById('task-desc').value.trim();
+  const cat = document.getElementById('task-cat').value;
+  const proof = document.getElementById('task-proof').value;
+  const time = document.getElementById('task-time').value;
+  const pay = parseFloat(document.getElementById('task-pay').value);
+  const slots = parseInt(document.getElementById('task-slots').value);
+  const url = document.getElementById('task-url').value.trim();
+  const extra = document.getElementById('task-extra').value.trim();
+  if(!title||!desc||!pay||!slots){ toast('Please fill all required fields','error'); return; }
+  if(pay<50){ toast('Minimum pay per task is ₦50','error'); return; }
+  const total = (pay*slots)*1.1;
+  if(walletBalance<total){ toast(`Insufficient balance. Need ₦${total.toLocaleString()} but have ₦${walletBalance.toLocaleString()}`,'error'); return; }
+  const btn = document.getElementById('post-btn');
+  btn.disabled=true; btn.innerHTML='<span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;display:inline-block;"></span> Posting...';
+  try{
+    const res = await fetch('/api/tasks',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ firebase_uid:currentUID, title, description:desc, category:cat, proof_type:proof, estimated_time:time, resource_url:url||null, extra_instructions:extra||null, pay_per_task:pay, total_slots:slots })
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error);
+    walletBalance = data.new_balance;
+    document.getElementById('bal-display').textContent = `₦${walletBalance.toLocaleString('en-NG',{minimumFractionDigits:2})}`;
+    if(window.parent&&window.parent.updateWallet) window.parent.updateWallet(data.new_balance);
+    toast('Task posted successfully! It is now live 🚀');
+    // Reset form
+    ['task-title','task-desc','task-pay','task-slots','task-url','task-extra'].forEach(id=>{ document.getElementById(id).value=''; });
+    ['cp','cs','cf','ct'].forEach(id=>{ document.getElementById(id).textContent=id==='ct'?'₦0':'₦0'; });
+  } catch(e){ toast(e.message,'error'); }
+  btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-rocket"></i> Post Task Now';
+};
+
+// ── REVIEW SUBMISSIONS ──
+async function loadSubmissions(){
+  try{
+    const res = await fetch('/api/submissions?status=pending', { headers:{'x-firebase-uid':currentUID} });
+    const data = await res.json();
+    renderSubmissions(data.submissions||[]);
+  } catch(e){ renderSubmissions([]); }
+}
+
+function renderSubmissions(subs){
+  const badge = document.getElementById('pending-badge');
+  if(subs.length>0){ badge.textContent=subs.length; badge.style.display='inline'; }
+  else badge.style.display='none';
+  if(!subs||subs.length===0){
+    document.getElementById('submissions-list').innerHTML=`<div class="empty"><i class="fa-solid fa-clipboard-check"></i><p>No pending submissions.<br>Post a task to start receiving submissions.</p></div>`;
+    return;
+  }
+  document.getElementById('submissions-list').innerHTML = subs.map(s=>{
+    const initials = (s.worker_name||'U').charAt(0).toUpperCase();
+    return `<div class="sub-item" id="sub-${s.id}">
+      <div class="sub-av">${initials}</div>
+      <div class="sub-info">
+        <div class="sub-name">${s.worker_name||'Worker'}</div>
+        <div class="sub-task">Task: ${s.task_title} · ₦${parseFloat(s.pay_per_task).toLocaleString()}</div>
+        ${s.proof_url?`<a class="sub-proof" href="${s.proof_url}" target="_blank"><i class="fa-solid fa-external-link-alt"></i> View Proof</a>`:
+        s.proof_text?`<div class="sub-proof"><i class="fa-solid fa-comment"></i> ${s.proof_text}</div>`:''}
+        <div class="sub-actions">
+          <button class="btn-approve" onclick="approveSubmission('${s.id}',this)"><i class="fa-solid fa-check"></i> Approve & Pay</button>
+          <button class="btn-reject" onclick="openRejectModal('${s.id}')"><i class="fa-solid fa-xmark"></i> Reject</button>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div class="sub-amt">₦${parseFloat(s.pay_per_task).toLocaleString()}</div>
+        <span class="tag tag-pending" style="margin-top:6px;display:inline-flex;">Pending</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+window.approveSubmission = async function(subId, btn){
+  btn.disabled=true; btn.textContent='Paying...';
+  try{
+    const res = await fetch('/api/submit',{
+      method:'PUT', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ firebase_uid:currentUID, submission_id:subId, action:'approve' })
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error);
+    const item = document.getElementById(`sub-${subId}`);
+    item.style.opacity='0.5';
+    item.querySelector('.sub-actions').innerHTML='<span class="tag tag-done"><i class="fa-solid fa-check" style="font-size:9px;"></i> Approved & Paid</span>';
+    item.querySelector('.tag-pending').className='tag tag-done';
+    toast('Payment sent to worker ✅');
+  } catch(e){ btn.disabled=false; btn.innerHTML='<i class="fa-solid fa-check"></i> Approve & Pay'; toast(e.message,'error'); }
+};
+
+window.openRejectModal = function(subId){
+  pendingRejectId = subId;
+  document.getElementById('reject-reason').value='';
+  document.getElementById('reject-modal').classList.add('open');
+};
+window.closeRejectModal = function(){ document.getElementById('reject-modal').classList.remove('open'); };
+window.confirmReject = async function(){
+  const reason = document.getElementById('reject-reason').value.trim()||'Did not meet requirements';
+  try{
+    const res = await fetch('/api/submit',{
+      method:'PUT', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ firebase_uid:currentUID, submission_id:pendingRejectId, action:'reject', rejection_reason:reason })
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error);
+    closeRejectModal();
+    const item = document.getElementById(`sub-${pendingRejectId}`);
+    item.style.opacity='0.5';
+    item.querySelector('.sub-actions').innerHTML='<span class="tag tag-rejected"><i class="fa-solid fa-xmark" style="font-size:9px;"></i> Rejected</span>';
+    toast('Submission rejected.');
+  } catch(e){ toast(e.message,'error'); }
+};
+
+// ── REFERRALS ──
+async function loadReferrals(){
+  try{
+    const res = await fetch('/api/referrals', { headers:{'x-firebase-uid':currentUID} });
+    const data = await res.json();
+    renderReferrals(data.referrals||[]);
+  } catch(e){ document.getElementById('referrals-list').innerHTML=''; }
+}
+
+function renderReferrals(refs){
+  const now = new Date();
+  const active = refs.filter(r=>new Date(r.expires_at)>now);
+  const totalEarned = refs.reduce((s,r)=>s+parseFloat(r.bonus_earned_by_referrer||0),0);
+  document.getElementById('ref-count').textContent = refs.length;
+  document.getElementById('ref-earned').textContent = `₦${totalEarned.toLocaleString('en-NG',{minimumFractionDigits:2})}`;
+  document.getElementById('ref-active').textContent = active.length;
+  if(!refs||refs.length===0){
+    document.getElementById('referrals-list').innerHTML=`<div class="empty"><i class="fa-solid fa-users"></i><p>No referrals yet.<br>Share your link and start earning 10%!</p></div>`;
+    return;
+  }
+  document.getElementById('referrals-list').innerHTML = refs.map(r=>{
+    const exp = new Date(r.expires_at);
+    const daysLeft = Math.max(0,Math.ceil((exp-now)/(1000*60*60*24)));
+    const isActive = daysLeft>0;
+    const initials = (r.referred_name||'U').charAt(0).toUpperCase();
+    return `<div class="ref-item">
+      <div class="ri-av">${initials}</div>
+      <div class="ri-info">
+        <div class="ri-name">${r.referred_name||'Friend'}</div>
+        <div class="ri-sub">Joined ${timeAgo(r.created_at)}</div>
+        ${isActive?`<span class="ri-days"><i class="fa-solid fa-clock" style="font-size:9px;"></i> ${daysLeft} day${daysLeft>1?'s':''} left</span>`:`<span style="font-size:11px;color:var(--t3);">Referral period expired</span>`}
+      </div>
+      <div>
+        <div class="ri-earn-val">+₦${parseFloat(r.bonus_earned_by_referrer||0).toLocaleString('en-NG',{minimumFractionDigits:2})}</div>
+        <div class="ri-earn-lbl">earned from them</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+window.copyRef = function(){
+  const link = document.getElementById('ref-link').value;
+  navigator.clipboard.writeText(link).catch(()=>{});
+  toast('Referral link copied! Share and earn 10% 🔥');
+};
+
+window.switchTab = function(tab){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  document.getElementById('content-'+tab).classList.add('active');
+};
+
+document.getElementById('reject-modal').addEventListener('click',function(e){ if(e.target===this)closeRejectModal(); });
+
+function timeAgo(d){ const diff=new Date()-new Date(d); const days=Math.floor(diff/86400000); return days<1?'today':days===1?'yesterday':`${days} days ago`; }
+function toast(msg,type='success'){
+  const c={success:{icon:'#009A44',ic:'fa-circle-check'},error:{icon:'#FF4757',ic:'fa-circle-xmark'}};
+  const col=c[type]||c.success;
+  document.getElementById('ticon').className=`fa-solid ${col.ic}`;
+  document.getElementById('ticon').style.color=col.icon;
+  document.getElementById('tm').textContent=msg;
+  const t=document.getElementById('t'); t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Games — Task Naira</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23009A44'/%3E%3Cpath d='M37 8L20 34H31L27 56L46 28H35L37 8Z' fill='white'/%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--g:#009A44;--g2:#007A36;--g3:#00C259;--gl:#E8F7EE;--gl2:#C8EDD8;--gold:#C89B00;--gold-l:#FFF8E0;--text:#0D1F14;--t2:#3A5444;--t3:#7A9A84;--border:#D5EAE0;--red:#FF4757;--off:#F5FAF7;--gray:#EEF3F0;--font-h:'Familjen Grotesk',sans-serif;--font-b:'Plus Jakarta Sans',sans-serif;}
+body{font-family:var(--font-b);background:var(--off);color:var(--text);padding:24px;min-height:100vh;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes pop{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* ── LOBBY ── */
+.lobby{animation:fadeUp .4s ease forwards;}
+.game-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;}
+.game-card{border-radius:20px;padding:28px;border:1px solid var(--border);background:#fff;overflow:hidden;position:relative;transition:all .3s;}
+.game-card:hover{transform:translateY(-4px);box-shadow:0 8px 40px rgba(0,154,68,0.12);}
+.ludo{border-top:4px solid var(--g);}
+.whot{border-top:4px solid var(--gold);}
+.gc-bg{position:absolute;top:-30px;right:-30px;width:140px;height:140px;border-radius:50%;opacity:0.07;}
+.ludo .gc-bg{background:var(--g);}.whot .gc-bg{background:var(--gold);}
+.gc-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.ludo .gc-icon{background:var(--gl);}.ludo .gc-icon i{color:var(--g);font-size:24px;}
+.whot .gc-icon{background:var(--gold-l);}.whot .gc-icon i{color:var(--gold);font-size:24px;}
+.gc-live{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;margin-bottom:10px;}
+.ludo .gc-live{color:var(--g);}.whot .gc-live{color:var(--gold);}
+.live-dot{width:6px;height:6px;border-radius:50%;animation:blink 1.4s infinite;}
+.ludo .live-dot{background:var(--g);}.whot .live-dot{background:var(--gold);}
+.gc-title{font-family:var(--font-h);font-size:20px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.gc-desc{font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:16px;}
+.gc-stakes{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.sp{padding:5px 12px;border-radius:100px;font-size:11px;font-weight:700;border:1.5px solid;cursor:pointer;transition:all .2s;}
+.ludo .sp{border-color:var(--gl2);color:var(--g);background:var(--gl);}
+.ludo .sp:hover,.ludo .sp.sel{background:var(--g);color:#fff;border-color:var(--g);}
+.whot .sp{border-color:#F5E4A0;color:var(--gold);background:var(--gold-l);}
+.whot .sp:hover,.whot .sp.sel{background:var(--gold);color:#fff;border-color:var(--gold);}
+.prize-info{background:var(--off);border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--t2);}
+.prize-info strong{color:var(--text);}
+.gc-btn{width:100%;padding:12px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-b);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.ludo .gc-btn{background:var(--g);color:#fff;}.ludo .gc-btn:hover{background:var(--g2);}
+.whot .gc-btn{background:var(--gold);color:#fff;}.whot .gc-btn:hover{filter:brightness(0.9);}
+.gc-btn:disabled{opacity:0.6;pointer-events:none;}
+.mode-btns{display:flex;gap:8px;margin-bottom:12px;}
+.mode-btn{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;border:1.5px solid var(--gl2);background:var(--gl);color:var(--g);cursor:pointer;font-family:var(--font-b);transition:all .2s;}
+.mode-btn.sel{background:var(--g);color:#fff;border-color:var(--g);}
+/* How */
+.how-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px;}
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px;}
+.hi{text-align:center;padding:12px;}
+.hi-ico{width:44px;height:44px;border-radius:12px;background:var(--gl);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
+.hi-ico i{color:var(--g);font-size:18px;}
+.hi-t{font-family:var(--font-h);font-size:14px;font-weight:700;margin-bottom:4px;}
+.hi-s{font-size:12px;color:var(--t2);}
+
+/* ── WAITING ROOM ── */
+.waiting-room{display:none;}
+.waiting-room.show{display:block;animation:fadeUp .4s ease forwards;}
+.wr-card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:32px;text-align:center;max-width:480px;margin:0 auto;}
+.wr-ico{width:80px;height:80px;border-radius:50%;background:var(--gl);margin:0 auto 20px;display:flex;align-items:center;justify-content:center;animation:pulse 2s infinite;}
+.wr-ico i{color:var(--g);font-size:36px;}
+.wr-title{font-family:var(--font-h);font-size:24px;font-weight:700;margin-bottom:8px;}
+.wr-sub{font-size:14px;color:var(--t2);margin-bottom:24px;}
+.wr-players{display:flex;justify-content:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.wr-av{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:18px;font-weight:700;color:#fff;}
+.wr-av.filled{background:var(--g);}
+.wr-av.empty{background:var(--border);border:2px dashed var(--t3);}
+.wr-av.empty i{color:var(--t3);}
+.wr-info{background:var(--gl);border:1px solid var(--gl2);border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:var(--t2);}
+.wr-cancel{padding:11px 24px;background:transparent;border:1.5px solid var(--border);border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-b);color:var(--t2);transition:all .2s;}
+.wr-cancel:hover{border-color:var(--red);color:var(--red);}
+
+/* ── GAME SCREENS ── */
+.game-screen{display:none;}
+.game-screen.show{display:block;animation:fadeUp .4s ease forwards;}
+.game-hdr{background:#fff;border:1px solid var(--border);border-radius:16px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
+.gh-name{font-family:var(--font-h);font-size:17px;font-weight:700;}
+.gh-timer{display:flex;align-items:center;gap:7px;font-family:var(--font-h);font-size:20px;font-weight:700;}
+.gh-timer.warn{color:var(--red);animation:pulse 1s infinite;}
+.gh-pot{font-family:var(--font-h);font-size:18px;font-weight:700;color:var(--g);}
+
+/* ── LUDO ── */
+.ludo-layout{display:grid;grid-template-columns:1fr 260px;gap:16px;}
+.ludo-wrap{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;flex-direction:column;align-items:center;}
+#ludo-canvas{max-width:100%;border-radius:8px;cursor:pointer;}
+.dice-row{display:flex;align-items:center;gap:20px;margin-top:16px;}
+.dice{width:56px;height:56px;background:#fff;border:2px solid var(--text);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;transition:all .2s;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.dice.rolling{animation:spin 0.3s ease;}
+.roll-btn{padding:10px 24px;background:var(--g);color:#fff;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-b);transition:all .2s;}
+.roll-btn:hover:not(:disabled){background:var(--g2);}
+.roll-btn:disabled{opacity:0.5;pointer-events:none;}
+.turn-info{font-size:13px;}
+.turn-info .my{font-weight:700;color:var(--g);}
+.turn-info .opp{color:var(--t3);}
+
+/* Players panel */
+.players-panel{display:flex;flex-direction:column;gap:10px;}
+.pc{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;transition:all .2s;}
+.pc.active-turn{border-color:var(--g);box-shadow:0 0 0 2px rgba(0,154,68,0.15);}
+.pc-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.pc-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:13px;font-weight:700;color:#fff;flex-shrink:0;}
+.pc-name{font-size:13px;font-weight:700;color:var(--text);}
+.pc-sub{font-size:11px;color:var(--t3);margin-top:1px;}
+.pc-dots{display:flex;gap:5px;}
+.pc-dot{width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(0,0,0,0.15);}
+.pc-dot.home{opacity:0.3;}
+.dw{display:none;font-size:11px;color:var(--red);margin-top:6px;align-items:center;gap:4px;}
+.dw.show{display:flex;}
+/* Log */
+.game-log{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;max-height:180px;overflow-y:auto;margin-top:12px;}
+.log-h{font-family:var(--font-h);font-size:13px;font-weight:700;margin-bottom:8px;}
+.log-i{font-size:12px;color:var(--t2);padding:3px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:5px;}
+.log-i:last-child{border-bottom:none;}
+.log-i i{font-size:9px;color:var(--g);}
+
+/* ── WHOT ── */
+.whot-layout{display:grid;grid-template-columns:1fr 240px;gap:16px;}
+.whot-board{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;}
+.opp-area{text-align:center;margin-bottom:12px;}
+.opp-lbl{font-size:12px;color:var(--t3);font-weight:600;margin-bottom:8px;}
+.opp-cards-row{display:flex;justify-content:center;gap:-6px;}
+.opp-card-back{width:36px;height:50px;border-radius:6px;background:linear-gradient(135deg,#1a3d2a,#0d2b1a);border:1.5px solid #1a3d2a;margin-left:-6px;}
+.opp-card-back:first-child{margin-left:0;}
+.center-area{display:flex;gap:28px;align-items:center;justify-content:center;padding:16px 0;}
+.pile{width:72px;height:100px;border-radius:10px;border:2px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.draw-pile{background:linear-gradient(135deg,#1a3d2a,#0d2b1a);border-color:#1a3d2a;cursor:pointer;}
+.draw-pile:hover{opacity:0.9;}
+.draw-pile i{color:rgba(255,255,255,0.6);font-size:22px;margin-bottom:4px;}
+.draw-pile span{color:rgba(255,255,255,0.8);font-size:10px;font-weight:700;}
+.top-card-pile{background:#fff;}
+.top-card-pile .tc-shape{font-size:22px;}
+.top-card-pile .tc-num{font-family:var(--font-h);font-size:20px;font-weight:700;}
+.pile-lbl{font-size:10px;color:var(--t3);text-align:center;margin-top:5px;font-weight:600;}
+.my-hand{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;padding:14px;background:var(--gl);border-radius:12px;border:1px solid var(--gl2);min-height:70px;margin-bottom:12px;}
+.hcard{width:56px;height:78px;border-radius:8px;border:2px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;background:#fff;font-family:var(--font-h);position:relative;}
+.hcard:hover{transform:translateY(-8px);box-shadow:0 8px 20px rgba(0,0,0,0.12);}
+.hcard.playable{border-color:var(--g);box-shadow:0 0 0 2px rgba(0,154,68,0.2);}
+.hcard.selected{border-color:var(--g);background:var(--gl);transform:translateY(-10px);}
+.hcard .cs{font-size:18px;margin-bottom:2px;}
+.hcard .cn{font-size:16px;font-weight:700;}
+.hcard .ct{position:absolute;top:3px;left:5px;font-size:10px;font-weight:700;}
+.hcard .cb{position:absolute;bottom:3px;right:5px;font-size:10px;font-weight:700;transform:rotate(180deg);}
+/* Card suits */
+.c-circle{background:#FFF0F0;border-color:#FF6B6B;}.c-circle .cn,.c-circle .ct,.c-circle .cb{color:#FF4757;}
+.c-triangle{background:#FFF8E0;border-color:#F5B800;}.c-triangle .cn,.c-triangle .ct,.c-triangle .cb{color:#C89B00;}
+.c-cross{background:#E8F0FF;border-color:#6B8FF5;}.c-cross .cn,.c-cross .ct,.c-cross .cb{color:#4F6EF7;}
+.c-square{background:#E8F7EE;border-color:#00C259;}.c-square .cn,.c-square .ct,.c-square .cb{color:#009A44;}
+.c-star{background:#F5EEFF;border-color:#A78BFA;}.c-star .cn,.c-star .ct,.c-star .cb{color:#8B5CF6;}
+.c-whot{background:linear-gradient(135deg,#1a3d2a,#0d2b1a);border-color:#009A44;}.c-whot .cn,.c-whot .ct,.c-whot .cb{color:#fff;}
+.play-btn{width:100%;padding:10px;background:var(--g);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s;}
+.play-btn:disabled{opacity:0.5;pointer-events:none;}
+.play-btn:hover:not(:disabled){background:var(--g2);}
+.status-msg{text-align:center;font-size:13px;font-weight:600;margin-bottom:10px;}
+/* Whot call */
+.whot-call{display:none;background:var(--gl);border:1px solid var(--gl2);border-radius:10px;padding:14px;margin-bottom:12px;text-align:center;}
+.whot-call.show{display:block;}
+.whot-call p{font-size:13px;font-weight:600;color:var(--t2);margin-bottom:8px;}
+.shape-btns{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;}
+.shape-btn{padding:7px 12px;border:1.5px solid var(--border);border-radius:8px;background:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-b);transition:all .2s;}
+.shape-btn:hover{border-color:var(--g);background:var(--gl);color:var(--g);}
+
+/* ── RESULT SCREEN ── */
+.result-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:300;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+.result-overlay.show{display:flex;}
+.result-card{background:#fff;border-radius:24px;padding:40px;text-align:center;max-width:360px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.3);animation:pop .5s cubic-bezier(.34,1.56,.64,1);}
+.res-ico{width:88px;height:88px;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:44px;}
+.res-ico.win{background:var(--gl);box-shadow:0 8px 32px rgba(0,154,68,0.3);}
+.res-ico.lose{background:#FFF0F1;box-shadow:0 8px 32px rgba(255,71,87,0.2);}
+.res-title{font-family:var(--font-h);font-size:26px;font-weight:700;margin-bottom:8px;}
+.res-title.win{color:var(--g);}.res-title.lose{color:var(--red);}
+.res-amt{font-family:var(--font-h);font-size:34px;font-weight:700;margin-bottom:6px;}
+.res-amt.win{color:var(--g);}.res-amt.lose{color:var(--red);}
+.res-sub{font-size:14px;color:var(--t2);margin-bottom:28px;}
+.res-btns{display:flex;gap:10px;justify-content:center;}
+.res-btn{padding:12px 28px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-b);transition:all .2s;}
+.res-btn.primary{background:var(--g);color:#fff;}
+.res-btn.secondary{background:var(--gray);color:var(--t2);}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;z-index:999;background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.1);transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);max-width:280px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.ti{width:34px;height:34px;border-radius:9px;background:var(--gl);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ti i{color:var(--g);font-size:14px;margin:auto;}
+.tm{font-size:13px;font-weight:600;color:var(--text);}
+@media(max-width:900px){.game-cards{grid-template-columns:1fr;}.ludo-layout{grid-template-columns:1fr;}.whot-layout{grid-template-columns:1fr;}.how-grid{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+
+<!-- LOBBY -->
+<div class="lobby" id="lobby">
+  <div style="margin-bottom:20px;">
+    <h2 style="font-family:var(--font-h);font-size:20px;font-weight:700;">Game & Earn</h2>
+    <p style="font-size:13px;color:var(--t3);margin-top:3px;">Stake Naira in your favourite Nigerian games. Winner takes the pot.</p>
+  </div>
+  <div class="game-cards">
+    <!-- LUDO -->
+    <div class="game-card ludo">
+      <div class="gc-bg"></div>
+      <div class="gc-icon"><i class="fa-solid fa-dice"></i></div>
+      <div class="gc-live"><span class="live-dot"></span> <span id="ludo-online">0</span> players online</div>
+      <div class="gc-title">Ludo Naira</div>
+      <p class="gc-desc">The classic Ludo you love — now with real Naira. 2-player (winner takes 90%) or 4-player (1st: 50%, 2nd: 40%).</p>
+      <div class="mode-btns">
+        <button class="mode-btn sel" id="m2p" onclick="setMode('2p',this)">2 Players</button>
+        <button class="mode-btn" id="m4p" onclick="setMode('4p',this)">4 Players</button>
+      </div>
+      <div class="gc-stakes" id="ludo-stakes">
+        <span class="sp ludo sel" onclick="selStake(this,'ludo')">₦100</span>
+        <span class="sp ludo" onclick="selStake(this,'ludo')">₦200</span>
+        <span class="sp ludo" onclick="selStake(this,'ludo')">₦500</span>
+        <span class="sp ludo" onclick="selStake(this,'ludo')">₦1,000</span>
+        <span class="sp ludo" onclick="selStake(this,'ludo')">₦2,000</span>
+      </div>
+      <div class="prize-info" id="ludo-prize">2P · ₦100 stake · <strong>Winner gets ₦180</strong></div>
+      <button class="gc-btn" id="ludo-btn" onclick="joinGame('ludo')"><i class="fa-solid fa-dice"></i> Find a Game</button>
+    </div>
+    <!-- WHOT -->
+    <div class="game-card whot">
+      <div class="gc-bg"></div>
+      <div class="gc-icon"><i class="fa-solid fa-cards-blank"></i></div>
+      <div class="gc-live"><span class="live-dot"></span> <span id="whot-online">0</span> players online</div>
+      <div class="gc-title">Whot Naira</div>
+      <p class="gc-desc">Nigeria's favourite card game with real Naira. 2 players head to head. Outsmart your opponent and cash out.</p>
+      <div class="gc-stakes">
+        <span class="sp whot sel" onclick="selStake(this,'whot')">₦100</span>
+        <span class="sp whot" onclick="selStake(this,'whot')">₦200</span>
+        <span class="sp whot" onclick="selStake(this,'whot')">₦500</span>
+        <span class="sp whot" onclick="selStake(this,'whot')">₦1,000</span>
+        <span class="sp whot" onclick="selStake(this,'whot')">₦2,000</span>
+      </div>
+      <div class="prize-info" id="whot-prize">2P · ₦100 stake · <strong>Winner gets ₦180</strong></div>
+      <button class="gc-btn" id="whot-btn" onclick="joinGame('whot')"><i class="fa-solid fa-cards-blank"></i> Find a Game</button>
+    </div>
+  </div>
+  <div class="how-card">
+    <h3 style="font-family:var(--font-h);font-size:17px;font-weight:700;">How Game Naira Works</h3>
+    <div class="how-grid">
+      <div class="hi"><div class="hi-ico"><i class="fa-solid fa-coins"></i></div><div class="hi-t">Pick Stake</div><div class="hi-s">Choose how much Naira to play for</div></div>
+      <div class="hi"><div class="hi-ico"><i class="fa-solid fa-user-group"></i></div><div class="hi-t">Get Matched</div><div class="hi-s">Matched with another player instantly</div></div>
+      <div class="hi"><div class="hi-ico"><i class="fa-solid fa-gamepad"></i></div><div class="hi-t">Play & Win</div><div class="hi-s">Winners share the pot (platform 10%)</div></div>
+      <div class="hi"><div class="hi-ico"><i class="fa-solid fa-building-columns"></i></div><div class="hi-t">Cash Out</div><div class="hi-s">Winnings go to wallet instantly</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- WAITING ROOM -->
+<div class="waiting-room" id="waiting-room">
+  <div class="wr-card">
+    <div class="wr-ico"><i class="fa-solid fa-hourglass-half"></i></div>
+    <div class="wr-title">Finding Opponents...</div>
+    <div class="wr-sub" id="wr-sub">Waiting for players to join</div>
+    <div class="wr-players" id="wr-players"></div>
+    <div class="wr-info">Game: <strong id="wr-game"></strong> · Stake: <strong id="wr-stake"></strong> · <strong id="wr-reward"></strong> if you win</div>
+    <button class="wr-cancel" onclick="cancelGame()"><i class="fa-solid fa-xmark"></i> Cancel & Get Refund</button>
+  </div>
+</div>
+
+<!-- LUDO SCREEN -->
+<div class="game-screen" id="ludo-screen">
+  <div class="game-hdr">
+    <div class="gh-name" id="lg-name">Ludo Naira · 2P</div>
+    <div class="gh-timer" id="lg-timer"><i class="fa-solid fa-clock" style="font-size:14px;color:var(--t3);"></i>5:00</div>
+    <div class="gh-pot">Pot: <span id="lg-pot">₦0</span></div>
+  </div>
+  <div class="ludo-layout">
+    <div class="ludo-wrap">
+      <canvas id="ludo-canvas" width="460" height="460"></canvas>
+      <div class="dice-row">
+        <div class="dice" id="dice">🎲</div>
+        <div>
+          <div class="turn-info" id="turn-info"><span class="my">Your Turn! Roll the dice.</span></div>
+          <div style="font-size:12px;color:var(--t3);margin-top:3px;" id="dice-val">Click roll to play</div>
+        </div>
+        <button class="roll-btn" id="roll-btn" onclick="rollDice()"><i class="fa-solid fa-dice"></i> Roll</button>
+      </div>
+    </div>
+    <div>
+      <div class="players-panel" id="ludo-players"></div>
+      <div class="game-log">
+        <div class="log-h">Game Log</div>
+        <div id="ludo-log"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHOT SCREEN -->
+<div class="game-screen" id="whot-screen">
+  <div class="game-hdr">
+    <div class="gh-name">Whot Naira · 2P</div>
+    <div class="gh-timer" id="wg-timer"><i class="fa-solid fa-clock" style="font-size:14px;color:var(--t3);"></i>5:00</div>
+    <div class="gh-pot">Pot: <span id="wg-pot">₦0</span></div>
+  </div>
+  <div class="whot-layout">
+    <div class="whot-board">
+      <div class="opp-area">
+        <div class="opp-lbl">Opponent · <span id="opp-count">5</span> cards</div>
+        <div class="opp-cards-row" id="opp-cards"></div>
+      </div>
+      <div class="center-area">
+        <div>
+          <div class="pile draw-pile" onclick="drawCard()">
+            <i class="fa-solid fa-layer-group"></i>
+            <span id="draw-count">40</span>
+          </div>
+          <div class="pile-lbl">Draw Pile</div>
+        </div>
+        <div>
+          <div class="pile top-card-pile" id="top-card">
+            <div class="tc-shape" id="tc-shape">⭕</div>
+            <div class="tc-num" id="tc-num">1</div>
+          </div>
+          <div class="pile-lbl">Top Card</div>
+        </div>
+      </div>
+      <div class="status-msg" id="whot-status">Your turn — play a card or draw</div>
+      <div class="whot-call" id="whot-call">
+        <p>🃏 Call Whot! Choose a shape:</p>
+        <div class="shape-btns">
+          <button class="shape-btn" onclick="callWhot('circle')">⭕ Circle</button>
+          <button class="shape-btn" onclick="callWhot('triangle')">🔺 Triangle</button>
+          <button class="shape-btn" onclick="callWhot('cross')">✚ Cross</button>
+          <button class="shape-btn" onclick="callWhot('square')">⬛ Square</button>
+          <button class="shape-btn" onclick="callWhot('star')">⭐ Star</button>
+        </div>
+      </div>
+      <div class="my-hand" id="my-hand"></div>
+      <button class="play-btn" id="play-btn" onclick="playCard()"><i class="fa-solid fa-hand-point-up"></i> Play Selected Card</button>
+    </div>
+    <div>
+      <div class="players-panel">
+        <div class="pc active-turn">
+          <div class="pc-row">
+            <div class="pc-av" id="w-my-av" style="background:var(--g);">Y</div>
+            <div><div class="pc-name" id="w-my-name">You</div><div class="pc-sub"><span id="my-count">5</span> cards</div></div>
+          </div>
+        </div>
+        <div class="pc">
+          <div class="pc-row">
+            <div class="pc-av" style="background:#4F6EF7;">O</div>
+            <div><div class="pc-name">Opponent</div><div class="pc-sub" id="opp-status">Connected</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="game-log" style="margin-top:10px;">
+        <div class="log-h">Game Log</div>
+        <div id="whot-log"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="result-overlay" id="result-overlay">
+  <div class="result-card">
+    <div class="res-ico" id="res-ico"></div>
+    <div class="res-title" id="res-title"></div>
+    <div class="res-amt" id="res-amt"></div>
+    <div class="res-sub" id="res-sub"></div>
+    <div class="res-btns">
+      <button class="res-btn primary" onclick="playAgain()"><i class="fa-solid fa-rotate-right"></i> Play Again</button>
+      <button class="res-btn secondary" onclick="goLobby()"><i class="fa-solid fa-home"></i> Lobby</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="t"><div class="ti"><i class="fa-solid fa-circle-check" id="ticon" style="margin:auto;"></i></div><div class="tm" id="tm"></div></div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+
+const app = initializeApp({
+  apiKey:"AIzaSyAkZn9q8jJ5YJEpRPqy-0xjh59q2OS2oh8",
+  authDomain:"task-naira.firebaseapp.com",
+  projectId:"task-naira",
+  storageBucket:"task-naira.firebasestorage.app",
+  messagingSenderId:"295178303446",
+  appId:"1:295178303446:web:6d8c5f0895b81f6d299677"
+});
+
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, async (user) => {
+  if(!user){ window.top.location.href='login.html'; return; }
+  window._uid = user.uid;
+  window._email = user.email;
+  const saved = JSON.parse(localStorage.getItem('tn_user')||'{}');
+  window._name = saved.first_name || 'You';
+  const initials = (saved.first_name||'Y')[0].toUpperCase();
+  document.getElementById('w-my-av').textContent = initials;
+  document.getElementById('w-my-name').textContent = saved.first_name || 'You';
+  // Fake online counts
+  document.getElementById('ludo-online').textContent = (Math.floor(Math.random()*400)+100).toLocaleString();
+  document.getElementById('whot-online').textContent = (Math.floor(Math.random()*200)+50).toLocaleString();
+});
+</script>
+
+<script>
+// ── STATE ──
+let stakes = { ludo:100, whot:100 };
+let ludoMode = '2p';
+let currentGame = null;
+let gameTimer = null;
+let myTurn = true;
+let selectedCardIdx = null;
+let whotState = {};
+const DICE_FACES = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+const SHAPES = ['circle','triangle','cross','square','star'];
+const EMOJI = {circle:'⭕',triangle:'🔺',cross:'✚',square:'⬛',star:'⭐',whot:'🃏'};
+
+// ── LOBBY ──
+function setMode(mode, btn){
+  ludoMode = mode;
+  document.getElementById('m2p').classList.toggle('sel', mode==='2p');
+  document.getElementById('m4p').classList.toggle('sel', mode==='4p');
+  updatePrize('ludo', stakes.ludo);
+}
+
+function selStake(el, game){
+  el.closest('.gc-stakes').querySelectorAll('.sp').forEach(s=>s.classList.remove('sel'));
+  el.classList.add('sel');
+  stakes[game] = parseInt(el.textContent.replace(/[₦,]/g,''));
+  updatePrize(game, stakes[game]);
+}
+
+function updatePrize(game, amount){
+  const is4p = game==='ludo' && ludoMode==='4p';
+  const players = is4p ? 4 : 2;
+  const pot = amount * players;
+  if(is4p){
+    document.getElementById('ludo-prize').innerHTML = `4P · ₦${amount.toLocaleString()} stake · <strong>1st: ₦${(pot*0.5).toLocaleString()}</strong> · <strong>2nd: ₦${(pot*0.4).toLocaleString()}</strong>`;
+  } else {
+    const win = pot * 0.9;
+    document.getElementById(`${game}-prize`).innerHTML = `2P · ₦${amount.toLocaleString()} stake · <strong>Winner gets ₦${win.toLocaleString()}</strong>`;
+  }
+}
+
+async function joinGame(type){
+  if(!window._uid){ toast('Please log in first','error'); return; }
+  const stake = stakes[type];
+  const wallet = JSON.parse(localStorage.getItem('tn_wallet')||'{}');
+  if(parseFloat(wallet.balance||0) < stake){
+    toast(`Need ₦${stake.toLocaleString()} to play. Please deposit first.`,'error');
+    return;
+  }
+  const btn = document.getElementById(`${type}-btn`);
+  btn.disabled=true;
+  btn.innerHTML='<span style="width:13px;height:13px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;display:inline-block;"></span> Finding...';
+  try{
+    const gameType = type==='ludo'?(ludoMode==='4p'?'ludo_4p':'ludo_2p'):'whot';
+    const res = await fetch('/api/games',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ firebase_uid:window._uid, game_type:gameType, stake_amount:stake })
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error);
+    // Update wallet
+    const w = JSON.parse(localStorage.getItem('tn_wallet')||'{}');
+    w.balance = data.new_balance;
+    localStorage.setItem('tn_wallet', JSON.stringify(w));
+    if(window.parent&&window.parent.updateWallet) window.parent.updateWallet(data.new_balance);
+    currentGame = { id:data.game_id, type, gameType, stake, players:data.max_players };
+    showWaiting(type, stake, data);
+    // Simulate opponent joining after 2-5 seconds
+    const delay = 2000 + Math.random()*3000;
+    setTimeout(()=>startGameplay(type), delay);
+  } catch(e){
+    btn.disabled=false;
+    btn.innerHTML=type==='ludo'?'<i class="fa-solid fa-dice"></i> Find a Game':'<i class="fa-solid fa-cards-blank"></i> Find a Game';
+    toast(e.message,'error');
+  }
+}
+
+function showWaiting(type, stake, data){
+  document.getElementById('lobby').style.display='none';
+  document.getElementById('waiting-room').classList.add('show');
+  const max = data.max_players;
+  document.getElementById('wr-game').textContent = type==='ludo'?`Ludo ${max}P`:'Whot 2P';
+  document.getElementById('wr-stake').textContent = `₦${stake.toLocaleString()}`;
+  const reward = max===4 ? `₦${(stake*4*0.5).toLocaleString()} (1st)` : `₦${(stake*2*0.9).toLocaleString()}`;
+  document.getElementById('wr-reward').textContent = reward;
+  const initials = (window._name||'Y')[0].toUpperCase();
+  let html = `<div class="wr-av filled">${initials}</div>`;
+  for(let i=1;i<max;i++) html+=`<div class="wr-av empty"><i class="fa-solid fa-question"></i></div>`;
+  document.getElementById('wr-players').innerHTML = html;
+  document.getElementById('wr-sub').textContent = `1/${max} players. Waiting for opponents...`;
+}
+
+function cancelGame(){
+  document.getElementById('waiting-room').classList.remove('show');
+  document.getElementById('lobby').style.display='block';
+  resetBtns();
+  toast('Game cancelled.');
+}
+
+function startGameplay(type){
+  document.getElementById('waiting-room').classList.remove('show');
+  if(type==='ludo') startLudo();
+  else startWhot();
+}
+
+// ── LUDO ──
+function startLudo(){
+  document.getElementById('ludo-screen').classList.add('show');
+  const max = currentGame.players;
+  const pot = max===4 ? currentGame.stake*4 : currentGame.stake*2;
+  document.getElementById('lg-name').textContent = `Ludo Naira · ${max}P`;
+  document.getElementById('lg-pot').textContent = `₦${(pot*0.9).toLocaleString()}`;
+  drawBoard(max);
+  startTimer('lg-timer', max===4?480:300);
+  renderLudoPlayers(max);
+  myTurn=true;
+  llog('Game started! Good luck 🎲');
+}
+
+function drawBoard(numPlayers){
+  const canvas = document.getElementById('ludo-canvas');
+  const ctx = canvas.getContext('2d');
+  const S = canvas.width;
+  const cs = S/15;
+  ctx.clearRect(0,0,S,S);
+  // Background
+  ctx.fillStyle='#fff'; ctx.fillRect(0,0,S,S);
+  // Grid
+  ctx.strokeStyle='#ddd'; ctx.lineWidth=0.5;
+  for(let i=0;i<=15;i++){
+    ctx.beginPath();ctx.moveTo(i*cs,0);ctx.lineTo(i*cs,S);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,i*cs);ctx.lineTo(S,i*cs);ctx.stroke();
+  }
+  // Home bases
+  const bases=[{x:0,y:0,c:'#E8F7EE'},{x:9*cs,y:0,c:'#FFE8E8'},{x:0,y:9*cs,c:'#FFF8E0'},{x:9*cs,y:9*cs,c:'#E8F0FF'}];
+  bases.forEach(b=>{
+    ctx.fillStyle=b.c; ctx.fillRect(b.x,b.y,6*cs,6*cs);
+    ctx.strokeStyle='#bbb'; ctx.lineWidth=1.5;
+    ctx.strokeRect(b.x+0.5,b.y+0.5,6*cs-1,6*cs-1);
+    ctx.fillStyle='rgba(255,255,255,0.6)';
+    ctx.beginPath();
+    ctx.arc(b.x+3*cs,b.y+3*cs,2*cs,0,2*Math.PI);
+    ctx.fill();
+    ctx.strokeStyle='rgba(0,0,0,0.1)'; ctx.lineWidth=1;
+    ctx.stroke();
+  });
+  // Center
+  ctx.fillStyle='#f8f8f8'; ctx.fillRect(6*cs,6*cs,3*cs,3*cs);
+  const cx=7.5*cs,cy=7.5*cs;
+  const tris=[
+    ['#E8F7EE',6*cs,6*cs,9*cs,6*cs,cx,cy],
+    ['#FFE8E8',9*cs,6*cs,9*cs,9*cs,cx,cy],
+    ['#FFF8E0',6*cs,9*cs,9*cs,9*cs,cx,cy],
+    ['#E8F0FF',6*cs,6*cs,6*cs,9*cs,cx,cy],
+  ];
+  tris.forEach(([c,x1,y1,x2,y2,x3,y3])=>{
+    ctx.fillStyle=c;
+    ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.lineTo(x3,y3);ctx.closePath();ctx.fill();
+  });
+  // Safe cells star
+  const safes=[[6,1],[8,2],[12,6],[13,8],[8,12],[6,13],[2,8],[1,6]];
+  safes.forEach(([col,row])=>{
+    ctx.fillStyle='rgba(0,154,68,0.12)'; ctx.fillRect(col*cs,row*cs,cs,cs);
+    ctx.fillStyle='#009A44'; ctx.font=`${cs*0.55}px sans-serif`;
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText('★',(col+0.5)*cs,(row+0.5)*cs);
+  });
+  // Draw pieces in home
+  const piecePos=[{color:'#009A44',spots:[[1,1],[2,1],[1,2],[2,2]]},{color:'#e74c3c',spots:[[10,1],[11,1],[10,2],[11,2]]},{color:'#f39c12',spots:[[1,10],[2,10],[1,11],[2,11]]},{color:'#3498db',spots:[[10,10],[11,10],[10,11],[11,11]]}];
+  const usedColors = numPlayers===2?[piecePos[0],piecePos[1]]:piecePos;
+  usedColors.forEach(p=>{
+    p.spots.forEach(([col,row])=>{
+      ctx.fillStyle=p.color;
+      ctx.beginPath();
+      ctx.arc((col+0.5)*cs,(row+0.5)*cs,cs*0.35,0,2*Math.PI);
+      ctx.fill();
+      ctx.strokeStyle='rgba(255,255,255,0.8)'; ctx.lineWidth=1.5; ctx.stroke();
+    });
+  });
+}
+
+function renderLudoPlayers(numP){
+  const players = numP===2?
+    [{name:'You',color:'#009A44',label:'Green'},{name:'Opponent',color:'#e74c3c',label:'Red'}]:
+    [{name:'You',color:'#009A44',label:'Green'},{name:'Opp 1',color:'#e74c3c',label:'Red'},{name:'Opp 2',color:'#f39c12',label:'Yellow'},{name:'Opp 3',color:'#3498db',label:'Blue'}];
+  document.getElementById('ludo-players').innerHTML = players.map((p,i)=>`
+    <div class="pc ${i===0?'active-turn':''}" id="lp${i}">
+      <div class="pc-row">
+        <div class="pc-av" style="background:${p.color};">${p.name[0]}</div>
+        <div><div class="pc-name">${p.name}</div><div class="pc-sub">${p.label} pieces</div></div>
+        ${i===0?'<span style="font-size:10px;font-weight:700;color:var(--g);background:var(--gl);padding:2px 7px;border-radius:100px;margin-left:auto;" id="turn-badge">TURN</span>':''}
+      </div>
+      <div class="pc-dots">${[0,1,2,3].map(()=>`<div class="pc-dot home" style="background:${p.color};"></div>`).join('')}</div>
+      <div class="dw" id="dw${i}"><i class="fa-solid fa-wifi" style="color:var(--red);"></i> Connection issues</div>
+    </div>
+  `).join('');
+}
+
+window.rollDice = function(){
+  if(!myTurn){ toast("It's not your turn!",'error'); return; }
+  const diceEl = document.getElementById('dice');
+  const btn = document.getElementById('roll-btn');
+  btn.disabled=true;
+  diceEl.classList.add('rolling');
+  let i=0;
+  const iv=setInterval(()=>{
+    diceEl.textContent=DICE_FACES[Math.floor(Math.random()*6)];
+    if(++i>10){
+      clearInterval(iv);
+      const val=Math.floor(Math.random()*6)+1;
+      diceEl.textContent=DICE_FACES[val-1];
+      diceEl.classList.remove('rolling');
+      document.getElementById('dice-val').textContent=`You rolled a ${val}!`;
+      llog(`You rolled a ${val} 🎲`);
+      if(val===6) toast('You rolled a 6! Bring a piece out or move.');
+      myTurn=false;
+      setTurnIndicator(false);
+      setTimeout(oppLudoTurn,1800);
+    }
+  },70);
+};
+
+function oppLudoTurn(){
+  llog('Opponent is thinking... ⏳');
+  setTimeout(()=>{
+    const val=Math.floor(Math.random()*6)+1;
+    llog(`Opponent rolled a ${val} 🎲`);
+    setTimeout(()=>{
+      myTurn=true;
+      setTurnIndicator(true);
+      document.getElementById('roll-btn').disabled=false;
+      llog('Your turn! Roll the dice.');
+    },1000);
+  },1500);
+}
+
+function setTurnIndicator(isMyTurn){
+  const el = document.getElementById('turn-info');
+  el.innerHTML=isMyTurn?'<span class="my">Your Turn! Roll the dice.</span>':'<span class="opp">Opponent\'s Turn...</span>';
+  const badge=document.getElementById('turn-badge');
+  if(badge) badge.style.display=isMyTurn?'inline':'none';
+  document.getElementById('lp0')?.classList.toggle('active-turn',isMyTurn);
+}
+
+function llog(msg){
+  const el=document.getElementById('ludo-log');
+  const d=document.createElement('div');
+  d.className='log-i';
+  d.innerHTML=`<i class="fa-solid fa-circle-dot"></i>${msg}`;
+  el.prepend(d);
+  if(el.children.length>20) el.removeChild(el.lastChild);
+}
+
+// ── WHOT GAME ──
+function startWhot(){
+  document.getElementById('whot-screen').classList.add('show');
+  const pot=currentGame.stake*2;
+  document.getElementById('wg-pot').textContent=`₦${(pot*0.9).toLocaleString()}`;
+  initWhotGame();
+  startTimer('wg-timer',300);
+}
+
+function initWhotGame(){
+  const deck=createDeck();
+  whotState={
+    myHand:deck.splice(0,5),
+    oppHand:deck.splice(0,5),
+    drawPile:deck,
+    discardPile:[],
+    topCard:null,
+    myTurn:true,
+    calledShape:null,
+    pickPending:0,
+  };
+  const first=whotState.drawPile.pop();
+  whotState.discardPile=[first];
+  whotState.topCard=first;
+  renderWhot();
+  wlog('Game started! Play a card. Good luck! 🃏');
+  updateWhotStatus();
+}
+
+function createDeck(){
+  const deck=[];
+  SHAPES.forEach(s=>{
+    [1,2,3,4,5,6,7,8,10,11,12,13,14].forEach(n=>{
+      deck.push({shape:s,num:n,type:n===2?'pick2':n===14?'suspension':'normal'});
+    });
+  });
+  [1,2].forEach(()=>deck.push({shape:'whot',num:20,type:'whot'}));
+  return shuffle(deck);
+}
+
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+function renderWhot(){
+  const w=whotState;
+  document.getElementById('opp-count').textContent=w.oppHand.length;
+  document.getElementById('my-count').textContent=w.myHand.length;
+  document.getElementById('draw-count').textContent=w.drawPile.length;
+  // Opp cards face down
+  document.getElementById('opp-cards').innerHTML=w.oppHand.map(()=>'<div class="opp-card-back"></div>').join('');
+  // Top card
+  const tc=w.topCard;
+  const shape=w.calledShape||tc?.shape||'circle';
+  document.getElementById('tc-shape').textContent=EMOJI[shape]||'🃏';
+  document.getElementById('tc-num').textContent=tc?.num||'';
+  document.getElementById('top-card').className=`pile top-card-pile c-${shape}`;
+  // My hand
+  const playable=getPlayable();
+  document.getElementById('my-hand').innerHTML=w.myHand.map((card,i)=>{
+    const canPlay=w.myTurn&&playable.includes(i);
+    const isSel=selectedCardIdx===i;
+    const s=card.type==='whot'?'whot':card.shape;
+    return `<div class="hcard c-${s}${canPlay?' playable':''}${isSel?' selected':''}" onclick="selectCard(${i})">
+      <div class="ct">${EMOJI[s]||''}</div>
+      <div class="cs">${EMOJI[s]||'🃏'}</div>
+      <div class="cn">${card.num}</div>
+      <div class="cb">${card.num}</div>
+    </div>`;
+  }).join('');
+}
+
+function getPlayable(){
+  const w=whotState;
+  if(!w.myTurn) return [];
+  const tc=w.topCard;
+  return w.myHand.map((card,i)=>{
+    if(card.type==='whot') return i;
+    if(w.pickPending>0&&card.type!=='pick2') return -1;
+    const matchShape=w.calledShape?card.shape===w.calledShape:card.shape===tc.shape;
+    const matchNum=card.num===tc.num;
+    return(matchShape||matchNum)?i:-1;
+  }).filter(i=>i>=0);
+}
+
+window.selectCard=function(idx){
+  if(!whotState.myTurn){toast("Not your turn!",'error');return;}
+  const playable=getPlayable();
+  if(!playable.includes(idx)){toast('This card cannot be played now','error');return;}
+  selectedCardIdx=selectedCardIdx===idx?null:idx;
+  renderWhot();
+};
+
+window.playCard=function(){
+  if(selectedCardIdx===null){toast('Select a card first','error');return;}
+  const card=whotState.myHand[selectedCardIdx];
+  if(card.type==='whot'){
+    document.getElementById('whot-call').classList.add('show');
+    return;
+  }
+  doPlayCard(selectedCardIdx,null);
+};
+
+window.callWhot=function(shape){
+  document.getElementById('whot-call').classList.remove('show');
+  doPlayCard(selectedCardIdx,shape);
+};
+
+function doPlayCard(idx,calledShape){
+  const w=whotState;
+  const card=w.myHand.splice(idx,1)[0];
+  w.discardPile.push(card);
+  w.topCard=card;
+  w.calledShape=calledShape||null;
+  selectedCardIdx=null;
+  const s=card.type==='whot'?'whot':card.shape;
+  wlog(`You played ${EMOJI[s]||''} ${card.num}`);
+  if(card.type==='pick2'){ w.pickPending+=2; wlog('Opponent must pick 2!'); }
+  else if(card.type==='suspension'){ wlog('Opponent skipped!'); w.myTurn=false; renderWhot(); setTimeout(oppWhotTurn,1200); return; }
+  else { w.pickPending=0; }
+  if(w.myHand.length===0){endWhot(true);return;}
+  w.myTurn=false;
+  renderWhot();
+  updateWhotStatus();
+  setTimeout(oppWhotTurn,1500);
+}
+
+function oppWhotTurn(){
+  const w=whotState;
+  const tc=w.topCard;
+  const playable=w.oppHand.map((card,i)=>{
+    if(card.type==='whot') return i;
+    if(w.pickPending>0&&card.type!=='pick2') return -1;
+    const cs=w.calledShape?card.shape===w.calledShape:card.shape===tc.shape;
+    return(cs||card.num===tc.num)?i:-1;
+  }).filter(i=>i>=0);
+  if(playable.length>0){
+    const idx=playable[Math.floor(Math.random()*playable.length)];
+    const card=w.oppHand.splice(idx,1)[0];
+    w.discardPile.push(card);
+    w.topCard=card;
+    w.calledShape=card.type==='whot'?SHAPES[Math.floor(Math.random()*5)]:null;
+    const s=card.type==='whot'?'whot':card.shape;
+    wlog(`Opponent played ${EMOJI[s]||''} ${card.num}`);
+    if(card.type==='pick2'){ w.pickPending+=2; wlog(`You must pick ${w.pickPending}!`); }
+    else { w.pickPending=0; }
+    if(w.oppHand.length===0){endWhot(false);return;}
+  } else {
+    const count=w.pickPending||1;
+    for(let i=0;i<count;i++){
+      if(w.drawPile.length===0) w.drawPile=shuffle(w.discardPile.splice(0,w.discardPile.length-1));
+      if(w.drawPile.length>0) w.oppHand.push(w.drawPile.pop());
+    }
+    w.pickPending=0;
+    wlog(`Opponent drew ${count} card${count>1?'s':''}`);
+  }
+  w.myTurn=true;
+  renderWhot();
+  updateWhotStatus();
+}
+
+window.drawCard=function(){
+  const w=whotState;
+  if(!w.myTurn){toast("Not your turn!",'error');return;}
+  const count=w.pickPending||1;
+  for(let i=0;i<count;i++){
+    if(w.drawPile.length===0) w.drawPile=shuffle(w.discardPile.splice(0,w.discardPile.length-1));
+    if(w.drawPile.length>0) w.myHand.push(w.drawPile.pop());
+  }
+  w.pickPending=0;
+  wlog(`You drew ${count} card${count>1?'s':''}`);
+  w.myTurn=false;
+  renderWhot();
+  updateWhotStatus();
+  setTimeout(oppWhotTurn,1200);
+};
+
+function updateWhotStatus(){
+  const el=document.getElementById('whot-status');
+  el.textContent=whotState.myTurn?'Your turn — play a card or draw':'Opponent is thinking...';
+  el.style.color=whotState.myTurn?'var(--g)':'var(--t3)';
+}
+
+function wlog(msg){
+  const el=document.getElementById('whot-log');
+  const d=document.createElement('div');
+  d.className='log-i';
+  d.innerHTML=`<i class="fa-solid fa-circle-dot"></i>${msg}`;
+  el.prepend(d);
+  if(el.children.length>15) el.removeChild(el.lastChild);
+}
+
+// ── END GAME ──
+async function endLudo(won, pos=1){
+  if(gameTimer) clearInterval(gameTimer);
+  const s=currentGame.stake;
+  const mp=currentGame.players;
+  let prize=0;
+  if(mp===4){ if(pos===1) prize=s*4*0.5; else if(pos===2) prize=s*4*0.4; }
+  else { if(won) prize=s*2*0.9; }
+  if(prize>0){
+    try{
+      await fetch('/api/games',{
+        method:'PUT',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({game_id:currentGame.id,first_place_uid:window._uid})
+      });
+    } catch(e){}
+  }
+  showResult(won||pos<=2, prize, pos, mp);
+}
+
+async function endWhot(won){
+  if(gameTimer) clearInterval(gameTimer);
+  const prize=won?currentGame.stake*2*0.9:0;
+  if(won){
+    try{
+      await fetch('/api/games',{
+        method:'PUT',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({game_id:currentGame.id,first_place_uid:window._uid})
+      });
+    } catch(e){}
+  }
+  showResult(won, prize, 1, 2);
+}
+
+function showResult(won, prize, pos, maxP){
+  document.getElementById('ludo-screen').classList.remove('show');
+  document.getElementById('whot-screen').classList.remove('show');
+  const overlay=document.getElementById('result-overlay');
+  const ico=document.getElementById('res-ico');
+  const title=document.getElementById('res-title');
+  const amt=document.getElementById('res-amt');
+  const sub=document.getElementById('res-sub');
+  if(won){
+    ico.className='res-ico win';
+    ico.textContent=pos===1?'🏆':'🥈';
+    title.className='res-title win';
+    title.textContent=pos===1?'You Won! 🎉':`${pos===2?'2nd':'3rd'} Place!`;
+    amt.className='res-amt win';
+    amt.textContent=`+₦${prize.toLocaleString()}`;
+    sub.textContent=`₦${prize.toLocaleString()} has been added to your wallet!`;
+    const w=JSON.parse(localStorage.getItem('tn_wallet')||'{}');
+    w.balance=(parseFloat(w.balance||0)+prize).toFixed(2);
+    localStorage.setItem('tn_wallet',JSON.stringify(w));
+    if(window.parent&&window.parent.updateWallet) window.parent.updateWallet(w.balance);
+  } else {
+    ico.className='res-ico lose';
+    ico.textContent='💸';
+    title.className='res-title lose';
+    title.textContent='Better Luck Next Time';
+    amt.className='res-amt lose';
+    amt.textContent=`-₦${currentGame.stake.toLocaleString()}`;
+    sub.textContent='Your stake was lost. Try again!';
+  }
+  overlay.classList.add('show');
+}
+
+// ── TIMER ──
+function startTimer(elId, secs){
+  if(gameTimer) clearInterval(gameTimer);
+  let rem=secs;
+  const el=document.getElementById(elId);
+  gameTimer=setInterval(()=>{
+    rem--;
+    const m=Math.floor(rem/60), s=rem%60;
+    el.textContent=`${m}:${s.toString().padStart(2,'0')}`;
+    if(rem<=30) el.classList.add('warn');
+    if(rem<=0){
+      clearInterval(gameTimer);
+      toast('Time up!','error');
+      if(currentGame?.type==='ludo') endLudo(false);
+      else endWhot(false);
+    }
+  },1000);
+}
+
+// ── HELPERS ──
+window.playAgain=function(){
+  document.getElementById('result-overlay').classList.remove('show');
+  goLobby();
+};
+
+window.goLobby=function(){
+  document.getElementById('result-overlay').classList.remove('show');
+  document.getElementById('ludo-screen').classList.remove('show');
+  document.getElementById('whot-screen').classList.remove('show');
+  document.getElementById('waiting-room').classList.remove('show');
+  document.getElementById('lobby').style.display='block';
+  if(gameTimer) clearInterval(gameTimer);
+  currentGame=null; selectedCardIdx=null; myTurn=true;
+  resetBtns();
+};
+
+function resetBtns(){
+  document.getElementById('ludo-btn').disabled=false;
+  document.getElementById('ludo-btn').innerHTML='<i class="fa-solid fa-dice"></i> Find a Game';
+  document.getElementById('whot-btn').disabled=false;
+  document.getElementById('whot-btn').innerHTML='<i class="fa-solid fa-cards-blank"></i> Find a Game';
+}
+
+function toast(msg,type='success'){
+  const c={success:{icon:'#009A44',ic:'fa-circle-check'},error:{icon:'#FF4757',ic:'fa-circle-xmark'}};
+  const col=c[type]||c.success;
+  document.getElementById('ticon').className=`fa-solid ${col.ic}`;
+  document.getElementById('ticon').style.color=col.icon;
+  document.getElementById('tm').textContent=msg;
+  const t=document.getElementById('t'); t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// Init prize display
+updatePrize('ludo',100);
+updatePrize('whot',100);
+
+// Expose globals
+window.selStake=selStake;
+window.setMode=setMode;
+window.joinGame=joinGame;
+window.cancelGame=cancelGame;
+</script>
+</body>
+</html>

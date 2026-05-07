@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tasks — Task Naira</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23009A44'/%3E%3Cpath d='M37 8L20 34H31L27 56L46 28H35L37 8Z' fill='white'/%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--g:#009A44;--g2:#007A36;--g3:#00C259;--gl:#E8F7EE;--gl2:#C8EDD8;--gold:#C89B00;--gold-l:#FFF8E0;--text:#0D1F14;--t2:#3A5444;--t3:#7A9A84;--border:#D5EAE0;--red:#FF4757;--off:#F5FAF7;--gray:#EEF3F0;--font-h:'Familjen Grotesk',sans-serif;--font-b:'Plus Jakarta Sans',sans-serif;}
+body{font-family:var(--font-b);background:var(--off);color:var(--text);padding:24px;min-height:100vh;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.fade{animation:fadeUp .4s ease forwards;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skel{background:linear-gradient(90deg,var(--gray) 25%,var(--border) 50%,var(--gray) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;}
+.flex-b{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-b);transition:all .2s;border:1.5px solid var(--border);background:transparent;color:var(--t2);}
+.btn:hover,.btn.active{background:var(--g);color:#fff;border-color:var(--g);}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:20px;}
+.tc{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;transition:all .2s;}
+.tc:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,154,68,0.1);border-color:var(--gl2);}
+.tc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+.tc-ico{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;}
+.cat-social{background:#EEF2FF;} .cat-social i{color:#4F6EF7;font-size:17px;}
+.cat-survey{background:var(--gold-l);} .cat-survey i{color:var(--gold);font-size:17px;}
+.cat-review{background:#FFF3E8;} .cat-review i{color:#F07B20;font-size:17px;}
+.cat-data{background:var(--gl);} .cat-data i{color:var(--g);font-size:17px;}
+.cat-other{background:#F5EEFF;} .cat-other i{color:#8B5CF6;font-size:17px;}
+.tc-pay{font-family:var(--font-h);font-size:18px;font-weight:700;color:var(--g);}
+.tc-pay span{font-size:11px;font-weight:400;color:var(--t3);}
+.tc-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.tc-desc{font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:12px;}
+.tc-meta{display:flex;gap:14px;font-size:11px;color:var(--t3);margin-bottom:14px;}
+.tc-meta i{font-size:10px;}
+.tc-btn{width:100%;padding:9px;background:var(--g);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-b);transition:all .2s;}
+.tc-btn:hover{background:var(--g2);}
+.tc-btn:disabled{opacity:0.6;pointer-events:none;}
+.empty{text-align:center;padding:60px 20px;grid-column:1/-1;}
+.empty i{font-size:48px;color:var(--border);margin-bottom:14px;display:block;}
+.empty p{font-size:14px;color:var(--t3);}
+/* Submit modal */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);}
+.overlay.open{display:flex;}
+.modal{background:#fff;border-radius:20px;width:100%;max-width:460px;box-shadow:0 24px 80px rgba(0,0,0,0.2);animation:pop .3s cubic-bezier(.34,1.56,.64,1);overflow:hidden;}
+@keyframes pop{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+.mt{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.mt h3{font-family:var(--font-h);font-size:18px;font-weight:700;}
+.mc{width:30px;height:30px;border-radius:8px;background:var(--off);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--t2);}
+.mb{padding:20px 24px;}
+.fg{margin-bottom:15px;}
+.fg label{display:block;font-size:11px;font-weight:700;color:var(--t3);letter-spacing:0.6px;text-transform:uppercase;margin-bottom:7px;}
+.fg input,.fg textarea{width:100%;padding:11px 14px;background:var(--gray);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-size:14px;font-family:var(--font-b);outline:none;transition:all .2s;resize:none;}
+.fg input:focus,.fg textarea:focus{background:#fff;border-color:var(--g);box-shadow:0 0 0 3px rgba(0,154,68,0.08);}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--t3);}
+.mf{padding:0 24px 20px;display:flex;gap:10px;}
+.mcancel{flex:1;padding:11px;background:var(--off);border:1px solid var(--border);border-radius:9px;color:var(--t2);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-b);}
+.msub{flex:2;padding:11px;background:var(--g);border:none;border-radius:9px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;justify-content:center;gap:7px;}
+.msub:disabled{opacity:0.7;pointer-events:none;}
+.task-info{background:var(--gl);border:1px solid var(--gl2);border-radius:10px;padding:12px 14px;margin-bottom:16px;}
+.task-info-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.task-info-pay{font-family:var(--font-h);font-size:18px;font-weight:700;color:var(--g);}
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;z-index:999;background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.1);transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);max-width:280px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.ti{width:34px;height:34px;border-radius:9px;background:var(--gl);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ti i{color:var(--g);font-size:14px;}
+.tm{font-size:13px;font-weight:600;color:var(--text);}
+@media(max-width:600px){.grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="flex-b fade" style="margin-bottom:20px;">
+  <div>
+    <h2 style="font-family:var(--font-h);font-size:20px;font-weight:700;">Task Marketplace</h2>
+    <p style="font-size:13px;color:var(--t3);margin-top:3px;">Complete tasks and earn Naira instantly to your wallet</p>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <button class="btn active" id="f-all" onclick="filterTasks('all',this)">All</button>
+    <button class="btn" id="f-social_media" onclick="filterTasks('social_media',this)">Social</button>
+    <button class="btn" id="f-survey" onclick="filterTasks('survey',this)">Surveys</button>
+    <button class="btn" id="f-app_review" onclick="filterTasks('app_review',this)">Reviews</button>
+    <button class="btn" id="f-data_entry" onclick="filterTasks('data_entry',this)">Data Entry</button>
+  </div>
+</div>
+
+<div class="grid fade" id="task-grid">
+  <div class="skel" style="height:220px;"></div>
+  <div class="skel" style="height:220px;"></div>
+  <div class="skel" style="height:220px;"></div>
+  <div class="skel" style="height:220px;"></div>
+  <div class="skel" style="height:220px;"></div>
+  <div class="skel" style="height:220px;"></div>
+</div>
+
+<!-- Submit Proof Modal -->
+<div class="overlay" id="submit-modal">
+  <div class="modal">
+    <div class="mt"><h3>Submit Task Proof</h3><button class="mc" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="mb">
+      <div class="task-info">
+        <div class="task-info-title" id="modal-task-title"></div>
+        <div class="task-info-pay" id="modal-task-pay"></div>
+      </div>
+      <div class="fg">
+        <label>Proof URL / Link <span style="color:var(--t3);font-size:10px;font-weight:400;text-transform:none;">(screenshot link, username, etc.)</span></label>
+        <input type="url" id="proof-url" placeholder="https://..."/>
+      </div>
+      <div class="fg">
+        <label>Additional Notes <span style="color:var(--t3);font-size:10px;font-weight:400;text-transform:none;">(Optional)</span></label>
+        <textarea id="proof-text" rows="3" placeholder="Any extra details about your submission..."></textarea>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="mcancel" onclick="closeModal()">Cancel</button>
+      <button class="msub" id="sub-btn" onclick="submitTask()"><i class="fa-solid fa-paper-plane"></i> Submit Proof</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="t"><div class="ti"><i class="fa-solid fa-circle-check" id="ticon"></i></div><div class="tm" id="tm"></div></div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+
+const app = initializeApp({
+  apiKey:"AIzaSyAkZn9q8jJ5YJEpRPqy-0xjh59q2OS2oh8",
+  authDomain:"task-naira.firebaseapp.com",
+  projectId:"task-naira",
+  storageBucket:"task-naira.firebasestorage.app",
+  messagingSenderId:"295178303446",
+  appId:"1:295178303446:web:6d8c5f0895b81f6d299677"
+});
+
+const auth = getAuth(app);
+let currentUID = null;
+let currentTaskId = null;
+let allTasks = [];
+
+const catMap = {
+  social_media:{cls:'cat-social',icon:'fa-hashtag',label:'Social Media'},
+  survey:{cls:'cat-survey',icon:'fa-chart-bar',label:'Survey'},
+  app_review:{cls:'cat-review',icon:'fa-star',label:'App Review'},
+  data_entry:{cls:'cat-data',icon:'fa-keyboard',label:'Data Entry'},
+  other:{cls:'cat-other',icon:'fa-briefcase',label:'Other'},
+};
+
+onAuthStateChanged(auth, async (user) => {
+  if(!user){ window.top.location.href='login.html'; return; }
+  currentUID = user.uid;
+  await loadTasks('all');
+});
+
+async function loadTasks(category){
+  try{
+    const url = category==='all' ? '/api/tasks?limit=50' : `/api/tasks?category=${category}&limit=50`;
+    const res = await fetch(url);
+    const data = await res.json();
+    allTasks = data.tasks || [];
+    renderTasks(allTasks);
+  } catch(e){
+    document.getElementById('task-grid').innerHTML=`<div class="empty"><i class="fa-solid fa-circle-exclamation"></i><p>Failed to load tasks.<br>Please refresh the page.</p></div>`;
+  }
+}
+
+function renderTasks(tasks){
+  if(!tasks||tasks.length===0){
+    document.getElementById('task-grid').innerHTML=`<div class="empty"><i class="fa-solid fa-clipboard-list"></i><p>No tasks available in this category.<br>Check back soon!</p></div>`;
+    return;
+  }
+  document.getElementById('task-grid').innerHTML = tasks.map(t=>{
+    const cat = catMap[t.category]||catMap.other;
+    return `<div class="tc">
+      <div class="tc-top">
+        <div class="tc-ico ${cat.cls}"><i class="fa-solid ${cat.icon}"></i></div>
+        <div class="tc-pay">₦${parseFloat(t.pay_per_task).toLocaleString()}<span>/task</span></div>
+      </div>
+      <div class="tc-title">${t.title}</div>
+      <div class="tc-desc">${t.description.substring(0,100)}${t.description.length>100?'...':''}</div>
+      <div class="tc-meta">
+        <span><i class="fa-regular fa-clock"></i> ${t.estimated_time}</span>
+        <span><i class="fa-solid fa-users"></i> ${t.remaining_slots} slots left</span>
+      </div>
+      <button class="tc-btn" onclick="openSubmitModal('${t.id}','${t.title.replace(/'/g,"\\'")}',${t.pay_per_task}${t.resource_url?`,'${t.resource_url}'`:''})">${t.resource_url?'<i class="fa-solid fa-external-link-alt"></i> Open & Submit':'<i class="fa-solid fa-paper-plane"></i> Submit Proof'}</button>
+    </div>`;
+  }).join('');
+}
+
+window.filterTasks = function(cat, btn){
+  document.querySelectorAll('[id^="f-"]').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  loadTasks(cat);
+};
+
+window.openSubmitModal = function(taskId, title, pay, url){
+  currentTaskId = taskId;
+  document.getElementById('modal-task-title').textContent = title;
+  document.getElementById('modal-task-pay').textContent = `₦${parseFloat(pay).toLocaleString()} reward`;
+  document.getElementById('proof-url').value = '';
+  document.getElementById('proof-text').value = '';
+  if(url){ window.open(url, '_blank'); }
+  document.getElementById('submit-modal').classList.add('open');
+};
+
+window.closeModal = function(){
+  document.getElementById('submit-modal').classList.remove('open');
+};
+
+window.submitTask = async function(){
+  const proofUrl = document.getElementById('proof-url').value.trim();
+  const proofText = document.getElementById('proof-text').value.trim();
+  if(!proofUrl && !proofText){ toast('Please provide proof of completion','error'); return; }
+  const btn = document.getElementById('sub-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;display:inline-block;"></span> Submitting...';
+  try{
+    const res = await fetch('/api/submit', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ firebase_uid:currentUID, task_id:currentTaskId, proof_url:proofUrl||null, proof_text:proofText||null })
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error);
+    closeModal();
+    toast('Task submitted! Waiting for poster to verify ✅');
+    await loadTasks('all');
+  } catch(e){
+    btn.disabled=false;
+    btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> Submit Proof';
+    toast(e.message,'error');
+  }
+};
+
+document.getElementById('submit-modal').addEventListener('click',function(e){ if(e.target===this)closeModal(); });
+
+function toast(msg,type='success'){
+  const c={success:{bg:'#E8F7EE',icon:'#009A44',ic:'fa-circle-check'},error:{bg:'#FFF0F1',icon:'#FF4757',ic:'fa-circle-xmark'}};
+  const col=c[type]||c.success;
+  document.getElementById('ticon').className=`fa-solid ${col.ic}`;
+  document.getElementById('ticon').style.color=col.icon;
+  document.getElementById('tm').textContent=msg;
+  const t=document.getElementById('t'); t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+</script>
+</body>
+</html>
