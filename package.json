@@ -1,0 +1,21 @@
+{
+  "name": "task-naira",
+  "version": "1.0.0",
+  "description": "Task Naira - Complete Tasks. Play Games. Earn Naira.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "firebase-admin": "^11.11.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "author": "Task Naira",
+  "license": "ISC"
+}
