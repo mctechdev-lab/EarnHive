@@ -11,7 +11,7 @@
     "cors": "^2.8.5"
   },
   "engines": {
-    "node": "24.x"
+    "node": "22.x"
   },
   "author": "Chibuzor Michael — MC TECH",
   "license": "ISC"
