@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EarnHive — Complete Tasks. Get Paid in TON.</title>
+<meta name="description" content="EarnHive by MC TECH — Complete tasks, earn TON crypto. Built by Chibuzor Michael."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#1A56DB;--blue-dark:#1040B0;--blue-mid:#2563EB;--blue-light:#EBF2FF;--blue-pale:#F0F6FF;
+  --gold:#F59E0B;--white:#FFFFFF;--off:#F7FAFF;--text:#080F1E;--text-mid:#334155;--text-soft:#64748B;
+  --border:#DBEAFE;--shadow-sm:0 2px 8px rgba(26,86,219,0.08);--shadow:0 8px 32px rgba(26,86,219,0.12);
+  --shadow-lg:0 20px 60px rgba(26,86,219,0.18);--radius:16px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%}
+nav.scrolled{background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);box-shadow:var(--shadow-sm)}
+.nav-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-family:'Clash Display',sans-serif;font-size:24px;font-weight:700;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:10px;transition:opacity .2s}
+.logo:hover{opacity:.85}
+.logo-icon{width:36px;height:36px;background:var(--blue);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.logo-icon i{color:white;font-size:16px}
+.logo-text span{color:var(--text)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text-mid);font-size:14px;font-weight:500;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--blue);border-radius:2px;transition:width .25s}
+.nav-links a:hover{color:var(--blue)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{display:flex;gap:10px;align-items:center}
+.btn-ghost{padding:9px 22px;border:1.5px solid var(--border);border-radius:50px;background:transparent;color:var(--text-mid);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:all .25s}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-pale)}
+.btn-primary{padding:10px 26px;border:none;border-radius:50px;background:var(--blue);color:white;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:all .25s;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(26,86,219,0.3)}
+.btn-primary:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(26,86,219,0.4)}
+.btn-primary i{font-size:12px;transition:transform .2s}
+.btn-primary:hover i{transform:translateX(3px)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none}
+.burger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+
+/* HERO */
+.hero{padding:140px 6% 80px;background:var(--off);position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center}
+.hero-bg{position:absolute;inset:0;pointer-events:none}
+.hero-blob-1{position:absolute;top:-200px;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(26,86,219,0.07) 0%,transparent 70%)}
+.hero-blob-2{position:absolute;bottom:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(245,158,11,0.05) 0%,transparent 70%)}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(26,86,219,0.08) 1px,transparent 1px);background-size:32px 32px}
+.hero-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center;width:100%;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue);padding:7px 18px;border-radius:50px;font-size:13px;font-weight:500;margin-bottom:28px;border:1px solid var(--border);box-shadow:var(--shadow-sm)}
+.hero-badge-dot{width:7px;height:7px;background:#22C55E;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+.hero h1{font-family:'Clash Display',sans-serif;font-size:clamp(42px,5.5vw,72px);font-weight:700;line-height:1.07;letter-spacing:-2px;margin-bottom:24px}
+.hero h1 .line-blue{color:var(--blue);display:block}
+.hero-sub{font-size:18px;color:var(--text-soft);line-height:1.75;margin-bottom:36px;max-width:500px;font-weight:300}
+.hero-sub strong{color:var(--text-mid);font-weight:500}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:40px}
+.btn-lg{padding:15px 34px;font-size:16px}
+.btn-outline-lg{padding:14px 32px;font-size:16px;border:2px solid var(--border);border-radius:50px;background:white;color:var(--text-mid);font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;text-decoration:none;transition:all .25s;display:inline-flex;align-items:center;gap:8px}
+.btn-outline-lg:hover{border-color:var(--blue);color:var(--blue);box-shadow:var(--shadow-sm)}
+.hero-trust{display:flex;align-items:center;gap:16px}
+.trust-avatars{display:flex}
+.trust-avatar{width:34px;height:34px;border-radius:50%;border:2.5px solid white;overflow:hidden;margin-left:-9px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.trust-avatar:first-child{margin-left:0}
+.trust-avatar img{width:100%;height:100%;object-fit:cover}
+.trust-text{font-size:13px;color:var(--text-soft);line-height:1.5}
+.trust-text strong{color:var(--text);font-weight:600}
+
+/* DASHBOARD PREVIEW */
+.hero-visual{position:relative}
+.dashboard-preview{background:white;border-radius:24px;box-shadow:var(--shadow-lg);border:1px solid var(--border);overflow:hidden;max-width:460px;margin:0 auto;animation:floatMain 4s ease-in-out infinite}
+@keyframes floatMain{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.dp-topbar{background:var(--blue);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.dp-logo{font-family:'Clash Display',sans-serif;font-size:15px;color:white;font-weight:700;display:flex;align-items:center;gap:8px}
+.dp-logo i{font-size:13px}
+.dp-user{display:flex;align-items:center;gap:8px}
+.dp-avatar{width:30px;height:30px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.3)}
+.dp-avatar img{width:100%;height:100%;object-fit:cover}
+.dp-uname{font-size:12px;color:rgba(255,255,255,.85);font-weight:500}
+.dp-body{padding:20px}
+.dp-balance-card{background:linear-gradient(135deg,var(--blue) 0%,#2563EB 100%);border-radius:16px;padding:20px;color:white;margin-bottom:16px;position:relative;overflow:hidden}
+.dp-balance-card::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:rgba(255,255,255,0.07);border-radius:50%}
+.dp-bal-label{font-size:11px;opacity:.7;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.dp-bal-amount{font-family:'Clash Display',sans-serif;font-size:36px;font-weight:700;margin-bottom:4px}
+.dp-bal-naira{font-size:13px;opacity:.75}
+.dp-bal-row{display:flex;justify-content:space-between;margin-top:14px}
+.dp-bal-stat{font-size:11px;opacity:.7}
+.dp-bal-stat strong{display:block;font-size:15px;opacity:1;font-weight:600}
+.dp-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.dp-stat{background:var(--off);border-radius:12px;padding:12px;text-align:center;border:1px solid var(--border)}
+.dp-stat-val{font-family:'Clash Display',sans-serif;font-size:18px;font-weight:700;color:var(--text)}
+.dp-stat-label{font-size:10px;color:var(--text-soft);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+.dp-section-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.dp-task{display:flex;align-items:center;gap:12px;padding:12px;background:var(--off);border-radius:12px;margin-bottom:8px;border:1px solid var(--border);cursor:pointer;transition:all .2s}
+.dp-task:hover{border-color:var(--blue);background:var(--blue-pale);transform:translateX(3px)}
+.dp-task-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.ti-blue{background:var(--blue-light);color:var(--blue)}
+.ti-gold{background:#FEF3C7;color:#92400E}
+.ti-green{background:#D1FAE5;color:#065F46}
+.dp-task-info{flex:1}
+.dp-task-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.dp-task-meta{font-size:11px;color:var(--text-soft);display:flex;align-items:center;gap:6px}
+.dp-task-pay{font-family:'Clash Display',sans-serif;font-size:16px;font-weight:700;color:var(--blue);white-space:nowrap}
+.dp-task-naira{font-size:10px;color:var(--text-soft);text-align:right}
+.float-notif{position:absolute;background:white;border-radius:14px;padding:10px 16px;box-shadow:0 8px 32px rgba(0,0,0,0.13);border:1px solid var(--border);display:flex;align-items:center;gap:10px;font-size:12px;font-weight:500;white-space:nowrap;z-index:10}
+.fn-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.fn-1{top:-16px;right:-24px;animation:floatA 3s ease-in-out infinite}
+.fn-2{bottom:20px;left:-36px;animation:floatB 3.5s ease-in-out infinite}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* STATS BAR */
+.stats-bar{padding:56px 6%;background:var(--blue);position:relative;overflow:hidden}
+.stats-bar::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M20 20.5V18H0v5h20v20.5h5V23h20v-5H25V2.5h-5z'/%3E%3C/g%3E%3C/svg%3E")}
+.stats-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:40px;position:relative;z-index:1}
+.stat-item{text-align:center}
+.stat-icon{width:52px;height:52px;background:rgba(255,255,255,0.12);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;transition:transform .25s,background .25s}
+.stat-icon:hover{transform:scale(1.12);background:rgba(255,255,255,0.2)}
+.stat-icon i{color:white;font-size:22px}
+.stat-number{font-family:'Clash Display',sans-serif;font-size:clamp(28px,4vw,46px);font-weight:700;color:white;line-height:1}
+.stat-label{font-size:14px;color:rgba(255,255,255,0.65);margin-top:6px}
+
+/* HOW IT WORKS */
+.how{padding:100px 6%;background:white}
+.section-center{text-align:center;max-width:640px;margin:0 auto 64px}
+.section-tag{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--blue);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:8px}
+.section-tag::before,.section-tag::after{content:'';width:24px;height:1.5px;background:var(--blue);border-radius:2px}
+.section-title{font-family:'Clash Display',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:700;line-height:1.15;letter-spacing:-1px;color:var(--text);margin-bottom:16px}
+.section-sub{font-size:17px;color:var(--text-soft);line-height:1.75;font-weight:300}
+.how-steps{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;position:relative}
+.how-steps::before{content:'';position:absolute;top:36px;left:calc(12.5% + 16px);right:calc(12.5% + 16px);height:1px;background:repeating-linear-gradient(90deg,var(--border) 0,var(--border) 8px,transparent 8px,transparent 16px)}
+.step{text-align:center;position:relative;z-index:1}
+.step-num{width:72px;height:72px;border-radius:50%;background:white;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;transition:all .3s;position:relative}
+.step:hover .step-num{background:var(--blue);color:white;border-color:var(--blue);transform:scale(1.1);box-shadow:0 8px 24px rgba(26,86,219,0.3)}
+.step-num i{font-size:22px;color:var(--blue);transition:color .3s}
+.step:hover .step-num i{color:white}
+.step h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.step p{font-size:14px;color:var(--text-soft);line-height:1.7}
+
+/* PEOPLE */
+.people{padding:100px 6%;background:var(--off)}
+.people-inner{max-width:1240px;margin:0 auto}
+.people-header{text-align:center;margin-bottom:56px}
+.people-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.person-card{background:white;border-radius:20px;overflow:hidden;border:1px solid var(--border);transition:all .3s;cursor:pointer}
+.person-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--blue)}
+.person-img-wrap{overflow:hidden;height:200px}
+.person-img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .4s}
+.person-card:hover .person-img{transform:scale(1.06)}
+.person-body{padding:20px}
+.person-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
+.person-location{font-size:13px;color:var(--text-soft);display:flex;align-items:center;gap:6px;margin-bottom:12px}
+.person-location i{color:var(--blue);font-size:12px}
+.person-earned{display:flex;align-items:center;justify-content:space-between;background:var(--off);border-radius:10px;padding:12px 14px}
+.pe-label{font-size:12px;color:var(--text-soft)}
+.pe-amount{font-family:'Clash Display',sans-serif;font-size:20px;font-weight:700;color:var(--blue)}
+.pe-naira{font-size:11px;color:var(--text-soft)}
+.person-quote{font-size:13px;color:var(--text-soft);font-style:italic;margin-top:12px;line-height:1.6;border-left:3px solid var(--blue-light);padding-left:12px}
+
+/* TASKS */
+.tasks-showcase{padding:100px 6%;background:white}
+.tasks-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.tasks-content .section-tag{justify-content:flex-start}
+.tasks-content .section-tag::before{display:none}
+.task-card-big{background:white;border-radius:18px;padding:20px;border:1px solid var(--border);display:flex;align-items:center;gap:16px;margin-bottom:14px;transition:all .25s;cursor:pointer;box-shadow:var(--shadow-sm)}
+.task-card-big:hover{border-color:var(--blue);box-shadow:var(--shadow);transform:translateX(6px)}
+.task-card-big:hover .tcb-arrow{opacity:1;transform:translateX(0)}
+.tcb-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;transition:transform .25s}
+.task-card-big:hover .tcb-icon{transform:scale(1.1)}
+.ic-blue{background:var(--blue-light);color:var(--blue)}
+.ic-gold{background:#FEF3C7;color:#92400E}
+.ic-green{background:#D1FAE5;color:#065F46}
+.ic-red{background:#FEE2E2;color:#991B1B}
+.tcb-info{flex:1}
+.tcb-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.tcb-meta{display:flex;gap:12px;font-size:12px;color:var(--text-soft);align-items:center}
+.tcb-meta i{font-size:11px}
+.tcb-right{text-align:right}
+.tcb-pay{font-family:'Clash Display',sans-serif;font-size:20px;font-weight:700;color:var(--blue)}
+.tcb-naira{font-size:11px;color:var(--text-soft)}
+.tcb-slots{font-size:11px;color:var(--text-soft);margin-top:2px}
+.tcb-arrow{opacity:0;transform:translateX(-4px);transition:all .2s;color:var(--blue);font-size:14px;margin-left:4px}
+.slots-bar{height:3px;background:var(--border);border-radius:2px;margin-top:8px;overflow:hidden}
+.slots-fill{height:100%;background:var(--blue);border-radius:2px}
+
+/* ADVERTISERS */
+.advertisers{padding:100px 6%;background:var(--off)}
+.adv-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.adv-photo{border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);position:relative}
+.adv-photo img{width:100%;height:420px;object-fit:cover;display:block;transition:transform .5s}
+.adv-photo:hover img{transform:scale(1.04)}
+.adv-photo-badge{position:absolute;bottom:20px;left:20px;right:20px;background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow)}
+.apb-icon{width:42px;height:42px;background:var(--blue);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.apb-icon i{color:white;font-size:18px}
+.apb-title{font-size:14px;font-weight:600;color:var(--text)}
+.apb-sub{font-size:12px;color:var(--text-soft)}
+.feature-list{margin-top:32px;display:flex;flex-direction:column;gap:16px}
+.feature-item{display:flex;gap:14px;align-items:flex-start;padding:16px;background:white;border-radius:14px;border:1px solid var(--border);transition:all .25s}
+.feature-item:hover{border-color:var(--blue);box-shadow:var(--shadow-sm);transform:translateX(4px)}
+.fi-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .25s}
+.feature-item:hover .fi-icon{transform:scale(1.1)}
+.fi-blue{background:var(--blue-light)}.fi-blue i{color:var(--blue)}
+.fi-gold{background:#FEF3C7}.fi-gold i{color:#92400E}
+.fi-green{background:#D1FAE5}.fi-green i{color:#065F46}
+.fi-text h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.fi-text p{font-size:13px;color:var(--text-soft);line-height:1.6}
+
+/* PAYMENTS */
+.payment{padding:100px 6%;background:white}
+.payment-inner{max-width:1240px;margin:0 auto}
+.pay-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.pay-card{background:var(--off);border-radius:20px;padding:32px 28px;border:1px solid var(--border);text-align:center;transition:all .3s}
+.pay-card:hover{background:white;border-color:var(--blue);box-shadow:var(--shadow);transform:translateY(-6px)}
+.pay-card-icon{width:64px;height:64px;border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;transition:transform .3s}
+.pay-card:hover .pay-card-icon{transform:scale(1.1) rotate(-5deg)}
+.pci-blue{background:var(--blue-light)}.pci-blue i{color:var(--blue);font-size:28px}
+.pci-gold{background:#FEF3C7}.pci-gold i{color:#92400E;font-size:28px}
+.pci-green{background:#D1FAE5}.pci-green i{color:#065F46;font-size:28px}
+.pay-card h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:10px}
+.pay-card p{font-size:14px;color:var(--text-soft);line-height:1.7;margin-bottom:18px}
+.pay-tag{display:inline-block;background:var(--blue-light);color:var(--blue);font-size:12px;font-weight:600;padding:5px 14px;border-radius:50px;border:1px solid rgba(26,86,219,.15)}
+
+/* CTA */
+.cta-section{padding:100px 6%;background:var(--blue);position:relative;overflow:hidden;text-align:center}
+.cta-section::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(ellipse,rgba(255,255,255,0.08) 0%,transparent 65%)}
+.cta-inner{position:relative;z-index:1}
+.cta-section h2{font-family:'Clash Display',sans-serif;font-size:clamp(32px,5vw,62px);font-weight:700;color:white;margin-bottom:20px;letter-spacing:-1.5px;line-height:1.1}
+.cta-section p{font-size:18px;color:rgba(255,255,255,0.75);margin-bottom:40px;font-weight:300;max-width:540px;margin-left:auto;margin-right:auto}
+.btn-white{background:white;color:var(--blue);padding:16px 40px;border-radius:50px;font-size:16px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .25s;font-family:'DM Sans',sans-serif;box-shadow:0 8px 32px rgba(0,0,0,.15)}
+.btn-white:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.22)}
+.btn-white i{font-size:14px;transition:transform .2s}
+.btn-white:hover i{transform:translateX(4px)}
+.cta-note{color:rgba(255,255,255,.4);font-size:13px;margin-top:20px}
+
+/* FOOTER */
+footer{background:var(--text);color:white;padding:64px 6% 32px}
+.footer-inner{max-width:1240px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand .logo{color:white}
+.footer-brand .logo .logo-text span{color:rgba(255,255,255,.5)}
+.footer-tagline{font-size:14px;color:rgba(255,255,255,.45);margin-top:14px;line-height:1.75;max-width:260px}
+.footer-social{display:flex;gap:10px;margin-top:20px}
+.social-btn{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .2s;color:rgba(255,255,255,.6)}
+.social-btn:hover{background:var(--blue);color:white;transform:translateY(-2px)}
+.social-btn i{font-size:15px}
+.footer-col h4{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.35);margin-bottom:18px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.footer-col a{color:rgba(255,255,255,.6);text-decoration:none;font-size:14px;transition:color .2s;display:flex;align-items:center;gap:8px}
+.footer-col a i{font-size:11px;color:rgba(255,255,255,.2);transition:color .2s}
+.footer-col a:hover{color:white}
+.footer-col a:hover i{color:var(--blue)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:rgba(255,255,255,.3)}
+.footer-badges{display:flex;gap:16px}
+.fbadge{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.3)}
+.fbadge i{font-size:11px}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .hero-inner,.tasks-inner,.adv-inner{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .how-steps{grid-template-columns:1fr 1fr}
+  .how-steps::before{display:none}
+  .stats-inner{grid-template-columns:1fr 1fr;gap:24px}
+  .people-grid{grid-template-columns:1fr 1fr}
+  .pay-cards{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .burger{display:flex}
+  .tasks-inner{text-align:center}
+  .tasks-content .section-tag{justify-content:center}
+  .tasks-content .section-tag::before{display:block}
+}
+@media(max-width:600px){
+  .people-grid,.how-steps{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:14px;text-align:center}
+  .hero{padding:120px 5% 60px}
+  .hero-actions{flex-direction:column;align-items:flex-start}
+  .stats-inner{grid-template-columns:1fr 1fr}
+}
+.mobile-nav{display:none;position:fixed;top:72px;left:0;right:0;background:white;border-bottom:1px solid var(--border);padding:16px 24px;z-index:99;flex-direction:column;gap:4px;box-shadow:var(--shadow)}
+.mobile-nav.open{display:flex}
+.mobile-nav a{padding:12px 16px;border-radius:10px;color:var(--text-mid);text-decoration:none;font-size:15px;font-weight:500;display:flex;align-items:center;gap:10px;transition:all .2s}
+.mobile-nav a i{font-size:14px;color:var(--blue);width:18px}
+.mobile-nav a:hover{background:var(--blue-pale);color:var(--blue)}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><i class="fa-solid fa-hexagon-nodes"></i></div>
+      <div class="logo-text">Earn<span>Hive</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#tasks">Tasks</a></li>
+      <li><a href="#advertise">Advertise</a></li>
+      <li><a href="#payments">Payments</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="login.html" class="btn-ghost">Log in</a>
+      <a href="register.html" class="btn-primary" style="padding:10px 24px;font-size:14px">Get Started Free <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <button class="burger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#how" onclick="toggleMenu()"><i class="fa-solid fa-circle-question"></i> How it works</a>
+  <a href="#tasks" onclick="toggleMenu()"><i class="fa-solid fa-list-check"></i> Tasks</a>
+  <a href="#advertise" onclick="toggleMenu()"><i class="fa-solid fa-bullhorn"></i> Advertise</a>
+  <a href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Log in</a>
+  <a href="register.html" style="background:var(--blue-pale);color:var(--blue)"><i class="fa-solid fa-user-plus"></i> Create free account</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-blob-1"></div>
+    <div class="hero-blob-2"></div>
+    <div class="hero-dots"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge fade-up"><span class="hero-badge-dot"></span> Now live in Nigeria &amp; 100+ countries</div>
+      <h1 class="fade-up" style="transition-delay:.1s">Complete Tasks.<span class="line-blue">Earn Real</span>Crypto.</h1>
+      <p class="hero-sub fade-up" style="transition-delay:.2s">EarnHive pays you in <strong>TON crypto</strong> for completing simple tasks — follow accounts, post captions, share content. Withdraw to your wallet instantly.</p>
+      <div class="hero-actions fade-up" style="transition-delay:.3s">
+        <a href="register.html" class="btn-primary btn-lg">Start Earning Free <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#how" class="btn-outline-lg"><i class="fa-solid fa-play" style="font-size:11px"></i> See how it works</a>
+      </div>
+      <div class="hero-trust fade-up" style="transition-delay:.4s">
+        <div class="trust-avatars">
+          <div class="trust-avatar"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&h=80&fit=crop&crop=face" alt=""/></div>
+          <div class="trust-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt=""/></div>
+          <div class="trust-avatar"><img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=80&h=80&fit=crop&crop=face" alt=""/></div>
+          <div class="trust-avatar"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&crop=face" alt=""/></div>
+        </div>
+        <p class="trust-text"><strong>2,400+ people</strong> already<br>earning on EarnHive today</p>
+      </div>
+    </div>
+
+    <!-- DASHBOARD PREVIEW -->
+    <div class="hero-visual fade-up" style="transition-delay:.25s">
+      <div class="float-notif fn-1"><span class="fn-dot" style="background:#22C55E"></span>Task approved &mdash; +0.5 TON</div>
+      <div class="dashboard-preview">
+        <div class="dp-topbar">
+          <div class="dp-logo"><i class="fa-solid fa-hexagon-nodes"></i> EarnHive</div>
+          <div class="dp-user">
+            <div class="dp-avatar"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=60&h=60&fit=crop&crop=face" alt=""/></div>
+            <div class="dp-uname">Amaka O.</div>
+          </div>
+        </div>
+        <div class="dp-body">
+          <div class="dp-balance-card">
+            <div class="dp-bal-label"><i class="fa-solid fa-wallet"></i> Total Balance</div>
+            <div class="dp-bal-amount">12.40 TON</div>
+            <div class="dp-bal-naira">&#8776; &#8358;47,120 Nigerian Naira</div>
+            <div class="dp-bal-row">
+              <div class="dp-bal-stat"><strong>+2.3 TON</strong>This week</div>
+              <div class="dp-bal-stat"><strong>18</strong>Tasks done</div>
+            </div>
+          </div>
+          <div class="dp-stats-row">
+            <div class="dp-stat"><div class="dp-stat-val">18</div><div class="dp-stat-label">Tasks</div></div>
+            <div class="dp-stat"><div class="dp-stat-val">5</div><div class="dp-stat-label">Referrals</div></div>
+            <div class="dp-stat"><div class="dp-stat-val">2</div><div class="dp-stat-label">Pending</div></div>
+          </div>
+          <div class="dp-section-title"><i class="fa-solid fa-fire" style="color:var(--blue)"></i> Available Tasks</div>
+          <div class="dp-task">
+            <div class="dp-task-icon ti-blue"><i class="fa-brands fa-instagram"></i></div>
+            <div class="dp-task-info">
+              <div class="dp-task-name">Follow Instagram Account</div>
+              <div class="dp-task-meta"><i class="fa-regular fa-clock"></i> 2 mins &bull; 130 slots left</div>
+            </div>
+            <div><div class="dp-task-pay">0.30 TON</div><div class="dp-task-naira">&#8776; &#8358;1,140</div></div>
+          </div>
+          <div class="dp-task">
+            <div class="dp-task-icon ti-gold"><i class="fa-brands fa-facebook"></i></div>
+            <div class="dp-task-info">
+              <div class="dp-task-name">Post Caption on Facebook</div>
+              <div class="dp-task-meta"><i class="fa-regular fa-clock"></i> 5 mins &bull; 95 slots left</div>
+            </div>
+            <div><div class="dp-task-pay">0.80 TON</div><div class="dp-task-naira">&#8776; &#8358;3,040</div></div>
+          </div>
+          <div class="dp-task">
+            <div class="dp-task-icon ti-green"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="dp-task-info">
+              <div class="dp-task-name">Join WhatsApp Group</div>
+              <div class="dp-task-meta"><i class="fa-regular fa-clock"></i> 1 min &bull; 200 slots left</div>
+            </div>
+            <div><div class="dp-task-pay">0.20 TON</div><div class="dp-task-naira">&#8776; &#8358;760</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="float-notif fn-2"><span class="fn-dot" style="background:var(--gold)"></span>Withdrawal sent &mdash; 5 TON</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<section class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item fade-up"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><div class="stat-number">2,400+</div><div class="stat-label">Active Earners</div></div>
+    <div class="stat-item fade-up" style="transition-delay:.1s"><div class="stat-icon"><i class="fa-solid fa-coins"></i></div><div class="stat-number">&#8358;12M+</div><div class="stat-label">Total Paid Out</div></div>
+    <div class="stat-item fade-up" style="transition-delay:.2s"><div class="stat-icon"><i class="fa-solid fa-earth-africa"></i></div><div class="stat-number">100+</div><div class="stat-label">Countries</div></div>
+    <div class="stat-item fade-up" style="transition-delay:.3s"><div class="stat-icon"><i class="fa-solid fa-list-check"></i></div><div class="stat-number">500+</div><div class="stat-label">Daily Tasks</div></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-center fade-up">
+    <div class="section-tag">How it works</div>
+    <h2 class="section-title">Start earning in 4 simple steps</h2>
+    <p class="section-sub">No experience needed. No hidden fees. Sign up and start earning from anywhere in the world.</p>
+  </div>
+  <div class="how-steps">
+    <div class="step fade-up"><div class="step-num"><i class="fa-solid fa-user-plus"></i></div><h3>Create Free Account</h3><p>Sign up in 60 seconds. No ID needed, no fees. Just your name and email and you are in.</p></div>
+    <div class="step fade-up" style="transition-delay:.1s"><div class="step-num"><i class="fa-solid fa-magnifying-glass"></i></div><h3>Browse Tasks</h3><p>See all tasks posted by advertisers. Pick any task that suits your time and skill.</p></div>
+    <div class="step fade-up" style="transition-delay:.2s"><div class="step-num"><i class="fa-solid fa-camera"></i></div><h3>Submit Your Proof</h3><p>Complete the task and submit your screenshot or username as proof. Simple and fast.</p></div>
+    <div class="step fade-up" style="transition-delay:.3s"><div class="step-num"><i class="fa-solid fa-wallet"></i></div><h3>Get Paid in TON</h3><p>Once approved, TON crypto is sent straight to your wallet. Withdraw anytime you want.</p></div>
+  </div>
+</section>
+
+<!-- REAL EARNERS -->
+<section class="people" id="people">
+  <div class="people-inner">
+    <div class="people-header fade-up">
+      <div class="section-tag">Real earners</div>
+      <h2 class="section-title">People earning every day</h2>
+      <p class="section-sub">Real people from Nigeria and across Africa using EarnHive to make extra income from their phones.</p>
+    </div>
+    <div class="people-grid">
+      <div class="person-card fade-up">
+        <div class="person-img-wrap"><img class="person-img" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&h=300&fit=crop&crop=top" alt="Amaka earner"/></div>
+        <div class="person-body">
+          <div class="person-name">Amaka Okonkwo</div>
+          <div class="person-location"><i class="fa-solid fa-location-dot"></i> Lagos, Nigeria</div>
+          <div class="person-earned">
+            <div><div class="pe-label">Earned this month</div><div class="pe-amount">18.4 TON</div><div class="pe-naira">&#8776; &#8358;69,920</div></div>
+            <i class="fa-solid fa-circle-check" style="color:#22C55E;font-size:22px"></i>
+          </div>
+          <p class="person-quote">"I complete tasks during my free time. Already withdrawn twice this month."</p>
+        </div>
+      </div>
+      <div class="person-card fade-up" style="transition-delay:.1s">
+        <div class="person-img-wrap"><img class="person-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=300&fit=crop&crop=top" alt="Chidi earner"/></div>
+        <div class="person-body">
+          <div class="person-name">Chidi Eze</div>
+          <div class="person-location"><i class="fa-solid fa-location-dot"></i> Abuja, Nigeria</div>
+          <div class="person-earned">
+            <div><div class="pe-label">Earned this month</div><div class="pe-amount">11.0 TON</div><div class="pe-naira">&#8776; &#8358;41,800</div></div>
+            <i class="fa-solid fa-circle-check" style="color:#22C55E;font-size:22px"></i>
+          </div>
+          <p class="person-quote">"Simple tasks, real money. I use it to pay for my data and save the rest."</p>
+        </div>
+      </div>
+      <div class="person-card fade-up" style="transition-delay:.2s">
+        <div class="person-img-wrap"><img class="person-img" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&h=300&fit=crop&crop=top" alt="Fatima earner"/></div>
+        <div class="person-body">
+          <div class="person-name">Fatima Sule</div>
+          <div class="person-location"><i class="fa-solid fa-location-dot"></i> Kano, Nigeria</div>
+          <div class="person-earned">
+            <div><div class="pe-label">Earned this month</div><div class="pe-amount">24.6 TON</div><div class="pe-naira">&#8776; &#8358;93,480</div></div>
+            <i class="fa-solid fa-circle-check" style="color:#22C55E;font-size:22px"></i>
+          </div>
+          <p class="person-quote">"I am a stay-at-home mom. EarnHive lets me earn while taking care of my kids."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TASKS SHOWCASE -->
+<section class="tasks-showcase" id="tasks">
+  <div class="tasks-inner">
+    <div class="tasks-content fade-up">
+      <div class="section-tag" style="justify-content:flex-start"><span style="font-family:Syne,sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--blue)">Task marketplace</span></div>
+      <h2 class="section-title">Real tasks.<br>Real money.</h2>
+      <p class="section-sub" style="margin-bottom:32px">New tasks posted every day by real businesses and promoters. Pick what suits you and get paid.</p>
+      <a href="register.html" class="btn-primary btn-lg">Browse All Tasks <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="tasks-visual fade-up" style="transition-delay:.2s">
+      <div class="task-card-big">
+        <div class="tcb-icon ic-blue"><i class="fa-brands fa-instagram"></i></div>
+        <div class="tcb-info"><div class="tcb-title">Follow Instagram Account</div><div class="tcb-meta"><i class="fa-regular fa-clock"></i> 2 mins &bull; Worldwide</div><div class="slots-bar"><div class="slots-fill" style="width:65%"></div></div></div>
+        <div class="tcb-right"><div class="tcb-pay">0.30 TON</div><div class="tcb-naira">&#8776; &#8358;1,140</div><div class="tcb-slots">130/200 slots</div></div>
+        <i class="fa-solid fa-arrow-right tcb-arrow"></i>
+      </div>
+      <div class="task-card-big">
+        <div class="tcb-icon ic-gold"><i class="fa-brands fa-facebook"></i></div>
+        <div class="tcb-info"><div class="tcb-title">Post Caption on Facebook</div><div class="tcb-meta"><i class="fa-regular fa-clock"></i> 5 mins &bull; Nigeria</div><div class="slots-bar"><div class="slots-fill" style="width:40%"></div></div></div>
+        <div class="tcb-right"><div class="tcb-pay">0.80 TON</div><div class="tcb-naira">&#8776; &#8358;3,040</div><div class="tcb-slots">40/100 slots</div></div>
+        <i class="fa-solid fa-arrow-right tcb-arrow"></i>
+      </div>
+      <div class="task-card-big">
+        <div class="tcb-icon ic-green"><i class="fa-brands fa-whatsapp"></i></div>
+        <div class="tcb-info"><div class="tcb-title">Join WhatsApp Group</div><div class="tcb-meta"><i class="fa-regular fa-clock"></i> 1 min &bull; Africa</div><div class="slots-bar"><div class="slots-fill" style="width:80%"></div></div></div>
+        <div class="tcb-right"><div class="tcb-pay">0.20 TON</div><div class="tcb-naira">&#8776; &#8358;760</div><div class="tcb-slots">160/200 slots</div></div>
+        <i class="fa-solid fa-arrow-right tcb-arrow"></i>
+      </div>
+      <div class="task-card-big">
+        <div class="tcb-icon ic-red"><i class="fa-brands fa-youtube"></i></div>
+        <div class="tcb-info"><div class="tcb-title">Subscribe YouTube Channel</div><div class="tcb-meta"><i class="fa-regular fa-clock"></i> 2 mins &bull; Worldwide</div><div class="slots-bar"><div class="slots-fill" style="width:25%"></div></div></div>
+        <div class="tcb-right"><div class="tcb-pay">0.40 TON</div><div class="tcb-naira">&#8776; &#8358;1,520</div><div class="tcb-slots">25/100 slots</div></div>
+        <i class="fa-solid fa-arrow-right tcb-arrow"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVERTISERS -->
+<section class="advertisers" id="advertise">
+  <div class="adv-inner">
+    <div class="adv-photo fade-up">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&h=500&fit=crop" alt="Business team advertising"/>
+      <div class="adv-photo-badge">
+        <div class="apb-icon"><i class="fa-solid fa-rocket"></i></div>
+        <div><div class="apb-title">Campaign live in minutes</div><div class="apb-sub">200 slots filled in under 24 hours</div></div>
+      </div>
+    </div>
+    <div class="adv-content fade-up" style="transition-delay:.2s">
+      <div class="section-tag" style="justify-content:flex-start"><span style="font-family:Syne,sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--blue)">For advertisers</span></div>
+      <h2 class="section-title">Promote your brand.<br>Pay only for results.</h2>
+      <p class="section-sub">Post a task, set your budget, upload your requirements. Our earners complete it. You only pay when the job is done and approved.</p>
+      <div class="feature-list">
+        <div class="feature-item"><div class="fi-icon fi-blue"><i class="fa-solid fa-sliders"></i></div><div class="fi-text"><h4>You control everything</h4><p>Set the task, the proof required, number of slots and how much you pay per completion.</p></div></div>
+        <div class="feature-item"><div class="fi-icon fi-gold"><i class="fa-solid fa-shield-check"></i></div><div class="fi-text"><h4>Admin reviews every submission</h4><p>Every proof screenshot is reviewed before payment. You only pay for genuine work.</p></div></div>
+        <div class="feature-item"><div class="fi-icon fi-green"><i class="fa-solid fa-gem"></i></div><div class="fi-text"><h4>Pay with TON crypto</h4><p>Deposit TON into your advertiser wallet. Fees are automatic and fully transparent.</p></div></div>
+      </div>
+      <div style="margin-top:28px"><a href="register.html?type=advertiser" class="btn-primary btn-lg">Post Your First Task <i class="fa-solid fa-arrow-right"></i></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENTS -->
+<section class="payment" id="payments">
+  <div class="payment-inner">
+    <div class="section-center fade-up">
+      <div class="section-tag">Payments</div>
+      <h2 class="section-title">Fast crypto payments</h2>
+      <p class="section-sub">All payments handled in TON — the fastest, cheapest blockchain built into Telegram. Ultra-low fees, near-instant transfers.</p>
+    </div>
+    <div class="pay-cards">
+      <div class="pay-card fade-up"><div class="pay-card-icon pci-blue"><i class="fa-solid fa-gem"></i></div><h3>TON Coin</h3><p>Telegram's own blockchain. Ultra-fast, fees under $0.01. The future of micro-payments is here.</p><span class="pay-tag">Earners &amp; Advertisers</span></div>
+      <div class="pay-card fade-up" style="transition-delay:.1s"><div class="pay-card-icon pci-gold"><i class="fa-solid fa-wallet"></i></div><h3>Crypto Wallet</h3><p>Connect any TON-compatible wallet. Withdraw your earnings directly to your own wallet address.</p><span class="pay-tag">Instant withdrawal</span></div>
+      <div class="pay-card fade-up" style="transition-delay:.2s"><div class="pay-card-icon pci-green"><i class="fa-solid fa-lock"></i></div><h3>Escrow Protected</h3><p>Advertiser funds are locked before tasks go live. Earners are always guaranteed their payment.</p><span class="pay-tag">100% secure</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="fade-up">Ready to join<br>the Hive?</h2>
+    <p class="fade-up" style="transition-delay:.1s">Join thousands of Nigerians already earning TON crypto every single day from their phones.</p>
+    <a href="register.html" class="btn-white fade-up" style="transition-delay:.2s">Create Free Account <i class="fa-solid fa-arrow-right"></i></a>
+    <p class="cta-note" style="margin-top:20px"><i class="fa-solid fa-shield-halved"></i> No credit card &nbsp;&bull;&nbsp; No hidden fees &nbsp;&bull;&nbsp; Free forever</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><div class="logo-icon"><i class="fa-solid fa-hexagon-nodes"></i></div><div class="logo-text">Earn<span>Hive</span></div></a>
+        <p class="footer-tagline">The task-earning platform powered by TON crypto. Built by MC TECH, founded by Chibuzor Michael.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/2348056230366" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-telegram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Platform</h4><ul><li><a href="register.html"><i class="fa-solid fa-chevron-right"></i>Start Earning</a></li><li><a href="register.html?type=advertiser"><i class="fa-solid fa-chevron-right"></i>Post a Task</a></li><li><a href="#how"><i class="fa-solid fa-chevron-right"></i>How it Works</a></li><li><a href="#payments"><i class="fa-solid fa-chevron-right"></i>Payments</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="#"><i class="fa-solid fa-chevron-right"></i>About MC TECH</a></li><li><a href="https://wa.me/2348056230366"><i class="fa-solid fa-chevron-right"></i>WhatsApp Support</a></li><li><a href="#"><i class="fa-solid fa-chevron-right"></i>Contact Us</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="#"><i class="fa-solid fa-chevron-right"></i>Terms of Service</a></li><li><a href="#"><i class="fa-solid fa-chevron-right"></i>Privacy Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 EarnHive by MC TECH &mdash; Chibuzor Michael</span>
+      <div class="footer-badges">
+        <span class="fbadge"><i class="fa-solid fa-lock"></i> SSL Secured</span>
+        <span class="fbadge"><i class="fa-solid fa-gem"></i> TON Powered</span>
+        <span class="fbadge"><i class="fa-solid fa-earth-africa"></i> Global</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20)});
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.12});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+function toggleMenu(){document.getElementById('mobile-nav').classList.toggle('open')}
+document.addEventListener('click',(e)=>{if(!e.target.closest('nav')&&!e.target.closest('#mobile-nav'))document.getElementById('mobile-nav').classList.remove('open')});
+</script>
+</body>
+</html>
