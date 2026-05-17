@@ -4,601 +4,392 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Log In — EarnHive</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23111'/%3E%3Cpolygon points='50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5' fill='%23F5B800' opacity='0.9'/%3E%3Ctext y='68' x='18' font-size='55' font-weight='900' fill='%23111' font-family='Arial'%3EEH%3C/text%3E%3C/svg%3E"/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --gold:#F5B800;--gold2:#E5A800;--gold-l:rgba(245,184,0,0.1);--gold-b:rgba(245,184,0,0.2);
-  --g:#16A34A;--g-l:rgba(22,163,74,0.1);--g-b:rgba(22,163,74,0.2);
-  --dark:#080808;--dark2:#0F0F0F;--dark3:#161616;--dark4:#1C1C1C;--dark5:#222;
-  --text:#F5F5F5;--t2:#A8A8A8;--t3:#555;
-  --border:rgba(255,255,255,0.07);--border2:rgba(245,184,0,0.2);
-  --red:#EF4444;--red-l:rgba(239,68,68,0.1);
-  --font-h:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;
-  --radius:12px;
-}
-*{scrollbar-width:thin;scrollbar-color:var(--gold) var(--dark3);}
-*::-webkit-scrollbar{width:4px;}*::-webkit-scrollbar-track{background:var(--dark3);}*::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px;}
-html,body{height:100%;font-family:var(--font-b);background:var(--dark);color:var(--text);overflow-x:hidden;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--blue:#1A56DB;--blue-dark:#1040B0;--blue-light:#EBF2FF;--blue-pale:#F0F6FF;--text:#080F1E;--text-mid:#334155;--text-soft:#64748B;--border:#DBEAFE;--off:#F7FAFF;--error:#EF4444;--success:#10B981;--shadow:0 8px 32px rgba(26,86,219,0.12)}
+body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);min-height:100vh;display:grid;grid-template-columns:1fr 1fr}
+
+/* LEFT */
+.left-panel{background:var(--blue);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:48px}
+.left-panel::before{content:'';position:absolute;top:-150px;right:-150px;width:500px;height:500px;background:rgba(255,255,255,0.05);border-radius:50%}
+.left-panel::after{content:'';position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;background:rgba(255,255,255,0.04);border-radius:50%}
+.left-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.06) 1px,transparent 1px);background-size:28px 28px}
+.lp-logo{font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;color:white;text-decoration:none;display:flex;align-items:center;gap:10px;position:relative;z-index:1}
+.lp-logo-icon{width:36px;height:36px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.lp-logo-icon i{color:white;font-size:16px}
+.lp-content{position:relative;z-index:1}
+.lp-content h2{font-family:'Clash Display',sans-serif;font-size:38px;font-weight:700;color:white;line-height:1.2;margin-bottom:16px;letter-spacing:-1px}
+.lp-content p{color:rgba(255,255,255,0.7);font-size:15px;line-height:1.75;margin-bottom:32px;font-weight:300}
+.perk{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.perk-icon{width:40px;height:40px;background:rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.perk:hover .perk-icon{background:rgba(255,255,255,0.22)}
+.perk-icon i{color:white;font-size:16px}
+.perk-text{color:rgba(255,255,255,0.85);font-size:14px}
+.earner-card{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);border-radius:16px;padding:20px;margin-top:28px}
+.ec-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.ec-avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.3)}
+.ec-avatar img{width:100%;height:100%;object-fit:cover}
+.ec-name{font-size:14px;font-weight:600;color:white}
+.ec-loc{font-size:12px;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:4px;margin-top:2px}
+.ec-loc i{font-size:10px}
+.ec-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ec-stat{background:rgba(255,255,255,0.08);border-radius:10px;padding:10px;text-align:center}
+.ec-stat-val{font-family:'Clash Display',sans-serif;font-size:18px;font-weight:700;color:white}
+.ec-stat-label{font-size:10px;color:rgba(255,255,255,.6);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+.lp-footer{color:rgba(255,255,255,0.35);font-size:13px;position:relative;z-index:1}
+
+/* RIGHT */
+.right-panel{display:flex;align-items:center;justify-content:center;padding:48px;overflow-y:auto}
+.form-box{width:100%;max-width:420px}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--text-soft);font-size:13px;text-decoration:none;margin-bottom:28px;transition:color .2s}
+.back-link:hover{color:var(--blue)}
+.back-link i{font-size:12px}
+.form-title{font-family:'Clash Display',sans-serif;font-size:30px;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-.5px}
+.form-sub{font-size:15px;color:var(--text-soft);margin-bottom:28px}
+.form-sub a{color:var(--blue);text-decoration:none;font-weight:500}
+.form-sub a:hover{opacity:.8}
+
+/* TABS */
+.auth-tabs{display:flex;background:var(--off);border-radius:12px;padding:4px;margin-bottom:24px;border:1px solid var(--border)}
+.tab-btn{flex:1;padding:10px;border:none;background:transparent;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--text-soft);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
+.tab-btn i{font-size:13px}
+.tab-btn.active{background:white;color:var(--blue);box-shadow:0 2px 8px rgba(26,86,219,0.12)}
+
+/* ALERT */
+.alert{padding:13px 16px;border-radius:12px;font-size:14px;margin-bottom:18px;display:none;align-items:center;gap:10px;line-height:1.5}
+.alert i{font-size:16px;flex-shrink:0}
+.alert.error{background:#FEF2F2;color:#DC2626;border:1px solid #FECACA;display:flex}
+.alert.success{background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0;display:flex}
+.alert.info{background:var(--blue-pale);color:var(--blue);border:1px solid rgba(26,86,219,.2);display:flex}
+
+/* FORM */
+.form-group{margin-bottom:18px}
+.form-label{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:500;color:var(--text);margin-bottom:7px}
+.label-link{font-size:12px;color:var(--blue);text-decoration:none;font-weight:400;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif}
+.label-link:hover{opacity:.75}
+.input-wrap{position:relative}
+.input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-soft);font-size:15px;pointer-events:none}
+.input-wrap:focus-within .input-icon{color:var(--blue)}
+.pw-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--text-soft);font-size:14px;cursor:pointer;background:none;border:none;padding:4px;transition:color .2s}
+.pw-toggle:hover{color:var(--blue)}
+input{width:100%;padding:13px 44px;border:1.5px solid var(--border);border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;color:var(--text);background:white;outline:none;transition:border-color .25s,box-shadow .25s}
+input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,86,219,0.08)}
+
+/* BUTTONS */
+.btn-full{width:100%;padding:14px;background:var(--blue);color:white;border:none;border-radius:12px;font-size:15px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px}
+.btn-full:hover{background:var(--blue-dark);transform:translateY(-1px);box-shadow:0 8px 24px rgba(26,86,219,0.3)}
+.btn-full:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-full i{font-size:14px;transition:transform .2s}
+.btn-full:hover:not(:disabled) i{transform:translateX(3px)}
+.btn-outline{width:100%;padding:13px;background:white;border:1.5px solid var(--border);border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .25s;font-weight:500}
+.btn-outline:hover{border-color:var(--blue);background:var(--blue-pale);transform:translateY(-1px)}
+.divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--text-soft);font-size:13px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* OTP */
+.otp-inputs{display:flex;gap:10px;margin-bottom:18px}
+.otp-inputs input{padding:16px 8px;text-align:center;font-size:22px;font-weight:700;font-family:'Clash Display',sans-serif;letter-spacing:2px;border-radius:12px;width:100%}
+.phone-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-mid);font-size:14px;font-weight:500;pointer-events:none}
+.phone-input{padding-left:56px!important}
+
+/* PANELS */
+.panel{animation:fadeIn .3s ease}
+.panel.hidden{display:none}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* SPINNER */
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(245,184,0,0.2)}50%{box-shadow:0 0 40px rgba(245,184,0,0.4)}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-@keyframes dropIn{from{opacity:0;transform:translateY(-10px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 
-.layout{display:flex;min-height:100vh;}
+/* VERIFY BADGE */
+.verify-icon{width:64px;height:64px;background:var(--blue-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.verify-icon i{color:var(--blue);font-size:28px}
 
-/* ── LEFT ── */
-.left{width:44%;background:linear-gradient(155deg,#0b1f0e 0%,#080808 55%,#0a0a0a 100%);border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;padding:48px;position:relative;overflow:hidden;}
-.left-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 20%,rgba(245,184,0,0.05),transparent 55%),radial-gradient(ellipse 60% 50% at 80% 85%,rgba(22,163,74,0.05),transparent 50%);}
-.left-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.013) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);}
-.zi{position:relative;z-index:1;}
-.logo{display:flex;align-items:center;gap:10px;margin-bottom:52px;text-decoration:none;}
-.logo-mark{width:40px;height:40px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;animation:glow 3s ease-in-out infinite;}
-.logo-text{font-family:var(--font-h);font-size:21px;font-weight:800;}
-.logo-text em{color:var(--gold);font-style:normal;}
-.ltag{display:inline-flex;align-items:center;gap:7px;background:var(--gold-l);border:1px solid var(--gold-b);color:var(--gold);padding:5px 13px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.4px;margin-bottom:18px;}
-.ldot{display:inline-block;width:7px;height:7px;background:#22C55E;border-radius:50%;animation:pulse 2s infinite;}
-.lh{font-family:var(--font-h);font-size:clamp(26px,2.8vw,40px);font-weight:800;line-height:1.1;letter-spacing:-1.4px;margin-bottom:12px;}
-.lh .gold{color:var(--gold);}
-.lp{font-size:13px;color:var(--t2);line-height:1.7;max-width:330px;margin-bottom:28px;}
-.act-list{display:flex;flex-direction:column;gap:9px;}
-.act{background:rgba(245,184,0,0.04);border:1px solid var(--gold-b);border-radius:13px;padding:12px 14px;display:flex;align-items:center;gap:11px;}
-.act-i{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
-.act-i.g{background:var(--g-l);border:1px solid var(--g-b);}
-.act-i.y{background:var(--gold-l);border:1px solid var(--gold-b);}
-.act-name{font-size:12px;font-weight:700;margin-bottom:1px;}
-.act-sub{font-size:11px;color:var(--t2);}
-.act-amt{margin-left:auto;font-family:var(--font-h);font-size:15px;font-weight:800;color:var(--gold);}
-.proof{background:rgba(245,184,0,0.05);border:1px solid var(--gold-b);border-radius:13px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-top:18px;}
-.pavs{display:flex;}
-.pav{width:30px;height:30px;border-radius:50%;border:2px solid var(--dark);display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:11px;font-weight:700;margin-left:-8px;flex-shrink:0;}
-.pav:first-child{margin-left:0;}
-.proof-t{font-size:12px;color:var(--t2);}
-.proof-t strong{color:var(--gold);}
-
-/* ── RIGHT ── */
-.right{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 44px;background:var(--dark2);overflow-y:auto;}
-.fw{width:100%;max-width:420px;animation:fadeUp .45s ease;}
-
-.wb{display:flex;align-items:center;gap:12px;background:var(--dark3);border:1px solid var(--gold-b);border-radius:13px;padding:13px 16px;margin-bottom:26px;}
-.wb-i{width:40px;height:40px;border-radius:11px;background:var(--gold-l);border:1px solid var(--gold-b);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
-.wb-t{font-size:13px;font-weight:700;color:var(--gold);margin-bottom:2px;}
-.wb-s{font-size:12px;color:var(--t2);}
-
-h2{font-family:var(--font-h);font-size:27px;font-weight:800;letter-spacing:-.7px;margin-bottom:5px;}
-h2 .gold{color:var(--gold);}
-.sub{font-size:13px;color:var(--t2);margin-bottom:22px;}
-
-/* ── TAB SWITCH ── */
-.tabs{display:flex;background:var(--dark3);border:1px solid var(--border);border-radius:11px;padding:4px;gap:4px;margin-bottom:22px;}
-.tab{flex:1;padding:9px;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-b);color:var(--t2);background:transparent;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;}
-.tab.on{background:var(--gold);color:var(--dark);}
-
-/* ── FIELDS ── */
-.fg{margin-bottom:15px;}
-.fg label{display:block;font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.6px;text-transform:uppercase;margin-bottom:7px;}
-.iw{position:relative;}
-.iw input{width:100%;padding:12px 16px 12px 42px;background:var(--dark3);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-size:14px;font-family:var(--font-b);outline:none;transition:all .22s;}
-.iw input:focus{background:var(--dark4);border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-l);}
-.iw input::placeholder{color:var(--t3);}
-.ii{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:13px;pointer-events:none;transition:color .2s;}
-.iw input:focus~.ii{color:var(--gold);}
-.iev{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--t3);font-size:13px;cursor:pointer;padding:4px;transition:color .2s;}
-.iev:hover{color:var(--gold);}
-
-/* ── PHONE FIELD WITH COUNTRY PICKER ── */
-.phone-row{display:flex;gap:0;position:relative;}
-.dial-btn{flex-shrink:0;display:flex;align-items:center;gap:6px;padding:0 12px;background:var(--dark3);border:1.5px solid var(--border);border-right:none;border-radius:10px 0 0 10px;cursor:pointer;font-size:13px;font-family:var(--font-b);color:var(--text);transition:all .22s;min-width:90px;white-space:nowrap;user-select:none;}
-.dial-btn:hover,.dial-btn.open{border-color:var(--gold);background:var(--dark4);}
-.dial-btn .flag{font-size:16px;}
-.dial-btn .code{font-weight:700;font-size:13px;}
-.dial-btn .chevron{margin-left:auto;font-size:9px;color:var(--t3);transition:transform .2s;}
-.dial-btn.open .chevron{transform:rotate(180deg);}
-.phone-input{flex:1;padding:12px 14px;background:var(--dark3);border:1.5px solid var(--border);border-left:1px solid var(--t3);border-radius:0 10px 10px 0;color:var(--text);font-size:14px;font-family:var(--font-b);outline:none;transition:all .22s;}
-.phone-input:focus{background:var(--dark4);border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-l);}
-.phone-input::placeholder{color:var(--t3);}
-
-/* ── COUNTRY DROPDOWN ── */
-.country-drop{position:absolute;top:calc(100% + 6px);left:0;width:320px;background:var(--dark3);border:1px solid var(--gold-b);border-radius:13px;z-index:999;overflow:hidden;display:none;animation:dropIn .2s ease;box-shadow:0 16px 48px rgba(0,0,0,0.6);}
-.country-drop.open{display:block;}
-.cd-search{padding:10px 12px;border-bottom:1px solid var(--border);}
-.cd-search input{width:100%;padding:8px 12px 8px 34px;background:var(--dark4);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-family:var(--font-b);outline:none;}
-.cd-search input:focus{border-color:var(--gold);}
-.cd-search input::placeholder{color:var(--t3);}
-.cd-search-ico{position:absolute;left:23px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:12px;pointer-events:none;}
-.cd-search{position:relative;}
-.cd-list{max-height:230px;overflow-y:auto;padding:6px;}
-.cd-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;cursor:pointer;transition:background .15s;font-size:13px;}
-.cd-item:hover{background:var(--gold-l);}
-.cd-item.active{background:var(--gold-l);border:1px solid var(--gold-b);}
-.cd-item .ci-flag{font-size:17px;flex-shrink:0;}
-.cd-item .ci-name{flex:1;font-weight:600;color:var(--text);}
-.cd-item .ci-dial{font-size:12px;color:var(--t2);font-weight:700;}
-.cd-item .ci-cur{font-size:10px;color:var(--t3);margin-left:auto;}
-.cd-empty{padding:20px;text-align:center;color:var(--t3);font-size:13px;}
-
-/* OTP boxes */
-.otp-wrap{display:flex;gap:8px;justify-content:center;margin:14px 0;}
-.otp-inp{width:46px;height:52px;border-radius:10px;border:1.5px solid var(--border);background:var(--dark4);color:var(--text);font-size:20px;font-weight:700;font-family:var(--font-h);text-align:center;outline:none;transition:all .2s;}
-.otp-inp:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-l);}
-.otp-inp.filled{border-color:var(--g);background:var(--g-l);}
-.otp-info{background:var(--dark3);border:1px solid var(--gold-b);border-radius:11px;padding:14px 16px;margin-bottom:14px;}
-.otp-info-t{font-size:13px;font-weight:700;color:var(--gold);margin-bottom:3px;}
-.otp-info-s{font-size:12px;color:var(--t2);}
-.resend-row{text-align:center;font-size:12px;color:var(--t2);margin-bottom:14px;}
-.resend-row button{background:none;border:none;color:var(--gold);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-b);}
-.resend-row button:disabled{color:var(--t3);cursor:default;}
-
-.row{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
-.remember{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;}
-.rem-box{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border);background:var(--dark3);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
-.rem-box.on{background:var(--gold);border-color:var(--gold);}
-.remember span{font-size:13px;color:var(--t2);}
-.forgot{font-size:13px;color:var(--gold);font-weight:700;cursor:pointer;background:none;border:none;font-family:var(--font-b);transition:opacity .2s;}
-.forgot:hover{opacity:.75;}
-
-.btn-primary{width:100%;padding:13px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--dark);border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 22px rgba(245,184,0,0.25);transition:all .22s;margin-bottom:18px;}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 30px rgba(245,184,0,0.38);}
-.btn-primary:disabled{opacity:.6;pointer-events:none;}
-.btn-secondary{width:100%;padding:12px;background:transparent;border:1.5px solid var(--border);border-radius:10px;color:var(--t2);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s;margin-bottom:10px;}
-.btn-secondary:hover{border-color:var(--gold-b);color:var(--gold);}
-.spinner{width:15px;height:15px;border:2px solid rgba(0,0,0,.3);border-top-color:var(--dark);border-radius:50%;animation:spin .7s linear infinite;}
-
-.divider{display:flex;align-items:center;gap:12px;margin:16px 0;}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
-.divider span{font-size:12px;color:var(--t3);}
-.soc-btns{display:flex;gap:9px;margin-bottom:24px;}
-.soc-btn{flex:1;padding:10px;border:1.5px solid var(--border);border-radius:10px;background:var(--dark3);color:var(--t2);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;}
-.soc-btn:hover{border-color:var(--gold-b);background:var(--dark4);color:var(--gold);}
-.footer-link{text-align:center;font-size:13px;color:var(--t2);}
-.footer-link a{color:var(--gold);font-weight:700;text-decoration:none;}
-
-.err-banner{background:var(--red-l);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:11px 15px;font-size:13px;color:var(--red);margin-bottom:14px;display:none;align-items:center;gap:8px;}
-.err-banner.show{display:flex;}
-
-/* Forgot Modal */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(10px);}
-.overlay.open{display:flex;}
-.modal{background:var(--dark3);border:1px solid var(--border);border-radius:18px;width:100%;max-width:380px;animation:dropIn .25s ease;overflow:hidden;}
-.mh{padding:20px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.mh h3{font-family:var(--font-h);font-size:17px;font-weight:800;}
-.mc{width:28px;height:28px;border-radius:7px;background:var(--dark4);border:none;cursor:pointer;color:var(--t2);font-size:13px;display:flex;align-items:center;justify-content:center;transition:color .2s;}
-.mc:hover{color:var(--gold);}
-.mb{padding:20px 22px;}
-.mf{padding:0 22px 20px;display:flex;gap:9px;}
-.btn-mcancel{flex:1;padding:10px;background:var(--dark4);border:1px solid var(--border);border-radius:9px;color:var(--t2);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-b);transition:all .2s;}
-.btn-mcancel:hover{border-color:var(--border2);color:var(--text);}
-.btn-msend{flex:2;padding:10px;background:var(--gold);border:none;border-radius:9px;color:var(--dark);font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;}
-.btn-msend:hover{background:var(--gold2);}
-.btn-msend:disabled{opacity:.6;pointer-events:none;}
-
-/* Toast */
-.toast{position:fixed;bottom:22px;right:22px;z-index:999;background:var(--dark3);border:1px solid var(--border);border-radius:13px;padding:13px 16px;display:flex;align-items:center;gap:11px;box-shadow:0 8px 30px rgba(0,0,0,.5);transform:translateY(70px);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);max-width:290px;}
-.toast.show{transform:translateY(0);opacity:1;}
-.toast-i{width:32px;height:32px;border-radius:8px;background:var(--gold-l);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.toast-m{font-size:13px;font-weight:600;}
-#recaptcha-container{position:fixed;bottom:0;right:0;z-index:9999;}
-
-@media(max-width:860px){.left{display:none;}.right{padding:28px 18px;}}
-@media(max-width:440px){.right{padding:20px 14px;}.otp-inp{width:40px;height:46px;font-size:18px;}}
+@media(max-width:768px){body{grid-template-columns:1fr}.left-panel{display:none}.right-panel{padding:32px 24px;align-items:flex-start;min-height:100vh}}
 </style>
 </head>
 <body>
-<div class="layout">
 
-<!-- LEFT -->
-<div class="left">
-  <div class="left-bg"></div><div class="left-grid"></div>
-  <div class="zi">
-    <a class="logo" href="index.html"><div class="logo-mark">🐝</div><div class="logo-text">Earn<em>Hive</em></div></a>
-    <div class="ltag"><span class="ldot"></span> 50,000+ earning right now</div>
-    <h1 class="lh">Welcome back.<br>Your money<br>is <span class="gold">waiting.</span></h1>
-    <p class="lp">Log back into EarnHive and continue earning from tasks, mini jobs and Ludo & Whot games — from anywhere in the world.</p>
-    <div class="act-list">
-      <div class="act"><div class="act-i g">✅</div><div><div class="act-name">Task Approved</div><div class="act-sub">App review · Just now</div></div><div class="act-amt">+$1.20</div></div>
-      <div class="act"><div class="act-i y">🎲</div><div><div class="act-name">Ludo Win 🏆</div><div class="act-sub">4-player · 2 min ago</div></div><div class="act-amt">+$8.00</div></div>
-      <div class="act"><div class="act-i g">💎</div><div><div class="act-name">TON Withdrawal</div><div class="act-sub">Sent to wallet · 5 min ago</div></div><div class="act-amt">5 TON</div></div>
-    </div>
-  </div>
-  <div class="zi">
-    <div class="proof">
-      <div class="pavs">
-        <div class="pav" style="background:#F5B800;color:#111;">R</div>
-        <div class="pav" style="background:#16A34A;color:#fff;">E</div>
-        <div class="pav" style="background:#4F6EF7;color:#fff;">M</div>
-        <div class="pav" style="background:#EC4899;color:#fff;">A</div>
+<div class="left-panel">
+  <div class="left-dots"></div>
+  <a href="index.html" class="lp-logo">
+    <div class="lp-logo-icon"><i class="fa-solid fa-hexagon-nodes"></i></div>
+    EarnHive
+  </a>
+  <div class="lp-content">
+    <h2>Welcome back<br>to the Hive.</h2>
+    <p>Complete tasks. Earn TON crypto. Withdraw anytime. Thousands of Nigerians are earning right now.</p>
+    <div class="perk"><div class="perk-icon"><i class="fa-solid fa-gem"></i></div><span class="perk-text">Earn TON crypto — withdraw to your wallet</span></div>
+    <div class="perk"><div class="perk-icon"><i class="fa-solid fa-bolt"></i></div><span class="perk-text">Tasks take just 1 to 10 minutes each</span></div>
+    <div class="perk"><div class="perk-icon"><i class="fa-solid fa-earth-africa"></i></div><span class="perk-text">Available in Nigeria and 100+ countries</span></div>
+    <div class="perk"><div class="perk-icon"><i class="fa-solid fa-shield-halved"></i></div><span class="perk-text">100% free — no hidden fees ever</span></div>
+    <div class="earner-card">
+      <div class="ec-top">
+        <div class="ec-avatar"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&crop=face" alt=""/></div>
+        <div><div class="ec-name">Fatima Sule</div><div class="ec-loc"><i class="fa-solid fa-location-dot"></i> Kano, Nigeria</div></div>
       </div>
-      <div class="proof-t"><strong>50,000+</strong> people earning on EarnHive today</div>
+      <div class="ec-stats">
+        <div class="ec-stat"><div class="ec-stat-val">24.6</div><div class="ec-stat-label">TON Earned</div></div>
+        <div class="ec-stat"><div class="ec-stat-val">47</div><div class="ec-stat-label">Tasks Done</div></div>
+        <div class="ec-stat"><div class="ec-stat-val">12</div><div class="ec-stat-label">Referrals</div></div>
+      </div>
     </div>
   </div>
+  <div class="lp-footer">&copy; 2025 EarnHive by MC TECH &mdash; Chibuzor Michael</div>
 </div>
 
-<!-- RIGHT -->
-<div class="right">
-<div class="fw">
-  <div class="wb"><div class="wb-i">🐝</div><div><div class="wb-t">Welcome back to EarnHive!</div><div class="wb-s">Log in to continue earning</div></div></div>
-  <h2>Log <span class="gold">In</span></h2>
-  <p class="sub">Choose how you want to log in</p>
+<div class="right-panel">
+  <div class="form-box">
+    <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to home</a>
+    <h1 class="form-title">Welcome back.</h1>
+    <p class="form-sub">No account? <a href="register.html">Create one free &rarr;</a></p>
 
-  <!-- TAB SWITCH -->
-  <div class="tabs">
-    <button class="tab on" id="tab-email" onclick="switchTab('email')"><i class="fa-solid fa-envelope"></i> Email</button>
-    <button class="tab" id="tab-phone" onclick="switchTab('phone')"><i class="fa-solid fa-phone"></i> Phone OTP</button>
-  </div>
+    <div id="alert-box" class="alert"></div>
 
-  <div class="err-banner" id="err-banner"><i class="fa-solid fa-circle-xmark"></i><span id="err-text"></span></div>
+    <!-- LOGIN PANEL -->
+    <div id="panel-login" class="panel">
+      <div class="auth-tabs">
+        <button class="tab-btn active" onclick="switchTab('email')"><i class="fa-regular fa-envelope"></i> Email</button>
+        <button class="tab-btn" onclick="switchTab('phone')"><i class="fa-solid fa-phone"></i> Phone</button>
+      </div>
 
-  <!-- EMAIL LOGIN -->
-  <div id="email-form">
-    <div class="fg">
-      <label>Email Address</label>
-      <div class="iw"><input type="email" id="email" placeholder="you@example.com" autocomplete="email"/><i class="ii fa-solid fa-envelope"></i></div>
-    </div>
-    <div class="fg">
-      <label>Password</label>
-      <div class="iw">
-        <input type="password" id="pwd" placeholder="Your password" autocomplete="current-password"/>
-        <i class="ii fa-solid fa-lock"></i>
-        <button class="iev" onclick="togglePwd()" type="button"><i class="fa-regular fa-eye" id="eye-icon"></i></button>
+      <!-- Email Login -->
+      <div id="tab-email">
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope input-icon"></i>
+            <input type="email" id="login-email" placeholder="you@example.com" onkeydown="if(event.key==='Enter')doLogin()"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-label">
+            <span>Password</span>
+            <button class="label-link" onclick="showPanel('panel-reset')">Forgot password?</button>
+          </div>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="login-password" placeholder="Your password" onkeydown="if(event.key==='Enter')doLogin()"/>
+            <button class="pw-toggle" onclick="togglePw('login-password','eye-login')"><i id="eye-login" class="fa-regular fa-eye"></i></button>
+          </div>
+        </div>
+        <button class="btn-full" id="btn-login" onclick="doLogin()"><i class="fa-solid fa-right-to-bracket"></i> Log In</button>
+        <div class="divider">or</div>
+        <button class="btn-outline" onclick="doGoogle()">
+          <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/></svg>
+          Continue with Google
+        </button>
+      </div>
+
+      <!-- Phone Login -->
+      <div id="tab-phone" class="hidden">
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <div class="input-wrap">
+            <span class="phone-prefix">+234</span>
+            <input type="tel" id="phone-number" class="phone-input" placeholder="8012345678"/>
+          </div>
+        </div>
+        <button class="btn-full" id="btn-send-otp" onclick="doSendOTP()"><i class="fa-solid fa-paper-plane"></i> Send OTP Code</button>
+        <div id="otp-section" class="hidden" style="margin-top:18px">
+          <div class="form-group">
+            <label class="form-label">Enter OTP Code</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-key input-icon"></i>
+              <input type="text" id="otp-code" placeholder="Enter 6-digit code" maxlength="6" style="letter-spacing:4px;font-size:18px;font-weight:700;text-align:center"/>
+            </div>
+          </div>
+          <button class="btn-full" id="btn-verify-otp" onclick="doVerifyOTP()"><i class="fa-solid fa-check"></i> Verify &amp; Log In</button>
+          <button onclick="doSendOTP()" style="width:100%;padding:10px;background:none;border:none;color:var(--blue);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;margin-top:8px">Resend OTP code</button>
+        </div>
+        <div id="recaptcha-container"></div>
       </div>
     </div>
-    <div class="row">
-      <div class="remember" onclick="toggleRem()"><div class="rem-box" id="rem-box"></div><span>Remember me 30 days</span></div>
-      <button class="forgot" onclick="openForgot()">Forgot password?</button>
-    </div>
-    <button class="btn-primary" id="email-btn" onclick="emailLogin()">
-      <span id="email-btn-txt"><i class="fa-solid fa-right-to-bracket"></i> Log In</span>
-    </button>
-  </div>
 
-  <!-- PHONE LOGIN -->
-  <div id="phone-form" style="display:none;">
-    <div id="phone-step1">
-      <div class="fg">
-        <label>Phone Number</label>
-        <div class="phone-row" id="phone-row">
-          <div class="dial-btn" id="dial-btn" onclick="toggleDrop()">
-            <span class="flag" id="sel-flag">🇳🇬</span>
-            <span class="code" id="sel-code">+234</span>
-            <i class="fa-solid fa-chevron-down chevron" id="chevron"></i>
-          </div>
-          <div class="country-drop" id="country-drop">
-            <div class="cd-search">
-              <i class="cd-search-ico fa-solid fa-magnifying-glass"></i>
-              <input type="text" id="cd-search-input" placeholder="Search country or code..." oninput="filterCountries(this.value)" onclick="event.stopPropagation()"/>
-            </div>
-            <div class="cd-list" id="cd-list"></div>
-          </div>
-          <input class="phone-input" type="tel" id="phone-num" placeholder="08012345678"/>
+    <!-- FORGOT PASSWORD PANEL -->
+    <div id="panel-reset" class="panel hidden">
+      <div style="text-align:center;margin-bottom:24px">
+        <div class="verify-icon"><i class="fa-solid fa-lock-open"></i></div>
+        <div style="font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;margin-bottom:6px">Reset Password</div>
+        <div style="font-size:14px;color:var(--text-soft);line-height:1.6">Enter your email and we will send you a link to reset your password.</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <div class="input-wrap">
+          <i class="fa-regular fa-envelope input-icon"></i>
+          <input type="email" id="reset-email" placeholder="you@example.com"/>
         </div>
       </div>
-      <div id="recaptcha-container"></div>
-      <button class="btn-primary" id="send-btn" onclick="sendPhoneOTP()">
-        <span id="send-btn-txt"><i class="fa-solid fa-paper-plane"></i> Send OTP Code</span>
+      <button class="btn-full" id="btn-reset" onclick="doReset()"><i class="fa-solid fa-paper-plane"></i> Send Reset Link</button>
+      <button onclick="showPanel('panel-login')" style="width:100%;padding:12px;background:none;border:none;color:var(--text-soft);font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px">
+        <i class="fa-solid fa-arrow-left" style="font-size:12px"></i> Back to login
       </button>
     </div>
 
-    <div id="phone-step2" style="display:none;">
-      <div class="otp-info">
-        <div class="otp-info-t">📱 Enter the 6-digit OTP</div>
-        <div class="otp-info-s">Sent to <span id="otp-phone-show" style="color:var(--gold);font-weight:700;"></span></div>
+    <!-- VERIFY EMAIL PANEL -->
+    <div id="panel-verify" class="panel hidden">
+      <div style="text-align:center;margin-bottom:24px">
+        <div class="verify-icon"><i class="fa-regular fa-envelope"></i></div>
+        <div style="font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;margin-bottom:6px">Verify Your Email</div>
+        <div style="font-size:14px;color:var(--text-soft);line-height:1.6">We sent a verification link to your email. Please check your inbox and click the link to continue.</div>
       </div>
-      <div class="otp-wrap">
-        <input class="otp-inp" type="text" maxlength="1" id="o1" oninput="otpMove(this,1)" onkeydown="otpBack(event,1)"/>
-        <input class="otp-inp" type="text" maxlength="1" id="o2" oninput="otpMove(this,2)" onkeydown="otpBack(event,2)"/>
-        <input class="otp-inp" type="text" maxlength="1" id="o3" oninput="otpMove(this,3)" onkeydown="otpBack(event,3)"/>
-        <input class="otp-inp" type="text" maxlength="1" id="o4" oninput="otpMove(this,4)" onkeydown="otpBack(event,4)"/>
-        <input class="otp-inp" type="text" maxlength="1" id="o5" oninput="otpMove(this,5)" onkeydown="otpBack(event,5)"/>
-        <input class="otp-inp" type="text" maxlength="1" id="o6" oninput="otpMove(this,6)" onkeydown="otpBack(event,6)"/>
-      </div>
-      <div class="resend-row">
-        <span id="resend-timer">Resend in <strong id="countdown">60</strong>s</span>
-        <button id="resend-btn" onclick="resendOTP()" disabled style="display:none;">Resend OTP</button>
-      </div>
-      <button class="btn-primary" id="verify-btn" onclick="verifyPhoneOTP()">
-        <span id="verify-btn-txt"><i class="fa-solid fa-shield-halved"></i> Verify & Log In</span>
+      <div id="verify-email-display" style="background:var(--blue-pale);border:1px solid rgba(26,86,219,.2);border-radius:10px;padding:12px 16px;text-align:center;font-size:14px;color:var(--blue);font-weight:500;margin-bottom:20px"></div>
+      <button class="btn-full" onclick="doResend()"><i class="fa-solid fa-rotate-right"></i> Resend Verification Email</button>
+      <button onclick="showPanel('panel-login')" style="width:100%;padding:12px;background:none;border:none;color:var(--text-soft);font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px">
+        <i class="fa-solid fa-arrow-left" style="font-size:12px"></i> Back to login
       </button>
-      <button class="btn-secondary" onclick="resetPhoneStep()"><i class="fa-solid fa-arrow-left"></i> Change Number</button>
     </div>
-  </div>
 
-  <!-- SOCIAL -->
-  <div class="divider"><span>or continue with</span></div>
-  <div class="soc-btns">
-    <button class="soc-btn" onclick="googleLogin()">
-      <svg width="15" height="15" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-      Google
-    </button>
-    <button class="soc-btn" onclick="toast('Telegram login coming soon 🚀','info')">
-      <i class="fa-brands fa-telegram" style="color:#2AABEE;"></i> Telegram
-    </button>
-  </div>
-  <div class="footer-link">Don't have an account? <a href="register.html">Sign up free →</a></div>
-</div>
-</div>
-</div>
-
-<!-- FORGOT MODAL -->
-<div class="overlay" id="forgot-ov">
-  <div class="modal">
-    <div class="mh"><h3>🔑 Reset Password</h3><button class="mc" onclick="closeForgot()"><i class="fa-solid fa-xmark"></i></button></div>
-    <div class="mb" id="forgot-body">
-      <p style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6;">Enter your registered email — we'll send a reset link instantly.</p>
-      <div class="fg" style="margin-bottom:0;">
-        <label>Email Address</label>
-        <div class="iw"><input type="email" id="reset-email" placeholder="you@example.com"/><i class="ii fa-solid fa-envelope"></i></div>
-      </div>
-    </div>
-    <div class="mf" id="forgot-foot">
-      <button class="btn-mcancel" onclick="closeForgot()">Cancel</button>
-      <button class="btn-msend" id="msend-btn" onclick="sendReset()"><i class="fa-solid fa-paper-plane"></i> Send Link</button>
-    </div>
   </div>
 </div>
 
-<div class="toast" id="toast"><div class="toast-i"><i id="t-ico" class="fa-solid fa-circle-check"></i></div><div class="toast-m" id="t-msg"></div></div>
-
-<!-- FIREBASE -->
 <script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
 import {
-  getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,
-  sendPasswordResetEmail, RecaptchaVerifier, signInWithPhoneNumber,
-  setPersistence, browserLocalPersistence, browserSessionPersistence
-} from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+  loginWithEmail, loginWithGoogle, resetPassword,
+  resendVerification, watchAuth, setupRecaptcha,
+  sendPhoneOTP, verifyPhoneOTP, authError
+} from './firebase-auth.js';
 
-const app = initializeApp({
-  apiKey:"AIzaSyAPAJCqvt40OpIuQDNShW4mdZQgpcS8lW8",
-  authDomain:"earnhive-8faa0.firebaseapp.com",
-  projectId:"earnhive-8faa0",
-  storageBucket:"earnhive-8faa0.firebasestorage.app",
-  messagingSenderId:"807669517293",
-  appId:"1:807669517293:web:37b20ab46d5c323e6a75e4"
+// Redirect if already logged in
+watchAuth(user => {
+  if (user && user.emailVerified) window.location.href = 'app.html';
 });
-const auth = getAuth(app);
-const gProvider = new GoogleAuthProvider();
-window._auth=auth; window._gProvider=gProvider;
-window._emailLogin=signInWithEmailAndPassword;
-window._googlePopup=signInWithPopup;
-window._resetPwd=sendPasswordResetEmail;
-window._RecaptchaVerifier=RecaptchaVerifier;
-window._phoneSignIn=signInWithPhoneNumber;
-window._setPersist=setPersistence;
-window._localP=browserLocalPersistence;
-window._sessionP=browserSessionPersistence;
 
-// Auto-redirect if still logged in
-const cached = localStorage.getItem('eh_user');
-const lastActive = localStorage.getItem('eh_last_active');
-if(cached && lastActive && (Date.now()-parseInt(lastActive)) < 30*24*60*60*1000){
-  const ob = localStorage.getItem('eh_onboarding_done');
-  window.location.href = (ob==='true') ? 'app.html' : 'onboarding.html';
-}
+// Setup recaptcha for phone
+setupRecaptcha('recaptcha-container');
 
-// Load countries and detect IP
-const { COUNTRIES, detectCountryFromIP } = await import('./countries.js');
-window.COUNTRIES = COUNTRIES;
+// ── Email Login ──────────────────────────────
+window.doLogin = async () => {
+  const btn = document.getElementById('btn-login');
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-password').value;
+  if (!email || !pass) { showAlert('Please enter your email and password.', 'error'); return; }
+  setLoading(btn, true);
+  try {
+    const user = await loginWithEmail(email, pass);
+    if (!user.emailVerified) {
+      document.getElementById('verify-email-display').textContent = user.email;
+      showPanel('panel-verify');
+      showAlert('Please verify your email first. Check your inbox.', 'info');
+      return;
+    }
+    window.location.href = 'app.html';
+  } catch (e) { showAlert(authError(e.code), 'error'); }
+  setLoading(btn, false, '<i class="fa-solid fa-right-to-bracket"></i> Log In');
+};
 
-detectCountryFromIP().then(c=>{
-  if(c){ window.selectedCountry = c; updateDialBtn(c); }
-});
-renderCountryList(COUNTRIES);
-</script>
-
-<script>
-let remOn = false;
-let phoneConfirm = null;
-let countdownInt = null;
-window.selectedCountry = { iso:'NG', flag:'🇳🇬', dial:'+234', name:'Nigeria' };
-
-// ── TAB SWITCH ──
-function switchTab(t){
-  document.getElementById('tab-email').classList.toggle('on', t==='email');
-  document.getElementById('tab-phone').classList.toggle('on', t==='phone');
-  document.getElementById('email-form').style.display = t==='email' ? 'block' : 'none';
-  document.getElementById('phone-form').style.display = t==='phone' ? 'block' : 'none';
-  hideErr();
-}
-
-// ── COUNTRY DROPDOWN ──
-function updateDialBtn(c){
-  document.getElementById('sel-flag').textContent = c.flag;
-  document.getElementById('sel-code').textContent = c.dial;
-}
-function toggleDrop(){
-  const drop = document.getElementById('country-drop');
-  const btn = document.getElementById('dial-btn');
-  const isOpen = drop.classList.contains('open');
-  drop.classList.toggle('open', !isOpen);
-  btn.classList.toggle('open', !isOpen);
-  if(!isOpen){ setTimeout(()=>document.getElementById('cd-search-input').focus(), 80); }
-}
-function closeDrop(){ document.getElementById('country-drop').classList.remove('open'); document.getElementById('dial-btn').classList.remove('open'); }
-document.addEventListener('click', e=>{ if(!document.getElementById('phone-row').contains(e.target)) closeDrop(); });
-
-function renderCountryList(list){
-  const ul = document.getElementById('cd-list');
-  if(!list.length){ ul.innerHTML = '<div class="cd-empty">No countries found</div>'; return; }
-  ul.innerHTML = list.map(c=>`
-    <div class="cd-item${window.selectedCountry?.iso===c.iso?' active':''}" onclick="selectCountry('${c.iso}')">
-      <span class="ci-flag">${c.flag}</span>
-      <span class="ci-name">${c.name}</span>
-      <span class="ci-dial">${c.dial}</span>
-      <span class="ci-cur">${c.currency}</span>
-    </div>`).join('');
-}
-function filterCountries(q){
-  if(!window.COUNTRIES) return;
-  const s = q.toLowerCase().replace(/^\+/,'');
-  const filtered = window.COUNTRIES.filter(c=>
-    c.name.toLowerCase().includes(s) || c.dial.replace('+','').startsWith(s) ||
-    c.iso.toLowerCase().includes(s) || c.currency.toLowerCase().includes(s)
-  );
-  renderCountryList(filtered);
-}
-function selectCountry(iso){
-  const c = window.COUNTRIES?.find(x=>x.iso===iso);
-  if(!c) return;
-  window.selectedCountry = c;
-  updateDialBtn(c);
-  closeDrop();
-  document.getElementById('cd-search-input').value = '';
-  renderCountryList(window.COUNTRIES);
-}
-
-// ── EMAIL LOGIN ──
-async function emailLogin(){
-  const email = document.getElementById('email').value.trim();
-  const pwd = document.getElementById('pwd').value;
-  if(!email){ showErr('Please enter your email address'); return; }
-  if(!pwd){ showErr('Please enter your password'); return; }
-  setBtnLoad('email-btn','email-btn-txt', true);
-  hideErr();
-  try{
-    const persist = remOn ? window._localP : window._sessionP;
-    await window._setPersist(window._auth, persist);
-    const cred = await window._emailLogin(window._auth, email, pwd);
-    await afterLogin(cred.user);
-  } catch(e){
-    setBtnLoad('email-btn','email-btn-txt', false, '<i class="fa-solid fa-right-to-bracket"></i> Log In');
-    showErr(friendlyErr(e.message));
-  }
-}
-
-// ── PHONE OTP LOGIN ──
-async function sendPhoneOTP(){
-  const num = document.getElementById('phone-num').value.trim().replace(/^0/,'');
-  if(!num || num.length < 5){ showErr('Please enter a valid phone number'); return; }
-  const fullPhone = window.selectedCountry.dial + num;
-  setBtnLoad('send-btn','send-btn-txt', true);
-  hideErr();
-  if(!window._recaptcha){
-    window._recaptcha = new window._RecaptchaVerifier(window._auth, 'recaptcha-container', { size:'invisible', callback:()=>{} });
-  }
-  try{
-    phoneConfirm = await window._phoneSignIn(window._auth, fullPhone, window._recaptcha);
-    document.getElementById('otp-phone-show').textContent = fullPhone;
-    document.getElementById('phone-step1').style.display = 'none';
-    document.getElementById('phone-step2').style.display = 'block';
-    startCountdown();
-    toast('OTP sent! Check your SMS 📱','success');
-  } catch(e){
-    setBtnLoad('send-btn','send-btn-txt', false, '<i class="fa-solid fa-paper-plane"></i> Send OTP Code');
-    if(window._recaptcha){ window._recaptcha.clear(); window._recaptcha = null; }
-    showErr(friendlyErr(e.message));
-  }
-}
-
-async function verifyPhoneOTP(){
-  const code = ['o1','o2','o3','o4','o5','o6'].map(id=>document.getElementById(id).value).join('');
-  if(code.length<6){ toast('Enter all 6 digits','error'); return; }
-  setBtnLoad('verify-btn','verify-btn-txt', true);
-  hideErr();
-  try{
-    const result = await phoneConfirm.confirm(code);
-    clearInterval(countdownInt);
-    await afterLogin(result.user);
-  } catch(e){
-    setBtnLoad('verify-btn','verify-btn-txt', false, '<i class="fa-solid fa-shield-halved"></i> Verify & Log In');
-    showErr(friendlyErr(e.message));
-  }
-}
-
-async function resendOTP(){ document.getElementById('phone-step2').style.display='none'; document.getElementById('phone-step1').style.display='block'; clearOTP(); clearInterval(countdownInt); await sendPhoneOTP(); }
-function resetPhoneStep(){ document.getElementById('phone-step2').style.display='none'; document.getElementById('phone-step1').style.display='block'; clearOTP(); clearInterval(countdownInt); hideErr(); }
-
-// ── GOOGLE LOGIN ──
-async function googleLogin(){
-  hideErr();
-  try{
-    const result = await window._googlePopup(window._auth, window._gProvider);
-    const user = result.user;
-    // Upsert to Supabase
-    const parts = (user.displayName||'').split(' ');
-    await fetch('/api/register',{ method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ firebase_uid:user.uid, first_name:parts[0]||'User', last_name:parts.slice(1).join(' ')||'', email:user.email, photo_url:user.photoURL||null, email_verified:user.emailVerified })
+// ── Google Login ─────────────────────────────
+window.doGoogle = async () => {
+  try {
+    const user = await loginWithGoogle();
+    // Register in Supabase if new user
+    const token = await user.getIdToken();
+    await fetch('/api/auth?action=register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-firebase-uid': user.uid, 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify({
+        first_name: (user.displayName || 'User').split(' ')[0],
+        last_name:  (user.displayName || '').split(' ').slice(1).join(' '),
+        email: user.email, photo_url: user.photoURL, account_type: 'earner'
+      })
     });
-    await afterLogin(user);
-  } catch(e){
-    if(!e.message.includes('popup-closed')) showErr(e.message);
-  }
-}
+    window.location.href = 'app.html';
+  } catch (e) { showAlert(authError(e.code), 'error'); }
+};
 
-// ── AFTER LOGIN ── (check Supabase + redirect)
-async function afterLogin(fbUser){
-  try{
-    const res = await fetch('/api/me', { headers:{'x-firebase-uid': fbUser.uid} });
-    const data = await res.json();
-    if(!res.ok) throw new Error(data.error || 'Account not found in EarnHive. Please register first.');
-    localStorage.setItem('eh_user', JSON.stringify(data.user));
-    localStorage.setItem('eh_last_active', Date.now().toString());
-    toast('Login successful! 🐝','success');
-    setTimeout(()=>{
-      const done = data.user?.onboarding_complete || localStorage.getItem('eh_onboarding_done')==='true';
-      window.location.href = done ? 'app.html' : 'onboarding.html';
-    }, 800);
-  } catch(e){
-    setBtnLoad('email-btn','email-btn-txt', false, '<i class="fa-solid fa-right-to-bracket"></i> Log In');
-    setBtnLoad('verify-btn','verify-btn-txt', false, '<i class="fa-solid fa-shield-halved"></i> Verify & Log In');
-    showErr(e.message);
-  }
-}
+// ── Phone OTP ────────────────────────────────
+window.doSendOTP = async () => {
+  const btn = document.getElementById('btn-send-otp');
+  const num = document.getElementById('phone-number').value.trim();
+  if (!num) { showAlert('Please enter your phone number.', 'error'); return; }
+  const full = '+234' + num.replace(/^0/, '');
+  setLoading(btn, true);
+  try {
+    await sendPhoneOTP(full);
+    document.getElementById('otp-section').classList.remove('hidden');
+    showAlert('OTP code sent! Check your SMS messages.', 'success');
+  } catch (e) { showAlert(authError(e.code), 'error'); }
+  setLoading(btn, false, '<i class="fa-solid fa-paper-plane"></i> Send OTP Code');
+};
 
-// ── RESET PASSWORD ──
-async function sendReset(){
+window.doVerifyOTP = async () => {
+  const btn  = document.getElementById('btn-verify-otp');
+  const code = document.getElementById('otp-code').value.trim();
+  if (!code || code.length < 6) { showAlert('Enter the 6-digit OTP code.', 'error'); return; }
+  setLoading(btn, true);
+  try {
+    const user = await verifyPhoneOTP(code);
+    const token = await user.getIdToken();
+    await fetch('/api/auth?action=register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-firebase-uid': user.uid, 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify({ first_name: 'User', email: user.email || '', phone: user.phoneNumber, account_type: 'earner' })
+    });
+    window.location.href = 'app.html';
+  } catch (e) { showAlert(authError(e.code), 'error'); }
+  setLoading(btn, false, '<i class="fa-solid fa-check"></i> Verify & Log In');
+};
+
+// ── Reset Password ───────────────────────────
+window.doReset = async () => {
+  const btn   = document.getElementById('btn-reset');
   const email = document.getElementById('reset-email').value.trim();
-  if(!email){ toast('Enter your email','error'); return; }
-  const btn = document.getElementById('msend-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<div class="spinner" style="border-color:rgba(0,0,0,.3);border-top-color:var(--dark);width:14px;height:14px;"></div>';
-  try{
-    await window._resetPwd(window._auth, email);
-    document.getElementById('forgot-body').innerHTML = `<div style="text-align:center;padding:10px 0;"><div style="font-size:42px;margin-bottom:10px;">📧</div><p style="font-size:13px;color:var(--t2);line-height:1.6;">Reset link sent to <strong style="color:var(--gold);">${email}</strong>. Check your inbox.</p></div>`;
-    document.getElementById('forgot-foot').innerHTML = `<button onclick="closeForgot()" style="width:100%;padding:11px;background:var(--gold);border:none;border-radius:9px;color:var(--dark);font-weight:700;cursor:pointer;font-family:var(--font-b);">Done</button>`;
-  } catch(e){
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Link';
-    toast(e.message.includes('user-not-found') ? 'No account with this email.' : e.message,'error');
-  }
-}
-function openForgot(){
-  document.getElementById('forgot-body').innerHTML = `<p style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6;">Enter your registered email — we'll send a reset link instantly.</p><div class="fg" style="margin-bottom:0;"><label>Email Address</label><div class="iw"><input type="email" id="reset-email" placeholder="you@example.com"/><i class="ii fa-solid fa-envelope"></i></div></div>`;
-  document.getElementById('forgot-foot').innerHTML = `<button class="btn-mcancel" onclick="closeForgot()">Cancel</button><button class="btn-msend" id="msend-btn" onclick="sendReset()"><i class="fa-solid fa-paper-plane"></i> Send Link</button>`;
-  document.getElementById('forgot-ov').classList.add('open');
-}
-function closeForgot(){ document.getElementById('forgot-ov').classList.remove('open'); }
-document.getElementById('forgot-ov').addEventListener('click',e=>{ if(e.target===document.getElementById('forgot-ov')) closeForgot(); });
+  if (!email) { showAlert('Please enter your email address.', 'error'); return; }
+  setLoading(btn, true);
+  try {
+    await resetPassword(email);
+    showAlert('Reset link sent! Check your email inbox.', 'success');
+  } catch (e) { showAlert(authError(e.code), 'error'); }
+  setLoading(btn, false, '<i class="fa-solid fa-paper-plane"></i> Send Reset Link');
+};
 
-// ── HELPERS ──
-function setBtnLoad(btnId, txtId, loading, resetHtml=''){
-  const btn = document.getElementById(btnId);
-  btn.disabled = loading;
-  if(loading) btn.innerHTML = '<div class="spinner"></div>';
-  else { document.getElementById(txtId).innerHTML = resetHtml; btn.innerHTML=''; btn.appendChild(document.getElementById(txtId)); }
+// ── Resend Verification ──────────────────────
+window.doResend = async () => {
+  try {
+    await resendVerification();
+    showAlert('Verification email sent again! Check your inbox.', 'success');
+  } catch (e) { showAlert(authError(e.code), 'error'); }
+};
+
+// ── Tab Switch ───────────────────────────────
+window.switchTab = (tab) => {
+  document.getElementById('tab-email').classList.toggle('hidden', tab !== 'email');
+  document.getElementById('tab-phone').classList.toggle('hidden', tab !== 'phone');
+  document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', (i === 0) === (tab === 'email')));
+};
+
+// ── Panel Switch ─────────────────────────────
+window.showPanel = (id) => {
+  ['panel-login','panel-reset','panel-verify'].forEach(p => {
+    document.getElementById(p).classList.toggle('hidden', p !== id);
+  });
+  document.getElementById('alert-box').className = 'alert';
+};
+
+// ── Password Toggle ──────────────────────────
+window.togglePw = (inputId, iconId) => {
+  const input = document.getElementById(inputId);
+  const icon  = document.getElementById(iconId);
+  input.type = input.type === 'password' ? 'text' : 'password';
+  icon.className = input.type === 'password' ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash';
+};
+
+// ── Helpers ──────────────────────────────────
+function showAlert(msg, type) {
+  const a = document.getElementById('alert-box');
+  const icons = { error:'circle-exclamation', success:'circle-check', info:'circle-info' };
+  a.innerHTML = `<i class="fa-solid fa-${icons[type]}"></i> ${msg}`;
+  a.className = `alert ${type}`;
+  setTimeout(() => { a.className = 'alert'; }, 6000);
 }
-function togglePwd(){ const i=document.getElementById('pwd'),e=document.getElementById('eye-icon'); if(i.type==='password'){i.type='text';e.className='fa-regular fa-eye-slash';}else{i.type='password';e.className='fa-regular fa-eye';} }
-function toggleRem(){ remOn=!remOn; const el=document.getElementById('rem-box'); el.classList.toggle('on',remOn); el.innerHTML=remOn?'<i class="fa-solid fa-check" style="color:var(--dark);font-size:10px;"></i>':''; }
-function showErr(m){ document.getElementById('err-text').textContent=m; document.getElementById('err-banner').classList.add('show'); }
-function hideErr(){ document.getElementById('err-banner').classList.remove('show'); }
-function startCountdown(){ let s=60; document.getElementById('resend-timer').style.display='inline'; document.getElementById('resend-btn').style.display='none'; countdownInt=setInterval(()=>{ s--; document.getElementById('countdown').textContent=s; if(s<=0){ clearInterval(countdownInt); document.getElementById('resend-timer').style.display='none'; document.getElementById('resend-btn').style.display='inline'; document.getElementById('resend-btn').disabled=false; }},1000); }
-function clearOTP(){ ['o1','o2','o3','o4','o5','o6'].forEach(id=>{ const el=document.getElementById(id); if(el){el.value='';el.classList.remove('filled');} }); }
-function otpMove(el,n){ el.value=el.value.replace(/\D/,''); el.classList.toggle('filled',!!el.value); if(el.value&&n<6) document.getElementById('o'+(n+1)).focus(); }
-function otpBack(e,n){ if(e.key==='Backspace'&&!document.getElementById('o'+n).value&&n>1) document.getElementById('o'+(n-1)).focus(); }
-function friendlyErr(m){
-  if(m.includes('user-not-found')||m.includes('wrong-password')||m.includes('invalid-credential')) return 'Incorrect email or password.';
-  if(m.includes('too-many-requests')) return 'Too many attempts. Try again in a few minutes.';
-  if(m.includes('user-disabled')) return 'This account has been suspended. Contact support.';
-  if(m.includes('network')) return 'No internet connection. Please check your network.';
-  if(m.includes('invalid-verification-code')) return 'Incorrect OTP. Please check and try again.';
-  if(m.includes('code-expired')) return 'OTP expired. Request a new one.';
-  if(m.includes('invalid-phone')) return 'Invalid phone number format. Check your country code.';
-  return m;
+
+function setLoading(btn, loading, originalHTML) {
+  if (loading) { btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Please wait...'; }
+  else { btn.disabled = false; btn.innerHTML = originalHTML; }
 }
-function toast(msg,type='success'){ const c={success:{color:'#F5B800',ic:'fa-circle-check'},error:{color:'#EF4444',ic:'fa-circle-xmark'},info:{color:'#60A5FA',ic:'fa-circle-info'}}[type]; document.getElementById('t-ico').className=`fa-solid ${c.ic}`; document.getElementById('t-ico').style.color=c.color; document.getElementById('t-msg').textContent=msg; const t=document.getElementById('toast'); t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3500); }
-document.addEventListener('keydown',e=>{ if(e.key==='Enter'&&document.getElementById('email-form').style.display!=='none') emailLogin(); });
 </script>
 </body>
 </html>
