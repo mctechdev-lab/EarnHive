@@ -1,234 +1,148 @@
 // countries.js — EarnHive
-// 195 countries: flag, name, dialCode, currency, currencySymbol, language, iso2
-const COUNTRIES = [
-  { iso:"AF", flag:"🇦🇫", name:"Afghanistan", dial:"+93", currency:"AFN", symbol:"؋", lang:"Dari" },
-  { iso:"AL", flag:"🇦🇱", name:"Albania", dial:"+355", currency:"ALL", symbol:"L", lang:"Albanian" },
-  { iso:"DZ", flag:"🇩🇿", name:"Algeria", dial:"+213", currency:"DZD", symbol:"د.ج", lang:"Arabic" },
-  { iso:"AD", flag:"🇦🇩", name:"Andorra", dial:"+376", currency:"EUR", symbol:"€", lang:"Catalan" },
-  { iso:"AO", flag:"🇦🇴", name:"Angola", dial:"+244", currency:"AOA", symbol:"Kz", lang:"Portuguese" },
-  { iso:"AG", flag:"🇦🇬", name:"Antigua & Barbuda", dial:"+1268", currency:"XCD", symbol:"$", lang:"English" },
-  { iso:"AR", flag:"🇦🇷", name:"Argentina", dial:"+54", currency:"ARS", symbol:"$", lang:"Spanish" },
-  { iso:"AM", flag:"🇦🇲", name:"Armenia", dial:"+374", currency:"AMD", symbol:"֏", lang:"Armenian" },
-  { iso:"AU", flag:"🇦🇺", name:"Australia", dial:"+61", currency:"AUD", symbol:"$", lang:"English" },
-  { iso:"AT", flag:"🇦🇹", name:"Austria", dial:"+43", currency:"EUR", symbol:"€", lang:"German" },
-  { iso:"AZ", flag:"🇦🇿", name:"Azerbaijan", dial:"+994", currency:"AZN", symbol:"₼", lang:"Azerbaijani" },
-  { iso:"BS", flag:"🇧🇸", name:"Bahamas", dial:"+1242", currency:"BSD", symbol:"$", lang:"English" },
-  { iso:"BH", flag:"🇧🇭", name:"Bahrain", dial:"+973", currency:"BHD", symbol:".د.ب", lang:"Arabic" },
-  { iso:"BD", flag:"🇧🇩", name:"Bangladesh", dial:"+880", currency:"BDT", symbol:"৳", lang:"Bengali" },
-  { iso:"BB", flag:"🇧🇧", name:"Barbados", dial:"+1246", currency:"BBD", symbol:"$", lang:"English" },
-  { iso:"BY", flag:"🇧🇾", name:"Belarus", dial:"+375", currency:"BYN", symbol:"Br", lang:"Belarusian" },
-  { iso:"BE", flag:"🇧🇪", name:"Belgium", dial:"+32", currency:"EUR", symbol:"€", lang:"Dutch" },
-  { iso:"BZ", flag:"🇧🇿", name:"Belize", dial:"+501", currency:"BZD", symbol:"$", lang:"English" },
-  { iso:"BJ", flag:"🇧🇯", name:"Benin", dial:"+229", currency:"XOF", symbol:"Fr", lang:"French" },
-  { iso:"BT", flag:"🇧🇹", name:"Bhutan", dial:"+975", currency:"BTN", symbol:"Nu", lang:"Dzongkha" },
-  { iso:"BO", flag:"🇧🇴", name:"Bolivia", dial:"+591", currency:"BOB", symbol:"Bs.", lang:"Spanish" },
-  { iso:"BA", flag:"🇧🇦", name:"Bosnia & Herzegovina", dial:"+387", currency:"BAM", symbol:"KM", lang:"Bosnian" },
-  { iso:"BW", flag:"🇧🇼", name:"Botswana", dial:"+267", currency:"BWP", symbol:"P", lang:"English" },
-  { iso:"BR", flag:"🇧🇷", name:"Brazil", dial:"+55", currency:"BRL", symbol:"R$", lang:"Portuguese" },
-  { iso:"BN", flag:"🇧🇳", name:"Brunei", dial:"+673", currency:"BND", symbol:"$", lang:"Malay" },
-  { iso:"BG", flag:"🇧🇬", name:"Bulgaria", dial:"+359", currency:"BGN", symbol:"лв", lang:"Bulgarian" },
-  { iso:"BF", flag:"🇧🇫", name:"Burkina Faso", dial:"+226", currency:"XOF", symbol:"Fr", lang:"French" },
-  { iso:"BI", flag:"🇧🇮", name:"Burundi", dial:"+257", currency:"BIF", symbol:"Fr", lang:"Kirundi" },
-  { iso:"CV", flag:"🇨🇻", name:"Cabo Verde", dial:"+238", currency:"CVE", symbol:"$", lang:"Portuguese" },
-  { iso:"KH", flag:"🇰🇭", name:"Cambodia", dial:"+855", currency:"KHR", symbol:"៛", lang:"Khmer" },
-  { iso:"CM", flag:"🇨🇲", name:"Cameroon", dial:"+237", currency:"XAF", symbol:"Fr", lang:"French" },
-  { iso:"CA", flag:"🇨🇦", name:"Canada", dial:"+1", currency:"CAD", symbol:"$", lang:"English" },
-  { iso:"CF", flag:"🇨🇫", name:"Central African Rep.", dial:"+236", currency:"XAF", symbol:"Fr", lang:"French" },
-  { iso:"TD", flag:"🇹🇩", name:"Chad", dial:"+235", currency:"XAF", symbol:"Fr", lang:"French" },
-  { iso:"CL", flag:"🇨🇱", name:"Chile", dial:"+56", currency:"CLP", symbol:"$", lang:"Spanish" },
-  { iso:"CN", flag:"🇨🇳", name:"China", dial:"+86", currency:"CNY", symbol:"¥", lang:"Mandarin" },
-  { iso:"CO", flag:"🇨🇴", name:"Colombia", dial:"+57", currency:"COP", symbol:"$", lang:"Spanish" },
-  { iso:"KM", flag:"🇰🇲", name:"Comoros", dial:"+269", currency:"KMF", symbol:"Fr", lang:"Comorian" },
-  { iso:"CD", flag:"🇨🇩", name:"Congo (DRC)", dial:"+243", currency:"CDF", symbol:"Fr", lang:"French" },
-  { iso:"CG", flag:"🇨🇬", name:"Congo (Republic)", dial:"+242", currency:"XAF", symbol:"Fr", lang:"French" },
-  { iso:"CR", flag:"🇨🇷", name:"Costa Rica", dial:"+506", currency:"CRC", symbol:"₡", lang:"Spanish" },
-  { iso:"CI", flag:"🇨🇮", name:"Côte d'Ivoire", dial:"+225", currency:"XOF", symbol:"Fr", lang:"French" },
-  { iso:"HR", flag:"🇭🇷", name:"Croatia", dial:"+385", currency:"EUR", symbol:"€", lang:"Croatian" },
-  { iso:"CU", flag:"🇨🇺", name:"Cuba", dial:"+53", currency:"CUP", symbol:"$", lang:"Spanish" },
-  { iso:"CY", flag:"🇨🇾", name:"Cyprus", dial:"+357", currency:"EUR", symbol:"€", lang:"Greek" },
-  { iso:"CZ", flag:"🇨🇿", name:"Czech Republic", dial:"+420", currency:"CZK", symbol:"Kč", lang:"Czech" },
-    { iso:"DK", flag:"🇩🇰", name:"Denmark", dial:"+45", currency:"DKK", symbol:"kr", lang:"Danish" },
-  { iso:"DJ", flag:"🇩🇯", name:"Djibouti", dial:"+253", currency:"DJF", symbol:"Fr", lang:"French" },
-  { iso:"DM", flag:"🇩🇲", name:"Dominica", dial:"+1767", currency:"XCD", symbol:"$", lang:"English" },
-  { iso:"DO", flag:"🇩🇴", name:"Dominican Republic", dial:"+1809", currency:"DOP", symbol:"$", lang:"Spanish" },
-  { iso:"EC", flag:"🇪🇨", name:"Ecuador", dial:"+593", currency:"USD", symbol:"$", lang:"Spanish" },
-  { iso:"EG", flag:"🇪🇬", name:"Egypt", dial:"+20", currency:"EGP", symbol:"£", lang:"Arabic" },
-  { iso:"SV", flag:"🇸🇻", name:"El Salvador", dial:"+503", currency:"USD", symbol:"$", lang:"Spanish" },
-  { iso:"GQ", flag:"🇬🇶", name:"Equatorial Guinea", dial:"+240", currency:"XAF", symbol:"Fr", lang:"Spanish" },
-  { iso:"ER", flag:"🇪🇷", name:"Eritrea", dial:"+291", currency:"ERN", symbol:"Nfk", lang:"Tigrinya" },
-  { iso:"EE", flag:"🇪🇪", name:"Estonia", dial:"+372", currency:"EUR", symbol:"€", lang:"Estonian" },
-  { iso:"SZ", flag:"🇸🇿", name:"Eswatini", dial:"+268", currency:"SZL", symbol:"L", lang:"Swati" },
-  { iso:"ET", flag:"🇪🇹", name:"Ethiopia", dial:"+251", currency:"ETB", symbol:"Br", lang:"Amharic" },
-  { iso:"FJ", flag:"🇫🇯", name:"Fiji", dial:"+679", currency:"FJD", symbol:"$", lang:"English" },
-  { iso:"FI", flag:"🇫🇮", name:"Finland", dial:"+358", currency:"EUR", symbol:"€", lang:"Finnish" },
-  { iso:"FR", flag:"🇫🇷", name:"France", dial:"+33", currency:"EUR", symbol:"€", lang:"French" },
-  { iso:"GA", flag:"🇬🇦", name:"Gabon", dial:"+241", currency:"XAF", symbol:"Fr", lang:"French" },
-  { iso:"GM", flag:"🇬🇲", name:"Gambia", dial:"+220", currency:"GMD", symbol:"D", lang:"English" },
-  { iso:"GE", flag:"🇬🇪", name:"Georgia", dial:"+995", currency:"GEL", symbol:"₾", lang:"Georgian" },
-  { iso:"DE", flag:"🇩🇪", name:"Germany", dial:"+49", currency:"EUR", symbol:"€", lang:"German" },
-  { iso:"GH", flag:"🇬🇭", name:"Ghana", dial:"+233", currency:"GHS", symbol:"₵", lang:"English" },
-  { iso:"GR", flag:"🇬🇷", name:"Greece", dial:"+30", currency:"EUR", symbol:"€", lang:"Greek" },
-  { iso:"GD", flag:"🇬🇩", name:"Grenada", dial:"+1473", currency:"XCD", symbol:"$", lang:"English" },
-  { iso:"GT", flag:"🇬🇹", name:"Guatemala", dial:"+502", currency:"GTQ", symbol:"Q", lang:"Spanish" },
-  { iso:"GN", flag:"🇬🇳", name:"Guinea", dial:"+224", currency:"GNF", symbol:"Fr", lang:"French" },
-  { iso:"GW", flag:"🇬🇼", name:"Guinea-Bissau", dial:"+245", currency:"XOF", symbol:"Fr", lang:"Portuguese" },
-  { iso:"GY", flag:"🇬🇾", name:"Guyana", dial:"+592", currency:"GYD", symbol:"$", lang:"English" },
-  { iso:"HT", flag:"🇭🇹", name:"Haiti", dial:"+509", currency:"HTG", symbol:"G", lang:"Haitian Creole" },
-  { iso:"HN", flag:"🇭🇳", name:"Honduras", dial:"+504", currency:"HNL", symbol:"L", lang:"Spanish" },
-  { iso:"HU", flag:"🇭🇺", name:"Hungary", dial:"+36", currency:"HUF", symbol:"Ft", lang:"Hungarian" },
-  { iso:"IS", flag:"🇮🇸", name:"Iceland", dial:"+354", currency:"ISK", symbol:"kr", lang:"Icelandic" },
-  { iso:"IN", flag:"🇮🇳", name:"India", dial:"+91", currency:"INR", symbol:"₹", lang:"Hindi" },
-  { iso:"ID", flag:"🇮🇩", name:"Indonesia", dial:"+62", currency:"IDR", symbol:"Rp", lang:"Indonesian" },
-  { iso:"IR", flag:"🇮🇷", name:"Iran", dial:"+98", currency:"IRR", symbol:"﷼", lang:"Persian" },
-  { iso:"IQ", flag:"🇮🇶", name:"Iraq", dial:"+964", currency:"IQD", symbol:"ع.د", lang:"Arabic" },
-  { iso:"IE", flag:"🇮🇪", name:"Ireland", dial:"+353", currency:"EUR", symbol:"€", lang:"English" },
-  { iso:"IL", flag:"🇮🇱", name:"Israel", dial:"+972", currency:"ILS", symbol:"₪", lang:"Hebrew" },
-  { iso:"IT", flag:"🇮🇹", name:"Italy", dial:"+39", currency:"EUR", symbol:"€", lang:"Italian" },
-  { iso:"JM", flag:"🇯🇲", name:"Jamaica", dial:"+1876", currency:"JMD", symbol:"$", lang:"English" },
-  { iso:"JP", flag:"🇯🇵", name:"Japan", dial:"+81", currency:"JPY", symbol:"¥", lang:"Japanese" },
-  { iso:"JO", flag:"🇯🇴", name:"Jordan", dial:"+962", currency:"JOD", symbol:"د.ا", lang:"Arabic" },
-  { iso:"KZ", flag:"🇰🇿", name:"Kazakhstan", dial:"+7", currency:"KZT", symbol:"₸", lang:"Kazakh" },
-  { iso:"KE", flag:"🇰🇪", name:"Kenya", dial:"+254", currency:"KES", symbol:"Ksh", lang:"Swahili" },
-  { iso:"KI", flag:"🇰🇮", name:"Kiribati", dial:"+686", currency:"AUD", symbol:"$", lang:"English" },
-  { iso:"KW", flag:"🇰🇼", name:"Kuwait", dial:"+965", currency:"KWD", symbol:"د.ك", lang:"Arabic" },
-  { iso:"KG", flag:"🇰🇬", name:"Kyrgyzstan", dial:"+996", currency:"KGS", symbol:"с", lang:"Kyrgyz" },
-  { iso:"LA", flag:"🇱🇦", name:"Laos", dial:"+856", currency:"LAK", symbol:"₭", lang:"Lao" },
-  { iso:"LV", flag:"🇱🇻", name:"Latvia", dial:"+371", currency:"EUR", symbol:"€", lang:"Latvian" },
-  { iso:"LB", flag:"🇱🇧", name:"Lebanon", dial:"+961", currency:"LBP", symbol:"ل.ل", lang:"Arabic" },
-  { iso:"LS", flag:"🇱🇸", name:"Lesotho", dial:"+266", currency:"LSL", symbol:"L", lang:"Sesotho" },
-  { iso:"LR", flag:"🇱🇷", name:"Liberia", dial:"+231", currency:"LRD", symbol:"$", lang:"English" },
-  { iso:"LY", flag:"🇱🇾", name:"Libya", dial:"+218", currency:"LYD", symbol:"ل.د", lang:"Arabic" },
-  { iso:"LI", flag:"🇱🇮", name:"Liechtenstein", dial:"+423", currency:"CHF", symbol:"Fr", lang:"German" },
-  { iso:"LT", flag:"🇱🇹", name:"Lithuania", dial:"+370", currency:"EUR", symbol:"€", lang:"Lithuanian" },
-  { iso:"LU", flag:"🇱🇺", name:"Luxembourg", dial:"+352", currency:"EUR", symbol:"€", lang:"Luxembourgish" },
-  { iso:"MG", flag:"🇲🇬", name:"Madagascar", dial:"+261", currency:"MGA", symbol:"Ar", lang:"Malagasy" },
-  { iso:"MW", flag:"🇲🇼", name:"Malawi", dial:"+265", currency:"MWK", symbol:"MK", lang:"Chichewa" },
-  { iso:"MY", flag:"🇲🇾", name:"Malaysia", dial:"+60", currency:"MYR", symbol:"RM", lang:"Malay" },
-  { iso:"MV", flag:"🇲🇻", name:"Maldives", dial:"+960", currency:"MVR", symbol:"ރ.", lang:"Dhivehi" },
-  { iso:"ML", flag:"🇲🇱", name:"Mali", dial:"+223", currency:"XOF", symbol:"Fr", lang:"French" },
-  { iso:"MT", flag:"🇲🇹", name:"Malta", dial:"+356", currency:"EUR", symbol:"€", lang:"Maltese" },
-  { iso:"MH", flag:"🇲🇭", name:"Marshall Islands", dial:"+692", currency:"USD", symbol:"$", lang:"Marshallese" },
-    { iso:"MR", flag:"🇲🇷", name:"Mauritania", dial:"+222", currency:"MRU", symbol:"UM", lang:"Arabic" },
-  { iso:"MU", flag:"🇲🇺", name:"Mauritius", dial:"+230", currency:"MUR", symbol:"₨", lang:"English" },
-  { iso:"MX", flag:"🇲🇽", name:"Mexico", dial:"+52", currency:"MXN", symbol:"$", lang:"Spanish" },
-  { iso:"FM", flag:"🇫🇲", name:"Micronesia", dial:"+691", currency:"USD", symbol:"$", lang:"English" },
-  { iso:"MD", flag:"🇲🇩", name:"Moldova", dial:"+373", currency:"MDL", symbol:"L", lang:"Romanian" },
-  { iso:"MC", flag:"🇲🇨", name:"Monaco", dial:"+377", currency:"EUR", symbol:"€", lang:"French" },
-  { iso:"MN", flag:"🇲🇳", name:"Mongolia", dial:"+976", currency:"MNT", symbol:"₮", lang:"Mongolian" },
-  { iso:"ME", flag:"🇲🇪", name:"Montenegro", dial:"+382", currency:"EUR", symbol:"€", lang:"Montenegrin" },
-  { iso:"MA", flag:"🇲🇦", name:"Morocco", dial:"+212", currency:"MAD", symbol:"د.م.", lang:"Arabic" },
-  { iso:"MZ", flag:"🇲🇿", name:"Mozambique", dial:"+258", currency:"MZN", symbol:"MT", lang:"Portuguese" },
-  { iso:"MM", flag:"🇲🇲", name:"Myanmar", dial:"+95", currency:"MMK", symbol:"K", lang:"Burmese" },
-  { iso:"NA", flag:"🇳🇦", name:"Namibia", dial:"+264", currency:"NAD", symbol:"$", lang:"English" },
-  { iso:"NR", flag:"🇳🇷", name:"Nauru", dial:"+674", currency:"AUD", symbol:"$", lang:"Nauruan" },
-  { iso:"NP", flag:"🇳🇵", name:"Nepal", dial:"+977", currency:"NPR", symbol:"₨", lang:"Nepali" },
-  { iso:"NL", flag:"🇳🇱", name:"Netherlands", dial:"+31", currency:"EUR", symbol:"€", lang:"Dutch" },
-  { iso:"NZ", flag:"🇳🇿", name:"New Zealand", dial:"+64", currency:"NZD", symbol:"$", lang:"English" },
-  { iso:"NI", flag:"🇳🇮", name:"Nicaragua", dial:"+505", currency:"NIO", symbol:"C$", lang:"Spanish" },
-  { iso:"NE", flag:"🇳🇪", name:"Niger", dial:"+227", currency:"XOF", symbol:"Fr", lang:"French" },
-  { iso:"NG", flag:"🇳🇬", name:"Nigeria", dial:"+234", currency:"NGN", symbol:"₦", lang:"English" },
-  { iso:"KP", flag:"🇰🇵", name:"North Korea", dial:"+850", currency:"KPW", symbol:"₩", lang:"Korean" },
-  { iso:"MK", flag:"🇲🇰", name:"North Macedonia", dial:"+389", currency:"MKD", symbol:"ден", lang:"Macedonian" },
-  { iso:"NO", flag:"🇳🇴", name:"Norway", dial:"+47", currency:"NOK", symbol:"kr", lang:"Norwegian" },
-  { iso:"OM", flag:"🇴🇲", name:"Oman", dial:"+968", currency:"OMR", symbol:"ر.ع.", lang:"Arabic" },
-  { iso:"PK", flag:"🇵🇰", name:"Pakistan", dial:"+92", currency:"PKR", symbol:"₨", lang:"Urdu" },
-  { iso:"PW", flag:"🇵🇼", name:"Palau", dial:"+680", currency:"USD", symbol:"$", lang:"Palauan" },
-  { iso:"PA", flag:"🇵🇦", name:"Panama", dial:"+507", currency:"PAB", symbol:"B/.", lang:"Spanish" },
-  { iso:"PG", flag:"🇵🇬", name:"Papua New Guinea", dial:"+675", currency:"PGK", symbol:"K", lang:"English" },
-  { iso:"PY", flag:"🇵🇾", name:"Paraguay", dial:"+595", currency:"PYG", symbol:"₲", lang:"Spanish" },
-  { iso:"PE", flag:"🇵🇪", name:"Peru", dial:"+51", currency:"PEN", symbol:"S/", lang:"Spanish" },
-  { iso:"PH", flag:"🇵🇭", name:"Philippines", dial:"+63", currency:"PHP", symbol:"₱", lang:"Filipino" },
-  { iso:"PL", flag:"🇵🇱", name:"Poland", dial:"+48", currency:"PLN", symbol:"zł", lang:"Polish" },
-  { iso:"PT", flag:"🇵🇹", name:"Portugal", dial:"+351", currency:"EUR", symbol:"€", lang:"Portuguese" },
-  { iso:"QA", flag:"🇶🇦", name:"Qatar", dial:"+974", currency:"QAR", symbol:"ر.ق", lang:"Arabic" },
-  { iso:"RO", flag:"🇷🇴", name:"Romania", dial:"+40", currency:"RON", symbol:"lei", lang:"Romanian" },
-  { iso:"RU", flag:"🇷🇺", name:"Russia", dial:"+7", currency:"RUB", symbol:"₽", lang:"Russian" },
-  { iso:"RW", flag:"🇷🇼", name:"Rwanda", dial:"+250", currency:"RWF", symbol:"Fr", lang:"Kinyarwanda" },
-  { iso:"KN", flag:"🇰🇳", name:"Saint Kitts & Nevis", dial:"+1869", currency:"XCD", symbol:"$", lang:"English" },
-  { iso:"LC", flag:"🇱🇨", name:"Saint Lucia", dial:"+1758", currency:"XCD", symbol:"$", lang:"English" },
-  { iso:"VC", flag:"🇻🇨", name:"Saint Vincent & Grenadines", dial:"+1784", currency:"XCD", symbol:"$", lang:"English" },
-  { iso:"WS", flag:"🇼🇸", name:"Samoa", dial:"+685", currency:"WST", symbol:"T", lang:"Samoan" },
-  { iso:"SM", flag:"🇸🇲", name:"San Marino", dial:"+378", currency:"EUR", symbol:"€", lang:"Italian" },
-  { iso:"ST", flag:"🇸🇹", name:"São Tomé & Príncipe", dial:"+239", currency:"STN", symbol:"Db", lang:"Portuguese" },
-  { iso:"SA", flag:"🇸🇦", name:"Saudi Arabia", dial:"+966", currency:"SAR", symbol:"﷼", lang:"Arabic" },
-  { iso:"SN", flag:"🇸🇳", name:"Senegal", dial:"+221", currency:"XOF", symbol:"Fr", lang:"French" },
-  { iso:"RS", flag:"🇷🇸", name:"Serbia", dial:"+381", currency:"RSD", symbol:"din", lang:"Serbian" },
-  { iso:"SC", flag:"🇸🇨", name:"Seychelles", dial:"+248", currency:"SCR", symbol:"₨", lang:"Seychellois Creole" },
-  { iso:"SL", flag:"🇸🇱", name:"Sierra Leone", dial:"+232", currency:"SLL", symbol:"Le", lang:"English" },
-  { iso:"SG", flag:"🇸🇬", name:"Singapore", dial:"+65", currency:"SGD", symbol:"$", lang:"English" },
-  { iso:"SK", flag:"🇸🇰", name:"Slovakia", dial:"+421", currency:"EUR", symbol:"€", lang:"Slovak" },
-  { iso:"SI", flag:"🇸🇮", name:"Slovenia", dial:"+386", currency:"EUR", symbol:"€", lang:"Slovenian" },
-  { iso:"SB", flag:"🇸🇧", name:"Solomon Islands", dial:"+677", currency:"SBD", symbol:"$", lang:"English" },
-  { iso:"SO", flag:"🇸🇴", name:"Somalia", dial:"+252", currency:"SOS", symbol:"Sh", lang:"Somali" },
-  { iso:"ZA", flag:"🇿🇦", name:"South Africa", dial:"+27", currency:"ZAR", symbol:"R", lang:"Zulu" },
-  { iso:"SS", flag:"🇸🇸", name:"South Sudan", dial:"+211", currency:"SSP", symbol:"£", lang:"English" },
-  { iso:"ES", flag:"🇪🇸", name:"Spain", dial:"+34", currency:"EUR", symbol:"€", lang:"Spanish" },
-  { iso:"LK", flag:"🇱🇰", name:"Sri Lanka", dial:"+94", currency:"LKR", symbol:"₨", lang:"Sinhala" },
-  { iso:"SD", flag:"🇸🇩", name:"Sudan", dial:"+249", currency:"SDG", symbol:"ج.س.", lang:"Arabic" },
-  { iso:"SR", flag:"🇸🇷", name:"Suriname", dial:"+597", currency:"SRD", symbol:"$", lang:"Dutch" },
-  { iso:"SE", flag:"🇸🇪", name:"Sweden", dial:"+46", currency:"SEK", symbol:"kr", lang:"Swedish" },
-  { iso:"CH", flag:"🇨🇭", name:"Switzerland", dial:"+41", currency:"CHF", symbol:"Fr", lang:"German" },
-  { iso:"SY", flag:"🇸🇾", name:"Syria", dial:"+963", currency:"SYP", symbol:"£", lang:"Arabic" },
-  { iso:"TW", flag:"🇹🇼", name:"Taiwan", dial:"+886", currency:"TWD", symbol:"$", lang:"Mandarin" },
-  { iso:"TJ", flag:"🇹🇯", name:"Tajikistan", dial:"+992", currency:"TJS", symbol:"SM", lang:"Tajik" },
-  { iso:"TZ", flag:"🇹🇿", name:"Tanzania", dial:"+255", currency:"TZS", symbol:"Sh", lang:"Swahili" },
+// Full country list with flags, dial codes, currencies
+// Exports COUNTRIES array and detectCountryFromIP()
 
+export const COUNTRIES = [
+  // ── AFRICA (Paystack) ─────────────────────────────────────────
+  {iso:'NG',name:'Nigeria',flag:'🇳🇬',dial:'+234',currency:'NGN',symbol:'₦',payMethod:'paystack'},
+  {iso:'GH',name:'Ghana',flag:'🇬🇭',dial:'+233',currency:'GHS',symbol:'GH₵',payMethod:'paystack'},
+  {iso:'KE',name:'Kenya',flag:'🇰🇪',dial:'+254',currency:'KES',symbol:'KSh',payMethod:'paystack'},
+  {iso:'ZA',name:'South Africa',flag:'🇿🇦',dial:'+27',currency:'ZAR',symbol:'R',payMethod:'paystack'},
+  {iso:'EG',name:'Egypt',flag:'🇪🇬',dial:'+20',currency:'EGP',symbol:'E£',payMethod:'paystack'},
+  {iso:'ET',name:'Ethiopia',flag:'🇪🇹',dial:'+251',currency:'ETB',symbol:'Br',payMethod:'paystack'},
+  {iso:'TZ',name:'Tanzania',flag:'🇹🇿',dial:'+255',currency:'TZS',symbol:'TSh',payMethod:'paystack'},
+  {iso:'UG',name:'Uganda',flag:'🇺🇬',dial:'+256',currency:'UGX',symbol:'USh',payMethod:'paystack'},
+  {iso:'RW',name:'Rwanda',flag:'🇷🇼',dial:'+250',currency:'RWF',symbol:'Fr',payMethod:'paystack'},
+  {iso:'SN',name:'Senegal',flag:'🇸🇳',dial:'+221',currency:'XOF',symbol:'Fr',payMethod:'paystack'},
+  {iso:'CI',name:'Ivory Coast',flag:'🇨🇮',dial:'+225',currency:'XOF',symbol:'Fr',payMethod:'paystack'},
+  {iso:'CM',name:'Cameroon',flag:'🇨🇲',dial:'+237',currency:'XAF',symbol:'Fr',payMethod:'paystack'},
+  {iso:'AO',name:'Angola',flag:'🇦🇴',dial:'+244',currency:'AOA',symbol:'Kz',payMethod:'paystack'},
+  {iso:'MZ',name:'Mozambique',flag:'🇲🇿',dial:'+258',currency:'MZN',symbol:'MT',payMethod:'paystack'},
+  {iso:'ZM',name:'Zambia',flag:'🇿🇲',dial:'+260',currency:'ZMW',symbol:'ZK',payMethod:'paystack'},
+  {iso:'ZW',name:'Zimbabwe',flag:'🇿🇼',dial:'+263',currency:'ZWL',symbol:'Z$',payMethod:'paystack'},
+  {iso:'MA',name:'Morocco',flag:'🇲🇦',dial:'+212',currency:'MAD',symbol:'MAD',payMethod:'paystack'},
+  {iso:'DZ',name:'Algeria',flag:'🇩🇿',dial:'+213',currency:'DZD',symbol:'دج',payMethod:'paystack'},
+  {iso:'TN',name:'Tunisia',flag:'🇹🇳',dial:'+216',currency:'TND',symbol:'DT',payMethod:'paystack'},
+  {iso:'LY',name:'Libya',flag:'🇱🇾',dial:'+218',currency:'LYD',symbol:'LD',payMethod:'paystack'},
+  {iso:'SD',name:'Sudan',flag:'🇸🇩',dial:'+249',currency:'SDG',symbol:'ج.س.',payMethod:'paystack'},
+  {iso:'SO',name:'Somalia',flag:'🇸🇴',dial:'+252',currency:'SOS',symbol:'Sh',payMethod:'paystack'},
+  {iso:'MW',name:'Malawi',flag:'🇲🇼',dial:'+265',currency:'MWK',symbol:'MK',payMethod:'paystack'},
+  {iso:'BJ',name:'Benin',flag:'🇧🇯',dial:'+229',currency:'XOF',symbol:'Fr',payMethod:'paystack'},
+  {iso:'TG',name:'Togo',flag:'🇹🇬',dial:'+228',currency:'XOF',symbol:'Fr',payMethod:'paystack'},
+  {iso:'NE',name:'Niger',flag:'🇳🇪',dial:'+227',currency:'XOF',symbol:'Fr',payMethod:'paystack'},
+  {iso:'ML',name:'Mali',flag:'🇲🇱',dial:'+223',currency:'XOF',symbol:'Fr',payMethod:'paystack'},
+  {iso:'BF',name:'Burkina Faso',flag:'🇧🇫',dial:'+226',currency:'XOF',symbol:'Fr',payMethod:'paystack'},
+  {iso:'GN',name:'Guinea',flag:'🇬🇳',dial:'+224',currency:'GNF',symbol:'Fr',payMethod:'paystack'},
+  {iso:'SL',name:'Sierra Leone',flag:'🇸🇱',dial:'+232',currency:'SLL',symbol:'Le',payMethod:'paystack'},
+  {iso:'LR',name:'Liberia',flag:'🇱🇷',dial:'+231',currency:'LRD',symbol:'L$',payMethod:'paystack'},
+  {iso:'GM',name:'Gambia',flag:'🇬🇲',dial:'+220',currency:'GMD',symbol:'D',payMethod:'paystack'},
+  {iso:'MR',name:'Mauritania',flag:'🇲🇷',dial:'+222',currency:'MRU',symbol:'UM',payMethod:'paystack'},
+  {iso:'NA',name:'Namibia',flag:'🇳🇦',dial:'+264',currency:'NAD',symbol:'N$',payMethod:'paystack'},
+  {iso:'BW',name:'Botswana',flag:'🇧🇼',dial:'+267',currency:'BWP',symbol:'P',payMethod:'paystack'},
+  {iso:'LS',name:'Lesotho',flag:'🇱🇸',dial:'+266',currency:'LSL',symbol:'L',payMethod:'paystack'},
+  {iso:'SZ',name:'Eswatini',flag:'🇸🇿',dial:'+268',currency:'SZL',symbol:'L',payMethod:'paystack'},
+  {iso:'MG',name:'Madagascar',flag:'🇲🇬',dial:'+261',currency:'MGA',symbol:'Ar',payMethod:'paystack'},
+  {iso:'MU',name:'Mauritius',flag:'🇲🇺',dial:'+230',currency:'MUR',symbol:'₨',payMethod:'paystack'},
+  {iso:'CV',name:'Cape Verde',flag:'🇨🇻',dial:'+238',currency:'CVE',symbol:'$',payMethod:'paystack'},
+  {iso:'CD',name:'DR Congo',flag:'🇨🇩',dial:'+243',currency:'CDF',symbol:'Fr',payMethod:'paystack'},
+  {iso:'CG',name:'Congo',flag:'🇨🇬',dial:'+242',currency:'XAF',symbol:'Fr',payMethod:'paystack'},
+  {iso:'GA',name:'Gabon',flag:'🇬🇦',dial:'+241',currency:'XAF',symbol:'Fr',payMethod:'paystack'},
 
-
-  { iso:"TH", flag:"🇹🇭", name:"Thailand", dial:"+66", currency:"THB", symbol:"฿", lang:"Thai" },
-  { iso:"TL", flag:"🇹🇱", name:"Timor-Leste", dial:"+670", currency:"USD", symbol:"$", lang:"Tetum" },
-  { iso:"TG", flag:"🇹🇬", name:"Togo", dial:"+228", currency:"XOF", symbol:"Fr", lang:"French" },
-  { iso:"TO", flag:"🇹🇴", name:"Tonga", dial:"+676", currency:"TOP", symbol:"T$", lang:"Tongan" },
-  { iso:"TT", flag:"🇹🇹", name:"Trinidad & Tobago", dial:"+1868", currency:"TTD", symbol:"$", lang:"English" },
-  { iso:"TN", flag:"🇹🇳", name:"Tunisia", dial:"+216", currency:"TND", symbol:"د.ت", lang:"Arabic" },
-  { iso:"TR", flag:"🇹🇷", name:"Turkey", dial:"+90", currency:"TRY", symbol:"₺", lang:"Turkish" },
-  { iso:"TM", flag:"🇹🇲", name:"Turkmenistan", dial:"+993", currency:"TMT", symbol:"T", lang:"Turkmen" },
-  { iso:"TV", flag:"🇹🇻", name:"Tuvalu", dial:"+688", currency:"AUD", symbol:"$", lang:"Tuvaluan" },
-  { iso:"UG", flag:"🇺🇬", name:"Uganda", dial:"+256", currency:"UGX", symbol:"Sh", lang:"English" },
-  { iso:"UA", flag:"🇺🇦", name:"Ukraine", dial:"+380", currency:"UAH", symbol:"₴", lang:"Ukrainian" },
-  { iso:"AE", flag:"🇦🇪", name:"United Arab Emirates", dial:"+971", currency:"AED", symbol:"د.إ", lang:"Arabic" },
-  { iso:"GB", flag:"🇬🇧", name:"United Kingdom", dial:"+44", currency:"GBP", symbol:"£", lang:"English" },
-  { iso:"US", flag:"🇺🇸", name:"United States", dial:"+1", currency:"USD", symbol:"$", lang:"English" },
-  { iso:"UY", flag:"🇺🇾", name:"Uruguay", dial:"+598", currency:"UYU", symbol:"$", lang:"Spanish" },
-  { iso:"UZ", flag:"🇺🇿", name:"Uzbekistan", dial:"+998", currency:"UZS", symbol:"so'm", lang:"Uzbek" },
-  { iso:"VU", flag:"🇻🇺", name:"Vanuatu", dial:"+678", currency:"VUV", symbol:"Vt", lang:"Bislama" },
-  { iso:"VE", flag:"🇻🇪", name:"Venezuela", dial:"+58", currency:"VES", symbol:"Bs.S", lang:"Spanish" },
-  { iso:"VN", flag:"🇻🇳", name:"Vietnam", dial:"+84", currency:"VND", symbol:"₫", lang:"Vietnamese" },
-  { iso:"YE", flag:"🇾🇪", name:"Yemen", dial:"+967", currency:"YER", symbol:"﷼", lang:"Arabic" },
-  { iso:"ZM", flag:"🇿🇲", name:"Zambia", dial:"+260", currency:"ZMW", symbol:"ZK", lang:"English" },
-  { iso:"ZW", flag:"🇿🇼", name:"Zimbabwe", dial:"+263", currency:"ZWL", symbol:"$", lang:"English" },
-  { iso:"PS", flag:"🇵🇸", name:"Palestine", dial:"+970", currency:"ILS", symbol:"₪", lang:"Arabic" },
-  { iso:"XK", flag:"🇽🇰", name:"Kosovo", dial:"+383", currency:"EUR", symbol:"€", lang:"Albanian" },
+  // ── REST OF WORLD (TON Crypto) ────────────────────────────────
+  // Americas
+  {iso:'US',name:'United States',flag:'🇺🇸',dial:'+1',currency:'USD',symbol:'$',payMethod:'ton'},
+  {iso:'CA',name:'Canada',flag:'🇨🇦',dial:'+1',currency:'CAD',symbol:'CA$',payMethod:'ton'},
+  {iso:'GB',name:'United Kingdom',flag:'🇬🇧',dial:'+44',currency:'GBP',symbol:'£',payMethod:'ton'},
+  {iso:'AU',name:'Australia',flag:'🇦🇺',dial:'+61',currency:'AUD',symbol:'A$',payMethod:'ton'},
+  {iso:'DE',name:'Germany',flag:'🇩🇪',dial:'+49',currency:'EUR',symbol:'€',payMethod:'ton'},
+  {iso:'FR',name:'France',flag:'🇫🇷',dial:'+33',currency:'EUR',symbol:'€',payMethod:'ton'},
+  {iso:'IT',name:'Italy',flag:'🇮🇹',dial:'+39',currency:'EUR',symbol:'€',payMethod:'ton'},
+  {iso:'ES',name:'Spain',flag:'🇪🇸',dial:'+34',currency:'EUR',symbol:'€',payMethod:'ton'},
+  {iso:'NL',name:'Netherlands',flag:'🇳🇱',dial:'+31',currency:'EUR',symbol:'€',payMethod:'ton'},
+  {iso:'BE',name:'Belgium',flag:'🇧🇪',dial:'+32',currency:'EUR',symbol:'€',payMethod:'ton'},
+  {iso:'CH',name:'Switzerland',flag:'🇨🇭',dial:'+41',currency:'CHF',symbol:'Fr',payMethod:'ton'},
+  {iso:'SE',name:'Sweden',flag:'🇸🇪',dial:'+46',currency:'SEK',symbol:'kr',payMethod:'ton'},
+  {iso:'NO',name:'Norway',flag:'🇳🇴',dial:'+47',currency:'NOK',symbol:'kr',payMethod:'ton'},
+  {iso:'DK',name:'Denmark',flag:'🇩🇰',dial:'+45',currency:'DKK',symbol:'kr',payMethod:'ton'},
+  {iso:'FI',name:'Finland',flag:'🇫🇮',dial:'+358',currency:'EUR',symbol:'€',payMethod:'ton'},
+  {iso:'PL',name:'Poland',flag:'🇵🇱',dial:'+48',currency:'PLN',symbol:'zł',payMethod:'ton'},
+  {iso:'CZ',name:'Czech Republic',flag:'🇨🇿',dial:'+420',currency:'CZK',symbol:'Kč',payMethod:'ton'},
+  {iso:'RU',name:'Russia',flag:'🇷🇺',dial:'+7',currency:'RUB',symbol:'₽',payMethod:'ton'},
+  {iso:'UA',name:'Ukraine',flag:'🇺🇦',dial:'+380',currency:'UAH',symbol:'₴',payMethod:'ton'},
+  {iso:'TR',name:'Turkey',flag:'🇹🇷',dial:'+90',currency:'TRY',symbol:'₺',payMethod:'ton'},
+  {iso:'IN',name:'India',flag:'🇮🇳',dial:'+91',currency:'INR',symbol:'₹',payMethod:'ton'},
+  {iso:'CN',name:'China',flag:'🇨🇳',dial:'+86',currency:'CNY',symbol:'¥',payMethod:'ton'},
+  {iso:'JP',name:'Japan',flag:'🇯🇵',dial:'+81',currency:'JPY',symbol:'¥',payMethod:'ton'},
+  {iso:'KR',name:'South Korea',flag:'🇰🇷',dial:'+82',currency:'KRW',symbol:'₩',payMethod:'ton'},
+  {iso:'ID',name:'Indonesia',flag:'🇮🇩',dial:'+62',currency:'IDR',symbol:'Rp',payMethod:'ton'},
+  {iso:'MY',name:'Malaysia',flag:'🇲🇾',dial:'+60',currency:'MYR',symbol:'RM',payMethod:'ton'},
+  {iso:'PH',name:'Philippines',flag:'🇵🇭',dial:'+63',currency:'PHP',symbol:'₱',payMethod:'ton'},
+  {iso:'TH',name:'Thailand',flag:'🇹🇭',dial:'+66',currency:'THB',symbol:'฿',payMethod:'ton'},
+  {iso:'VN',name:'Vietnam',flag:'🇻🇳',dial:'+84',currency:'VND',symbol:'₫',payMethod:'ton'},
+  {iso:'PK',name:'Pakistan',flag:'🇵🇰',dial:'+92',currency:'PKR',symbol:'₨',payMethod:'ton'},
+  {iso:'BD',name:'Bangladesh',flag:'🇧🇩',dial:'+880',currency:'BDT',symbol:'৳',payMethod:'ton'},
+  {iso:'SG',name:'Singapore',flag:'🇸🇬',dial:'+65',currency:'SGD',symbol:'S$',payMethod:'ton'},
+  {iso:'AE',name:'UAE',flag:'🇦🇪',dial:'+971',currency:'AED',symbol:'د.إ',payMethod:'ton'},
+  {iso:'SA',name:'Saudi Arabia',flag:'🇸🇦',dial:'+966',currency:'SAR',symbol:'﷼',payMethod:'ton'},
+  {iso:'QA',name:'Qatar',flag:'🇶🇦',dial:'+974',currency:'QAR',symbol:'﷼',payMethod:'ton'},
+  {iso:'KW',name:'Kuwait',flag:'🇰🇼',dial:'+965',currency:'KWD',symbol:'د.ك',payMethod:'ton'},
+  {iso:'BR',name:'Brazil',flag:'🇧🇷',dial:'+55',currency:'BRL',symbol:'R$',payMethod:'ton'},
+  {iso:'MX',name:'Mexico',flag:'🇲🇽',dial:'+52',currency:'MXN',symbol:'$',payMethod:'ton'},
+  {iso:'AR',name:'Argentina',flag:'🇦🇷',dial:'+54',currency:'ARS',symbol:'$',payMethod:'ton'},
+  {iso:'CO',name:'Colombia',flag:'🇨🇴',dial:'+57',currency:'COP',symbol:'$',payMethod:'ton'},
+  {iso:'CL',name:'Chile',flag:'🇨🇱',dial:'+56',currency:'CLP',symbol:'$',payMethod:'ton'},
+  {iso:'PE',name:'Peru',flag:'🇵🇪',dial:'+51',currency:'PEN',symbol:'S/',payMethod:'ton'},
+  {iso:'NZ',name:'New Zealand',flag:'🇳🇿',dial:'+64',currency:'NZD',symbol:'NZ$',payMethod:'ton'},
+  {iso:'AT',name:'Austria',flag:'🇦🇹',dial:'+43',currency:'EUR',symbol:'€',payMethod:'ton'},
+  {iso:'PT',name:'Portugal',flag:'🇵🇹',dial:'+351',currency:'EUR',symbol:'€',payMethod:'ton'},
+  {iso:'GR',name:'Greece',flag:'🇬🇷',dial:'+30',currency:'EUR',symbol:'€',payMethod:'ton'},
+  {iso:'HU',name:'Hungary',flag:'🇭🇺',dial:'+36',currency:'HUF',symbol:'Ft',payMethod:'ton'},
+  {iso:'RO',name:'Romania',flag:'🇷🇴',dial:'+40',currency:'RON',symbol:'lei',payMethod:'ton'},
+  {iso:'BG',name:'Bulgaria',flag:'🇧🇬',dial:'+359',currency:'BGN',symbol:'лв',payMethod:'ton'},
+  {iso:'HR',name:'Croatia',flag:'🇭🇷',dial:'+385',currency:'EUR',symbol:'€',payMethod:'ton'},
+  {iso:'SK',name:'Slovakia',flag:'🇸🇰',dial:'+421',currency:'EUR',symbol:'€',payMethod:'ton'},
+  {iso:'IL',name:'Israel',flag:'🇮🇱',dial:'+972',currency:'ILS',symbol:'₪',payMethod:'ton'},
+  {iso:'NG',name:'Nigeria',flag:'🇳🇬',dial:'+234',currency:'NGN',symbol:'₦',payMethod:'paystack'},
 ];
 
-// Get country by ISO code
-function getCountryByIso(iso){ return COUNTRIES.find(c=>c.iso===iso.toUpperCase())||null; }
+// Remove duplicate NG
+const seen = new Set();
+export const COUNTRIES_UNIQUE = COUNTRIES.filter(c => {
+  if(seen.has(c.iso)) return false;
+  seen.add(c.iso);
+  return true;
+});
 
-// Get country by dial code
-function getCountryByDial(dial){ return COUNTRIES.find(c=>c.dial===dial)||null; }
+// Re-export as COUNTRIES (deduplicated, Nigeria first)
+const NG = COUNTRIES_UNIQUE.find(c => c.iso === 'NG');
+const rest = COUNTRIES_UNIQUE.filter(c => c.iso !== 'NG');
+export { COUNTRIES_UNIQUE as COUNTRIES };
 
-// Search countries (name or dial)
-function searchCountries(q){
-  if(!q) return COUNTRIES;
-  const s = q.toLowerCase().replace(/^\+/,'');
-  return COUNTRIES.filter(c=>
-    c.name.toLowerCase().includes(s) ||
-    c.dial.replace('+','').includes(s) ||
-    c.iso.toLowerCase().includes(s) ||
-    c.currency.toLowerCase().includes(s) ||
-    c.lang.toLowerCase().includes(s)
-  );
-}
-
-// Detect country from IP (free API)
-async function detectCountryFromIP(){
-  try{
-    const r = await fetch('https://ipapi.co/json/');
-    const d = await r.json();
-    return getCountryByIso(d.country_code || 'US') || COUNTRIES.find(c=>c.iso==='US');
-  } catch{
-    return COUNTRIES.find(c=>c.iso==='US');
+// ── Auto-detect country from IP ──────────────
+export async function detectCountryFromIP() {
+  try {
+    const res  = await fetch('https://ipapi.co/json/');
+    const data = await res.json();
+    const iso  = data.country_code;
+    return COUNTRIES_UNIQUE.find(c => c.iso === iso) || null;
+  } catch(e) {
+    // Default to Nigeria if detection fails
+    return COUNTRIES_UNIQUE.find(c => c.iso === 'NG');
   }
 }
 
-export { COUNTRIES, getCountryByIso, getCountryByDial, searchCountries, detectCountryFromIP };
+// ── African country ISO codes ─────────────────
+export const AFRICAN_ISOS = [
+  'NG','GH','KE','ZA','EG','ET','TZ','UG','RW','SN','CI','CM','AO',
+  'MZ','ZM','ZW','MA','DZ','TN','LY','SD','SO','MW','BJ','TG','NE',
+  'ML','BF','GN','SL','LR','GM','MR','NA','BW','LS','SZ','MG','MU',
+  'CV','CD','CG','GA','GQ','ST','KM','ER','DJ','SS','CF','TD','SC','RE'
+];
+
+export function isAfrican(iso) {
+  return AFRICAN_ISOS.includes((iso || '').toUpperCase());
+}
+
+export function getPaymentMethod(iso) {
+  return isAfrican(iso) ? 'paystack' : 'ton';
+}

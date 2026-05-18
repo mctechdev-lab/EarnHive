@@ -9,7 +9,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--blue:#1A56DB;--blue-dark:#1040B0;--blue-light:#EBF2FF;--blue-pale:#F0F6FF;--text:#080F1E;--text-mid:#334155;--text-soft:#64748B;--border:#DBEAFE;--off:#F7FAFF;--error:#EF4444;--success:#10B981;--shadow:0 8px 32px rgba(26,86,219,0.12)}
+:root{
+  --blue:#1A56DB;--blue-dark:#1040B0;--blue-light:#EBF2FF;--blue-pale:#F0F6FF;
+  --text:#080F1E;--text-mid:#334155;--text-soft:#64748B;--border:#DBEAFE;
+  --off:#F7FAFF;--error:#EF4444;--success:#10B981;
+  --shadow:0 8px 32px rgba(26,86,219,0.12);
+}
 body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);min-height:100vh;display:grid;grid-template-columns:1fr 1fr}
 
 /* LEFT */
@@ -23,92 +28,151 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);mi
 .lp-content{position:relative;z-index:1}
 .lp-content h2{font-family:'Clash Display',sans-serif;font-size:36px;font-weight:700;color:white;line-height:1.2;margin-bottom:16px;letter-spacing:-1px}
 .lp-content p{color:rgba(255,255,255,0.7);font-size:15px;line-height:1.75;margin-bottom:32px;font-weight:300}
-.perk{display:flex;align-items:center;gap:14px;margin-bottom:16px;transition:transform .2s}
+.perk{display:flex;align-items:center;gap:14px;margin-bottom:14px;transition:transform .2s}
 .perk:hover{transform:translateX(4px)}
-.perk-icon{width:40px;height:40px;background:rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.perk-icon{width:38px;height:38px;background:rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
 .perk:hover .perk-icon{background:rgba(255,255,255,0.22)}
-.perk-icon i{color:white;font-size:16px}
+.perk-icon i{color:white;font-size:15px}
 .perk-text{color:rgba(255,255,255,0.85);font-size:14px}
+
+/* PAYMENT BADGE */
+.pay-badge{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:14px;padding:16px;margin-top:24px}
+.pb-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,0.5);margin-bottom:12px}
+.pb-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pb-row:last-child{margin-bottom:0}
+.pb-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pb-icon i{font-size:14px}
+.pb-green{background:rgba(34,197,94,0.2)}.pb-green i{color:#4ADE80}
+.pb-blue{background:rgba(96,165,250,0.2)}.pb-blue i{color:#93C5FD}
+.pb-info{font-size:13px;color:rgba(255,255,255,0.8);font-weight:500}
+.pb-sub{font-size:11px;color:rgba(255,255,255,0.45);margin-top:1px}
+
 .lp-footer{color:rgba(255,255,255,0.35);font-size:13px;position:relative;z-index:1}
 
 /* RIGHT */
-.right-panel{display:flex;align-items:flex-start;justify-content:center;padding:40px 48px;overflow-y:auto}
-.form-box{width:100%;max-width:440px;padding:20px 0}
-.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--text-soft);font-size:13px;text-decoration:none;margin-bottom:24px;transition:color .2s}
+.right-panel{display:flex;align-items:flex-start;justify-content:center;padding:36px 44px;overflow-y:auto}
+.form-box{width:100%;max-width:460px;padding:16px 0 40px}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--text-soft);font-size:13px;text-decoration:none;margin-bottom:20px;transition:color .2s}
 .back-link:hover{color:var(--blue)}
-.form-title{font-family:'Clash Display',sans-serif;font-size:28px;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-.5px}
-.form-sub{font-size:15px;color:var(--text-soft);margin-bottom:24px}
+.form-title{font-family:'Clash Display',sans-serif;font-size:26px;font-weight:700;color:var(--text);margin-bottom:5px;letter-spacing:-.5px}
+.form-sub{font-size:14px;color:var(--text-soft);margin-bottom:20px}
 .form-sub a{color:var(--blue);text-decoration:none;font-weight:500}
 
 /* STEPS */
-.steps-row{display:flex;align-items:center;gap:0;margin-bottom:28px}
-.step-dot{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;border:2px solid var(--border);background:white;font-family:'Clash Display',sans-serif;font-size:13px;font-weight:700;color:var(--text-soft);flex-shrink:0;transition:all .3s}
-.step-dot.active{background:var(--blue);border-color:var(--blue);color:white}
-.step-dot.done{background:var(--success);border-color:var(--success);color:white}
-.step-line{flex:1;height:2px;background:var(--border);transition:background .3s}
+.steps-wrap{margin-bottom:24px}
+.steps-row{display:flex;align-items:center}
+.step-item{display:flex;flex-direction:column;align-items:center;gap:4px}
+.step-circle{width:30px;height:30px;border-radius:50%;border:2px solid var(--border);background:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--text-soft);transition:all .3s;flex-shrink:0}
+.step-circle.active{background:var(--blue);border-color:var(--blue);color:white}
+.step-circle.done{background:var(--success);border-color:var(--success);color:white}
+.step-label{font-size:10px;font-weight:600;color:var(--text-soft);white-space:nowrap}
+.step-label.active{color:var(--blue)}
+.step-label.done{color:var(--success)}
+.step-line{flex:1;height:2px;background:var(--border);transition:background .3s;margin:0 4px;margin-bottom:16px}
 .step-line.done{background:var(--success)}
-.step-label{font-size:10px;color:var(--text-soft);margin-top:6px;text-align:center;font-weight:500}
 
 /* ALERT */
-.alert{padding:13px 16px;border-radius:12px;font-size:14px;margin-bottom:16px;display:none;align-items:center;gap:10px;line-height:1.5}
-.alert i{font-size:16px;flex-shrink:0}
+.alert{padding:12px 16px;border-radius:12px;font-size:14px;margin-bottom:14px;display:none;align-items:center;gap:10px;line-height:1.5}
+.alert i{font-size:15px;flex-shrink:0}
 .alert.error{background:#FEF2F2;color:#DC2626;border:1px solid #FECACA;display:flex}
 .alert.success{background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0;display:flex}
 .alert.info{background:var(--blue-pale);color:var(--blue);border:1px solid rgba(26,86,219,.2);display:flex}
 
 /* FORM */
-.form-group{margin-bottom:16px}
-.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.form-label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px}
+.form-group{margin-bottom:14px}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-label{display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
 .input-wrap{position:relative}
-.input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-soft);font-size:14px;pointer-events:none}
+.input-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--text-soft);font-size:13px;pointer-events:none;transition:color .2s}
 .input-wrap:focus-within .input-icon{color:var(--blue)}
-.pw-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--text-soft);font-size:13px;cursor:pointer;background:none;border:none;padding:4px;transition:color .2s}
+.pw-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-soft);font-size:13px;cursor:pointer;background:none;border:none;padding:4px;transition:color .2s}
 .pw-toggle:hover{color:var(--blue)}
-input,select{width:100%;padding:12px 14px 12px 42px;border:1.5px solid var(--border);border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);background:white;outline:none;transition:border-color .25s,box-shadow .25s;-webkit-appearance:none}
-select{padding:12px 14px 12px 42px;cursor:pointer}
-input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,86,219,0.08)}
+input,select{width:100%;padding:11px 14px 11px 38px;border:1.5px solid var(--border);border-radius:11px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);background:white;outline:none;transition:border-color .25s,box-shadow .25s;-webkit-appearance:none}
+input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,219,0.08)}
+input::placeholder{color:#94A3B8}
 
-/* PASSWORD STRENGTH */
-.strength-bar{height:4px;border-radius:2px;background:var(--border);margin-top:8px;overflow:hidden}
+/* COUNTRY SELECTOR */
+.country-wrap{position:relative}
+.country-btn{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:11px;background:white;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .25s;text-align:left}
+.country-btn:hover,.country-btn.open{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,219,0.08)}
+.cb-flag{font-size:18px;flex-shrink:0}
+.cb-name{flex:1;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif}
+.cb-dial{font-size:13px;color:var(--text-soft);font-weight:600}
+.cb-chev{color:var(--text-soft);font-size:11px;transition:transform .2s;margin-left:4px}
+.country-btn.open .cb-chev{transform:rotate(180deg)}
+
+/* PAY METHOD INDICATOR */
+.pay-method-row{display:flex;align-items:center;gap:8px;margin-top:6px;padding:10px 12px;border-radius:10px;font-size:13px;font-weight:500}
+.pm-paystack{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.pm-ton{background:var(--blue-pale);color:var(--blue);border:1px solid rgba(26,86,219,.15)}
+.pm-paystack i{color:#2E7D32}
+.pm-ton i{color:var(--blue)}
+
+/* COUNTRY DROPDOWN */
+.country-drop{position:absolute;top:calc(100% + 6px);left:0;right:0;background:white;border:1.5px solid var(--border);border-radius:14px;z-index:999;overflow:hidden;display:none;box-shadow:0 16px 48px rgba(26,86,219,0.15)}
+.country-drop.open{display:block}
+.cd-search{padding:10px 12px;border-bottom:1px solid var(--border);position:relative}
+.cd-search input{padding:8px 12px 8px 34px;font-size:13px;border-radius:8px;border:1.5px solid var(--border)}
+.cd-search .input-icon{top:50%;transform:translateY(-50%)}
+.cd-list{max-height:200px;overflow-y:auto;padding:6px}
+.cd-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;cursor:pointer;transition:background .15s}
+.cd-item:hover{background:var(--blue-pale)}
+.cd-item.selected{background:var(--blue-light)}
+.cd-flag{font-size:18px;flex-shrink:0}
+.cd-cname{flex:1;font-size:13px;font-weight:500;color:var(--text)}
+.cd-dial{font-size:12px;color:var(--text-soft);font-weight:600}
+.cd-pay{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;margin-left:4px}
+.cp-paystack{background:#E8F5E9;color:#1B5E20}
+.cp-ton{background:var(--blue-light);color:var(--blue)}
+.cd-none{padding:20px;text-align:center;color:var(--text-soft);font-size:13px}
+
+/* PHONE ROW */
+.phone-row{display:flex;gap:0}
+.phone-dial{display:flex;align-items:center;gap:6px;padding:11px 12px;border:1.5px solid var(--border);border-right:none;border-radius:11px 0 0 11px;background:white;font-size:13px;font-weight:600;color:var(--text-mid);flex-shrink:0;min-width:80px;cursor:pointer;transition:border-color .2s}
+.phone-dial:hover{border-color:var(--blue)}
+.phone-dial-flag{font-size:16px}
+.phone-input-field{border-radius:0 11px 11px 0 !important;border-left:1px solid var(--border) !important;padding-left:14px !important}
+
+/* PWD STRENGTH */
+.strength-bar{height:3px;border-radius:2px;background:var(--border);margin-top:6px;overflow:hidden}
 .strength-fill{height:100%;border-radius:2px;transition:all .4s}
-.strength-text{font-size:11px;margin-top:4px;font-weight:500}
+.strength-text{font-size:11px;margin-top:3px;font-weight:600}
 
 /* ACCOUNT TYPE */
-.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.type-card{border:2px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;transition:all .25s;text-align:center;background:white}
+.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.type-card{border:2px solid var(--border);border-radius:13px;padding:14px;cursor:pointer;transition:all .25s;text-align:center;background:white}
 .type-card:hover{border-color:var(--blue);background:var(--blue-pale)}
 .type-card.selected{border-color:var(--blue);background:var(--blue-pale)}
-.type-card-icon{width:44px;height:44px;border-radius:12px;background:var(--off);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;transition:background .2s}
+.type-card-icon{width:42px;height:42px;border-radius:11px;background:var(--off);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;transition:background .2s}
 .type-card.selected .type-card-icon{background:var(--blue-light)}
-.type-card-icon i{font-size:20px;color:var(--text-soft);transition:color .2s}
+.type-card-icon i{font-size:18px;color:var(--text-soft);transition:color .2s}
 .type-card.selected .type-card-icon i{color:var(--blue)}
-.type-card-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
-.type-card-desc{font-size:12px;color:var(--text-soft);line-height:1.4}
-.type-card-age{font-size:11px;font-weight:600;margin-top:6px;padding:2px 8px;border-radius:50px;display:inline-block}
+.type-card-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.type-card-desc{font-size:11px;color:var(--text-soft);line-height:1.4}
+.type-age{font-size:10px;font-weight:700;margin-top:5px;padding:2px 7px;border-radius:50px;display:inline-block}
 .age-any{background:#D1FAE5;color:#065F46}
 .age-18{background:var(--blue-light);color:var(--blue)}
 
 /* BUTTONS */
-.btn-full{width:100%;padding:14px;background:var(--blue);color:white;border:none;border-radius:12px;font-size:15px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px}
+.btn-full{width:100%;padding:13px;background:var(--blue);color:white;border:none;border-radius:11px;font-size:15px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px}
 .btn-full:hover{background:var(--blue-dark);transform:translateY(-1px);box-shadow:0 8px 24px rgba(26,86,219,0.3)}
 .btn-full:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
-.btn-full i{font-size:14px;transition:transform .2s}
+.btn-full i{font-size:13px;transition:transform .2s}
 .btn-full:hover:not(:disabled) i{transform:translateX(3px)}
-.btn-outline{width:100%;padding:13px;background:white;border:1.5px solid var(--border);border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .25s;font-weight:500}
+.btn-outline{width:100%;padding:12px;background:white;border:1.5px solid var(--border);border-radius:11px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .25s;font-weight:500}
 .btn-outline:hover{border-color:var(--blue);background:var(--blue-pale)}
-.btn-back{width:100%;padding:11px;background:none;border:none;color:var(--text-soft);font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px;transition:color .2s}
-.btn-back:hover{color:var(--blue)}
-.divider{display:flex;align-items:center;gap:12px;margin:16px 0;color:var(--text-soft);font-size:13px}
+.btn-back-small{width:100%;padding:10px;background:none;border:none;color:var(--text-soft);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px;transition:color .2s}
+.btn-back-small:hover{color:var(--blue)}
+.divider{display:flex;align-items:center;gap:12px;margin:14px 0;color:var(--text-soft);font-size:13px}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
-.terms-note{font-size:12px;color:var(--text-soft);text-align:center;margin-top:12px;line-height:1.6}
+.terms-note{font-size:12px;color:var(--text-soft);text-align:center;margin-top:10px;line-height:1.6}
 .terms-note a{color:var(--blue);text-decoration:none}
 
 /* SUCCESS */
-.success-screen{text-align:center;padding:20px 0}
-.success-icon{width:80px;height:80px;background:#D1FAE5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;animation:popIn .4s ease}
-@keyframes popIn{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
-.success-icon i{color:var(--success);font-size:36px}
+.success-screen{text-align:center;padding:16px 0}
+.success-icon{width:76px;height:76px;background:#D1FAE5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;animation:popIn .4s ease}
+@keyframes popIn{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.success-icon i{color:var(--success);font-size:34px}
 
 /* PANEL */
 .panel{animation:fadeIn .3s ease}
@@ -116,15 +180,15 @@ input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,8
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* SPINNER */
-.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.spinner{width:17px;height:17px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-@media(max-width:768px){body{grid-template-columns:1fr}.left-panel{display:none}.right-panel{padding:28px 24px;align-items:flex-start;min-height:100vh}}
-@media(max-width:360px){.form-row-2{grid-template-columns:1fr}}
+@media(max-width:768px){body{grid-template-columns:1fr}.left-panel{display:none}.right-panel{padding:24px 20px;min-height:100vh}}
 </style>
 </head>
 <body>
 
+<!-- LEFT PANEL -->
 <div class="left-panel">
   <div class="left-dots"></div>
   <a href="index.html" class="lp-logo">
@@ -133,16 +197,33 @@ input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,8
   </a>
   <div class="lp-content">
     <h2>Start earning<br>TON crypto<br>today.</h2>
-    <p>Join thousands of people completing simple tasks and getting paid in TON. Free to join, free forever.</p>
+    <p>Join thousands of people completing simple tasks and getting paid instantly. Free to join, free forever. Any age welcome.</p>
     <div class="perk"><div class="perk-icon"><i class="fa-solid fa-gem"></i></div><span class="perk-text">Earn TON crypto — withdraw anytime</span></div>
-    <div class="perk"><div class="perk-icon"><i class="fa-solid fa-bolt"></i></div><span class="perk-text">Tasks take 1 to 10 minutes each</span></div>
-    <div class="perk"><div class="perk-icon"><i class="fa-solid fa-earth-africa"></i></div><span class="perk-text">Available in Nigeria and 100+ countries</span></div>
     <div class="perk"><div class="perk-icon"><i class="fa-solid fa-users"></i></div><span class="perk-text">Any age can earn — teenagers welcome</span></div>
+    <div class="perk"><div class="perk-icon"><i class="fa-solid fa-earth-africa"></i></div><span class="perk-text">Available in 195 countries worldwide</span></div>
     <div class="perk"><div class="perk-icon"><i class="fa-solid fa-shield-halved"></i></div><span class="perk-text">100% free — no hidden fees ever</span></div>
+    <div class="pay-badge">
+      <div class="pb-title">Payment Methods</div>
+      <div class="pb-row">
+        <div class="pb-icon pb-green"><i class="fa-solid fa-credit-card"></i></div>
+        <div>
+          <div class="pb-info">Paystack — Bank / Card</div>
+          <div class="pb-sub">Nigeria &amp; African countries</div>
+        </div>
+      </div>
+      <div class="pb-row">
+        <div class="pb-icon pb-blue"><i class="fa-solid fa-gem"></i></div>
+        <div>
+          <div class="pb-info">TON Crypto</div>
+          <div class="pb-sub">Rest of the world</div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="lp-footer">&copy; 2025 EarnHive by MC TECH &mdash; Chibuzor Michael</div>
 </div>
 
+<!-- RIGHT PANEL -->
 <div class="right-panel">
   <div class="form-box">
     <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to home</a>
@@ -150,18 +231,29 @@ input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,8
     <p class="form-sub">Already have one? <a href="login.html">Log in &rarr;</a></p>
 
     <!-- STEP INDICATOR -->
-    <div id="step-indicator" style="margin-bottom:28px">
+    <div class="steps-wrap" id="step-indicator">
       <div class="steps-row">
-        <div><div class="step-dot active" id="dot-1">1</div></div>
+        <div class="step-item">
+          <div class="step-circle active" id="dot-1">1</div>
+        </div>
         <div class="step-line" id="line-1"></div>
-        <div><div class="step-dot" id="dot-2">2</div></div>
+        <div class="step-item">
+          <div class="step-circle" id="dot-2">2</div>
+        </div>
         <div class="step-line" id="line-2"></div>
-        <div><div class="step-dot" id="dot-3">3</div></div>
+        <div class="step-item">
+          <div class="step-circle" id="dot-3">3</div>
+        </div>
+        <div class="step-line" id="line-3"></div>
+        <div class="step-item">
+          <div class="step-circle" id="dot-4">4</div>
+        </div>
       </div>
-      <div style="display:grid;grid-template-columns:32px 1fr 32px 1fr 32px;margin-top:6px;text-align:center">
-        <div class="step-label">Info</div><div></div>
-        <div class="step-label">Password</div><div></div>
-        <div class="step-label">Type</div>
+      <div style="display:flex;justify-content:space-between;margin-top:4px">
+        <span class="step-label active" id="label-1">Details</span>
+        <span class="step-label" id="label-2">Country</span>
+        <span class="step-label" id="label-3">Password</span>
+        <span class="step-label" id="label-4">Account</span>
       </div>
     </div>
 
@@ -193,14 +285,7 @@ input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,8
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label">Phone Number <span style="color:var(--text-soft);font-weight:400">(optional)</span></label>
-        <div class="input-wrap">
-          <i class="fa-solid fa-phone input-icon"></i>
-          <input type="tel" id="reg-phone" placeholder="+234 801 234 5678"/>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Referral Code <span style="color:var(--text-soft);font-weight:400">(optional)</span></label>
+        <label class="form-label">Referral Code <span style="color:var(--text-soft);font-weight:400;text-transform:none">(optional)</span></label>
         <div class="input-wrap">
           <i class="fa-solid fa-tag input-icon"></i>
           <input type="text" id="reg-ref" placeholder="e.g. EHAB12" style="text-transform:uppercase"/>
@@ -209,13 +294,55 @@ input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,8
       <button class="btn-full" onclick="nextStep(1)">Continue <i class="fa-solid fa-arrow-right"></i></button>
       <div class="divider">or</div>
       <button class="btn-outline" onclick="doGoogle()">
-        <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/></svg>
+        <svg width="17" height="17" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/></svg>
         Sign up with Google
       </button>
+      <p class="terms-note">By signing up you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a></p>
     </div>
 
-    <!-- STEP 2: Password -->
+    <!-- STEP 2: Country + Phone -->
     <div id="step-2" class="panel hidden">
+      <div class="form-group">
+        <label class="form-label">Your Country</label>
+        <div class="country-wrap">
+          <button class="country-btn" id="country-btn" onclick="toggleCountryDrop()" type="button">
+            <span class="cb-flag" id="cb-flag">&#127988;</span>
+            <span class="cb-name" id="cb-name">Select your country...</span>
+            <span class="cb-dial" id="cb-dial"></span>
+            <i class="fa-solid fa-chevron-down cb-chev" id="cb-chev"></i>
+          </button>
+          <div class="country-drop" id="country-drop">
+            <div class="cd-search">
+              <div class="input-wrap">
+                <i class="fa-solid fa-magnifying-glass input-icon"></i>
+                <input type="text" id="country-search" placeholder="Search country..." oninput="filterCountries(this.value)" onclick="event.stopPropagation()"/>
+              </div>
+            </div>
+            <div class="cd-list" id="country-list"></div>
+          </div>
+        </div>
+        <!-- Payment method indicator -->
+        <div id="pay-method-indicator" style="display:none" class="pay-method-row pm-paystack">
+          <i class="fa-solid fa-circle-info"></i>
+          <span id="pay-method-text"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone Number <span style="color:var(--text-soft);font-weight:400;text-transform:none">(optional)</span></label>
+        <div class="phone-row">
+          <div class="phone-dial" id="phone-dial-btn" onclick="toggleCountryDrop()">
+            <span class="phone-dial-flag" id="dial-flag">&#127988;</span>
+            <span id="dial-code" style="font-size:12px;font-weight:700;color:var(--text-soft)"></span>
+          </div>
+          <input type="tel" id="reg-phone" class="phone-input-field" placeholder="801 234 5678" style="flex:1"/>
+        </div>
+      </div>
+      <button class="btn-full" onclick="nextStep(2)">Continue <i class="fa-solid fa-arrow-right"></i></button>
+      <button class="btn-back-small" onclick="goBack(2)"><i class="fa-solid fa-arrow-left" style="font-size:11px"></i> Back</button>
+    </div>
+
+    <!-- STEP 3: Password -->
+    <div id="step-3" class="panel hidden">
       <div class="form-group">
         <label class="form-label">Create Password</label>
         <div class="input-wrap">
@@ -234,34 +361,34 @@ input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,8
           <button class="pw-toggle" onclick="togglePw('reg-confirm','eye-confirm')"><i id="eye-confirm" class="fa-regular fa-eye"></i></button>
         </div>
       </div>
-      <button class="btn-full" onclick="nextStep(2)">Continue <i class="fa-solid fa-arrow-right"></i></button>
-      <button class="btn-back" onclick="goBack(2)"><i class="fa-solid fa-arrow-left" style="font-size:12px"></i> Back</button>
+      <button class="btn-full" onclick="nextStep(3)">Continue <i class="fa-solid fa-arrow-right"></i></button>
+      <button class="btn-back-small" onclick="goBack(3)"><i class="fa-solid fa-arrow-left" style="font-size:11px"></i> Back</button>
     </div>
 
-    <!-- STEP 3: Account Type -->
-    <div id="step-3" class="panel hidden">
-      <p style="font-size:14px;color:var(--text-soft);margin-bottom:16px;line-height:1.6">How will you use EarnHive?</p>
+    <!-- STEP 4: Account Type -->
+    <div id="step-4" class="panel hidden">
+      <p style="font-size:13px;color:var(--text-soft);margin-bottom:14px;line-height:1.6">How will you use EarnHive?</p>
       <div class="type-grid">
         <div class="type-card selected" id="card-earner" onclick="selectType('earner')">
           <div class="type-card-icon"><i class="fa-solid fa-coins"></i></div>
           <div class="type-card-title">I want to Earn</div>
-          <div class="type-card-desc">Complete tasks and earn TON crypto</div>
-          <span class="type-card-age age-any"><i class="fa-solid fa-check" style="font-size:9px"></i> Any age welcome</span>
+          <div class="type-card-desc">Complete tasks, earn money</div>
+          <span class="type-age age-any"><i class="fa-solid fa-check" style="font-size:8px"></i> Any age</span>
         </div>
         <div class="type-card" id="card-advertiser" onclick="selectType('advertiser')">
           <div class="type-card-icon"><i class="fa-solid fa-bullhorn"></i></div>
           <div class="type-card-title">I want to Advertise</div>
-          <div class="type-card-desc">Post tasks and promote my business</div>
-          <span class="type-card-age age-18"><i class="fa-solid fa-shield-halved" style="font-size:9px"></i> 18+ only</span>
+          <div class="type-card-desc">Post tasks, promote business</div>
+          <span class="type-age age-18"><i class="fa-solid fa-shield-halved" style="font-size:8px"></i> 18+ only</span>
         </div>
       </div>
-      <div id="age-warning" class="alert info hidden" style="margin-bottom:14px">
-        <i class="fa-solid fa-circle-info"></i> Advertisers must be 18 years or older. You confirm you meet this requirement.
+      <div id="age-warning" style="display:none" class="alert info">
+        <i class="fa-solid fa-circle-info"></i> Advertisers must be 18 years or older to post tasks and make payments.
       </div>
       <button class="btn-full" id="btn-create" onclick="createAccount()">
         <i class="fa-solid fa-user-plus"></i> Create My Account
       </button>
-      <button class="btn-back" onclick="goBack(3)"><i class="fa-solid fa-arrow-left" style="font-size:12px"></i> Back</button>
+      <button class="btn-back-small" onclick="goBack(4)"><i class="fa-solid fa-arrow-left" style="font-size:11px"></i> Back</button>
     </div>
 
     <!-- SUCCESS SCREEN -->
@@ -270,69 +397,142 @@ input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,8
         <div class="success-icon"><i class="fa-solid fa-check"></i></div>
         <div style="font-family:'Clash Display',sans-serif;font-size:24px;font-weight:700;margin-bottom:8px">Account Created!</div>
         <div style="font-size:14px;color:var(--text-soft);line-height:1.7;margin-bottom:6px">We sent a verification email to:</div>
-        <div id="success-email" style="font-weight:600;color:var(--blue);font-size:15px;margin-bottom:20px"></div>
-        <div style="font-size:14px;color:var(--text-soft);line-height:1.7;margin-bottom:24px">Please check your inbox and click the verification link before logging in.</div>
+        <div id="success-email" style="font-weight:600;color:var(--blue);font-size:15px;margin-bottom:8px"></div>
+        <div id="success-pay-info" style="background:var(--blue-pale);border:1px solid rgba(26,86,219,.15);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--blue);margin-bottom:18px;display:flex;align-items:center;gap:8px"></div>
+        <div style="font-size:13px;color:var(--text-soft);line-height:1.7;margin-bottom:20px">Please verify your email before logging in.</div>
         <button class="btn-full" onclick="window.location.href='login.html'">
           <i class="fa-solid fa-right-to-bracket"></i> Go to Login
         </button>
-        <button onclick="doResend()" style="width:100%;padding:11px;background:none;border:none;color:var(--blue);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;margin-top:8px">
+        <button onclick="doResend()" style="width:100%;padding:10px;background:none;border:none;color:var(--blue);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;margin-top:6px">
           <i class="fa-solid fa-rotate-right"></i> Resend verification email
         </button>
       </div>
     </div>
 
-    <p class="terms-note" id="terms-note">By creating an account you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.</p>
   </div>
 </div>
 
 <script type="module">
-import {
-  registerWithEmail, loginWithGoogle,
-  resendVerification, watchAuth, authError
-} from './firebase-auth.js';
+import { registerWithEmail, loginWithGoogle, resendVerification, watchAuth, authError } from './firebase-auth.js';
+import { COUNTRIES, detectCountryFromIP } from './countries.js';
 
-let selectedType = 'earner';
-let currentStep  = 1;
+// ── African countries that use Paystack ──────
+const AFRICAN_ISOS = ['NG','GH','KE','ZA','EG','ET','TZ','UG','RW','SN','CI','CM','AO','MZ','ZM','ZW','MA','DZ','TN','LY','SD','SO','MW','BJ','TG','NE','ML','BF','GN','SL','LR','GM','MR','ER','DJ','SS','CF','TD','CD','CG','GA','GQ','ST','CV','KM','MG','MU','SC','NA','BW','LS','SZ','RE'];
+
+function isAfrica(iso){ return AFRICAN_ISOS.includes(iso.toUpperCase()); }
+function getPayMethod(iso){ return isAfrica(iso) ? 'paystack' : 'ton'; }
+
+let selectedCountry = null;
+let selectedType    = 'earner';
 
 // Redirect if already logged in
-watchAuth(user => {
-  if (user && user.emailVerified) window.location.href = 'app.html';
+watchAuth(user => { if(user && user.emailVerified) window.location.href = 'app.html'; });
+
+// ── Build country list ───────────────────────
+function buildCountryList(filter=''){
+  const list = document.getElementById('country-list');
+  const items = filter
+    ? COUNTRIES.filter(c => c.name.toLowerCase().includes(filter.toLowerCase()) || c.dial.includes(filter))
+    : COUNTRIES;
+  if(!items.length){ list.innerHTML = '<div class="cd-none">No countries found</div>'; return; }
+  list.innerHTML = items.map(c => {
+    const method = getPayMethod(c.iso);
+    const payBadge = method === 'paystack'
+      ? '<span class="cd-pay cp-paystack">Paystack</span>'
+      : '<span class="cd-pay cp-ton">TON</span>';
+    return `<div class="cd-item ${selectedCountry?.iso===c.iso?'selected':''}" onclick="selectCountry('${c.iso}')">
+      <span class="cd-flag">${c.flag}</span>
+      <span class="cd-cname">${c.name}</span>
+      <span class="cd-dial">${c.dial}</span>
+      ${payBadge}
+    </div>`;
+  }).join('');
+}
+
+window.filterCountries = (q) => buildCountryList(q);
+
+window.selectCountry = (iso) => {
+  selectedCountry = COUNTRIES.find(c => c.iso === iso);
+  if(!selectedCountry) return;
+  // Update button
+  document.getElementById('cb-flag').textContent  = selectedCountry.flag;
+  document.getElementById('cb-name').textContent  = selectedCountry.name;
+  document.getElementById('cb-dial').textContent  = selectedCountry.dial;
+  document.getElementById('dial-flag').textContent = selectedCountry.flag;
+  document.getElementById('dial-code').textContent = selectedCountry.dial;
+  // Show payment method
+  const method = getPayMethod(selectedCountry.iso);
+  const ind = document.getElementById('pay-method-indicator');
+  const txt = document.getElementById('pay-method-text');
+  ind.style.display = 'flex';
+  ind.className = `pay-method-row ${method === 'paystack' ? 'pm-paystack' : 'pm-ton'}`;
+  txt.innerHTML = method === 'paystack'
+    ? '<i class="fa-solid fa-credit-card" style="margin-right:4px"></i> You will deposit and withdraw via <strong>Paystack</strong> (bank transfer / card)'
+    : '<i class="fa-solid fa-gem" style="margin-right:4px"></i> You will deposit and withdraw via <strong>TON crypto</strong>';
+  // Close dropdown
+  closeCountryDrop();
+  buildCountryList();
+};
+
+window.toggleCountryDrop = () => {
+  const drop = document.getElementById('country-drop');
+  const btn  = document.getElementById('country-btn');
+  const open = drop.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  document.getElementById('cb-chev').style.transform = open ? 'rotate(180deg)' : '';
+  if(open){ buildCountryList(); setTimeout(()=>document.getElementById('country-search').focus(),100); }
+};
+
+function closeCountryDrop(){
+  document.getElementById('country-drop').classList.remove('open');
+  document.getElementById('country-btn').classList.remove('open');
+  document.getElementById('cb-chev').style.transform = '';
+}
+
+// Close dropdown on outside click
+document.addEventListener('click', e => {
+  if(!e.target.closest('.country-wrap')) closeCountryDrop();
 });
 
-// Check URL for advertiser param
-if (new URLSearchParams(location.search).get('type') === 'advertiser') selectType('advertiser');
+// Auto-detect country on load
+detectCountryFromIP().then(c => {
+  if(c) selectCountry(c.iso);
+});
 
 // ── Step Navigation ──────────────────────────
 window.nextStep = (step) => {
-  if (step === 1) {
-    const fn    = document.getElementById('firstName').value.trim();
+  if(step === 1){
+    if(!document.getElementById('firstName').value.trim()){ showAlert('Please enter your first name.','error'); return; }
     const email = document.getElementById('reg-email').value.trim();
-    if (!fn)    { showAlert('Please enter your first name.', 'error'); return; }
-    if (!email || !email.includes('@')) { showAlert('Please enter a valid email address.', 'error'); return; }
+    if(!email || !email.includes('@')){ showAlert('Please enter a valid email address.','error'); return; }
   }
-  if (step === 2) {
+  if(step === 2){
+    if(!selectedCountry){ showAlert('Please select your country.','error'); return; }
+  }
+  if(step === 3){
     const pw = document.getElementById('reg-password').value;
     const cf = document.getElementById('reg-confirm').value;
-    if (pw.length < 8) { showAlert('Password must be at least 8 characters.', 'error'); return; }
-    if (pw !== cf)     { showAlert('Passwords do not match. Please try again.', 'error'); return; }
+    if(pw.length < 8){ showAlert('Password must be at least 8 characters.','error'); return; }
+    if(pw !== cf){ showAlert('Passwords do not match.','error'); return; }
   }
   goToStep(step + 1);
 };
 
 window.goBack = (step) => goToStep(step - 1);
 
-function goToStep(n) {
-  currentStep = n;
-  [1,2,3].forEach(i => {
+function goToStep(n){
+  [1,2,3,4].forEach(i => {
     document.getElementById(`step-${i}`).classList.toggle('hidden', i !== n);
-    const dot  = document.getElementById(`dot-${i}`);
-    const done = i < n;
-    const active = i === n;
+    const dot   = document.getElementById(`dot-${i}`);
+    const label = document.getElementById(`label-${i}`);
+    const done  = i < n;
+    const active= i === n;
     dot.classList.toggle('active', active);
     dot.classList.toggle('done',   done);
-    if (done) dot.innerHTML = '<i class="fa-solid fa-check" style="font-size:11px"></i>';
-    else dot.textContent = i;
-    if (i < 3) document.getElementById(`line-${i}`).classList.toggle('done', i < n);
+    dot.innerHTML = done ? '<i class="fa-solid fa-check" style="font-size:10px"></i>' : String(i);
+    label.classList.toggle('active', active);
+    label.classList.toggle('done',   done);
+    if(i < 4){ document.getElementById(`line-${i}`).classList.toggle('done', i < n); }
   });
   document.getElementById('alert-box').className = 'alert';
 }
@@ -344,39 +544,47 @@ window.selectType = (type) => {
     document.getElementById(`card-${t}`).classList.toggle('selected', t === type);
   });
   const warn = document.getElementById('age-warning');
-  warn.classList.toggle('hidden', type !== 'advertiser');
-  if (type !== 'advertiser') warn.style.display = '';
-  else warn.style.display = 'flex';
+  warn.style.display = type === 'advertiser' ? 'flex' : 'none';
 };
 
 // ── Create Account ───────────────────────────
 window.createAccount = async () => {
-  const btn  = document.getElementById('btn-create');
-  const fn   = document.getElementById('firstName').value.trim();
-  const ln   = document.getElementById('lastName').value.trim();
+  const btn   = document.getElementById('btn-create');
+  const fn    = document.getElementById('firstName').value.trim();
+  const ln    = document.getElementById('lastName').value.trim();
   const email = document.getElementById('reg-email').value.trim();
-  const pw   = document.getElementById('reg-password').value;
+  const pw    = document.getElementById('reg-password').value;
   const phone = document.getElementById('reg-phone').value.trim();
-  const ref  = document.getElementById('reg-ref').value.trim();
-
+  const ref   = document.getElementById('reg-ref').value.trim();
   setLoading(btn, true);
   try {
     const user = await registerWithEmail(email, pw, `${fn} ${ln}`.trim());
     const token = await user.getIdToken();
     await fetch('/api/auth?action=register', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-firebase-uid': user.uid, 'Authorization': `Bearer ${token}` },
+      headers: { 'Content-Type':'application/json','x-firebase-uid':user.uid,'Authorization':`Bearer ${token}` },
       body: JSON.stringify({
-        first_name: fn, last_name: ln, email, phone: phone || null,
-        account_type: selectedType, referral_code_used: ref || null
+        first_name: fn, last_name: ln, email,
+        phone: phone ? `${selectedCountry?.dial}${phone}` : null,
+        country_iso:    selectedCountry?.iso    || 'NG',
+        country_name:   selectedCountry?.name   || 'Nigeria',
+        currency:       selectedCountry?.currency || 'NGN',
+        currency_symbol:selectedCountry?.symbol  || '₦',
+        payment_method: getPayMethod(selectedCountry?.iso || 'NG'),
+        account_type:   selectedType,
+        referral_code_used: ref || null
       })
     });
+    // Show success
     document.getElementById('success-email').textContent = email;
-    document.getElementById('step-3').classList.add('hidden');
+    const method = getPayMethod(selectedCountry?.iso || 'NG');
+    document.getElementById('success-pay-info').innerHTML = method === 'paystack'
+      ? '<i class="fa-solid fa-credit-card"></i> Your account is set up for <strong>Paystack</strong> payments (bank/card)'
+      : '<i class="fa-solid fa-gem"></i> Your account is set up for <strong>TON crypto</strong> payments';
+    document.getElementById('step-4').classList.add('hidden');
     document.getElementById('step-success').classList.remove('hidden');
     document.getElementById('step-indicator').style.display = 'none';
-    document.getElementById('terms-note').style.display = 'none';
-  } catch (e) { showAlert(authError(e.code), 'error'); }
+  } catch(e){ showAlert(authError(e.code),'error'); }
   setLoading(btn, false, '<i class="fa-solid fa-user-plus"></i> Create My Account');
 };
 
@@ -385,25 +593,28 @@ window.doGoogle = async () => {
   try {
     const user = await loginWithGoogle();
     const token = await user.getIdToken();
+    const detectedCountry = selectedCountry || await detectCountryFromIP();
     await fetch('/api/auth?action=register', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-firebase-uid': user.uid, 'Authorization': `Bearer ${token}` },
+      headers: { 'Content-Type':'application/json','x-firebase-uid':user.uid,'Authorization':`Bearer ${token}` },
       body: JSON.stringify({
-        first_name: (user.displayName || 'User').split(' ')[0],
-        last_name:  (user.displayName || '').split(' ').slice(1).join(' '),
-        email: user.email, photo_url: user.photoURL, account_type: 'earner'
+        first_name: (user.displayName||'User').split(' ')[0],
+        last_name:  (user.displayName||'').split(' ').slice(1).join(' '),
+        email: user.email, photo_url: user.photoURL,
+        country_iso:    detectedCountry?.iso    || 'NG',
+        country_name:   detectedCountry?.name   || 'Nigeria',
+        currency:       detectedCountry?.currency|| 'NGN',
+        payment_method: getPayMethod(detectedCountry?.iso||'NG'),
+        account_type: 'earner'
       })
     });
     window.location.href = 'app.html';
-  } catch (e) { showAlert(authError(e.code), 'error'); }
+  } catch(e){ showAlert(authError(e.code),'error'); }
 };
 
-// ── Resend Verification ──────────────────────
 window.doResend = async () => {
-  try {
-    await resendVerification();
-    showAlert('Verification email sent! Check your inbox.', 'success');
-  } catch(e) { showAlert(authError(e.code), 'error'); }
+  try { await resendVerification(); showAlert('Verification email sent! Check your inbox.','success'); }
+  catch(e){ showAlert(authError(e.code),'error'); }
 };
 
 // ── Password Strength ────────────────────────
@@ -411,25 +622,25 @@ window.checkStrength = () => {
   const pw   = document.getElementById('reg-password').value;
   const fill = document.getElementById('strength-fill');
   const text = document.getElementById('strength-text');
-  if (!pw) { fill.style.width = '0'; text.textContent = ''; return; }
+  if(!pw){ fill.style.width='0'; text.textContent=''; return; }
   let score = 0;
-  if (pw.length >= 8)  score++;
-  if (pw.length >= 12) score++;
-  if (/[A-Z]/.test(pw)) score++;
-  if (/[0-9]/.test(pw)) score++;
-  if (/[^a-zA-Z0-9]/.test(pw)) score++;
-  const levels = [
-    { pct:'20%', color:'#EF4444', label:'Very weak' },
-    { pct:'40%', color:'#F97316', label:'Weak' },
-    { pct:'60%', color:'#F59E0B', label:'Fair' },
-    { pct:'80%', color:'#84CC16', label:'Strong' },
-    { pct:'100%',color:'#10B981', label:'Very strong' },
+  if(pw.length>=8)  score++;
+  if(pw.length>=12) score++;
+  if(/[A-Z]/.test(pw)) score++;
+  if(/[0-9]/.test(pw)) score++;
+  if(/[^a-zA-Z0-9]/.test(pw)) score++;
+  const levels=[
+    {pct:'20%',color:'#EF4444',label:'Very weak'},
+    {pct:'40%',color:'#F97316',label:'Weak'},
+    {pct:'60%',color:'#F59E0B',label:'Fair'},
+    {pct:'80%',color:'#84CC16',label:'Strong'},
+    {pct:'100%',color:'#10B981',label:'Very strong'},
   ];
-  const l = levels[Math.min(score, 4)];
-  fill.style.width  = l.pct;
+  const l = levels[Math.min(score,4)];
+  fill.style.width = l.pct;
   fill.style.background = l.color;
-  text.style.color  = l.color;
-  text.textContent  = l.label;
+  text.style.color = l.color;
+  text.textContent = l.label;
 };
 
 // ── Helpers ──────────────────────────────────
@@ -440,18 +651,21 @@ window.togglePw = (inputId, iconId) => {
   icon.className = input.type === 'password' ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash';
 };
 
-function showAlert(msg, type) {
+function showAlert(msg, type){
   const a = document.getElementById('alert-box');
-  const icons = { error:'circle-exclamation', success:'circle-check', info:'circle-info' };
+  const icons = {error:'circle-exclamation',success:'circle-check',info:'circle-info'};
   a.innerHTML = `<i class="fa-solid fa-${icons[type]}"></i> ${msg}`;
   a.className = `alert ${type}`;
-  setTimeout(() => { a.className = 'alert'; }, 6000);
+  setTimeout(()=>{ a.className='alert'; }, 6000);
 }
 
-function setLoading(btn, loading, orig) {
+function setLoading(btn, loading, orig){
   btn.disabled = loading;
   btn.innerHTML = loading ? '<span class="spinner"></span> Please wait...' : orig;
 }
+
+// Check URL for advertiser param
+if(new URLSearchParams(location.search).get('type')==='advertiser') selectType('advertiser');
 </script>
 </body>
 </html>
