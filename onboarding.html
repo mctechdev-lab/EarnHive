@@ -3,738 +3,575 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Setup Your Account — EarnHive</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23111'/%3E%3Cpolygon points='50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5' fill='%23F5B800' opacity='0.9'/%3E%3Ctext y='68' x='18' font-size='55' font-weight='900' fill='%23111' font-family='Arial'%3EEH%3C/text%3E%3C/svg%3E"/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<title>Welcome to EarnHive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --gold:#F5B800;--gold2:#E5A800;--gold-l:rgba(245,184,0,0.1);--gold-b:rgba(245,184,0,0.2);
-  --g:#16A34A;--g2:#15803D;--g-l:rgba(22,163,74,0.1);--g-b:rgba(22,163,74,0.2);
-  --dark:#080808;--dark2:#0F0F0F;--dark3:#161616;--dark4:#1C1C1C;
-  --text:#F5F5F5;--t2:#A8A8A8;--t3:#555;
-  --border:rgba(255,255,255,0.07);--border2:rgba(245,184,0,0.18);
-  --font-h:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;
+  --blue:#1A56DB;--blue-dark:#1040B0;--blue-light:#EBF2FF;--blue-pale:#F0F6FF;
+  --text:#080F1E;--text-mid:#334155;--text-soft:#64748B;--border:#DBEAFE;
+  --off:#F7FAFF;--success:#10B981;--gold:#F59E0B;
 }
-html,body{min-height:100%;font-family:var(--font-b);background:var(--dark);color:var(--text);overflow-x:hidden;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes slideRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(245,184,0,0.2)}50%{box-shadow:0 0 40px rgba(245,184,0,0.4)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text)}
 
-/* MAIN LAYOUT */
-.page{min-height:100vh;display:flex;flex-direction:column;background:var(--dark);}
-/* BG */
-.page-bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
-.bg-glow1{position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(245,184,0,0.05) 0%,transparent 65%);}
-.bg-glow2{position:absolute;bottom:-100px;right:0;width:400px;height:400px;background:radial-gradient(circle,rgba(22,163,74,0.04) 0%,transparent 65%);}
-.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.012) 1px,transparent 1px);background-size:70px 70px;mask-image:radial-gradient(ellipse 100% 80% at 50% 0%,black,transparent 80%);}
+/* FULL SCREEN WRAPPER */
+.ob-wrapper{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
+.ob-wrapper::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(26,86,219,0.06) 0%,transparent 70%);pointer-events:none}
+.ob-wrapper::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(245,158,11,0.05) 0%,transparent 70%);pointer-events:none}
 
-/* TOPBAR */
-.topbar{position:relative;z-index:10;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.logo-mark{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;animation:glow 3s ease-in-out infinite;}
-.logo-text{font-family:var(--font-h);font-size:19px;font-weight:800;color:var(--text);}
-.logo-text em{color:var(--gold);font-style:normal;}
-.topbar-right{font-size:13px;color:var(--t2);}
-.topbar-right strong{color:var(--gold);}
+/* LOGO */
+.ob-logo{font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:10px;margin-bottom:40px;text-decoration:none}
+.ob-logo-icon{width:36px;height:36px;background:var(--blue);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.ob-logo-icon i{color:white;font-size:16px}
+.ob-logo span{color:var(--text)}
 
-/* PROGRESS STEPPER */
-.stepper{position:relative;z-index:10;padding:24px 40px;display:flex;align-items:center;justify-content:center;}
-.stepper-inner{display:flex;align-items:center;gap:0;max-width:600px;width:100%;}
-.step-dot{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}
-.sd-circle{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;transition:all .4s;border:2px solid;}
-.sd-circle.idle{background:transparent;border-color:var(--t3);color:var(--t3);}
-.sd-circle.active{background:var(--gold);border-color:var(--gold);color:var(--dark);animation:pulse 2s ease-in-out infinite;}
-.sd-circle.done{background:var(--g);border-color:var(--g);color:#fff;}
-.sd-label{font-size:10px;font-weight:600;white-space:nowrap;transition:color .4s;}
-.step-dot.idle-dot .sd-label{color:var(--t3);}
-.step-dot.active-dot .sd-label{color:var(--gold);}
-.step-dot.done-dot .sd-label{color:var(--g);}
-.step-line{flex:1;height:2px;background:var(--border);margin:0 4px;margin-bottom:20px;transition:background .4s;}
-.step-line.done{background:var(--g);}
+/* SLIDE CONTAINER */
+.ob-card{background:white;border-radius:24px;border:1px solid var(--border);box-shadow:0 20px 60px rgba(26,86,219,0.1);width:100%;max-width:520px;overflow:hidden;position:relative;z-index:1}
 
-/* CONTENT */
-.content{position:relative;z-index:10;flex:1;display:flex;align-items:flex-start;justify-content:center;padding:20px 20px 40px;}
-.step-panel{display:none;width:100%;max-width:640px;animation:slideRight .4s ease forwards;}
-.step-panel.active{display:block;}
+/* PROGRESS BAR */
+.ob-progress{height:4px;background:var(--border)}
+.ob-progress-fill{height:100%;background:var(--blue);border-radius:0 2px 2px 0;transition:width .5s ease}
 
-/* STEP CARD */
-.step-card{background:var(--dark2);border:1px solid var(--border);border-radius:24px;overflow:hidden;}
-.sc-head{padding:32px 36px 24px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:18px;}
-.sc-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;animation:float 3s ease-in-out infinite;}
-.sc-icon.gold{background:var(--gold-l);border:1px solid var(--gold-b);}
-.sc-icon.green{background:var(--g-l);border:1px solid var(--g-b);}
-.sc-step-num{font-size:11px;font-weight:700;color:var(--t3);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px;}
-.sc-title{font-family:var(--font-h);font-size:22px;font-weight:800;margin-bottom:4px;}
-.sc-sub{font-size:13px;color:var(--t2);}
-.sc-body{padding:28px 36px;}
-.sc-foot{padding:20px 36px 28px;border-top:1px solid var(--border);display:flex;gap:12px;}
+/* SLIDE */
+.ob-slide{padding:40px;display:none;animation:slideIn .4s ease}
+.ob-slide.active{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
 
-/* COUNTRY GRID */
-.country-search{width:100%;padding:12px 16px 12px 44px;background:var(--dark3);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-size:14px;font-family:var(--font-b);outline:none;margin-bottom:16px;transition:all .2s;}
-.country-search:focus{border-color:var(--gold);background:var(--dark4);}
-.country-search::placeholder{color:var(--t3);}
-.search-wrap{position:relative;margin-bottom:16px;}
-.search-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:14px;}
-.country-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-height:320px;overflow-y:auto;padding-right:4px;}
-.country-grid::-webkit-scrollbar{width:4px;}
-.country-grid::-webkit-scrollbar-track{background:var(--dark3);}
-.country-grid::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
-.country-item{background:var(--dark3);border:1.5px solid var(--border);border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:all .2s;text-align:center;}
-.country-item:hover{border-color:var(--gold-b);background:var(--dark4);}
-.country-item.sel{border-color:var(--gold);background:var(--gold-l);}
-.ci-flag{font-size:24px;}
-.ci-name{font-size:12px;font-weight:700;color:var(--text);}
-.ci-curr{font-size:10px;color:var(--t2);}
+/* SLIDE ILLUSTRATION */
+.ob-illustration{width:120px;height:120px;border-radius:28px;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;position:relative}
+.il-blue{background:var(--blue-light)}
+.il-green{background:#D1FAE5}
+.il-gold{background:#FEF3C7}
+.il-purple{background:#EDE9FE}
+.ob-illustration i{font-size:52px}
+.il-blue i{color:var(--blue)}
+.il-green i{color:#059669}
+.il-gold i{color:#D97706}
+.il-purple i{color:#7C3AED}
 
-/* LANGUAGE OPTIONS */
-.lang-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.lang-item{background:var(--dark3);border:1.5px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s;}
-.lang-item:hover{border-color:var(--gold-b);background:var(--dark4);}
-.lang-item.sel{border-color:var(--gold);background:var(--gold-l);}
-.li-flag{font-size:24px;}
-.li-lang{font-size:14px;font-weight:700;}
-.li-native{font-size:12px;color:var(--t2);margin-top:2px;}
-.li-check{margin-left:auto;width:22px;height:22px;border-radius:50%;background:var(--gold);display:none;align-items:center;justify-content:center;}
-.lang-item.sel .li-check{display:flex;}
-.li-check i{color:var(--dark);font-size:10px;}
+/* FLOATING BADGES ON ILLUSTRATION */
+.ob-float{position:absolute;background:white;border-radius:12px;padding:8px 12px;box-shadow:0 4px 16px rgba(0,0,0,0.1);font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;white-space:nowrap;border:1px solid var(--border)}
+.ob-float-1{top:-10px;right:-20px;animation:floatA 3s ease-in-out infinite}
+.ob-float-2{bottom:-10px;left:-20px;animation:floatB 3.5s ease-in-out infinite}
+@keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+.float-dot{width:8px;height:8px;border-radius:50%}
 
-/* CURRENCY OPTIONS */
-.curr-options{display:flex;flex-direction:column;gap:10px;}
-.curr-item{background:var(--dark3);border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .2s;}
-.curr-item:hover{border-color:var(--gold-b);background:var(--dark4);}
-.curr-item.sel{border-color:var(--gold);background:var(--gold-l);}
-.curr-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.curr-ico.local{background:var(--g-l);border:1px solid var(--g-b);}
-.curr-ico.crypto{background:var(--gold-l);border:1px solid var(--gold-b);}
-.curr-ico.both{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);}
-.curr-title{font-size:15px;font-weight:700;margin-bottom:3px;}
-.curr-sub{font-size:12px;color:var(--t2);}
-.curr-badge{margin-left:auto;font-size:10px;font-weight:700;padding:4px 10px;border-radius:100px;white-space:nowrap;}
-.curr-badge.rec{background:var(--gold-l);color:var(--gold);border:1px solid var(--gold-b);}
-.curr-check{margin-left:auto;width:22px;height:22px;border-radius:50%;background:var(--gold);display:none;align-items:center;justify-content:center;}
-.curr-item.sel .curr-check{display:flex;}
-.curr-item.sel .curr-badge{display:none;}
-.curr-check i{color:var(--dark);font-size:10px;}
+.ob-slide-title{font-family:'Clash Display',sans-serif;font-size:26px;font-weight:700;color:var(--text);text-align:center;margin-bottom:10px;letter-spacing:-.5px;line-height:1.2}
+.ob-slide-sub{font-size:15px;color:var(--text-soft);text-align:center;line-height:1.75;margin-bottom:28px;font-weight:300}
+.ob-slide-sub strong{color:var(--text-mid);font-weight:500}
 
-/* PAYMENT OPTIONS */
-.pay-options{display:flex;flex-direction:column;gap:10px;}
-.pay-item{background:var(--dark3);border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .2s;}
-.pay-item:hover{border-color:var(--gold-b);background:var(--dark4);}
-.pay-item.sel{border-color:var(--gold);background:var(--gold-l);}
-.pay-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.pay-info{flex:1;}
-.pay-title{font-size:15px;font-weight:700;margin-bottom:3px;}
-.pay-sub{font-size:12px;color:var(--t2);}
-.pay-tag{font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;white-space:nowrap;margin-left:auto;}
-.pay-tag.africa{background:var(--g-l);color:var(--g);border:1px solid var(--g-b);}
-.pay-tag.global{background:var(--gold-l);color:var(--gold);border:1px solid var(--gold-b);}
-.pay-check{margin-left:auto;width:22px;height:22px;border-radius:50%;background:var(--gold);display:none;align-items:center;justify-content:center;}
-.pay-item.sel .pay-check{display:flex;}
-.pay-item.sel .pay-tag{display:none;}
-.pay-check i{color:var(--dark);font-size:10px;}
+/* FEATURE LIST */
+.ob-features{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.ob-feature{display:flex;align-items:center;gap:14px;padding:14px;background:var(--off);border-radius:12px;border:1px solid var(--border);transition:all .2s}
+.ob-feature:hover{border-color:var(--blue);background:var(--blue-pale)}
+.ob-feat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fi-blue{background:var(--blue-light)}.fi-blue i{color:var(--blue);font-size:16px}
+.fi-green{background:#D1FAE5}.fi-green i{color:#059669;font-size:16px}
+.fi-gold{background:#FEF3C7}.fi-gold i{color:#D97706;font-size:16px}
+.fi-purple{background:#EDE9FE}.fi-purple i{color:#7C3AED;font-size:16px}
+.ob-feat-text h4{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+.ob-feat-text p{font-size:12px;color:var(--text-soft);line-height:1.5}
 
-/* DEPOSIT STEP */
-.dep-info{background:var(--dark3);border:1px solid var(--gold-b);border-radius:16px;padding:20px;margin-bottom:20px;display:flex;align-items:flex-start;gap:14px;}
-.dep-ico{font-size:32px;flex-shrink:0;}
-.dep-title{font-size:15px;font-weight:700;margin-bottom:6px;}
-.dep-desc{font-size:13px;color:var(--t2);line-height:1.6;}
-.dep-input-wrap{margin-bottom:16px;}
-.dep-input-wrap label{display:block;font-size:11px;font-weight:700;color:var(--t3);letter-spacing:0.6px;text-transform:uppercase;margin-bottom:8px;}
-.dep-input{display:flex;background:var(--dark3);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;transition:all .2s;}
-.dep-input:focus-within{border-color:var(--gold);}
-.dep-currency{padding:0 14px;background:var(--dark4);color:var(--gold);font-size:14px;font-weight:700;display:flex;align-items:center;border-right:1px solid var(--border);}
-.dep-amount{flex:1;padding:13px 16px;background:transparent;border:none;color:var(--text);font-size:16px;font-family:var(--font-b);outline:none;}
-.dep-amount::placeholder{color:var(--t3);}
-.dep-min{font-size:12px;color:var(--t2);margin-top:6px;}
-.skip-link{font-size:13px;color:var(--t3);text-align:center;cursor:pointer;transition:color .2s;}
-.skip-link:hover{color:var(--gold);}
+/* PAY METHOD CARDS */
+.pay-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.pay-card{border:2px solid var(--border);border-radius:14px;padding:18px;text-align:center;transition:all .25s;cursor:default}
+.pay-card.highlight{border-color:var(--blue);background:var(--blue-pale)}
+.pay-card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+.pc-green{background:#D1FAE5}.pc-green i{color:#059669;font-size:22px}
+.pc-blue{background:var(--blue-light)}.pc-blue i{color:var(--blue);font-size:22px}
+.pay-card h4{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
+.pay-card p{font-size:12px;color:var(--text-soft);line-height:1.4}
+.pay-card .pc-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:50px;display:inline-block;margin-top:6px}
+.pcb-green{background:#D1FAE5;color:#065F46}
+.pcb-blue{background:var(--blue-light);color:var(--blue)}
 
-/* COMPLETION STEP */
-.complete-content{text-align:center;padding:20px 0;}
-.comp-bee{font-size:64px;display:block;margin-bottom:20px;animation:float 2s ease-in-out infinite;}
-.comp-title{font-family:var(--font-h);font-size:26px;font-weight:800;margin-bottom:10px;}
-.comp-sub{font-size:14px;color:var(--t2);line-height:1.65;margin-bottom:24px;}
-.comp-perks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;text-align:left;}
-.comp-perk{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:flex-start;gap:10px;}
-.cp-ico{font-size:18px;flex-shrink:0;}
-.cp-title{font-size:13px;font-weight:700;margin-bottom:2px;}
-.cp-sub{font-size:11px;color:var(--t2);}
+/* TASK PREVIEW */
+.task-preview{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.tp-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--off);border-radius:12px;border:1px solid var(--border);transition:all .2s}
+.tp-item:hover{border-color:var(--blue);transform:translateX(4px)}
+.tp-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.tp-blue{background:var(--blue-light);color:var(--blue)}
+.tp-gold{background:#FEF3C7;color:#D97706}
+.tp-green{background:#D1FAE5;color:#059669}
+.tp-red{background:#FEE2E2;color:#DC2626}
+.tp-info{flex:1}
+.tp-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.tp-meta{font-size:11px;color:var(--text-soft);display:flex;align-items:center;gap:6px}
+.tp-meta i{font-size:10px}
+.tp-pay{font-family:'Clash Display',sans-serif;font-size:15px;font-weight:700;color:var(--blue);white-space:nowrap}
+
+/* WALLET SETUP */
+.wallet-form{margin-bottom:24px}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.input-wrap{position:relative}
+.input-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--text-soft);font-size:13px;pointer-events:none}
+.input-wrap:focus-within .input-icon{color:var(--blue)}
+input,select{width:100%;padding:11px 14px 11px 38px;border:1.5px solid var(--border);border-radius:11px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);background:white;outline:none;transition:border-color .25s,box-shadow .25s;-webkit-appearance:none}
+input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,219,0.08)}
+input::placeholder{color:#94A3B8}
+.info-box{background:var(--blue-pale);border:1px solid rgba(26,86,219,.15);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--blue);display:flex;align-items:flex-start;gap:8px;margin-bottom:14px;line-height:1.6}
+.info-box i{margin-top:1px;flex-shrink:0}
+
+/* REFERRAL */
+.ref-box{background:linear-gradient(135deg,var(--blue) 0%,#2563EB 100%);border-radius:16px;padding:20px;margin-bottom:20px;color:white;text-align:center}
+.ref-box-title{font-family:'Clash Display',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px}
+.ref-box-sub{font-size:13px;opacity:.8;margin-bottom:16px;line-height:1.6}
+.ref-link-row{display:flex;gap:8px}
+.ref-link-input{flex:1;padding:10px 14px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:10px;color:white;font-size:13px;font-family:'DM Sans',sans-serif;outline:none}
+.ref-link-input::placeholder{color:rgba(255,255,255,.5)}
+.btn-copy{padding:10px 16px;background:white;color:var(--blue);border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.btn-copy:hover{opacity:.9;transform:scale(1.02)}
+.btn-copy i{font-size:12px}
 
 /* BUTTONS */
-.btn-primary{flex:1;padding:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--dark);border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;justify-content:center;gap:8px;transition:all .25s;box-shadow:0 6px 24px rgba(245,184,0,0.25);}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 32px rgba(245,184,0,0.4);}
-.btn-primary:disabled{opacity:0.6;pointer-events:none;}
-.btn-secondary{padding:14px 20px;background:transparent;border:1.5px solid var(--border);color:var(--t2);border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font-b);display:flex;align-items:center;gap:7px;transition:all .2s;}
-.btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
-.spinner{width:16px;height:16px;border:2px solid rgba(0,0,0,0.3);border-top-color:var(--dark);border-radius:50%;animation:spin .7s linear infinite;display:none;}
+.btn-full{width:100%;padding:14px;background:var(--blue);color:white;border:none;border-radius:12px;font-size:15px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-full:hover{background:var(--blue-dark);transform:translateY(-1px);box-shadow:0 8px 24px rgba(26,86,219,0.3)}
+.btn-full:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-full i{font-size:13px;transition:transform .2s}
+.btn-full:hover:not(:disabled) i{transform:translateX(3px)}
+.btn-skip{width:100%;padding:10px;background:none;border:none;color:var(--text-soft);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px;transition:color .2s}
+.btn-skip:hover{color:var(--blue)}
+
+/* DOTS */
+.ob-dots{display:flex;justify-content:center;gap:8px;padding:20px 0 24px;border-top:1px solid var(--border);margin-top:0}
+.ob-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;cursor:pointer}
+.ob-dot.active{background:var(--blue);width:24px;border-radius:4px}
+.ob-dot.done{background:var(--blue);opacity:.4}
+
+/* SPINNER */
+.spinner{width:17px;height:17px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 
 /* TOAST */
-.toast{position:fixed;bottom:24px;right:24px;z-index:999;background:var(--dark3);border:1px solid var(--border);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);max-width:300px;}
-.toast.show{transform:translateY(0);opacity:1;}
-.toast-ico{width:34px;height:34px;border-radius:9px;background:var(--gold-l);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.toast-ico i{font-size:14px;}
-.toast-msg{font-size:13px;font-weight:600;color:var(--text);}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--text);color:white;padding:12px 20px;border-radius:12px;font-size:14px;opacity:0;transition:all .3s;z-index:99;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-@media(max-width:768px){
-  .topbar{padding:16px 20px;}
-  .stepper{padding:16px 20px;}
-  .country-grid{grid-template-columns:repeat(2,1fr);}
-  .lang-grid{grid-template-columns:1fr;}
-  .sc-head{padding:24px 20px 16px;flex-direction:column;}
-  .sc-body{padding:20px;}
-  .sc-foot{padding:16px 20px 24px;}
-  .comp-perks{grid-template-columns:1fr;}
-  .content{padding:16px 16px 40px;}
-}
+@media(max-width:560px){.ob-card{border-radius:20px}.ob-slide{padding:28px 24px}.pay-cards{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="page">
-  <div class="page-bg"><div class="bg-glow1"></div><div class="bg-glow2"></div><div class="bg-grid"></div></div>
 
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <a class="logo" href="index.html">
-      <div class="logo-mark">🐝</div>
-      <div class="logo-text">Earn<em>Hive</em></div>
-    </a>
-    <div class="topbar-right">Step <strong id="step-counter">1</strong> of 5 — Account Setup</div>
-  </div>
+<div class="ob-wrapper">
+  <a href="index.html" class="ob-logo">
+    <div class="ob-logo-icon"><i class="fa-solid fa-hexagon-nodes"></i></div>
+    Earn<span>Hive</span>
+  </a>
 
-  <!-- STEPPER -->
-  <div class="stepper">
-    <div class="stepper-inner">
-      <div class="step-dot active-dot" id="dot1"><div class="sd-circle active" id="dc1">1</div><div class="sd-label">Country</div></div>
-      <div class="step-line" id="line1"></div>
-      <div class="step-dot idle-dot" id="dot2"><div class="sd-circle idle" id="dc2">2</div><div class="sd-label">Language</div></div>
-      <div class="step-line" id="line2"></div>
-      <div class="step-dot idle-dot" id="dot3"><div class="sd-circle idle" id="dc3">3</div><div class="sd-label">Currency</div></div>
-      <div class="step-line" id="line3"></div>
-      <div class="step-dot idle-dot" id="dot4"><div class="sd-circle idle" id="dc4">4</div><div class="sd-label">Payment</div></div>
-      <div class="step-line" id="line4"></div>
-      <div class="step-dot idle-dot" id="dot5"><div class="sd-circle idle" id="dc5">5</div><div class="sd-label">Deposit</div></div>
+  <div class="ob-card">
+    <!-- PROGRESS -->
+    <div class="ob-progress"><div class="ob-progress-fill" id="ob-progress" style="width:20%"></div></div>
+
+    <!-- SLIDE 1: WELCOME -->
+    <div class="ob-slide active" id="slide-1">
+      <div class="ob-illustration il-blue" style="position:relative">
+        <i class="fa-solid fa-hexagon-nodes"></i>
+        <div class="ob-float ob-float-1"><span class="float-dot" style="background:#22C55E"></span>+0.5 TON earned</div>
+        <div class="ob-float ob-float-2"><span class="float-dot" style="background:var(--gold)"></span>Task approved!</div>
+      </div>
+      <h2 class="ob-slide-title">Welcome to EarnHive!</h2>
+      <p class="ob-slide-sub">You are about to join <strong>thousands of people</strong> earning money by completing simple tasks. Let us show you how it works in 60 seconds.</p>
+      <div class="ob-features">
+        <div class="ob-feature">
+          <div class="ob-feat-icon fi-blue"><i class="fa-solid fa-list-check"></i></div>
+          <div class="ob-feat-text"><h4>Complete simple tasks</h4><p>Follow accounts, share posts, post captions — takes 1 to 10 minutes</p></div>
+        </div>
+        <div class="ob-feature">
+          <div class="ob-feat-icon fi-green"><i class="fa-solid fa-coins"></i></div>
+          <div class="ob-feat-text"><h4>Earn real money</h4><p>Every approved task adds money to your balance instantly</p></div>
+        </div>
+        <div class="ob-feature">
+          <div class="ob-feat-icon fi-gold"><i class="fa-solid fa-wallet"></i></div>
+          <div class="ob-feat-text"><h4>Withdraw anytime</h4><p>Send your earnings to your bank or crypto wallet whenever you want</p></div>
+        </div>
+      </div>
+      <button class="btn-full" onclick="nextSlide()">Let's Get Started <i class="fa-solid fa-arrow-right"></i></button>
     </div>
-  </div>
 
-  <!-- CONTENT -->
-  <div class="content">
+    <!-- SLIDE 2: HOW TASKS WORK -->
+    <div class="ob-slide" id="slide-2">
+      <div class="ob-illustration il-purple" style="position:relative">
+        <i class="fa-solid fa-camera"></i>
+        <div class="ob-float ob-float-1" style="right:-24px"><i class="fa-solid fa-check" style="color:#22C55E;font-size:11px"></i> Proof approved</div>
+        <div class="ob-float ob-float-2" style="left:-24px"><i class="fa-brands fa-instagram" style="color:#E1306C;font-size:11px"></i> Follow task</div>
+      </div>
+      <h2 class="ob-slide-title">How Tasks Work</h2>
+      <p class="ob-slide-sub">Every task is simple. Here is what to expect:</p>
+      <div class="task-preview">
+        <div class="tp-item">
+          <div class="tp-icon tp-blue"><i class="fa-brands fa-instagram"></i></div>
+          <div class="tp-info"><div class="tp-name">Follow Instagram Account</div><div class="tp-meta"><i class="fa-regular fa-clock"></i>2 mins &bull; Screenshot proof</div></div>
+          <div><div class="tp-pay">0.30 TON</div></div>
+        </div>
+        <div class="tp-item">
+          <div class="tp-icon tp-gold"><i class="fa-brands fa-facebook"></i></div>
+          <div class="tp-info"><div class="tp-name">Post Caption on Facebook</div><div class="tp-meta"><i class="fa-regular fa-clock"></i>5 mins &bull; Screenshot proof</div></div>
+          <div><div class="tp-pay">0.80 TON</div></div>
+        </div>
+        <div class="tp-item">
+          <div class="tp-icon tp-green"><i class="fa-brands fa-whatsapp"></i></div>
+          <div class="tp-info"><div class="tp-name">Join WhatsApp Group</div><div class="tp-meta"><i class="fa-regular fa-clock"></i>1 min &bull; Phone number proof</div></div>
+          <div><div class="tp-pay">0.20 TON</div></div>
+        </div>
+        <div class="tp-item">
+          <div class="tp-icon tp-red"><i class="fa-brands fa-youtube"></i></div>
+          <div class="tp-info"><div class="tp-name">Subscribe YouTube Channel</div><div class="tp-meta"><i class="fa-regular fa-clock"></i>2 mins &bull; Username proof</div></div>
+          <div><div class="tp-pay">0.40 TON</div></div>
+        </div>
+      </div>
+      <button class="btn-full" onclick="nextSlide()">Got It! <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
 
-    <!-- STEP 1: COUNTRY -->
-    <div class="step-panel active" id="panel1">
-      <div class="step-card">
-        <div class="sc-head">
-          <div class="sc-icon gold">🌍</div>
-          <div>
-            <div class="sc-step-num">Step 1 of 5</div>
-            <div class="sc-title">Where are you from?</div>
-            <div class="sc-sub">Select your country to personalise your experience — currency, language and payment methods will be set automatically.</div>
+    <!-- SLIDE 3: PAYMENT METHOD -->
+    <div class="ob-slide" id="slide-3">
+      <div class="ob-illustration il-green" style="position:relative">
+        <i class="fa-solid fa-money-bill-transfer"></i>
+        <div class="ob-float ob-float-1"><i class="fa-solid fa-credit-card" style="color:#059669;font-size:11px"></i> Paystack</div>
+        <div class="ob-float ob-float-2"><i class="fa-solid fa-gem" style="color:var(--blue);font-size:11px"></i> TON Crypto</div>
+      </div>
+      <h2 class="ob-slide-title">How You Get Paid</h2>
+      <p class="ob-slide-sub">EarnHive pays everyone based on their country. Your payment method was set when you registered.</p>
+      <div class="pay-cards">
+        <div class="pay-card" id="pay-card-paystack">
+          <div class="pay-card-icon pc-green"><i class="fa-solid fa-credit-card"></i></div>
+          <h4>Paystack</h4>
+          <p>Bank transfer, card or USSD payment</p>
+          <span class="pc-badge pcb-green">Nigeria &amp; Africa</span>
+        </div>
+        <div class="pay-card" id="pay-card-ton">
+          <div class="pay-card-icon pc-blue"><i class="fa-solid fa-gem"></i></div>
+          <h4>TON Crypto</h4>
+          <p>Sent directly to your TON wallet</p>
+          <span class="pc-badge pcb-blue">Rest of World</span>
+        </div>
+      </div>
+      <div class="info-box" id="pay-info-box">
+        <i class="fa-solid fa-circle-info"></i>
+        <span id="pay-info-text">Loading your payment method...</span>
+      </div>
+      <button class="btn-full" onclick="nextSlide()">Continue <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- SLIDE 4: WALLET / BANK SETUP -->
+    <div class="ob-slide" id="slide-4">
+      <div class="ob-illustration il-gold" style="position:relative">
+        <i class="fa-solid fa-wallet"></i>
+        <div class="ob-float ob-float-1"><i class="fa-solid fa-lock" style="color:#D97706;font-size:11px"></i> Secure</div>
+        <div class="ob-float ob-float-2"><i class="fa-solid fa-bolt" style="color:#22C55E;font-size:11px"></i> Fast payout</div>
+      </div>
+      <h2 class="ob-slide-title" id="wallet-slide-title">Set Up Your Wallet</h2>
+      <p class="ob-slide-sub" id="wallet-slide-sub">Enter your payout details so you can withdraw your earnings instantly.</p>
+
+      <!-- PAYSTACK FORM (Nigeria/Africa) -->
+      <div class="wallet-form" id="paystack-form" style="display:none">
+        <div class="info-box">
+          <i class="fa-solid fa-circle-info"></i>
+          Earnings will be sent directly to your Nigerian bank account via Paystack. You can update this anytime in Settings.
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bank Name</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-building-columns input-icon"></i>
+            <select id="bank-name">
+              <option value="">Select your bank...</option>
+              <option>Access Bank</option>
+              <option>First Bank</option>
+              <option>GTBank (Guaranty Trust)</option>
+              <option>Zenith Bank</option>
+              <option>UBA (United Bank for Africa)</option>
+              <option>Ecobank Nigeria</option>
+              <option>FCMB</option>
+              <option>Fidelity Bank</option>
+              <option>Heritage Bank</option>
+              <option>Keystone Bank</option>
+              <option>Polaris Bank</option>
+              <option>Stanbic IBTC Bank</option>
+              <option>Sterling Bank</option>
+              <option>Union Bank</option>
+              <option>Unity Bank</option>
+              <option>Wema Bank</option>
+              <option>Opay</option>
+              <option>Palmpay</option>
+              <option>Kuda Bank</option>
+              <option>Moniepoint</option>
+              <option>Carbon</option>
+            </select>
           </div>
         </div>
-        <div class="sc-body">
-          <div class="search-wrap">
-            <i class="fa-solid fa-search"></i>
-            <input class="country-search" id="country-search" type="text" placeholder="Search your country..." oninput="filterCountries(this.value)"/>
-          </div>
-          <div class="country-grid" id="country-grid">
-            <!-- Populated by JS -->
+        <div class="form-group">
+          <label class="form-label">Account Number</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-hashtag input-icon"></i>
+            <input type="text" id="bank-account" placeholder="0123456789" maxlength="10"/>
           </div>
         </div>
-        <div class="sc-foot">
-          <button class="btn-primary" id="btn1" onclick="goStep(2)"><span>Continue</span> <i class="fa-solid fa-arrow-right"></i></button>
+        <div class="form-group">
+          <label class="form-label">Account Name</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-user input-icon"></i>
+            <input type="text" id="bank-name-holder" placeholder="Chidi Okafor"/>
+          </div>
         </div>
+      </div>
+
+      <!-- TON WALLET FORM (International) -->
+      <div class="wallet-form" id="ton-form" style="display:none">
+        <div class="info-box">
+          <i class="fa-solid fa-circle-info"></i>
+          Your TON earnings will be sent directly to your wallet. Don't have one? Download <strong>Tonkeeper</strong> or <strong>TON Wallet</strong> free from your app store.
+        </div>
+        <div class="form-group">
+          <label class="form-label">TON Wallet Address</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-wallet input-icon"></i>
+            <input type="text" id="ton-wallet" placeholder="UQA... or EQA..."/>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+          <a href="https://tonkeeper.com" target="_blank" style="display:flex;align-items:center;gap:8px;background:var(--off);border:1px solid var(--border);border-radius:10px;padding:10px 12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500;transition:all .2s">
+            <i class="fa-solid fa-gem" style="color:var(--blue)"></i> Tonkeeper
+          </a>
+          <a href="https://ton.org/wallets" target="_blank" style="display:flex;align-items:center;gap:8px;background:var(--off);border:1px solid var(--border);border-radius:10px;padding:10px 12px;text-decoration:none;color:var(--text);font-size:13px;font-weight:500;transition:all .2s">
+            <i class="fa-solid fa-wallet" style="color:var(--blue)"></i> TON Wallet
+          </a>
+        </div>
+      </div>
+
+      <button class="btn-full" id="btn-wallet-save" onclick="saveWallet()">Save &amp; Continue <i class="fa-solid fa-arrow-right"></i></button>
+      <button class="btn-skip" onclick="nextSlide()">Skip for now, I'll add this later</button>
+    </div>
+
+    <!-- SLIDE 5: REFERRAL -->
+    <div class="ob-slide" id="slide-5">
+      <div class="ob-illustration il-purple" style="position:relative">
+        <i class="fa-solid fa-users"></i>
+        <div class="ob-float ob-float-1"><i class="fa-solid fa-user-plus" style="color:var(--blue);font-size:11px"></i> Friend joined!</div>
+        <div class="ob-float ob-float-2"><i class="fa-solid fa-coins" style="color:var(--gold);font-size:11px"></i> +0.1 TON bonus</div>
+      </div>
+      <h2 class="ob-slide-title">Invite Friends, Earn More!</h2>
+      <p class="ob-slide-sub">Share your unique referral link. When a friend joins and completes their first task, <strong>you both get a bonus!</strong></p>
+      <div class="ref-box">
+        <div class="ref-box-title"><i class="fa-solid fa-link" style="margin-right:8px"></i>Your Referral Link</div>
+        <div class="ref-box-sub">Share this link on WhatsApp, Telegram or anywhere. More referrals = more money!</div>
+        <div class="ref-link-row">
+          <input class="ref-link-input" id="ref-link-input" readonly value="Loading..."/>
+          <button class="btn-copy" onclick="copyRef()"><i class="fa-solid fa-copy"></i> Copy</button>
+        </div>
+      </div>
+      <div class="ob-features">
+        <div class="ob-feature">
+          <div class="ob-feat-icon fi-blue"><i class="fa-solid fa-link"></i></div>
+          <div class="ob-feat-text"><h4>Share your link</h4><p>Send it to friends, family, WhatsApp groups, Telegram channels</p></div>
+        </div>
+        <div class="ob-feature">
+          <div class="ob-feat-icon fi-gold"><i class="fa-solid fa-coins"></i></div>
+          <div class="ob-feat-text"><h4>Both earn a bonus</h4><p>When they complete their first task, you both get rewarded</p></div>
+        </div>
+      </div>
+      <button class="btn-full" onclick="nextSlide()">Almost Done! <i class="fa-solid fa-arrow-right"></i></button>
+      <button class="btn-skip" onclick="nextSlide()">Skip referrals for now</button>
+    </div>
+
+    <!-- SLIDE 6: ALL DONE -->
+    <div class="ob-slide" id="slide-6">
+      <div style="text-align:center;padding:10px 0">
+        <div style="width:100px;height:100px;background:linear-gradient(135deg,var(--blue) 0%,#2563EB 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 12px 40px rgba(26,86,219,0.3);animation:popIn .5s ease">
+          <i class="fa-solid fa-check" style="color:white;font-size:44px"></i>
+        </div>
+        @keyframes popIn{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+        <h2 class="ob-slide-title">You Are All Set!</h2>
+        <p class="ob-slide-sub">Your EarnHive account is ready. Tasks are waiting for you right now. Let's start earning!</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px">
+          <div style="background:var(--off);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center">
+            <div style="font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;color:var(--blue);margin-bottom:4px">0.00</div>
+            <div style="font-size:11px;color:var(--text-soft);text-transform:uppercase;letter-spacing:.5px">Balance</div>
+          </div>
+          <div style="background:var(--off);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center">
+            <div style="font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;color:var(--blue);margin-bottom:4px" id="done-tasks-count">...</div>
+            <div style="font-size:11px;color:var(--text-soft);text-transform:uppercase;letter-spacing:.5px">Tasks Live</div>
+          </div>
+          <div style="background:var(--off);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center">
+            <div style="font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;color:var(--blue);margin-bottom:4px">0</div>
+            <div style="font-size:11px;color:var(--text-soft);text-transform:uppercase;letter-spacing:.5px">Referrals</div>
+          </div>
+        </div>
+        <button class="btn-full" id="btn-go-dashboard" onclick="finishOnboarding()">
+          <i class="fa-solid fa-house"></i> Go to My Dashboard
+        </button>
       </div>
     </div>
 
-    <!-- STEP 2: LANGUAGE -->
-    <div class="step-panel" id="panel2">
-      <div class="step-card">
-        <div class="sc-head">
-          <div class="sc-icon gold">🌐</div>
-          <div>
-            <div class="sc-step-num">Step 2 of 5</div>
-            <div class="sc-title">Choose Your Language</div>
-            <div class="sc-sub">EarnHive will display everything in your selected language — tasks, games, notifications and all app content.</div>
-          </div>
-        </div>
-        <div class="sc-body">
-          <div class="lang-grid" id="lang-grid">
-            <div class="lang-item sel" onclick="selLang(this,'en')" data-lang="en">
-              <span class="li-flag">🇬🇧</span>
-              <div><div class="li-lang">English</div><div class="li-native">English</div></div>
-              <div class="li-check"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="lang-item" onclick="selLang(this,'hi')" data-lang="hi">
-              <span class="li-flag">🇮🇳</span>
-              <div><div class="li-lang">Hindi</div><div class="li-native">हिंदी</div></div>
-              <div class="li-check"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="lang-item" onclick="selLang(this,'pt')" data-lang="pt">
-              <span class="li-flag">🇧🇷</span>
-              <div><div class="li-lang">Portuguese</div><div class="li-native">Português</div></div>
-              <div class="li-check"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="lang-item" onclick="selLang(this,'fr')" data-lang="fr">
-              <span class="li-flag">🇫🇷</span>
-              <div><div class="li-lang">French</div><div class="li-native">Français</div></div>
-              <div class="li-check"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="lang-item" onclick="selLang(this,'ar')" data-lang="ar">
-              <span class="li-flag">🇸🇦</span>
-              <div><div class="li-lang">Arabic</div><div class="li-native">العربية</div></div>
-              <div class="li-check"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="lang-item" onclick="selLang(this,'es')" data-lang="es">
-              <span class="li-flag">🇪🇸</span>
-              <div><div class="li-lang">Spanish</div><div class="li-native">Español</div></div>
-              <div class="li-check"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="lang-item" onclick="selLang(this,'ru')" data-lang="ru">
-              <span class="li-flag">🇷🇺</span>
-              <div><div class="li-lang">Russian</div><div class="li-native">Русский</div></div>
-              <div class="li-check"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="lang-item" onclick="selLang(this,'zh')" data-lang="zh">
-              <span class="li-flag">🇨🇳</span>
-              <div><div class="li-lang">Chinese</div><div class="li-native">中文</div></div>
-              <div class="li-check"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="lang-item" onclick="selLang(this,'sw')" data-lang="sw">
-              <span class="li-flag">🇰🇪</span>
-              <div><div class="li-lang">Swahili</div><div class="li-native">Kiswahili</div></div>
-              <div class="li-check"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="lang-item" onclick="selLang(this,'de')" data-lang="de">
-              <span class="li-flag">🇩🇪</span>
-              <div><div class="li-lang">German</div><div class="li-native">Deutsch</div></div>
-              <div class="li-check"><i class="fa-solid fa-check"></i></div>
-            </div>
-          </div>
-        </div>
-        <div class="sc-foot">
-          <button class="btn-secondary" onclick="goStep(1)"><i class="fa-solid fa-arrow-left"></i> Back</button>
-          <button class="btn-primary" onclick="goStep(3)">Continue <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-      </div>
+    <!-- DOTS -->
+    <div class="ob-dots">
+      <div class="ob-dot active" onclick="goSlide(1)"></div>
+      <div class="ob-dot" onclick="goSlide(2)"></div>
+      <div class="ob-dot" onclick="goSlide(3)"></div>
+      <div class="ob-dot" onclick="goSlide(4)"></div>
+      <div class="ob-dot" onclick="goSlide(5)"></div>
+      <div class="ob-dot" onclick="goSlide(6)"></div>
     </div>
-
-    <!-- STEP 3: CURRENCY -->
-    <div class="step-panel" id="panel3">
-      <div class="step-card">
-        <div class="sc-head">
-          <div class="sc-icon gold">💰</div>
-          <div>
-            <div class="sc-step-num">Step 3 of 5</div>
-            <div class="sc-title">Display Currency</div>
-            <div class="sc-sub">Choose how you want to see your earnings and balances displayed. You can always change this in settings.</div>
-          </div>
-        </div>
-        <div class="sc-body">
-          <div class="curr-options">
-            <div class="curr-item" onclick="selCurr(this,'local')" data-curr="local">
-              <div class="curr-ico local">🏦</div>
-              <div>
-                <div class="curr-title">Local Currency</div>
-                <div class="curr-sub" id="local-curr-sub">Show balances in your country's currency (e.g. NGN, INR, USD)</div>
-              </div>
-              <div class="curr-check"><i class="fa-solid fa-check"></i></div>
-              <div class="curr-badge">Auto-detected</div>
-            </div>
-            <div class="curr-item sel" onclick="selCurr(this,'ton')" data-curr="ton">
-              <div class="curr-ico crypto">💎</div>
-              <div>
-                <div class="curr-title">TON Coin</div>
-                <div class="curr-sub">Show balances in TON — the native crypto of EarnHive. Ultra-low fees, global.</div>
-              </div>
-              <div class="curr-check"><i class="fa-solid fa-check"></i></div>
-              <div class="curr-badge rec">Recommended</div>
-            </div>
-            <div class="curr-item" onclick="selCurr(this,'both')" data-curr="both">
-              <div class="curr-ico both">🔄</div>
-              <div>
-                <div class="curr-title">Both (Local + TON)</div>
-                <div class="curr-sub">Show both your local currency and TON equivalent. Best of both worlds.</div>
-              </div>
-              <div class="curr-check"><i class="fa-solid fa-check"></i></div>
-            </div>
-          </div>
-        </div>
-        <div class="sc-foot">
-          <button class="btn-secondary" onclick="goStep(2)"><i class="fa-solid fa-arrow-left"></i> Back</button>
-          <button class="btn-primary" onclick="goStep(4)">Continue <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 4: PAYMENT METHOD -->
-    <div class="step-panel" id="panel4">
-      <div class="step-card">
-        <div class="sc-head">
-          <div class="sc-icon gold">💳</div>
-          <div>
-            <div class="sc-step-num">Step 4 of 5</div>
-            <div class="sc-title">Payment Method</div>
-            <div class="sc-sub">Choose your preferred way to deposit and withdraw. You can use multiple methods later.</div>
-          </div>
-        </div>
-        <div class="sc-body">
-          <div class="pay-options" id="pay-options">
-            <!-- Populated by JS based on country -->
-          </div>
-        </div>
-        <div class="sc-foot">
-          <button class="btn-secondary" onclick="goStep(3)"><i class="fa-solid fa-arrow-left"></i> Back</button>
-          <button class="btn-primary" onclick="goStep(5)">Continue <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 5: OPTIONAL DEPOSIT -->
-    <div class="step-panel" id="panel5">
-      <div class="step-card">
-        <div class="sc-head">
-          <div class="sc-icon gold">🚀</div>
-          <div>
-            <div class="sc-step-num">Step 5 of 5 — Optional</div>
-            <div class="sc-title">Fund Your Wallet</div>
-            <div class="sc-sub">Start earning right away by adding funds to your wallet. You can skip this and deposit later from your dashboard.</div>
-          </div>
-        </div>
-        <div class="sc-body">
-          <div class="dep-info">
-            <div class="dep-ico">💎</div>
-            <div>
-              <div class="dep-title">Why deposit now?</div>
-              <div class="dep-desc">To post tasks and stake in games, you need wallet balance. Depositing now means you can start immediately after setup. Minimum: $1 or ₦100 equivalent.</div>
-            </div>
-          </div>
-          <div class="dep-input-wrap">
-            <label>Amount to Deposit</label>
-            <div class="dep-input">
-              <div class="dep-currency" id="dep-curr-symbol">₦</div>
-              <input class="dep-amount" type="number" id="dep-amount" placeholder="0.00" min="100"/>
-            </div>
-            <div class="dep-min" id="dep-min-text">Minimum deposit: ₦100</div>
-          </div>
-          <div class="complete-content" style="padding:0;">
-            <div class="comp-perks">
-              <div class="comp-perk"><div class="cp-ico">📋</div><div><div class="cp-title">Post Tasks</div><div class="cp-sub">Need wallet balance to post tasks for others</div></div></div>
-              <div class="comp-perk"><div class="cp-ico">🎲</div><div><div class="cp-title">Play Games</div><div class="cp-sub">Stake Naira or TON in Ludo & Whot</div></div></div>
-              <div class="comp-perk"><div class="cp-ico">⚡</div><div><div class="cp-title">Instant Earnings</div><div class="cp-sub">Completing tasks is free — no deposit needed</div></div></div>
-              <div class="comp-perk"><div class="cp-ico">🔒</div><div><div class="cp-title">Secure Escrow</div><div class="cp-sub">All funds protected by escrow system</div></div></div>
-            </div>
-          </div>
-        </div>
-        <div class="sc-foot" style="flex-direction:column;gap:10px;">
-          <div style="display:flex;gap:12px;">
-            <button class="btn-secondary" onclick="goStep(4)"><i class="fa-solid fa-arrow-left"></i> Back</button>
-            <button class="btn-primary" id="dep-btn" onclick="handleDeposit()">
-              <div class="spinner" id="dep-spinner"></div>
-              <span id="dep-btn-text"><i class="fa-solid fa-wallet"></i> Deposit & Start</span>
-            </button>
-          </div>
-          <div class="skip-link" onclick="completeOnboarding()">Skip for now — I'll deposit later →</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
 
-<div class="toast" id="toast">
-  <div class="toast-ico"><i class="fa-solid fa-circle-check" id="t-icon"></i></div>
-  <div class="toast-msg" id="t-msg"></div>
-</div>
+<div class="toast" id="toast"></div>
 
 <script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
-import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+import { watchAuth } from './firebase-auth.js';
+import { getPaymentMethod } from './countries.js';
 
-const app = initializeApp({
-  apiKey: "AIzaSyAPAJCqvt40OpIuQDNShW4mdZQgpcS8lW8",
-  authDomain: "earnhive-8faa0.firebaseapp.com",
-  projectId: "earnhive-8faa0",
-  storageBucket: "earnhive-8faa0.firebasestorage.app",
-  messagingSenderId: "807669517293",
-  appId: "1:807669517293:web:37b20ab46d5c323e6a75e4"
+const TOTAL = 6;
+let currentSlide = 1;
+let userProfile  = null;
+let payMethod    = 'ton';
+
+// ── Auth Guard ───────────────────────────────
+watchAuth(async user => {
+  if (!user) { window.location.href = 'login.html'; return; }
+  try {
+    const token = await user.getIdToken();
+    const res   = await fetch('/api/users?action=me', {
+      headers: { 'x-firebase-uid': user.uid, 'Authorization': `Bearer ${token}` }
+    });
+    userProfile = await res.json();
+    if (userProfile.onboarding_done) { window.location.href = 'app.html'; return; }
+    payMethod = userProfile.payment_method || getPaymentMethod(userProfile.country_iso || 'NG');
+    setupSlide3();
+    setupSlide4();
+    setupSlide5(userProfile.referral_code);
+    loadTaskCount();
+  } catch(e) { console.error(e); }
 });
 
-const auth = getAuth(app);
-
-onAuthStateChanged(auth, (user) => {
-  if(!user){
-    window.location.href = 'login.html';
-    return;
-  }
-  window._uid = user.uid;
-  window._email = user.email;
-});
-</script>
-
-<script>
-// ── STATE ──
-let selectedCountry = null;
-let selectedLang = 'en';
-let selectedCurr = 'ton';
-let selectedPay = null;
-let currentStep = 1;
-
-// ── COUNTRIES DATA ──
-const COUNTRIES = [
-  {name:'Nigeria',flag:'🇳🇬',code:'NG',currency:'NGN',symbol:'₦',pay:'paystack'},
-  {name:'Ghana',flag:'🇬🇭',code:'GH',currency:'GHS',symbol:'₵',pay:'paystack'},
-  {name:'Kenya',flag:'🇰🇪',code:'KE',currency:'KES',symbol:'KSh',pay:'paystack'},
-  {name:'South Africa',flag:'🇿🇦',code:'ZA',currency:'ZAR',symbol:'R',pay:'paystack'},
-  {name:'India',flag:'🇮🇳',code:'IN',currency:'INR',symbol:'₹',pay:'crypto'},
-  {name:'USA',flag:'🇺🇸',code:'US',currency:'USD',symbol:'$',pay:'crypto'},
-  {name:'UK',flag:'🇬🇧',code:'GB',currency:'GBP',symbol:'£',pay:'crypto'},
-  {name:'Brazil',flag:'🇧🇷',code:'BR',currency:'BRL',symbol:'R$',pay:'crypto'},
-  {name:'Germany',flag:'🇩🇪',code:'DE',currency:'EUR',symbol:'€',pay:'crypto'},
-  {name:'France',flag:'🇫🇷',code:'FR',currency:'EUR',symbol:'€',pay:'crypto'},
-  {name:'Russia',flag:'🇷🇺',code:'RU',currency:'RUB',symbol:'₽',pay:'crypto'},
-  {name:'China',flag:'🇨🇳',code:'CN',currency:'CNY',symbol:'¥',pay:'crypto'},
-  {name:'Philippines',flag:'🇵🇭',code:'PH',currency:'PHP',symbol:'₱',pay:'crypto'},
-  {name:'Pakistan',flag:'🇵🇰',code:'PK',currency:'PKR',symbol:'₨',pay:'crypto'},
-  {name:'Indonesia',flag:'🇮🇩',code:'ID',currency:'IDR',symbol:'Rp',pay:'crypto'},
-  {name:'Tanzania',flag:'🇹🇿',code:'TZ',currency:'TZS',symbol:'TSh',pay:'crypto'},
-  {name:'Uganda',flag:'🇺🇬',code:'UG',currency:'UGX',symbol:'USh',pay:'crypto'},
-  {name:'Egypt',flag:'🇪🇬',code:'EG',currency:'EGP',symbol:'£',pay:'crypto'},
-  {name:'Saudi Arabia',flag:'🇸🇦',code:'SA',currency:'SAR',symbol:'﷼',pay:'crypto'},
-  {name:'UAE',flag:'🇦🇪',code:'AE',currency:'AED',symbol:'د.إ',pay:'crypto'},
-  {name:'Turkey',flag:'🇹🇷',code:'TR',currency:'TRY',symbol:'₺',pay:'crypto'},
-  {name:'Mexico',flag:'🇲🇽',code:'MX',currency:'MXN',symbol:'$',pay:'crypto'},
-  {name:'Japan',flag:'🇯🇵',code:'JP',currency:'JPY',symbol:'¥',pay:'crypto'},
-  {name:'South Korea',flag:'🇰🇷',code:'KR',currency:'KRW',symbol:'₩',pay:'crypto'},
-  {name:'Vietnam',flag:'🇻🇳',code:'VN',currency:'VND',symbol:'₫',pay:'crypto'},
-  {name:'Canada',flag:'🇨🇦',code:'CA',currency:'CAD',symbol:'$',pay:'crypto'},
-  {name:'Australia',flag:'🇦🇺',code:'AU',currency:'AUD',symbol:'$',pay:'crypto'},
-  {name:'Spain',flag:'🇪🇸',code:'ES',currency:'EUR',symbol:'€',pay:'crypto'},
-  {name:'Italy',flag:'🇮🇹',code:'IT',currency:'EUR',symbol:'€',pay:'crypto'},
-  {name:'Netherlands',flag:'🇳🇱',code:'NL',currency:'EUR',symbol:'€',pay:'crypto'},
-];
-
-// ── INIT COUNTRIES ──
-function renderCountries(list){
-  document.getElementById('country-grid').innerHTML = list.map(c => `
-    <div class="country-item ${selectedCountry?.code===c.code?'sel':''}" onclick="selCountry(this,'${c.code}')">
-      <div class="ci-flag">${c.flag}</div>
-      <div class="ci-name">${c.name}</div>
-      <div class="ci-curr">${c.currency}</div>
-    </div>
-  `).join('');
-}
-
-function filterCountries(q){
-  const filtered = q ? COUNTRIES.filter(c=>c.name.toLowerCase().includes(q.toLowerCase())) : COUNTRIES;
-  renderCountries(filtered);
-}
-
-function selCountry(el, code){
-  selectedCountry = COUNTRIES.find(c=>c.code===code);
-  document.querySelectorAll('.country-item').forEach(i=>i.classList.remove('sel'));
-  el.classList.add('sel');
-  // Auto-set local currency display
-  document.getElementById('local-curr-sub').textContent = `Show balances in ${selectedCountry.currency} (${selectedCountry.symbol})`;
-  // Update deposit symbol
-  document.getElementById('dep-curr-symbol').textContent = selectedCountry.symbol;
-  document.getElementById('dep-min-text').textContent = `Minimum deposit: ${selectedCountry.symbol}${selectedCountry.currency==='NGN'?'100':selectedCountry.currency==='USD'?'1':'equivalent'}`;
-  // Auto-select payment method
-  selectedPay = selectedCountry.pay;
-  renderPayOptions();
-}
-
-// ── LANGUAGE ──
-function selLang(el, lang){
-  selectedLang = lang;
-  document.querySelectorAll('.lang-item').forEach(i=>i.classList.remove('sel'));
-  el.classList.add('sel');
-}
-
-// ── CURRENCY ──
-function selCurr(el, curr){
-  selectedCurr = curr;
-  document.querySelectorAll('.curr-item').forEach(i=>i.classList.remove('sel'));
-  el.classList.add('sel');
-}
-
-// ── PAYMENT ──
-function renderPayOptions(){
-  const isAfrica = selectedCountry?.pay === 'paystack';
-  const options = isAfrica ? [
-    {key:'paystack',ico:'💳',cls:'',title:'Paystack (Bank/Card)',sub:`Bank transfer, card payment, USSD — for ${selectedCountry?.name||'your country'}`,tag:'africa',tagLabel:'Recommended for Africa'},
-    {key:'crypto',ico:'💎',cls:'',title:'TON / Crypto (NOWPayments)',sub:'Deposit and withdraw using TON coin, USDT, BTC and 300+ cryptocurrencies',tag:'global',tagLabel:'Global'},
-  ] : [
-    {key:'crypto',ico:'💎',cls:'',title:'TON / Crypto (NOWPayments)',sub:'Deposit and withdraw using TON coin, USDT, BTC and 300+ cryptocurrencies — works everywhere',tag:'global',tagLabel:'Recommended'},
-    {key:'paystack',ico:'💳',cls:'',title:'Paystack (Africa Only)',sub:'Available for Nigeria, Ghana, Kenya and South Africa bank payments',tag:'africa',tagLabel:'Africa only'},
-  ];
-  document.getElementById('pay-options').innerHTML = options.map((o,i) => `
-    <div class="pay-item ${i===0?'sel':''}" onclick="selPay(this,'${o.key}')" data-pay="${o.key}">
-      <div class="pay-ico">${o.ico}</div>
-      <div class="pay-info">
-        <div class="pay-title">${o.title}</div>
-        <div class="pay-sub">${o.sub}</div>
-      </div>
-      <div class="pay-tag ${o.tag}">${o.tagLabel}</div>
-      <div class="pay-check"><i class="fa-solid fa-check"></i></div>
-    </div>
-  `).join('');
-  selectedPay = options[0].key;
-}
-
-function selPay(el, pay){
-  selectedPay = pay;
-  document.querySelectorAll('.pay-item').forEach(i=>i.classList.remove('sel'));
-  el.classList.add('sel');
-}
-
-// ── STEP NAVIGATION ──
-window.goStep = function(step){
-  if(step===2 && !selectedCountry){ toast('Please select your country first','error'); return; }
-  // Update stepper
-  for(let i=1;i<=5;i++){
-    const dot=document.getElementById(`dot${i}`);
-    const circle=document.getElementById(`dc${i}`);
-    if(i<step){
-      dot.className='step-dot done-dot';
-      circle.className='sd-circle done';
-      circle.innerHTML='<i class="fa-solid fa-check" style="font-size:11px;"></i>';
-      if(i<5) document.getElementById(`line${i}`).classList.add('done');
-    } else if(i===step){
-      dot.className='step-dot active-dot';
-      circle.className='sd-circle active';
-      circle.textContent=i;
-    } else {
-      dot.className='step-dot idle-dot';
-      circle.className='sd-circle idle';
-      circle.textContent=i;
-    }
-  }
-  // Switch panels
-  document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById(`panel${step}`).classList.add('active');
-  document.getElementById('step-counter').textContent=step;
-  currentStep=step;
-  // Init pay options on step 4
-  if(step===4) renderPayOptions();
-};
-
-// ── DEPOSIT ──
-window.handleDeposit = async function(){
-  const amount = parseFloat(document.getElementById('dep-amount').value);
-  if(!amount||amount<=0){ toast('Enter a deposit amount','error'); return; }
-  if(selectedCountry?.currency==='NGN' && amount<100){ toast('Minimum deposit is ₦100','error'); return; }
-  const btn=document.getElementById('dep-btn');
-  btn.disabled=true;
-  document.getElementById('dep-spinner').style.display='block';
-  document.getElementById('dep-btn-text').style.display='none';
-  try{
-    if(selectedPay==='paystack'){
-      const res = await fetch('/api/deposit',{
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ firebase_uid:window._uid, amount, email:window._email })
-      });
-      const data = await res.json();
-      if(!res.ok) throw new Error(data.error);
-      saveOnboardingData();
-      window.open(data.authorization_url,'_blank');
-      toast('Redirecting to Paystack... Complete payment then come back 🐝');
-      setTimeout(completeOnboarding, 2000);
-    } else {
-      // NOWPayments crypto — redirect to deposit in app
-      saveOnboardingData();
-      toast('Setup complete! You can deposit crypto from your dashboard.');
-      setTimeout(completeOnboarding, 1500);
-    }
-  } catch(e){
-    btn.disabled=false;
-    document.getElementById('dep-spinner').style.display='none';
-    document.getElementById('dep-btn-text').style.display='flex';
-    toast(e.message,'error');
-  }
-};
-
-// ── COMPLETE ──
-window.completeOnboarding = function(){
-  saveOnboardingData();
-  localStorage.setItem('eh_onboarding_done','true');
-  window.location.href='app.html';
-};
-
-function saveOnboardingData(){
-  const prefs={
-    country: selectedCountry,
-    language: selectedLang,
-    currency: selectedCurr,
-    payment_method: selectedPay,
-    setup_at: new Date().toISOString(),
-  };
-  localStorage.setItem('eh_prefs', JSON.stringify(prefs));
-  // Also save to API
-  if(window._uid){
-    fetch('/api/me', {
-      method:'PUT',
-      headers:{'Content-Type':'application/json','x-firebase-uid':window._uid},
-      body: JSON.stringify({ country:selectedCountry?.code, language:selectedLang, currency_preference:selectedCurr, payment_method:selectedPay })
-    }).catch(()=>{});
+function setupSlide3() {
+  const isPaystack = payMethod === 'paystack';
+  document.getElementById('pay-card-paystack').classList.toggle('highlight', isPaystack);
+  document.getElementById('pay-card-ton').classList.toggle('highlight', !isPaystack);
+  const box  = document.getElementById('pay-info-box');
+  const text = document.getElementById('pay-info-text');
+  if (isPaystack) {
+    box.style.background  = '#F0FDF4';
+    box.style.borderColor = '#BBF7D0';
+    box.style.color       = '#065F46';
+    text.innerHTML = '<strong><i class="fa-solid fa-credit-card" style="margin-right:6px"></i>Your account is set up for Paystack</strong> — you will deposit and withdraw using your Nigerian bank account or card.';
+  } else {
+    text.innerHTML = '<strong><i class="fa-solid fa-gem" style="margin-right:6px"></i>Your account is set up for TON crypto</strong> — you will deposit and withdraw using your TON wallet address.';
   }
 }
 
-// ── AUTO DETECT COUNTRY ──
-async function detectCountry(){
-  try{
-    const res = await fetch('https://ipapi.co/json/');
+function setupSlide4() {
+  const isPaystack = payMethod === 'paystack';
+  const title = document.getElementById('wallet-slide-title');
+  const sub   = document.getElementById('wallet-slide-sub');
+  document.getElementById('paystack-form').style.display = isPaystack ? 'block' : 'none';
+  document.getElementById('ton-form').style.display      = isPaystack ? 'none'  : 'block';
+  if (isPaystack) {
+    title.textContent = 'Set Up Bank Account';
+    sub.textContent   = 'Enter your bank details so we can send your Naira earnings directly.';
+  } else {
+    title.textContent = 'Set Up TON Wallet';
+    sub.textContent   = 'Enter your TON wallet address to receive your crypto earnings.';
+  }
+  // Pre-fill if saved
+  if (userProfile?.bank_name)     document.getElementById('bank-name').value = userProfile.bank_name;
+  if (userProfile?.bank_account)  document.getElementById('bank-account').value = userProfile.bank_account;
+  if (userProfile?.bank_holder)   document.getElementById('bank-name-holder').value = userProfile.bank_holder;
+  if (userProfile?.ton_wallet)    document.getElementById('ton-wallet').value = userProfile.ton_wallet;
+}
+
+function setupSlide5(code) {
+  const link = `${location.origin}/register.html?ref=${code || 'LOADING'}`;
+  document.getElementById('ref-link-input').value = link;
+}
+
+async function loadTaskCount() {
+  try {
+    const res  = await fetch('/api/tasks?action=list');
     const data = await res.json();
-    const found = COUNTRIES.find(c=>c.code===data.country_code);
-    if(found){
-      selectedCountry=found;
-      renderCountries(COUNTRIES);
-      // Scroll to selected
-      setTimeout(()=>{
-        const sel=document.querySelector('.country-item.sel');
-        if(sel) sel.scrollIntoView({behavior:'smooth',block:'center'});
-      },300);
-      // Auto suggest language
-      const langMap={NG:'en',GH:'en',KE:'sw',ZA:'en',IN:'hi',BR:'pt',FR:'fr',DE:'de',RU:'ru',CN:'zh',SA:'ar',AE:'ar'};
-      const sugLang=langMap[data.country_code];
-      if(sugLang){
-        selectedLang=sugLang;
-        document.querySelectorAll('.lang-item').forEach(el=>{
-          if(el.dataset.lang===sugLang){ el.classList.add('sel'); }
-          else el.classList.remove('sel');
-        });
-      }
-    }
-  } catch(e){ renderCountries(COUNTRIES); }
+    document.getElementById('done-tasks-count').textContent = (data.tasks || []).length;
+  } catch(e) { document.getElementById('done-tasks-count').textContent = '0'; }
 }
 
-// ── TOAST ──
-function toast(msg,type='success'){
-  const c={success:{color:'#F5B800',ic:'fa-circle-check'},error:{color:'#EF4444',ic:'fa-circle-xmark'}};
-  const col=c[type]||c.success;
-  document.getElementById('t-icon').className=`fa-solid ${col.ic}`;
-  document.getElementById('t-icon').style.color=col.color;
-  document.getElementById('t-msg').textContent=msg;
-  const t=document.getElementById('toast'); t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3500);
-}
+// ── Navigation ───────────────────────────────
+window.nextSlide = () => goSlide(currentSlide + 1);
 
-// ── INIT ──
-renderCountries(COUNTRIES);
-detectCountry();
-renderPayOptions();
+window.goSlide = (n) => {
+  if (n < 1 || n > TOTAL) return;
+  document.getElementById(`slide-${currentSlide}`).classList.remove('active');
+  document.getElementById(`slide-${n}`).classList.add('active');
+  currentSlide = n;
+  // Progress bar
+  document.getElementById('ob-progress').style.width = `${(n / TOTAL) * 100}%`;
+  // Dots
+  document.querySelectorAll('.ob-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === n - 1);
+    d.classList.toggle('done',   i < n - 1);
+  });
+};
 
-// Check if already onboarded
-if(localStorage.getItem('eh_onboarding_done')==='true'){
-  window.location.href='app.html';
-}
-// Check if logged in
-if(!localStorage.getItem('eh_user') && !localStorage.getItem('eh_last_active')){
-  window.location.href='login.html';
+// ── Save Wallet ──────────────────────────────
+window.saveWallet = async () => {
+  const btn = document.getElementById('btn-wallet-save');
+  const isPaystack = payMethod === 'paystack';
+  const body = {};
+  if (isPaystack) {
+    body.bank_name    = document.getElementById('bank-name').value;
+    body.bank_account = document.getElementById('bank-account').value;
+    body.bank_holder  = document.getElementById('bank-name-holder').value;
+    if (!body.bank_name || !body.bank_account) { showToast('Please fill in your bank details'); return; }
+  } else {
+    body.ton_wallet = document.getElementById('ton-wallet').value.trim();
+    if (!body.ton_wallet) { showToast('Please enter your TON wallet address'); return; }
+  }
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Saving...';
+  try {
+    const token = await (await import('./firebase-auth.js')).currentUser().getIdToken();
+    const uid   = (await import('./firebase-auth.js')).currentUser().uid;
+    await fetch('/api/users?action=update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-firebase-uid': uid, 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify(body)
+    });
+    showToast('Saved!');
+    setTimeout(() => nextSlide(), 800);
+  } catch(e) { showToast('Error saving. Try again.'); }
+  btn.disabled = false;
+  btn.innerHTML = 'Save &amp; Continue <i class="fa-solid fa-arrow-right"></i>';
+};
+
+// ── Finish Onboarding ────────────────────────
+window.finishOnboarding = async () => {
+  const btn = document.getElementById('btn-go-dashboard');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Loading...';
+  try {
+    const { currentUser } = await import('./firebase-auth.js');
+    const user  = currentUser();
+    const token = await user.getIdToken();
+    await fetch('/api/users?action=update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-firebase-uid': user.uid, 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify({ onboarding_done: true })
+    });
+    window.location.href = 'app.html';
+  } catch(e) { window.location.href = 'app.html'; }
+};
+
+// ── Copy Ref ─────────────────────────────────
+window.copyRef = () => {
+  const link = document.getElementById('ref-link-input').value;
+  navigator.clipboard.writeText(link).then(() => showToast('Link copied!'));
+};
+
+// ── Toast ────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${msg}`;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
 }
 </script>
 </body>

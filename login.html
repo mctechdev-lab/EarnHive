@@ -9,9 +9,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--blue:#1A56DB;--blue-dark:#1040B0;--blue-light:#EBF2FF;--blue-pale:#F0F6FF;--text:#080F1E;--text-mid:#334155;--text-soft:#64748B;--border:#DBEAFE;--off:#F7FAFF;--error:#EF4444;--success:#10B981;--shadow:0 8px 32px rgba(26,86,219,0.12)}
+:root{--blue:#1A56DB;--blue-dark:#1040B0;--blue-light:#EBF2FF;--blue-pale:#F0F6FF;--text:#080F1E;--text-mid:#334155;--text-soft:#64748B;--border:#DBEAFE;--off:#F7FAFF;--error:#EF4444;--success:#10B981}
 body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);min-height:100vh;display:grid;grid-template-columns:1fr 1fr}
-
 /* LEFT */
 .left-panel{background:var(--blue);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:48px}
 .left-panel::before{content:'';position:absolute;top:-150px;right:-150px;width:500px;height:500px;background:rgba(255,255,255,0.05);border-radius:50%}
@@ -21,98 +20,85 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);mi
 .lp-logo-icon{width:36px;height:36px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center}
 .lp-logo-icon i{color:white;font-size:16px}
 .lp-content{position:relative;z-index:1}
-.lp-content h2{font-family:'Clash Display',sans-serif;font-size:38px;font-weight:700;color:white;line-height:1.2;margin-bottom:16px;letter-spacing:-1px}
+.lp-content h2{font-family:'Clash Display',sans-serif;font-size:36px;font-weight:700;color:white;line-height:1.2;margin-bottom:16px;letter-spacing:-1px}
 .lp-content p{color:rgba(255,255,255,0.7);font-size:15px;line-height:1.75;margin-bottom:32px;font-weight:300}
-.perk{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-.perk-icon{width:40px;height:40px;background:rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.perk{display:flex;align-items:center;gap:14px;margin-bottom:14px;transition:transform .2s}
+.perk:hover{transform:translateX(4px)}
+.perk-icon{width:38px;height:38px;background:rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
 .perk:hover .perk-icon{background:rgba(255,255,255,0.22)}
-.perk-icon i{color:white;font-size:16px}
+.perk-icon i{color:white;font-size:15px}
 .perk-text{color:rgba(255,255,255,0.85);font-size:14px}
-.earner-card{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);border-radius:16px;padding:20px;margin-top:28px}
+.earner-card{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);border-radius:16px;padding:20px;margin-top:24px}
 .ec-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .ec-avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.3)}
 .ec-avatar img{width:100%;height:100%;object-fit:cover}
 .ec-name{font-size:14px;font-weight:600;color:white}
 .ec-loc{font-size:12px;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:4px;margin-top:2px}
 .ec-loc i{font-size:10px}
-.ec-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ec-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .ec-stat{background:rgba(255,255,255,0.08);border-radius:10px;padding:10px;text-align:center}
 .ec-stat-val{font-family:'Clash Display',sans-serif;font-size:18px;font-weight:700;color:white}
 .ec-stat-label{font-size:10px;color:rgba(255,255,255,.6);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
 .lp-footer{color:rgba(255,255,255,0.35);font-size:13px;position:relative;z-index:1}
-
 /* RIGHT */
 .right-panel{display:flex;align-items:center;justify-content:center;padding:48px;overflow-y:auto}
 .form-box{width:100%;max-width:420px}
-.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--text-soft);font-size:13px;text-decoration:none;margin-bottom:28px;transition:color .2s}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--text-soft);font-size:13px;text-decoration:none;margin-bottom:24px;transition:color .2s}
 .back-link:hover{color:var(--blue)}
-.back-link i{font-size:12px}
-.form-title{font-family:'Clash Display',sans-serif;font-size:30px;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-.5px}
-.form-sub{font-size:15px;color:var(--text-soft);margin-bottom:28px}
+.form-title{font-family:'Clash Display',sans-serif;font-size:28px;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-.5px}
+.form-sub{font-size:15px;color:var(--text-soft);margin-bottom:24px}
 .form-sub a{color:var(--blue);text-decoration:none;font-weight:500}
-.form-sub a:hover{opacity:.8}
-
 /* TABS */
-.auth-tabs{display:flex;background:var(--off);border-radius:12px;padding:4px;margin-bottom:24px;border:1px solid var(--border)}
+.auth-tabs{display:flex;background:var(--off);border-radius:12px;padding:4px;margin-bottom:22px;border:1px solid var(--border)}
 .tab-btn{flex:1;padding:10px;border:none;background:transparent;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--text-soft);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
-.tab-btn i{font-size:13px}
 .tab-btn.active{background:white;color:var(--blue);box-shadow:0 2px 8px rgba(26,86,219,0.12)}
-
 /* ALERT */
-.alert{padding:13px 16px;border-radius:12px;font-size:14px;margin-bottom:18px;display:none;align-items:center;gap:10px;line-height:1.5}
-.alert i{font-size:16px;flex-shrink:0}
+.alert{padding:12px 16px;border-radius:12px;font-size:14px;margin-bottom:16px;display:none;align-items:center;gap:10px;line-height:1.5}
+.alert i{font-size:15px;flex-shrink:0}
 .alert.error{background:#FEF2F2;color:#DC2626;border:1px solid #FECACA;display:flex}
 .alert.success{background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0;display:flex}
 .alert.info{background:var(--blue-pale);color:var(--blue);border:1px solid rgba(26,86,219,.2);display:flex}
-
 /* FORM */
-.form-group{margin-bottom:18px}
+.form-group{margin-bottom:16px}
 .form-label{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:500;color:var(--text);margin-bottom:7px}
-.label-link{font-size:12px;color:var(--blue);text-decoration:none;font-weight:400;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif}
+.label-link{font-size:12px;color:var(--blue);text-decoration:none;font-weight:400;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;transition:opacity .2s}
 .label-link:hover{opacity:.75}
 .input-wrap{position:relative}
-.input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-soft);font-size:15px;pointer-events:none}
+.input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-soft);font-size:14px;pointer-events:none;transition:color .2s}
 .input-wrap:focus-within .input-icon{color:var(--blue)}
-.pw-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--text-soft);font-size:14px;cursor:pointer;background:none;border:none;padding:4px;transition:color .2s}
+.pw-toggle{position:absolute;right:13px;top:50%;transform:translateY(-50%);color:var(--text-soft);font-size:13px;cursor:pointer;background:none;border:none;padding:4px;transition:color .2s}
 .pw-toggle:hover{color:var(--blue)}
-input{width:100%;padding:13px 44px;border:1.5px solid var(--border);border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;color:var(--text);background:white;outline:none;transition:border-color .25s,box-shadow .25s}
-input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,86,219,0.08)}
-
+input{width:100%;padding:12px 42px;border:1.5px solid var(--border);border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);background:white;outline:none;transition:border-color .25s,box-shadow .25s}
+input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,219,0.08)}
+/* PHONE */
+.phone-row{display:flex;gap:0}
+.phone-prefix{display:flex;align-items:center;padding:12px 14px;border:1.5px solid var(--border);border-right:none;border-radius:12px 0 0 12px;background:white;font-size:13px;font-weight:700;color:var(--text-mid);flex-shrink:0;gap:6px}
+.phone-field{border-radius:0 12px 12px 0!important;border-left:1px solid var(--border)!important;padding-left:14px!important}
 /* BUTTONS */
-.btn-full{width:100%;padding:14px;background:var(--blue);color:white;border:none;border-radius:12px;font-size:15px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px}
+.btn-full{width:100%;padding:13px;background:var(--blue);color:white;border:none;border-radius:12px;font-size:15px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px}
 .btn-full:hover{background:var(--blue-dark);transform:translateY(-1px);box-shadow:0 8px 24px rgba(26,86,219,0.3)}
 .btn-full:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
-.btn-full i{font-size:14px;transition:transform .2s}
+.btn-full i{font-size:13px;transition:transform .2s}
 .btn-full:hover:not(:disabled) i{transform:translateX(3px)}
-.btn-outline{width:100%;padding:13px;background:white;border:1.5px solid var(--border);border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .25s;font-weight:500}
+.btn-outline{width:100%;padding:12px;background:white;border:1.5px solid var(--border);border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .25s;font-weight:500}
 .btn-outline:hover{border-color:var(--blue);background:var(--blue-pale);transform:translateY(-1px)}
-.divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--text-soft);font-size:13px}
+.btn-back{width:100%;padding:10px;background:none;border:none;color:var(--text-soft);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px;transition:color .2s}
+.btn-back:hover{color:var(--blue)}
+.divider{display:flex;align-items:center;gap:12px;margin:16px 0;color:var(--text-soft);font-size:13px}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
-
-/* OTP */
-.otp-inputs{display:flex;gap:10px;margin-bottom:18px}
-.otp-inputs input{padding:16px 8px;text-align:center;font-size:22px;font-weight:700;font-family:'Clash Display',sans-serif;letter-spacing:2px;border-radius:12px;width:100%}
-.phone-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-mid);font-size:14px;font-weight:500;pointer-events:none}
-.phone-input{padding-left:56px!important}
-
-/* PANELS */
+/* VERIFY SCREEN */
+.verify-icon{width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+/* PANEL */
 .panel{animation:fadeIn .3s ease}
 .panel.hidden{display:none}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
 /* SPINNER */
-.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.spinner{width:17px;height:17px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* VERIFY BADGE */
-.verify-icon{width:64px;height:64px;background:var(--blue-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
-.verify-icon i{color:var(--blue);font-size:28px}
-
-@media(max-width:768px){body{grid-template-columns:1fr}.left-panel{display:none}.right-panel{padding:32px 24px;align-items:flex-start;min-height:100vh}}
+@media(max-width:768px){body{grid-template-columns:1fr}.left-panel{display:none}.right-panel{padding:28px 20px;align-items:flex-start;min-height:100vh}}
 </style>
 </head>
 <body>
-
 <div class="left-panel">
   <div class="left-dots"></div>
   <a href="index.html" class="lp-logo">
@@ -121,20 +107,20 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,86,219,0.08)}
   </a>
   <div class="lp-content">
     <h2>Welcome back<br>to the Hive.</h2>
-    <p>Complete tasks. Earn TON crypto. Withdraw anytime. Thousands of Nigerians are earning right now.</p>
-    <div class="perk"><div class="perk-icon"><i class="fa-solid fa-gem"></i></div><span class="perk-text">Earn TON crypto — withdraw to your wallet</span></div>
+    <p>Complete tasks. Earn money instantly. Thousands of people are earning right now.</p>
+    <div class="perk"><div class="perk-icon"><i class="fa-solid fa-gem"></i></div><span class="perk-text">Earn TON crypto or Naira via Paystack</span></div>
     <div class="perk"><div class="perk-icon"><i class="fa-solid fa-bolt"></i></div><span class="perk-text">Tasks take just 1 to 10 minutes each</span></div>
     <div class="perk"><div class="perk-icon"><i class="fa-solid fa-earth-africa"></i></div><span class="perk-text">Available in Nigeria and 100+ countries</span></div>
-    <div class="perk"><div class="perk-icon"><i class="fa-solid fa-shield-halved"></i></div><span class="perk-text">100% free — no hidden fees ever</span></div>
+    <div class="perk"><div class="perk-icon"><i class="fa-solid fa-users"></i></div><span class="perk-text">Any age welcome — teenagers included</span></div>
     <div class="earner-card">
       <div class="ec-top">
         <div class="ec-avatar"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&crop=face" alt=""/></div>
         <div><div class="ec-name">Fatima Sule</div><div class="ec-loc"><i class="fa-solid fa-location-dot"></i> Kano, Nigeria</div></div>
       </div>
       <div class="ec-stats">
-        <div class="ec-stat"><div class="ec-stat-val">24.6</div><div class="ec-stat-label">TON Earned</div></div>
-        <div class="ec-stat"><div class="ec-stat-val">47</div><div class="ec-stat-label">Tasks Done</div></div>
-        <div class="ec-stat"><div class="ec-stat-val">12</div><div class="ec-stat-label">Referrals</div></div>
+        <div class="ec-stat"><div class="ec-stat-val">24.6</div><div class="ec-stat-label">TON</div></div>
+        <div class="ec-stat"><div class="ec-stat-val">47</div><div class="ec-stat-label">Tasks</div></div>
+        <div class="ec-stat"><div class="ec-stat-val">12</div><div class="ec-stat-label">Refs</div></div>
       </div>
     </div>
   </div>
@@ -144,19 +130,17 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,86,219,0.08)}
 <div class="right-panel">
   <div class="form-box">
     <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to home</a>
-    <h1 class="form-title">Welcome back.</h1>
-    <p class="form-sub">No account? <a href="register.html">Create one free &rarr;</a></p>
-
     <div id="alert-box" class="alert"></div>
 
     <!-- LOGIN PANEL -->
     <div id="panel-login" class="panel">
+      <h1 class="form-title">Welcome back.</h1>
+      <p class="form-sub">No account? <a href="register.html">Create one free &rarr;</a></p>
       <div class="auth-tabs">
-        <button class="tab-btn active" onclick="switchTab('email')"><i class="fa-regular fa-envelope"></i> Email</button>
-        <button class="tab-btn" onclick="switchTab('phone')"><i class="fa-solid fa-phone"></i> Phone</button>
+        <button class="tab-btn active" id="tab-email-btn" onclick="switchTab('email')"><i class="fa-regular fa-envelope"></i> Email</button>
+        <button class="tab-btn" id="tab-phone-btn" onclick="switchTab('phone')"><i class="fa-solid fa-phone"></i> Phone</button>
       </div>
-
-      <!-- Email Login -->
+      <!-- Email -->
       <div id="tab-email">
         <div class="form-group">
           <label class="form-label">Email Address</label>
@@ -179,31 +163,30 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,86,219,0.08)}
         <button class="btn-full" id="btn-login" onclick="doLogin()"><i class="fa-solid fa-right-to-bracket"></i> Log In</button>
         <div class="divider">or</div>
         <button class="btn-outline" onclick="doGoogle()">
-          <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/></svg>
+          <svg width="17" height="17" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/></svg>
           Continue with Google
         </button>
       </div>
-
-      <!-- Phone Login -->
+      <!-- Phone -->
       <div id="tab-phone" class="hidden">
         <div class="form-group">
           <label class="form-label">Phone Number</label>
-          <div class="input-wrap">
-            <span class="phone-prefix">+234</span>
-            <input type="tel" id="phone-number" class="phone-input" placeholder="8012345678"/>
+          <div class="phone-row">
+            <div class="phone-prefix"><span id="phone-flag">🇳🇬</span><span>+234</span></div>
+            <input type="tel" id="phone-number" class="phone-field" placeholder="801 234 5678" style="flex:1"/>
           </div>
         </div>
         <button class="btn-full" id="btn-send-otp" onclick="doSendOTP()"><i class="fa-solid fa-paper-plane"></i> Send OTP Code</button>
-        <div id="otp-section" class="hidden" style="margin-top:18px">
+        <div id="otp-section" class="hidden" style="margin-top:14px">
           <div class="form-group">
-            <label class="form-label">Enter OTP Code</label>
+            <label class="form-label">Enter 6-Digit OTP</label>
             <div class="input-wrap">
               <i class="fa-solid fa-key input-icon"></i>
-              <input type="text" id="otp-code" placeholder="Enter 6-digit code" maxlength="6" style="letter-spacing:4px;font-size:18px;font-weight:700;text-align:center"/>
+              <input type="text" id="otp-code" placeholder="• • • • • •" maxlength="6" style="letter-spacing:6px;font-size:20px;font-weight:700;text-align:center;padding:12px"/>
             </div>
           </div>
           <button class="btn-full" id="btn-verify-otp" onclick="doVerifyOTP()"><i class="fa-solid fa-check"></i> Verify &amp; Log In</button>
-          <button onclick="doSendOTP()" style="width:100%;padding:10px;background:none;border:none;color:var(--blue);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;margin-top:8px">Resend OTP code</button>
+          <button onclick="doSendOTP()" style="width:100%;padding:8px;background:none;border:none;color:var(--blue);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;margin-top:6px">Resend OTP</button>
         </div>
         <div id="recaptcha-container"></div>
       </div>
@@ -211,10 +194,10 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,86,219,0.08)}
 
     <!-- FORGOT PASSWORD PANEL -->
     <div id="panel-reset" class="panel hidden">
-      <div style="text-align:center;margin-bottom:24px">
-        <div class="verify-icon"><i class="fa-solid fa-lock-open"></i></div>
+      <div style="text-align:center;margin-bottom:22px">
+        <div class="verify-icon" style="background:var(--blue-light)"><i class="fa-solid fa-lock-open" style="color:var(--blue);font-size:26px"></i></div>
         <div style="font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;margin-bottom:6px">Reset Password</div>
-        <div style="font-size:14px;color:var(--text-soft);line-height:1.6">Enter your email and we will send you a link to reset your password.</div>
+        <div style="font-size:14px;color:var(--text-soft);line-height:1.6">Enter your email and we will send you a reset link.</div>
       </div>
       <div class="form-group">
         <label class="form-label">Email Address</label>
@@ -224,160 +207,129 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(26,86,219,0.08)}
         </div>
       </div>
       <button class="btn-full" id="btn-reset" onclick="doReset()"><i class="fa-solid fa-paper-plane"></i> Send Reset Link</button>
-      <button onclick="showPanel('panel-login')" style="width:100%;padding:12px;background:none;border:none;color:var(--text-soft);font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px">
-        <i class="fa-solid fa-arrow-left" style="font-size:12px"></i> Back to login
-      </button>
+      <button class="btn-back" onclick="showPanel('panel-login')"><i class="fa-solid fa-arrow-left" style="font-size:11px"></i> Back to login</button>
     </div>
 
     <!-- VERIFY EMAIL PANEL -->
     <div id="panel-verify" class="panel hidden">
-      <div style="text-align:center;margin-bottom:24px">
-        <div class="verify-icon"><i class="fa-regular fa-envelope"></i></div>
+      <div style="text-align:center;margin-bottom:22px">
+        <div class="verify-icon" style="background:#FEF3C7"><i class="fa-regular fa-envelope" style="color:#92400E;font-size:26px"></i></div>
         <div style="font-family:'Clash Display',sans-serif;font-size:22px;font-weight:700;margin-bottom:6px">Verify Your Email</div>
-        <div style="font-size:14px;color:var(--text-soft);line-height:1.6">We sent a verification link to your email. Please check your inbox and click the link to continue.</div>
+        <div style="font-size:14px;color:var(--text-soft);line-height:1.6">We sent a verification link to your email. Click it to activate your account.</div>
       </div>
-      <div id="verify-email-display" style="background:var(--blue-pale);border:1px solid rgba(26,86,219,.2);border-radius:10px;padding:12px 16px;text-align:center;font-size:14px;color:var(--blue);font-weight:500;margin-bottom:20px"></div>
+      <div id="verify-email-addr" style="background:var(--blue-pale);border:1px solid rgba(26,86,219,.2);border-radius:10px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:var(--blue);margin-bottom:18px"></div>
       <button class="btn-full" onclick="doResend()"><i class="fa-solid fa-rotate-right"></i> Resend Verification Email</button>
-      <button onclick="showPanel('panel-login')" style="width:100%;padding:12px;background:none;border:none;color:var(--text-soft);font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px">
-        <i class="fa-solid fa-arrow-left" style="font-size:12px"></i> Back to login
-      </button>
+      <button class="btn-back" onclick="showPanel('panel-login')"><i class="fa-solid fa-arrow-left" style="font-size:11px"></i> Back to login</button>
     </div>
 
   </div>
 </div>
 
 <script type="module">
-import {
-  loginWithEmail, loginWithGoogle, resetPassword,
-  resendVerification, watchAuth, setupRecaptcha,
-  sendPhoneOTP, verifyPhoneOTP, authError
-} from './firebase-auth.js';
+import { loginWithEmail, loginWithGoogle, resetPassword, resendVerification, watchAuth, setupRecaptcha, sendPhoneOTP, verifyPhoneOTP, authError } from './firebase-auth.js';
 
-// Redirect if already logged in
-watchAuth(user => {
-  if (user && user.emailVerified) window.location.href = 'app.html';
+watchAuth(async user => {
+  if (!user) return;
+  if (!user.emailVerified && !user.phoneNumber) {
+    document.getElementById('verify-email-addr').textContent = user.email;
+    showPanel('panel-verify');
+    return;
+  }
+  // Check if onboarding done
+  try {
+    const token = await user.getIdToken();
+    const res = await fetch('/api/users?action=me', { headers: { 'x-firebase-uid': user.uid, 'Authorization': `Bearer ${token}` }});
+    const data = await res.json();
+    window.location.href = data.onboarding_done ? 'app.html' : 'onboarding.html';
+  } catch(e) { window.location.href = 'onboarding.html'; }
 });
 
-// Setup recaptcha for phone
 setupRecaptcha('recaptcha-container');
 
-// ── Email Login ──────────────────────────────
 window.doLogin = async () => {
-  const btn = document.getElementById('btn-login');
+  const btn   = document.getElementById('btn-login');
   const email = document.getElementById('login-email').value.trim();
   const pass  = document.getElementById('login-password').value;
   if (!email || !pass) { showAlert('Please enter your email and password.', 'error'); return; }
-  setLoading(btn, true);
+  setLoad(btn, true);
   try {
     const user = await loginWithEmail(email, pass);
     if (!user.emailVerified) {
-      document.getElementById('verify-email-display').textContent = user.email;
+      document.getElementById('verify-email-addr').textContent = user.email;
       showPanel('panel-verify');
-      showAlert('Please verify your email first. Check your inbox.', 'info');
-      return;
     }
-    window.location.href = 'app.html';
-  } catch (e) { showAlert(authError(e.code), 'error'); }
-  setLoading(btn, false, '<i class="fa-solid fa-right-to-bracket"></i> Log In');
+  } catch(e) { showAlert(authError(e.code), 'error'); }
+  setLoad(btn, false, '<i class="fa-solid fa-right-to-bracket"></i> Log In');
 };
 
-// ── Google Login ─────────────────────────────
 window.doGoogle = async () => {
   try {
     const user = await loginWithGoogle();
-    // Register in Supabase if new user
     const token = await user.getIdToken();
     await fetch('/api/auth?action=register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-firebase-uid': user.uid, 'Authorization': `Bearer ${token}` },
-      body: JSON.stringify({
-        first_name: (user.displayName || 'User').split(' ')[0],
-        last_name:  (user.displayName || '').split(' ').slice(1).join(' '),
-        email: user.email, photo_url: user.photoURL, account_type: 'earner'
-      })
+      body: JSON.stringify({ first_name: (user.displayName||'User').split(' ')[0], last_name: (user.displayName||'').split(' ').slice(1).join(' '), email: user.email, photo_url: user.photoURL, account_type: 'earner' })
     });
-    window.location.href = 'app.html';
-  } catch (e) { showAlert(authError(e.code), 'error'); }
+  } catch(e) { showAlert(authError(e.code), 'error'); }
 };
 
-// ── Phone OTP ────────────────────────────────
 window.doSendOTP = async () => {
   const btn = document.getElementById('btn-send-otp');
   const num = document.getElementById('phone-number').value.trim();
   if (!num) { showAlert('Please enter your phone number.', 'error'); return; }
-  const full = '+234' + num.replace(/^0/, '');
-  setLoading(btn, true);
+  setLoad(btn, true);
   try {
-    await sendPhoneOTP(full);
+    await sendPhoneOTP('+234' + num.replace(/^0/, ''));
     document.getElementById('otp-section').classList.remove('hidden');
-    showAlert('OTP code sent! Check your SMS messages.', 'success');
-  } catch (e) { showAlert(authError(e.code), 'error'); }
-  setLoading(btn, false, '<i class="fa-solid fa-paper-plane"></i> Send OTP Code');
+    showAlert('OTP sent! Check your SMS.', 'success');
+  } catch(e) { showAlert(authError(e.code), 'error'); }
+  setLoad(btn, false, '<i class="fa-solid fa-paper-plane"></i> Send OTP Code');
 };
 
 window.doVerifyOTP = async () => {
   const btn  = document.getElementById('btn-verify-otp');
   const code = document.getElementById('otp-code').value.trim();
-  if (!code || code.length < 6) { showAlert('Enter the 6-digit OTP code.', 'error'); return; }
-  setLoading(btn, true);
-  try {
-    const user = await verifyPhoneOTP(code);
-    const token = await user.getIdToken();
-    await fetch('/api/auth?action=register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-firebase-uid': user.uid, 'Authorization': `Bearer ${token}` },
-      body: JSON.stringify({ first_name: 'User', email: user.email || '', phone: user.phoneNumber, account_type: 'earner' })
-    });
-    window.location.href = 'app.html';
-  } catch (e) { showAlert(authError(e.code), 'error'); }
-  setLoading(btn, false, '<i class="fa-solid fa-check"></i> Verify & Log In');
+  if (code.length < 6) { showAlert('Enter the 6-digit OTP.', 'error'); return; }
+  setLoad(btn, true);
+  try { await verifyPhoneOTP(code); }
+  catch(e) { showAlert(authError(e.code), 'error'); }
+  setLoad(btn, false, '<i class="fa-solid fa-check"></i> Verify & Log In');
 };
 
-// ── Reset Password ───────────────────────────
 window.doReset = async () => {
   const btn   = document.getElementById('btn-reset');
   const email = document.getElementById('reset-email').value.trim();
-  if (!email) { showAlert('Please enter your email address.', 'error'); return; }
-  setLoading(btn, true);
-  try {
-    await resetPassword(email);
-    showAlert('Reset link sent! Check your email inbox.', 'success');
-  } catch (e) { showAlert(authError(e.code), 'error'); }
-  setLoading(btn, false, '<i class="fa-solid fa-paper-plane"></i> Send Reset Link');
+  if (!email) { showAlert('Please enter your email.', 'error'); return; }
+  setLoad(btn, true);
+  try { await resetPassword(email); showAlert('Reset link sent! Check your inbox.', 'success'); }
+  catch(e) { showAlert(authError(e.code), 'error'); }
+  setLoad(btn, false, '<i class="fa-solid fa-paper-plane"></i> Send Reset Link');
 };
 
-// ── Resend Verification ──────────────────────
 window.doResend = async () => {
-  try {
-    await resendVerification();
-    showAlert('Verification email sent again! Check your inbox.', 'success');
-  } catch (e) { showAlert(authError(e.code), 'error'); }
+  try { await resendVerification(); showAlert('Verification email resent! Check inbox.', 'success'); }
+  catch(e) { showAlert(authError(e.code), 'error'); }
 };
 
-// ── Tab Switch ───────────────────────────────
 window.switchTab = (tab) => {
   document.getElementById('tab-email').classList.toggle('hidden', tab !== 'email');
   document.getElementById('tab-phone').classList.toggle('hidden', tab !== 'phone');
-  document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', (i === 0) === (tab === 'email')));
+  document.getElementById('tab-email-btn').classList.toggle('active', tab === 'email');
+  document.getElementById('tab-phone-btn').classList.toggle('active', tab === 'phone');
 };
 
-// ── Panel Switch ─────────────────────────────
 window.showPanel = (id) => {
-  ['panel-login','panel-reset','panel-verify'].forEach(p => {
-    document.getElementById(p).classList.toggle('hidden', p !== id);
-  });
+  ['panel-login','panel-reset','panel-verify'].forEach(p => document.getElementById(p).classList.toggle('hidden', p !== id));
   document.getElementById('alert-box').className = 'alert';
 };
 
-// ── Password Toggle ──────────────────────────
 window.togglePw = (inputId, iconId) => {
-  const input = document.getElementById(inputId);
-  const icon  = document.getElementById(iconId);
-  input.type = input.type === 'password' ? 'text' : 'password';
-  icon.className = input.type === 'password' ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash';
+  const el = document.getElementById(inputId);
+  el.type  = el.type === 'password' ? 'text' : 'password';
+  document.getElementById(iconId).className = el.type === 'password' ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash';
 };
 
-// ── Helpers ──────────────────────────────────
 function showAlert(msg, type) {
   const a = document.getElementById('alert-box');
   const icons = { error:'circle-exclamation', success:'circle-check', info:'circle-info' };
@@ -386,9 +338,9 @@ function showAlert(msg, type) {
   setTimeout(() => { a.className = 'alert'; }, 6000);
 }
 
-function setLoading(btn, loading, originalHTML) {
-  if (loading) { btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Please wait...'; }
-  else { btn.disabled = false; btn.innerHTML = originalHTML; }
+function setLoad(btn, loading, orig) {
+  btn.disabled = loading;
+  btn.innerHTML = loading ? '<span class="spinner"></span> Please wait...' : orig;
 }
 </script>
 </body>
